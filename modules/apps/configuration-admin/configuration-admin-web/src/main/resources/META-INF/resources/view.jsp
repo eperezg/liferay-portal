@@ -89,6 +89,26 @@ portletURL.setParameter("configurationCategory", configurationCategory);
 				</c:choose>
 			</liferay-ui:search-container-column-text>
 
+			<liferay-ui:search-container-column-text name="scope">
+				<c:choose>
+					<c:when test="<%= ConfigurationAdmin.Scope.COMPANY.equals(configurationModel.getScope()) %>">
+						<liferay-ui:message key="default-settings-for-all-instances" />
+					</c:when>
+					<c:when test="<%= ConfigurationAdmin.Scope.GROUP.equals(configurationModel.getScope()) %>">
+						<liferay-ui:message key="default-configuration-for-all-sites" />
+					</c:when>
+					<c:when test="<%= ConfigurationAdmin.Scope.PORTLET_INSTANCE.equals(configurationModel.getScope()) %>">
+						<liferay-ui:message key="default-configuration-for-application" />
+					</c:when>
+					<c:when test="<%= ConfigurationAdmin.Scope.SYSTEM.equals(configurationModel.getScope()) %>">
+						<liferay-ui:message key="system" />
+					</c:when>
+					<c:otherwise>
+						-
+					</c:otherwise>
+				</c:choose>
+			</liferay-ui:search-container-column-text>
+
 			<liferay-ui:search-container-column-text
 				align="right"
 				cssClass="entry-action"
@@ -122,7 +142,7 @@ portletURL.setParameter("configurationCategory", configurationCategory);
 								</portlet:actionURL>
 
 								<liferay-ui:icon
-									message="delete"
+									message='<%= configurationModel.isFactory() ? "delete" : "reset-default-values" %>'
 									method="post"
 									url="<%= deleteConfigActionURL %>"
 								/>

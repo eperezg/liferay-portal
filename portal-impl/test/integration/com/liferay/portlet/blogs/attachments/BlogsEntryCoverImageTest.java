@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
@@ -43,8 +42,7 @@ public class BlogsEntryCoverImageTest extends BaseBlogsEntryImageTestCase {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
+		new LiferayIntegrationTestRule();
 
 	@Before
 	public void setUp() throws Exception {
@@ -85,7 +83,14 @@ public class BlogsEntryCoverImageTest extends BaseBlogsEntryImageTestCase {
 	}
 
 	@Override
-	protected long getImageFileEntry(BlogsEntry blogsEntry) {
+	protected void addImage(long entryId, ImageSelector imageSelector)
+		throws Exception {
+
+		BlogsEntryLocalServiceUtil.addCoverImage(entryId, imageSelector);
+	}
+
+	@Override
+	protected long getImageFileEntryId(BlogsEntry blogsEntry) {
 		return blogsEntry.getCoverImageFileEntryId();
 	}
 

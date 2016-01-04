@@ -74,7 +74,7 @@ catch (NoSuchFolderException nsfe) {
 		%>
 
 		<liferay-ui:section>
-			<liferay-ui:email-notification-settings
+			<liferay-frontend:email-notification-settings
 				emailBody="<%= bookmarksGroupServiceOverriddenConfiguration.emailEntryAddedBodyXml() %>"
 				emailDefinitionTerms="<%= emailDefinitionTerms %>"
 				emailEnabled="<%= bookmarksGroupServiceOverriddenConfiguration.emailEntryAddedEnabled() %>"
@@ -84,7 +84,7 @@ catch (NoSuchFolderException nsfe) {
 		</liferay-ui:section>
 
 		<liferay-ui:section>
-			<liferay-ui:email-notification-settings
+			<liferay-frontend:email-notification-settings
 				emailBody="<%= bookmarksGroupServiceOverriddenConfiguration.emailEntryUpdatedBodyXml() %>"
 				emailDefinitionTerms="<%= emailDefinitionTerms %>"
 				emailEnabled="<%= bookmarksGroupServiceOverriddenConfiguration.emailEntryUpdatedEnabled() %>"
@@ -95,7 +95,7 @@ catch (NoSuchFolderException nsfe) {
 	</liferay-ui:tabs>
 
 	<aui:button-row>
-		<aui:button type="submit" />
+		<aui:button cssClass="btn-lg" type="submit" />
 	</aui:button-row>
 </aui:form>
 

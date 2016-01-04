@@ -72,6 +72,11 @@
 		<execute function="AssertClick" locator1="WCD#ADD_BASIC_WEB_CONTENT" value1="Basic Web Content" />
 
 		<execute function="SelectFrame" locator1="IFrame#EDIT_ASSET" />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Structure and Template" />
+		</execute>
+
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 		<execute function="SelectFrame" />
 
@@ -230,6 +235,8 @@
 
 			<execute function="AssertTextEquals" locator1="DDMField#DDM_INPUT" value1="Edited ${structureFieldName} Field" />
 		</for>
+
+		<execute function="SelectFrameTop" />
 	</command>
 
 	<command name="gotoCP">

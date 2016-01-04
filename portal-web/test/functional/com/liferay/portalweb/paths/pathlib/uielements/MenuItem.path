@@ -24,6 +24,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>ANY_MENU_ITEM</td>
+	<td>//li[contains(.,'${key_menuItem}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>BOOKMARK</td>
 	<td>//ul[contains(@class,'dropdown-menu')]//a[contains(@id,'menu') and contains(.,'Bookmark')]</td>
 	<td></td>
@@ -120,7 +125,7 @@
 </tr>
 <tr>
 	<td>ASSIGN_MEMBERS</td>
-	<td>//a[@role='menuitem' and contains(.,'Assign Members')]</td>
+	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Assign Members')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -184,6 +189,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CATEGORY</td>
+	<td>//div[contains(@class,'open')]//a[contains(.,'Category')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CHECKIN</td>
 	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Checkin')]</td>
 	<td></td>
@@ -230,7 +240,7 @@
 </tr>
 <tr>
 	<td>DEFINE_PERMISSIONS</td>
-	<td>//a[@role='menuitem' and contains(.,'Define Permissions')]</td>
+	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Define Permissions')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -470,7 +480,12 @@
 </tr>
 <tr>
 	<td>ORGANIZATION_ROLE</td>
-	<td>//a[@role='menuitem' and contains(.,'Organization Role')]</td>
+	<td>//li/a[contains(@id,'menuItem') and contains(.,'Organization Role')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_ROLES</td>
+	<td>//a[@role='menuitem' and contains(.,'Organization Roles')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -485,7 +500,7 @@
 </tr>
 <tr>
 	<td>PERMISSIONS</td>
-	<td>//div[contains(@class,'open')]//a[contains(.,'Permissions')] | //li[contains(@class,'open')]//a[contains(.,'Permissions')] | //ul[contains(@class,'dropdown')]//a[contains(.,'Permissions')]</td>
+	<td>//div[contains(@class,'open')]//a[contains(.,'Permissions')] | //li[contains(@class,'open')]//a[contains(.,'Permissions')] | //ul[contains(@class,'dropdown')]//a[contains(.,'Permissions')] | //a[@title='Permissions' and @role='menuitem']/span</td>
 	<td></td>
 </tr>
 <tr>
@@ -515,7 +530,12 @@
 </tr>
 <tr>
 	<td>REGULAR_ROLE</td>
-	<td>//a[@role='menuitem' and contains(.,'Regular Role')]</td>
+	<td>//li/a[contains(@id,'menuItem') and contains(.,'Regular Role')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>REGULAR_ROLES</td>
+	<td>//a[@role='menuitem' and contains(.,'Regular Roles')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -551,6 +571,11 @@
 <tr>
 	<td>RESTORE</td>
 	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Restore')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RESET_DEFAULT_VALUES</td>
+	<td>//div[contains(@class,'open')]//a[contains(.,'Reset Default Values')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -590,7 +615,7 @@
 </tr>
 <tr>
 	<td>SCOPE_SELECTION</td>
-	<td>//ul[contains(@class,'lfr-menu-list')]/li/a[contains(.,'${key_scopeSelection}')]</td>
+	<td>//ul[contains(@class,'dropdown-menu')]/li/a[contains(.,'${key_scopeSelection}')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -610,7 +635,12 @@
 </tr>
 <tr>
 	<td>SITE_ROLE</td>
-	<td>//a[@role='menuitem' and contains(.,'Site Role')]</td>
+	<td>//li/a[contains(@id,'menuItem') and contains(.,'Site Role')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_ROLES</td>
+	<td>//a[@role='menuitem' and contains(.,'Site Roles')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -644,6 +674,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SPREADSHEET_VIEW</td>
+	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Spreadsheet View')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>STRUCTURE_NAME</td>
 	<td>//ul[contains(@class,'dropdown-menu-left-side-bottom')]/li/a[contains(.,'${key_structureName}')]</td>
 	<td></td>
@@ -651,6 +686,11 @@
 <tr>
 	<td>STRUCTURES</td>
 	<td>//div[contains(@class,'open')]//a[@role='menuitem' and contains(.,'Structures')] | //a[@role='menuitem' and .='Structures']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUBCATEGORY</td>
+	<td>//div[contains(@class,'open')]//a[contains(.,'Subcategory')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -666,6 +706,11 @@
 <tr>
 	<td>TEMPLATES</td>
 	<td>//div[contains(@class,'open')]//a[@role='menuitem']//span[contains(.,'Templates')] | //a[@role='menuitem' and .='Templates']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>THREAD</td>
+	<td>//div[contains(@class,'open')]//a[contains(.,'Thread')]</td>
 	<td></td>
 </tr>
 <tr>

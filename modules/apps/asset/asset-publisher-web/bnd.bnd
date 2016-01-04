@@ -11,5 +11,7 @@ Include-Resource:\
 	@../../../../util-java/util-java.jar!/com/liferay/util/ContentUtil.class,\
 	@../../../../util-java/util-java.jar!/com/liferay/util/RSSThreadLocal.class,\
 	@../../../../util-java/util-java.jar!/com/liferay/util/RSSUtil.class
-Require-SchemaVersion: 1.0.0
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Asset
 Web-ContextPath: /asset-publisher-web
+-include: ../../../../marketplace/web-content-management/bnd.bnd
