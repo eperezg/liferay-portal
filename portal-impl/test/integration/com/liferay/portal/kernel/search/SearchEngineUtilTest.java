@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.search;
 import com.liferay.portal.kernel.search.bundle.searchengineutil.TestSearchEngineConfigurator;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portal.util.test.AtomicState;
 
@@ -36,7 +37,7 @@ public class SearchEngineUtilTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			new SyntheticBundleRule("bundle.searchengineutil"));
 
 	@BeforeClass

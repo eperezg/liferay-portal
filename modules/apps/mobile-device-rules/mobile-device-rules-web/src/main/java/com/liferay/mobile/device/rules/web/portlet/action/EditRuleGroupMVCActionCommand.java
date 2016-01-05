@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -78,8 +80,8 @@ public class EditRuleGroupMVCActionCommand extends BaseMVCActionCommand {
 			deleteRuleGroupIds = new long[] {ruleGroupId};
 		}
 		else {
-			deleteRuleGroupIds = ParamUtil.getLongValues(
-				actionRequest, "rowIds");
+			deleteRuleGroupIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "ruleGroupIds"), 0L);
 		}
 
 		for (long deleteRuleGroupId : deleteRuleGroupIds) {
@@ -95,17 +97,29 @@ public class EditRuleGroupMVCActionCommand extends BaseMVCActionCommand {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
+			MDRRuleGroup ruleGroup = null;
+
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateRuleGroup(actionRequest);
+				ruleGroup = updateRuleGroup(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteRuleGroups(actionRequest);
 			}
 			else if (cmd.equals(Constants.COPY)) {
-				copyRuleGroup(actionRequest);
+				ruleGroup = copyRuleGroup(actionRequest);
 			}
 
-			sendRedirect(actionRequest, actionResponse);
+			String redirect = StringPool.BLANK;
+
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.COPY)) {
+				redirect = getAddOrCopyRedirect(
+					actionRequest, actionResponse, ruleGroup);
+			}
+			else {
+				redirect = getRedirect(actionRequest, actionResponse);
+			}
+
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRuleGroupException ||
@@ -139,6 +153,24 @@ public class EditRuleGroupMVCActionCommand extends BaseMVCActionCommand {
 
 		portletURL.setParameter(
 			"ruleGroupId", String.valueOf(ruleGroup.getRuleGroupId()));
+
+		return portletURL.toString();
+	}
+
+	protected String getRedirect(
+		ActionRequest actionRequest, ActionResponse actionResponse) {
+
+		LiferayPortletResponse liferayPortletResponse =
+			(LiferayPortletResponse)actionResponse;
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "/mobile_device_rules/edit_rule_group");
+
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+		portletURL.setParameter("redirect", redirect);
 
 		return portletURL.toString();
 	}

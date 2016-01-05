@@ -26,8 +26,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 )
 @Meta.OCD(
 	factory = true,
-	id = "com.liferay.portal.cxf.common.configuration.CXFEndpointPublisherConfiguration",
-	localization = "content/Language", name = "%cxf.endpoint.configuration.name"
+	id = "com.liferay.portal.cxf.common.configuration.CXFEndpointPublisherConfiguration"
 )
 public interface CXFEndpointPublisherConfiguration {
 

@@ -376,5 +376,12 @@ public class DLFileEntryMetadataLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(DLFileEntryMetadataLocalService service) {
+	}
+
 	private static DLFileEntryMetadataLocalService _service;
 }

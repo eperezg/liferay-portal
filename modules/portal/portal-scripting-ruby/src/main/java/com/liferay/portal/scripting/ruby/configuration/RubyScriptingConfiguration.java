@@ -23,10 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.scripting.ruby.configuration.RubyScriptingConfiguration",
-	localization = "content/Language",
-	name = "%ruby.scripting.configuration.name"
-
+	id = "com.liferay.portal.scripting.ruby.configuration.RubyScriptingConfiguration"
 )
 public interface RubyScriptingConfiguration {
 

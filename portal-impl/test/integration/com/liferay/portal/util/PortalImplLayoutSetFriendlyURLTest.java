@@ -24,6 +24,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.test.LayoutTestUtil;
 
@@ -44,7 +45,8 @@ public class PortalImplLayoutSetFriendlyURLTest
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testAccessFromVirtualHost() throws Exception {

@@ -189,7 +189,7 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 			ddmFormValues);
 
 		UpgradeDynamicDataMapping upgradeDynamicDataMapping =
-			new UpgradeDynamicDataMapping(null, null, null, null, null, null);
+			new UpgradeDynamicDataMapping();
 
 		DDMFormValues actualDDMFormValues =
 			upgradeDynamicDataMapping.getDDMFormValues(
@@ -315,7 +315,7 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 			ddmFormValues);
 
 		UpgradeDynamicDataMapping upgradeDynamicDataMapping =
-			new UpgradeDynamicDataMapping(null, null, null, null, null, null);
+			new UpgradeDynamicDataMapping();
 
 		DDMFormValues actualDDMFormValues =
 			upgradeDynamicDataMapping.getDDMFormValues(
@@ -402,7 +402,7 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 			ddmFormValues);
 
 		UpgradeDynamicDataMapping upgradeDynamicDataMapping =
-			new UpgradeDynamicDataMapping(null, null, null, null, null, null);
+			new UpgradeDynamicDataMapping();
 
 		DDMFormValues actualDDMFormValues =
 			upgradeDynamicDataMapping.getDDMFormValues(
@@ -578,7 +578,6 @@ public class UpgradeDynamicDataMappingTest extends PowerMockito {
 
 					return languageIds;
 				}
-
 			}
 		);
 	}

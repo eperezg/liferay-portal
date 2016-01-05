@@ -47,25 +47,22 @@
 			function(A) {lb}
 				Liferay.DDM.Renderer.FieldTypes.register({$fieldTypes|noAutoescape});
 
-				Liferay.component(
-					'{$containerId}DDMForm',
-					new Liferay.DDM.Renderer.Form(
-						{lb}
-							container: '#{$containerId}',
-							definition: {$definition|noAutoescape},
-							evaluation: {$evaluation|noAutoescape},
+				new Liferay.DDM.Renderer.Form(
+					{lb}
+						container: '#{$containerId}',
+						definition: {$definition|noAutoescape},
+						evaluation: {$evaluation|noAutoescape},
 
-							{if $layout}
-								layout: {$layout|noAutoescape},
-							{/if}
+						{if $layout}
+							layout: {$layout|noAutoescape},
+						{/if}
 
-							portletNamespace: '{$portletNamespace}',
-							readOnly: {$readOnly},
-							templateNamespace: '{$templateNamespace}',
-							values: {$values|noAutoescape}
-						{rb}
-					).render()
-				);
+						portletNamespace: '{$portletNamespace}',
+						readOnly: {$readOnly},
+						templateNamespace: '{$templateNamespace}',
+						values: {$values|noAutoescape}
+					{rb}
+				).render();
 			{rb}
 		);
 	</script>
@@ -201,7 +198,7 @@
 {template .tabbed_form}
 	<div class="lfr-ddm-form-container" id="{$containerId}">
 		<div class="lfr-ddm-form-tabs">
-			<ul class="nav nav-tabs nav-tabs-default">
+			<ul class="nav nav-tabs">
 				{foreach $page in $pages}
 					<li>
 						<a href="javascript:;">{$page.title}</a>

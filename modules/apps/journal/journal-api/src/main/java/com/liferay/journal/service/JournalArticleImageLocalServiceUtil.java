@@ -326,6 +326,13 @@ public class JournalArticleImageLocalServiceUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(JournalArticleImageLocalService service) {
+	}
+
 	private static ServiceTracker<JournalArticleImageLocalService, JournalArticleImageLocalService> _serviceTracker =
 		ServiceTrackerFactory.open(JournalArticleImageLocalService.class);
 }

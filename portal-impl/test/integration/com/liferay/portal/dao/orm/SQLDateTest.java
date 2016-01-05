@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,7 +49,8 @@ public class SQLDateTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			TransactionalTestRule.INSTANCE);
 
 	@Test
 	public void testMillisecondsHibernate() {

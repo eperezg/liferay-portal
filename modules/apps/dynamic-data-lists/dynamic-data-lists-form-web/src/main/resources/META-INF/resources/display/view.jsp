@@ -37,7 +37,7 @@ DDLRecordSet recordSet = ddlFormDisplayContext.getRecordSet();
 					<aui:form action="<%= addRecordActionURL %>" method="post" name="fm">
 
 						<%
-						String redirectURL = ddlFormDisplayContext.getRedirectURL();
+						String redirectURL = GetterUtil.getString(recordSet.getSettingsProperty("redirectURL", StringPool.BLANK));
 						%>
 
 						<c:if test="<%= Validator.isNull(redirectURL) %>">

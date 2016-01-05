@@ -2149,6 +2149,13 @@ public class CalendarResourceUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(CalendarResourcePersistence persistence) {
+	}
+
 	private static ServiceTracker<CalendarResourcePersistence, CalendarResourcePersistence> _serviceTracker =
 		ServiceTrackerFactory.open(CalendarResourcePersistence.class);
 }

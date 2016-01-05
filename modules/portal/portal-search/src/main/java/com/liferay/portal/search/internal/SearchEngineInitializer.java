@@ -16,10 +16,9 @@ package com.liferay.portal.search.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchEngineHelperUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.util.PropsValues;
 
@@ -63,7 +62,7 @@ public class SearchEngineInitializer implements Runnable {
 	}
 
 	protected void doReIndex(int delay) {
-		if (IndexWriterHelperUtil.isIndexReadOnly()) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
@@ -88,9 +87,9 @@ public class SearchEngineInitializer implements Runnable {
 		stopWatch.start();
 
 		try {
-			SearchEngineHelperUtil.removeCompany(_companyId);
+			SearchEngineUtil.removeCompany(_companyId);
 
-			SearchEngineHelperUtil.initialize(_companyId);
+			SearchEngineUtil.initialize(_companyId);
 
 			Set<String> searchEngineIds = new HashSet<>();
 
@@ -98,7 +97,7 @@ public class SearchEngineInitializer implements Runnable {
 				String searchEngineId = indexer.getSearchEngineId();
 
 				if (searchEngineIds.add(searchEngineId)) {
-					IndexWriterHelperUtil.deleteEntityDocuments(
+					SearchEngineUtil.deleteEntityDocuments(
 						searchEngineId, _companyId, indexer.getClassName(),
 						true);
 				}

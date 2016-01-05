@@ -25,59 +25,35 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  */
 @ProviderType
 public class MBCategoryFinderUtil {
-	public static int countC_ByS_G_U_P(long groupId, long userId,
+	public static int countByS_G_U_P(long groupId, long userId,
 		long[] parentCategoryIds,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.portlet.messageboards.model.MBCategory> queryDefinition) {
 		return getFinder()
-				   .countC_ByS_G_U_P(groupId, userId, parentCategoryIds,
+				   .countByS_G_U_P(groupId, userId, parentCategoryIds,
 			queryDefinition);
 	}
 
-	public static int countC_T_ByG_C(long groupId, long categoryId,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition) {
-		return getFinder().countC_T_ByG_C(groupId, categoryId, queryDefinition);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindC_ByS_G_U_P(
-		long groupId, long userId, long[] parentCategoryIds,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.portlet.messageboards.model.MBCategory> queryDefinition) {
-		return getFinder()
-				   .filterFindC_ByS_G_U_P(groupId, userId, parentCategoryIds,
-			queryDefinition);
-	}
-
-	public static java.util.List<java.lang.Object> filterFindC_T_ByG_C(
-		long groupId, long categoryId,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition) {
-		return getFinder()
-				   .filterFindC_T_ByG_C(groupId, categoryId, queryDefinition);
-	}
-
-	public static java.util.List<java.lang.Object> findC_T_ByG_C(long groupId,
-		long categoryId,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition) {
-		return getFinder().findC_T_ByG_C(groupId, categoryId, queryDefinition);
-	}
-
-	public static int filterCountC_ByS_G_U_P(long groupId, long userId,
+	public static int filterCountByS_G_U_P(long groupId, long userId,
 		long[] parentCategoryIds,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.portlet.messageboards.model.MBCategory> queryDefinition) {
 		return getFinder()
-				   .filterCountC_ByS_G_U_P(groupId, userId, parentCategoryIds,
+				   .filterCountByS_G_U_P(groupId, userId, parentCategoryIds,
 			queryDefinition);
 	}
 
-	public static int filterCountC_T_ByG_C(long groupId, long categoryId,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition<?> queryDefinition) {
-		return getFinder()
-				   .filterCountC_T_ByG_C(groupId, categoryId, queryDefinition);
-	}
-
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findC_ByS_G_U_P(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByS_G_U_P(
 		long groupId, long userId, long[] parentCategoryIds,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.portlet.messageboards.model.MBCategory> queryDefinition) {
 		return getFinder()
-				   .findC_ByS_G_U_P(groupId, userId, parentCategoryIds,
+				   .filterFindByS_G_U_P(groupId, userId, parentCategoryIds,
+			queryDefinition);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U_P(
+		long groupId, long userId, long[] parentCategoryIds,
+		com.liferay.portal.kernel.dao.orm.QueryDefinition<com.liferay.portlet.messageboards.model.MBCategory> queryDefinition) {
+		return getFinder()
+				   .findByS_G_U_P(groupId, userId, parentCategoryIds,
 			queryDefinition);
 	}
 

@@ -609,6 +609,14 @@ public class EmailAddressWrapper implements EmailAddress,
 		return _emailAddress.getStagedModelType();
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public EmailAddress getWrappedEmailAddress() {
+		return _emailAddress;
+	}
+
 	@Override
 	public EmailAddress getWrappedModel() {
 		return _emailAddress;

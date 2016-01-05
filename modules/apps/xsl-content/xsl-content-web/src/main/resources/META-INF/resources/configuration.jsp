@@ -38,13 +38,11 @@
 		</div>
 	</c:if>
 
-	<aui:fieldset-group markupView="lexicon">
-		<aui:fieldset>
-			<aui:input cssClass="lfr-input-text-container" name="preferences--xmlUrl--" type="text" value="<%= xslContentPortletInstanceConfiguration.xmlUrl() %>" />
+	<aui:fieldset>
+		<aui:input cssClass="lfr-input-text-container" name="preferences--xmlUrl--" type="text" value="<%= xslContentPortletInstanceConfiguration.xmlUrl() %>" />
 
-			<aui:input cssClass="lfr-input-text-container" name="preferences--xslUrl--" type="text" value="<%= xslContentPortletInstanceConfiguration.xslUrl() %>" />
-		</aui:fieldset>
-	</aui:fieldset-group>
+		<aui:input cssClass="lfr-input-text-container" name="preferences--xslUrl--" type="text" value="<%= xslContentPortletInstanceConfiguration.xslUrl() %>" />
+	</aui:fieldset>
 
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" />

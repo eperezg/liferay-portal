@@ -83,18 +83,20 @@ public class DefaultDLEditFileEntryDisplayContext
 
 	@Override
 	public String getPublishButtonLabel() {
+		String publishButtonLabel = "publish";
+
 		if (_hasFolderWorkflowDefinitionLink()) {
-			return "submit-for-publication";
+			publishButtonLabel = "submit-for-publication";
 		}
 
 		DLPortletInstanceSettings dlPortletInstanceSettings =
 			_dlRequestHelper.getDLPortletInstanceSettings();
 
 		if (dlPortletInstanceSettings.isEnableFileEntryDrafts()) {
-			return "save";
+			publishButtonLabel = "save";
 		}
 
-		return "publish";
+		return publishButtonLabel;
 	}
 
 	@Override

@@ -21,12 +21,10 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 /**
  * @author Lino Alves
  */
-@ConfigurationAdmin(
-	category = "productivity", scope = ConfigurationAdmin.Scope.GROUP
-)
+@ConfigurationAdmin(category = "productivity")
 @Meta.OCD(
 	id = "com.liferay.dynamic.data.mapping.configuration.DDMServiceConfiguration",
-	localization = "content/Language", name = "%ddm.service.configuration.name"
+	name = "Dynamic Data Mapping Service Configuration"
 )
 public interface DDMServiceConfiguration {
 

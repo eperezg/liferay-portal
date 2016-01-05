@@ -3,9 +3,7 @@
 	<var name="userName" value="Test Test" />
 
 	<command name="addCP">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="Type#typeCKEditor" locator1="CKEditor#BODY_FIELD" value1="${threadBody}" />
@@ -15,16 +13,17 @@
 	</command>
 
 	<command name="addCPWithAttachment">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="Type#typeCKEditor" locator1="CKEditor#BODY_FIELD" value1="${threadBody}" />
 
-		<execute macro="Panel#expandPanel">
-			<var name="panelHeading" value="Attachments" />
-		</execute>
+		<if>
+			<condition function="IsElementPresent" locator1="MessageBoardsEditMessage#ATTACHMENTS_BROWSE_FIELD" />
+			<then>
+				<execute function="Click" locator1="MessageBoardsEditMessage#ATTACHMENTS_DROPDOWN" />
+			</then>
+		</if>
 
 		<execute function="UploadCommonFile" locator1="MessageBoardsEditMessage#ATTACHMENTS_BROWSE_FIELD" value1="${mbAttachmentFile}" />
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
@@ -33,15 +32,16 @@
 	</command>
 
 	<command name="addInvalidAttachmentPG">
-		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="Click" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" />
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 
-		<execute macro="Panel#expandPanel">
-			<var name="panelHeading" value="Attachments" />
-		</execute>
+		<if>
+			<condition function="IsElementPresent" locator1="MessageBoardsEditMessage#ATTACHMENTS_DROPDOWN_COLLAPSED" />
+			<then>
+				<execute function="AssertClick" locator1="MessageBoardsEditMessage#ATTACHMENTS_DROPDOWN" value1="Attachments" />
+			</then>
+		</if>
 
 		<execute function="UploadCommonFile" locator1="MessageBoardsEditMessage#ATTACHMENTS_FILE_FIELD_1" value1="${mbThreadAttachment}" />
 		<execute function="AssertClick" locator1="Button#PUBLISH" value1="Publish" />
@@ -56,9 +56,7 @@
 	</command>
 
 	<command name="addPG">
-		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="Click" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" />
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 
@@ -186,9 +184,13 @@
 		<execute function="AssertTextEquals" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="AssertElementPresent" locator1="CKEditor#BODY_FIELD" />
 
-		<execute macro="Panel#expandPanel">
-			<var name="panelHeading" value="Categorization" />
-		</execute>
+		<if>
+			<condition function="IsElementNotPresent" locator1="AssetCategorization#TAGS_ADD_BUTTON" />
+			<then>
+				<execute function="AssertClick" locator1="AssetCategorization#PANEL_TOGGLE" value1="Categorization" />
+				<execute function="AssertElementPresent" locator1="AssetCategorization#TAGS_ADD_BUTTON" />
+			</then>
+		</if>
 
 		<if>
 			<isset var="tagNameList" />
@@ -209,9 +211,7 @@
 	</command>
 
 	<command name="addWithWorkflowCP">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="Type#typeCKEditor" locator1="CKEditor#BODY_FIELD" value1="${threadBody}" />
@@ -221,9 +221,7 @@
 	</command>
 
 	<command name="addWithWorkflowPG">
-		<execute function="Click#makeVisibleClickAt" locator1="Portlet#ICON_PLUS_SIGN" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="Click" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" />
 
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="${threadSubject}" />
 		<execute function="Type#typeCKEditorWaitForCKEditor" locator1="CKEditor#BODY_FIELD" value1="${threadBody}" />
@@ -254,7 +252,7 @@
 		<var name="key_threadSubject" value="${threadSubject}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_THREAD" value1="${threadSubject}" />
-		<execute function="Click" locator1="MessageBoards#VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="MessageBoards#THREAD_TABLE_ACTIONS" />
 		<execute function="Click" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="The ${assetType} ${threadSubject} was moved to the Recycle Bin. Undo" />
 		<execute function="AssertElementNotPresent" locator1="MessageBoards#THREAD_TABLE_THREAD" />
@@ -457,9 +455,8 @@
 			</else>
 		</if>
 
-		<execute function="Click" locator1="MessageBoards#THREAD_TABLE_ACTIONS" />
-
-		<execute function="AssertClick" locator1="MenuItem#MOVE" value1="Move" />
+		<execute function="Click" locator1="PGMessageboardsCategory#THREAD_TABLE_ACTIONS_GENERIC" />
+		<execute function="AssertClick" locator1="PGMessageboardsCategory#THREAD_MENULIST_MOVE" value1="Move" />
 
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 
@@ -504,8 +501,8 @@
 			</else>
 		</if>
 
-		<execute function="AssertClick" locator1="MessageBoards#THREAD_TABLE_ACTIONS" />
-		<execute function="AssertClick" locator1="MenuItem#MOVE" value1="Move" />
+		<execute function="AssertClick" locator1="PGMessageboardsCategory#THREAD_TABLE_ACTIONS_GENERIC" value1="Actions" />
+		<execute function="AssertClick" locator1="PGMessageboardsCategory#THREAD_MENULIST_MOVE" value1="Move" />
 
 		<execute function="AssertClick" locator1="Button#SELECT" value1="Select" />
 
@@ -540,7 +537,7 @@
 		<var name="key_threadSubject" value="${threadSubject}" />
 
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_THREAD" value1="${threadSubject}" />
-		<execute function="Click" locator1="MessageBoards#VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="MessageBoards#THREAD_TABLE_ACTIONS" />
 		<execute function="AssertElementPresent#assertVisible" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" />
 		<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" value1="Move to the Recycle Bin" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="Message#SUCCESS" value1="The ${assetType} ${threadSubject} was moved to the Recycle Bin. Undo" />
@@ -579,7 +576,7 @@
 		<var method="StringUtil#lowerCase('${key_roleName}')" name="key_roleName" />
 		<var name="key_threadSubject" value="${threadSubject}" />
 
-		<execute function="Click" locator1="MessageBoards#VERTICAL_ELLIPSIS" />
+		<execute function="Click" locator1="MessageBoards#THREAD_TABLE_ACTIONS" />
 		<execute function="AssertClick" locator1="MenuItem#PERMISSIONS" value1="Permissions" />
 
 		<execute function="SelectFrame" locator1="Permissions#PERMISSIONS_IFRAME" />
@@ -778,9 +775,9 @@
 		</execute>
 
 		<while>
-			<condition function="IsElementPresent" locator1="MessageBoards#VERTICAL_ELLIPSIS_GENERIC" />
+			<condition function="IsElementPresent" locator1="MessageBoards#THREAD_TABLE_ACTIONS_GENERIC" />
 			<then>
-				<execute function="Click" locator1="MessageBoards#VERTICAL_ELLIPSIS_GENERIC" />
+				<execute function="Click" locator1="MessageBoards#THREAD_TABLE_ACTIONS_GENERIC" />
 				<execute function="AssertClick" locator1="MenuItem#MOVE_TO_THE_RECYCLE_BIN" value1="Move to the Recycle Bin" />
 			</then>
 		</while>
@@ -805,9 +802,7 @@
 	</command>
 
 	<command name="viewAnonymousPostingCheckboxCP">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
 		<execute function="AssertElementPresent" locator1="Checkbox#ANONYMOUS" />
 	</command>
@@ -835,7 +830,7 @@
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_ADMIN_POSTS" value1="${postsNumber}" />
 		<execute function="AssertElementPresent" locator1="MessageBoards#THREAD_TABLE_ADMIN_VIEWS" value1="${threadSubject}" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoards#THREAD_TABLE_ADMIN_LAST_POST" value1="${userName}" />
-		<execute function="AssertElementPresent" locator1="MessageBoards#VERTICAL_ELLIPSIS" value1="${threadSubject}" />
+		<execute function="AssertElementPresent" locator1="MessageBoards#THREAD_TABLE_ACTIONS" value1="${threadSubject}" />
 
 		<execute function="AssertClick" locator1="MessageBoards#THREAD_TABLE_ADMIN_THREAD" value1="${threadSubject}" />
 
@@ -864,7 +859,7 @@
 		<execute function="AssertElementNotPresent" locator1="MessageBoards#THREAD_TABLE_POSTS" />
 		<execute function="AssertElementNotPresent" locator1="MessageBoards#THREAD_TABLE_VIEWS" />
 		<execute function="AssertElementNotPresent" locator1="MessageBoards#THREAD_TABLE_LAST_POST" />
-		<execute function="AssertElementNotPresent" locator1="MessageBoards#VERTICAL_ELLIPSIS" />
+		<execute function="AssertElementNotPresent" locator1="MessageBoards#THREAD_TABLE_ACTIONS" />
 	</command>
 
 	<command name="viewLockedPG">
@@ -899,29 +894,21 @@
 	</command>
 
 	<command name="viewMarkAsQuestionCheckedCP">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
 		<execute function="AssertChecked" locator1="Checkbox#MARK_AS_A_QUESTION" />
-
 		<execute function="AssertClick" locator1="Button#CANCEL" value1="Cancel" />
 	</command>
 
 	<command name="viewMarkAsQuestionNotCheckedCP">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
 		<execute function="AssertNotChecked" locator1="Checkbox#MARK_AS_A_QUESTION" />
-
 		<execute function="AssertClick" locator1="Button#CANCEL" value1="Cancel" />
 	</command>
 
 	<command name="viewNoAnonymousPostingCheckboxCP">
-		<execute function="Click" locator1="Button#PLUS" />
-
-		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
+		<execute function="AssertClick" locator1="MessageBoards#POST_NEW_THREAD_BUTTON" value1="Post New Thread" />
 
 		<execute function="AssertElementNotPresent" locator1="Checkbox#ANONYMOUS" />
 	</command>
@@ -1019,7 +1006,7 @@
 		<execute function="AssertTextEquals" locator1="MessageBoards#THREAD_TABLE_ADMIN_POSTS" value1="${postsNumber}" />
 		<execute function="AssertElementPresent" locator1="MessageBoards#THREAD_TABLE_ADMIN_VIEWS" value1="${threadSubject}" />
 		<execute function="AssertTextEquals#assertPartialText" locator1="MessageBoards#THREAD_TABLE_ADMIN_LAST_POST" value1="${userName}" />
-		<execute function="AssertElementPresent" locator1="MessageBoards#VERTICAL_ELLIPSIS" value1="${threadSubject}" />
+		<execute function="AssertElementPresent" locator1="MessageBoards#THREAD_TABLE_ACTIONS" value1="${threadSubject}" />
 
 		<execute function="AssertClick" locator1="MessageBoards#THREAD_TABLE_THREAD" value1="${threadSubject}" />
 

@@ -53,9 +53,8 @@ String viewMode = ParamUtil.getString(request, "viewMode");
 
 		<div class="print-action user-tool-asset-addon-entry">
 			<liferay-ui:icon
-				icon="print"
+				iconCssClass="icon-print"
 				label="<%= true %>"
-				markupView="lexicon"
 				message='<%= LanguageUtil.format(request, "print-x-x", new Object[] {"hide-accessible", HtmlUtil.escape(articleDisplay.getTitle())}, false) %>'
 				url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
 			/>

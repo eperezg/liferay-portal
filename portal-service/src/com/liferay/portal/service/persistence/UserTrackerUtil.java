@@ -749,5 +749,12 @@ public class UserTrackerUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(UserTrackerPersistence persistence) {
+	}
+
 	private static UserTrackerPersistence _persistence;
 }

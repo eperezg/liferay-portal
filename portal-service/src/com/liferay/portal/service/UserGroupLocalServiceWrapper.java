@@ -1035,6 +1035,23 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService,
 		return _userGroupLocalService.updateUserGroup(userGroup);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public UserGroupLocalService getWrappedUserGroupLocalService() {
+		return _userGroupLocalService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedUserGroupLocalService(
+		UserGroupLocalService userGroupLocalService) {
+		_userGroupLocalService = userGroupLocalService;
+	}
+
 	@Override
 	public UserGroupLocalService getWrappedService() {
 		return _userGroupLocalService;

@@ -424,5 +424,12 @@ public class LayoutFriendlyURLLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(LayoutFriendlyURLLocalService service) {
+	}
+
 	private static LayoutFriendlyURLLocalService _service;
 }

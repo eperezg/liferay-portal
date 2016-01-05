@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.social.NoSuchActivityException;
@@ -6360,8 +6359,6 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		socialActivity.setNew(true);
 		socialActivity.setPrimaryKey(activityId);
 
-		socialActivity.setCompanyId(companyProvider.getCompanyId());
-
 		return socialActivity;
 	}
 
@@ -7130,7 +7127,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

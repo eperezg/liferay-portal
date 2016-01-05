@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.nio.intraband.messaging.IntrabandBridgeMessageListener;
 import com.liferay.portal.kernel.resiliency.spi.SPI;
 import com.liferay.portal.kernel.resiliency.spi.SPIUtil;
-import com.liferay.portal.kernel.search.SearchEngineHelperUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 
 import java.rmi.RemoteException;
 
@@ -35,13 +35,11 @@ public class SPISearchEngineConfigurator {
 			return;
 		}
 
-		Set<String> searchEngineIds =
-			SearchEngineHelperUtil.getSearchEngineIds();
+		Set<String> searchEngineIds = SearchEngineUtil.getSearchEngineIds();
 
 		for (String searchEngineId : searchEngineIds) {
 			String destinationName =
-				SearchEngineHelperUtil.getSearchWriterDestinationName(
-					searchEngineId);
+				SearchEngineUtil.getSearchWriterDestinationName(searchEngineId);
 
 			Destination destination = MessageBusUtil.getDestination(
 				destinationName);

@@ -19,14 +19,7 @@
 <%
 String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
-String navigation = ParamUtil.getString(request, "navigation", "home");
-
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("categoryId", StringPool.BLANK);
-portletURL.setParameter("tag", StringPool.BLANK);
 %>
 
 <liferay-frontend:management-bar
@@ -38,32 +31,6 @@ portletURL.setParameter("tag", StringPool.BLANK);
 
 		<liferay-util:include page="/bookmarks/display_style_buttons.jsp" servletContext="<%= application %>" />
 	</liferay-frontend:management-bar-buttons>
-
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-navigation>
-
-			<%
-			portletURL.setParameter("navigation", "home");
-			%>
-
-			<liferay-frontend:management-bar-navigation-item active='<%= navigation.equals("home") %>' label="all" url="<%= portletURL.toString() %>" />
-
-			<%
-			portletURL.setParameter("navigation", "recent");
-			%>
-
-			<liferay-frontend:management-bar-navigation-item active='<%= navigation.equals("recent") %>' label="recent" url="<%= portletURL.toString() %>" />
-
-			<c:if test="<%= themeDisplay.isSignedIn() %>">
-
-				<%
-				portletURL.setParameter("navigation", "mine");
-				%>
-
-				<liferay-frontend:management-bar-navigation-item active='<%= navigation.equals("mine") %>' label="mine" url="<%= portletURL.toString() %>" />
-			</c:if>
-		</liferay-frontend:management-bar-navigation>
-	</liferay-frontend:management-bar-filters>
 
 	<liferay-frontend:management-bar-action-buttons>
 

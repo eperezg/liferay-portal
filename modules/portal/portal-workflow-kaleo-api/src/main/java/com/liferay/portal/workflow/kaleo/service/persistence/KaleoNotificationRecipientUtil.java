@@ -789,6 +789,14 @@ public class KaleoNotificationRecipientUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(
+		KaleoNotificationRecipientPersistence persistence) {
+	}
+
 	private static ServiceTracker<KaleoNotificationRecipientPersistence, KaleoNotificationRecipientPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(KaleoNotificationRecipientPersistence.class);
 }

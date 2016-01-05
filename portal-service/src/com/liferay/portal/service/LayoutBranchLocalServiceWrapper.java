@@ -329,6 +329,23 @@ public class LayoutBranchLocalServiceWrapper implements LayoutBranchLocalService
 			name, description, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public LayoutBranchLocalService getWrappedLayoutBranchLocalService() {
+		return _layoutBranchLocalService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedLayoutBranchLocalService(
+		LayoutBranchLocalService layoutBranchLocalService) {
+		_layoutBranchLocalService = layoutBranchLocalService;
+	}
+
 	@Override
 	public LayoutBranchLocalService getWrappedService() {
 		return _layoutBranchLocalService;

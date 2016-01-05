@@ -48,7 +48,6 @@ public class AmazonRankingsWebUpgrade implements UpgradeStepRegistrator {
 						}
 					};
 				}
-
 			});
 	}
 

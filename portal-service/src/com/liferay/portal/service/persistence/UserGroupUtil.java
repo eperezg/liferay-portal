@@ -1911,5 +1911,12 @@ public class UserGroupUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(UserGroupPersistence persistence) {
+	}
+
 	private static UserGroupPersistence _persistence;
 }

@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.SynchronousDestination;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
-import com.liferay.portal.kernel.search.SearchEngineHelperUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.rule.callback.SynchronousDestinationTestCallback.SyncHandler;
@@ -189,13 +189,13 @@ public class SynchronousDestinationTestCallback
 			replaceDestination(DestinationNames.SUBSCRIPTION_SENDER);
 
 			for (String searchEngineId :
-					SearchEngineHelperUtil.getSearchEngineIds()) {
+					SearchEngineUtil.getSearchEngineIds()) {
 
 				replaceDestination(
-					SearchEngineHelperUtil.getSearchReaderDestinationName(
+					SearchEngineUtil.getSearchReaderDestinationName(
 						searchEngineId));
 				replaceDestination(
-					SearchEngineHelperUtil.getSearchWriterDestinationName(
+					SearchEngineUtil.getSearchWriterDestinationName(
 						searchEngineId));
 			}
 		}
@@ -299,18 +299,16 @@ public class SynchronousDestinationTestCallback
 		public void send(final Message message) {
 			try {
 				TransactionInvokerUtil.invoke(
-					_transactionAttribute,
-					new Callable<Void>() {
+					_transactionAttribute, new Callable<Void>() {
 
-						@Override
-						public Void call() throws Exception {
-							CleanTransactionSynchronousDestination.super.send(
-								message);
+					@Override
+					public Void call() throws Exception {
+						CleanTransactionSynchronousDestination.super.send(
+							message);
 
-							return null;
-						}
-
-					});
+						return null;
+					}
+				});
 			}
 			catch (Throwable t) {
 				throw new RuntimeException(t);

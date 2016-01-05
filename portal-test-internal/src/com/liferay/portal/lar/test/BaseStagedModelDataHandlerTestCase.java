@@ -570,10 +570,6 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 		portletDataContext.setSourceGroupId(stagingGroup.getGroupId());
 	}
 
-	protected boolean isAssetPrioritySupported() {
-		return false;
-	}
-
 	protected boolean isCommentableStagedModel() {
 		return false;
 	}
@@ -626,31 +622,16 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 
 		AssetTag assetTag = AssetTestUtil.addTag(stagingGroup.getGroupId());
 
-		double assetPriority = assetEntry.getPriority();
-
-		if (isAssetPrioritySupported()) {
-			assetPriority = RandomTestUtil.nextDouble();
-		}
-
-		assetEntry = AssetEntryLocalServiceUtil.updateEntry(
+		AssetEntryLocalServiceUtil.updateEntry(
 			TestPropsValues.getUserId(), stagingGroup.getGroupId(),
-			assetEntry.getCreateDate(), assetEntry.getModifiedDate(),
 			assetEntry.getClassName(), assetEntry.getClassPK(),
-			assetEntry.getClassUuid(), assetEntry.getClassTypeId(),
 			new long[] {
 				assetCategory.getCategoryId(),
 				companyAssetCategory.getCategoryId()
 			},
-			new String[] {assetTag.getName()}, assetEntry.isVisible(),
-			assetEntry.getStartDate(), assetEntry.getEndDate(),
-			assetEntry.getExpirationDate(), assetEntry.getMimeType(),
-			assetEntry.getTitle(), assetEntry.getDescription(),
-			assetEntry.getSummary(), assetEntry.getUrl(),
-			assetEntry.getLayoutUuid(), assetEntry.getHeight(),
-			assetEntry.getWidth(), assetPriority);
+			new String[] {assetTag.getName()});
 
-		return new StagedModelAssets(
-			assetCategory, assetEntry, assetTag, assetVocabulary);
+		return new StagedModelAssets(assetCategory, assetTag, assetVocabulary);
 	}
 
 	protected void validateAssets(
@@ -662,20 +643,13 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 			return;
 		}
 
-		AssetEntry importedAssetEntry = fetchAssetEntry(stagedModel, group);
+		AssetEntry assetEntry = fetchAssetEntry(stagedModel, group);
 
-		if (isAssetPrioritySupported()) {
-			AssetEntry assetEntry = stagedModelAssets.getAssetEntry();
-
-			Assert.assertEquals(
-				assetEntry.getPriority(), importedAssetEntry.getPriority(), 0D);
-		}
-
-		List<AssetCategory> importedAssetCategories =
+		List<AssetCategory> assetCategories =
 			AssetCategoryLocalServiceUtil.getEntryCategories(
-				importedAssetEntry.getEntryId());
+				assetEntry.getEntryId());
 
-		Assert.assertEquals(2, importedAssetCategories.size());
+		Assert.assertEquals(2, assetCategories.size());
 
 		AssetCategory stagedAssetCategory =
 			stagedModelAssets.getAssetCategory();
@@ -687,7 +661,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 
 		long companyGroupId = company.getGroupId();
 
-		for (AssetCategory assetCategory : importedAssetCategories) {
+		for (AssetCategory assetCategory : assetCategories) {
 			long groupId = assetCategory.getGroupId();
 
 			if (groupId != companyGroupId) {
@@ -700,14 +674,13 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 		Assert.assertEquals(
 			stagedAssetCategory.getUuid(), importedAssetCategory.getUuid());
 
-		List<AssetTag> importedAssetTags =
-			AssetTagLocalServiceUtil.getEntryTags(
-				importedAssetEntry.getEntryId());
+		List<AssetTag> assetTags = AssetTagLocalServiceUtil.getEntryTags(
+			assetEntry.getEntryId());
 
-		Assert.assertEquals(1, importedAssetTags.size());
+		Assert.assertEquals(1, assetTags.size());
 
 		AssetTag assetTag = stagedModelAssets.getAssetTag();
-		AssetTag importedAssetTag = importedAssetTags.get(0);
+		AssetTag importedAssetTag = assetTags.get(0);
 
 		Assert.assertEquals(assetTag.getName(), importedAssetTag.getName());
 
@@ -935,21 +908,16 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 	protected class StagedModelAssets implements Serializable {
 
 		public StagedModelAssets(
-			AssetCategory assetCategory, AssetEntry assetEntry,
-			AssetTag assetTag, AssetVocabulary assetVocabulary) {
+			AssetCategory assetCategory, AssetTag assetTag,
+			AssetVocabulary assetVocabulary) {
 
 			_assetCategory = assetCategory;
-			_assetEntry = assetEntry;
 			_assetTag = assetTag;
 			_assetVocabulary = assetVocabulary;
 		}
 
 		public AssetCategory getAssetCategory() {
 			return _assetCategory;
-		}
-
-		public AssetEntry getAssetEntry() {
-			return _assetEntry;
 		}
 
 		public AssetTag getAssetTag() {
@@ -964,10 +932,6 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 			_assetCategory = assetCategory;
 		}
 
-		public void setAssetEntry(AssetEntry assetEntry) {
-			_assetEntry = assetEntry;
-		}
-
 		public void setAssetTag(AssetTag assetTag) {
 			_assetTag = assetTag;
 		}
@@ -977,7 +941,6 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 		}
 
 		private AssetCategory _assetCategory;
-		private AssetEntry _assetEntry;
 		private AssetTag _assetTag;
 		private AssetVocabulary _assetVocabulary;
 

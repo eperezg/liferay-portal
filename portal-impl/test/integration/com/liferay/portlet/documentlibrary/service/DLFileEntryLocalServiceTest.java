@@ -19,7 +19,8 @@ import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryProviderUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.search.IndexWriterHelperUtil;
+import com.liferay.portal.kernel.repository.util.RepositoryTrashUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
@@ -38,6 +39,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.test.randomizerbumpers.TikaSafeRandomizerBumper;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
@@ -93,7 +95,7 @@ public class DLFileEntryLocalServiceTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			SynchronousDestinationTestRule.INSTANCE);
 
 	@Before
@@ -215,7 +217,7 @@ public class DLFileEntryLocalServiceTest {
 				RepositoryProviderUtil.getFileEntryLocalRepository(
 					fileEntry.getFileEntryId());
 
-			DLTrashLocalServiceUtil.moveFileEntryToTrash(
+			RepositoryTrashUtil.moveFileEntryToTrash(
 				TestPropsValues.getUserId(), localRepository.getRepositoryId(),
 				fileEntry.getFileEntryId());
 		}
@@ -408,12 +410,12 @@ public class DLFileEntryLocalServiceTest {
 			StringPool.BLANK, StringPool.BLANK, is, bytes.length,
 			serviceContext);
 
-		boolean indexReadOnly = IndexWriterHelperUtil.isIndexReadOnly();
+		boolean indexReadOnly = SearchEngineUtil.isIndexReadOnly();
 
 		DLFileEntry dlFileEntry = null;
 
 		try {
-			IndexWriterHelperUtil.setIndexReadOnly(true);
+			SearchEngineUtil.setIndexReadOnly(true);
 
 			dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 				fileEntry.getFileEntryId());
@@ -434,7 +436,7 @@ public class DLFileEntryLocalServiceTest {
 					dlFileEntry.getFileEntryId());
 			}
 
-			IndexWriterHelperUtil.setIndexReadOnly(indexReadOnly);
+			SearchEngineUtil.setIndexReadOnly(indexReadOnly);
 		}
 	}
 

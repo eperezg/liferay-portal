@@ -36,7 +36,7 @@ public class TermRangeQueryFactoryUtil {
 
 		String searchEngineId = searchContext.getSearchEngineId();
 
-		SearchEngine searchEngine = SearchEngineHelperUtil.getSearchEngine(
+		SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
 			searchEngineId);
 
 		return searchEngine.getTermRangeQueryFactory();

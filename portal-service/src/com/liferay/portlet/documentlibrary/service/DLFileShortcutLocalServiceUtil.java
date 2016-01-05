@@ -468,5 +468,12 @@ public class DLFileShortcutLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(DLFileShortcutLocalService service) {
+	}
+
 	private static DLFileShortcutLocalService _service;
 }

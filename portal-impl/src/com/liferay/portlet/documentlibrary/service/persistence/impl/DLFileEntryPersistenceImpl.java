@@ -42,7 +42,6 @@ import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -12068,8 +12067,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		dlFileEntry.setUuid(uuid);
 
-		dlFileEntry.setCompanyId(companyProvider.getCompanyId());
-
 		return dlFileEntry;
 	}
 
@@ -12933,7 +12930,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

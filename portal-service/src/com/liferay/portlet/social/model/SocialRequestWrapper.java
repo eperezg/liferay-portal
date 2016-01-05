@@ -608,6 +608,14 @@ public class SocialRequestWrapper implements SocialRequest,
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public SocialRequest getWrappedSocialRequest() {
+		return _socialRequest;
+	}
+
 	@Override
 	public SocialRequest getWrappedModel() {
 		return _socialRequest;

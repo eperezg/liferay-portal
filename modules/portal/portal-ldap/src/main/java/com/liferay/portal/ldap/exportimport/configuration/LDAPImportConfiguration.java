@@ -23,13 +23,12 @@ import com.liferay.portal.ldap.configuration.CompanyScopedConfiguration;
  * @author Michael C. Han
  */
 @ConfigurationAdmin(
-	category = "platform", factoryInstanceLabelAttribute = "companyId",
-	scope = ConfigurationAdmin.Scope.COMPANY
+	category = "platform", factoryInstanceLabelAttribute = "companyId"
 )
 @Meta.OCD(
 	factory = true,
 	id = "com.liferay.portal.ldap.exportimport.configuration.LDAPImportConfiguration",
-	localization = "content/Language", name = "%ldap.import.configuration.name"
+	localization = "content/Language"
 )
 public interface LDAPImportConfiguration extends CompanyScopedConfiguration {
 

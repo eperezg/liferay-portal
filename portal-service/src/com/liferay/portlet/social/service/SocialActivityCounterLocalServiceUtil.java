@@ -823,5 +823,12 @@ public class SocialActivityCounterLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(SocialActivityCounterLocalService service) {
+	}
+
 	private static SocialActivityCounterLocalService _service;
 }

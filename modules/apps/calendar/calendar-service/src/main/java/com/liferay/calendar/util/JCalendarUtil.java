@@ -109,18 +109,20 @@ public class JCalendarUtil {
 		return timeZone.getOffset(System.currentTimeMillis());
 	}
 
-	public static boolean isSameDayOfWeek(
-		Calendar jCalendar1, Calendar jCalendar2) {
+	public static int getWeekdayPosition(Calendar jCalendar) {
+		int weekOfMonth = jCalendar.get(Calendar.WEEK_OF_MONTH);
 
-		int dayOfWeek1 = jCalendar1.get(Calendar.DAY_OF_WEEK);
-		int dayOfWeek2 = jCalendar2.get(Calendar.DAY_OF_WEEK);
+		Calendar firstDayJCalendar = (Calendar)jCalendar.clone();
 
-		if (dayOfWeek1 == dayOfWeek2) {
-			return true;
+		firstDayJCalendar.set(Calendar.DAY_OF_MONTH, 1);
+
+		if (firstDayJCalendar.get(Calendar.DAY_OF_WEEK) >
+				jCalendar.get(Calendar.DAY_OF_WEEK)) {
+
+			return weekOfMonth - 1;
 		}
-		else {
-			return false;
-		}
+
+		return weekOfMonth;
 	}
 
 	public static Calendar mergeJCalendar(

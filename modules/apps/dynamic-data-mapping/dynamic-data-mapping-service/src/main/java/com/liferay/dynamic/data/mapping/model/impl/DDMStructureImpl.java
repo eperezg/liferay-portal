@@ -453,7 +453,6 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 					return true;
 				}
-
 			};
 
 		return ListUtil.filter(ddmFormFields, predicateFilter);

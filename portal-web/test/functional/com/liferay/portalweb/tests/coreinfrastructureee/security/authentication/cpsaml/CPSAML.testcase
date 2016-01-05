@@ -110,7 +110,7 @@
 			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoControlPanelSystem">
 			<var name="portlet" value="Server Administration" />
 		</execute>
 

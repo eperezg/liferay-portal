@@ -21,14 +21,9 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 /**
  * @author Iván Zaera
  */
-@ConfigurationAdmin(
-	category = "collaboration",
-	scope = ConfigurationAdmin.Scope.PORTLET_INSTANCE
-)
+@ConfigurationAdmin(category = "collaboration")
 @Meta.OCD(
-	id = "com.liferay.social.group.statistics.web.configuration.SocialGroupStatisticsPortletInstanceConfiguration",
-	localization = "content/Language",
-	name = "%social.group.statistics.portlet.instance.configuration.name"
+	id = "com.liferay.social.group.statistics.web.configuration.SocialGroupStatisticsPortletInstanceConfiguration"
 )
 public interface SocialGroupStatisticsPortletInstanceConfiguration {
 

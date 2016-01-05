@@ -95,7 +95,6 @@ public class AntUtil {
 
 				log(msg);
 			}
-
 		};
 
 		buildLogger.setErrorPrintStream(System.err);

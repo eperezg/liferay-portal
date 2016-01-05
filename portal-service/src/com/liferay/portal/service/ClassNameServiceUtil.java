@@ -65,5 +65,12 @@ public class ClassNameServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(ClassNameService service) {
+	}
+
 	private static ClassNameService _service;
 }

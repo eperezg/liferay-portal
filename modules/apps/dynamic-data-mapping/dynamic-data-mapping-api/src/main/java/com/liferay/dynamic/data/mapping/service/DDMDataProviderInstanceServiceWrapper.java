@@ -121,6 +121,23 @@ public class DDMDataProviderInstanceServiceWrapper
 			nameMap, descriptionMap, ddmFormValues, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public DDMDataProviderInstanceService getWrappedDDMDataProviderInstanceService() {
+		return _ddmDataProviderInstanceService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedDDMDataProviderInstanceService(
+		DDMDataProviderInstanceService ddmDataProviderInstanceService) {
+		_ddmDataProviderInstanceService = ddmDataProviderInstanceService;
+	}
+
 	@Override
 	public DDMDataProviderInstanceService getWrappedService() {
 		return _ddmDataProviderInstanceService;

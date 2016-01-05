@@ -122,7 +122,7 @@ if (Validator.isNotNull(portletResource)) {
 	<c:if test="<%= portletResource.equals(PortletKeys.PORTLET_DISPLAY_TEMPLATE) %>">
 		<h4><liferay-ui:message key="related-application-permissions" /></h4>
 
-		<div class="related-permissions">
+		<div>
 
 			<%
 			Set<String> relatedPortletResources = new HashSet<String>();
@@ -208,7 +208,7 @@ if (Validator.isNotNull(portletResource)) {
 	</c:if>
 
 	<aui:button-row>
-		<aui:button cssClass="btn-lg" onClick='<%= liferayPortletResponse.getNamespace() + "updateActions();" %>' value="save" />
+		<aui:button onClick='<%= liferayPortletResponse.getNamespace() + "updateActions();" %>' value="save" />
 	</aui:button-row>
 </aui:form>
 

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.social.model.SocialActivityCounter;
 import com.liferay.portlet.social.model.SocialActivityCounterConstants;
 import com.liferay.portlet.social.model.SocialActivityLimit;
@@ -43,7 +44,7 @@ public class SocialActivityCounterLocalServiceTest
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			SynchronousDestinationTestRule.INSTANCE);
 
 	@Before

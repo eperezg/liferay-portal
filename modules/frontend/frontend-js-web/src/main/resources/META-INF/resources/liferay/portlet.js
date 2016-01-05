@@ -1,4 +1,5 @@
 ;(function(A, Liferay) {
+	var AArray = A.Array;
 	var Util = Liferay.Util;
 
 	var STR_HEAD = 'head';
@@ -150,6 +151,7 @@
 
 			var beforePortletLoaded = options.beforePortletLoaded;
 			var onCompleteFn = options.onComplete;
+			var positionOptions = options.positionOptions;
 
 			var onComplete = function(portlet, portletId) {
 				if (onCompleteFn) {
@@ -274,47 +276,40 @@
 
 				portletBound = portletBound.one('> *');
 
-				var portletId;
+				var id = portletBound.attr('id');
 
-				if (portletBound) {
-					var id = portletBound.attr('id');
+				var portletId = Util.getPortletId(id);
 
-					portletId = Util.getPortletId(id);
+				portletBound.portletId = portletId;
 
-					portletBound.portletId = portletId;
+				placeHolder.hide();
+				placeHolder.placeAfter(portletBound);
 
-					placeHolder.hide();
-					placeHolder.placeAfter(portletBound);
+				placeHolder.remove();
 
-					placeHolder.remove();
+				instance.refreshLayout(portletBound);
 
-					instance.refreshLayout(portletBound);
-
-					if (window.location.hash) {
-						window.location.hash = 'p_p_id_' + portletId + '_';
-					}
-
-					portletBoundary = portletBound;
-
-					var Layout = Liferay.Layout;
-
-					if (Layout && Layout.INITIALIZED) {
-						Layout.updateCurrentPortletInfo(portletBoundary);
-
-						if (container) {
-							Layout.syncEmptyColumnClassUI(container);
-						}
-
-						Layout.syncDraggableClassUI();
-						Layout.updatePortletDropZones(portletBoundary);
-					}
-
-					if (onComplete) {
-						onComplete(portletBoundary, portletId);
-					}
+				if (window.location.hash) {
+					window.location.hash = 'p_p_id_' + portletId + '_';
 				}
-				else {
-					placeHolder.remove();
+
+				portletBoundary = portletBound;
+
+				var Layout = Liferay.Layout;
+
+				if (Layout && Layout.INITIALIZED) {
+					Layout.updateCurrentPortletInfo(portletBoundary);
+
+					if (container) {
+						Layout.syncEmptyColumnClassUI(container);
+					}
+
+					Layout.syncDraggableClassUI();
+					Layout.updatePortletDropZones(portletBoundary);
+				}
+
+				if (onComplete) {
+					onComplete(portletBoundary, portletId);
 				}
 
 				return portletId;
@@ -682,12 +677,13 @@
 		function(options) {
 			var instance = this;
 
-			var bodyCssClass = options.bodyCssClass;
-			var namespace = options.namespace;
 			var portlet = options.portlet;
-			var subTitle = options.subTitle;
-			var title = options.title;
+			var portletId = options.portletId;
 			var uri = options.uri;
+			var namespace = options.namespace;
+			var title = options.title;
+			var subTitle = options.subTitle;
+			var bodyCssClass = options.bodyCssClass;
 
 			portlet = A.one(portlet);
 

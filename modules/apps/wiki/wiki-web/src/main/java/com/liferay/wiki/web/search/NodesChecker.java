@@ -81,10 +81,14 @@ public class NodesChecker extends EmptyOnClickRowChecker {
 		String name = WikiNode.class.getSimpleName();
 		boolean showInput = false;
 
-		if (WikiNodePermissionChecker.contains(
-				_permissionChecker, node, ActionKeys.DELETE)) {
+		try {
+			if (WikiNodePermissionChecker.contains(
+					_permissionChecker, node, ActionKeys.DELETE)) {
 
-			showInput = true;
+				showInput = true;
+			}
+		}
+		catch (Exception e) {
 		}
 
 		if (!showInput) {

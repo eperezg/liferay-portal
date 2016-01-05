@@ -132,6 +132,7 @@ else {
 					url="<%= addFolderURL %>"
 				/>
 			</c:if>
+
 		</c:otherwise>
 	</c:choose>
 

@@ -83,7 +83,7 @@ public class UpgradeDynamicDataListsTest extends PowerMockito {
 			createLocalizationXML(new String[] {fieldsDisplay}));
 
 		UpgradeDynamicDataLists upgradeDynamicDataLists =
-			new UpgradeDynamicDataLists(null, null, null);
+			new UpgradeDynamicDataLists();
 
 		String xml = upgradeDynamicDataLists.toXML(expandoValuesMap);
 
@@ -122,7 +122,7 @@ public class UpgradeDynamicDataListsTest extends PowerMockito {
 			createLocalizationXML(new String[] {fieldsDisplay}));
 
 		UpgradeDynamicDataLists upgradeDynamicDataLists =
-			new UpgradeDynamicDataLists(null, null, null);
+			new UpgradeDynamicDataLists();
 
 		String xml = upgradeDynamicDataLists.toXML(expandoValuesMap);
 

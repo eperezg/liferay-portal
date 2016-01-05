@@ -1,3 +1,4 @@
+/* @generated */
 /*
  * Copyright (c) 2003 The Visigoth Software Society. All rights
  * reserved.
@@ -541,4 +542,3 @@ extends
         RmiDebuggedEnvironmentImpl.cleanup();
     }
 }
-/* @generated */

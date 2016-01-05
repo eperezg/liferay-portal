@@ -33,7 +33,7 @@ WikiVisualizationHelper wikiVisualizationHelper = new WikiVisualizationHelper(wi
 	PortletURL undoTrashURL = wikiURLHelper.getUndoTrashURL();
 	%>
 
-	<liferay-trash:undo portletURL="<%= undoTrashURL.toString() %>" />
+	<liferay-ui:trash-undo portletURL="<%= undoTrashURL.toString() %>" />
 </c:if>
 
 <%

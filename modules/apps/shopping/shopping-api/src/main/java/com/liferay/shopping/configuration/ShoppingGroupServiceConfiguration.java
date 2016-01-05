@@ -22,11 +22,9 @@ import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 /**
  * @author Peter Fellwock
  */
-@ConfigurationAdmin(category = "other", scope = ConfigurationAdmin.Scope.GROUP)
+@ConfigurationAdmin(category = "other")
 @Meta.OCD(
-	id = "com.liferay.shopping.configuration.ShoppingGroupServiceConfiguration",
-	localization = "content/Language",
-	name = "%shopping.group.service.configuration.name"
+	id = "com.liferay.shopping.configuration.ShoppingGroupServiceConfiguration"
 )
 public interface ShoppingGroupServiceConfiguration {
 

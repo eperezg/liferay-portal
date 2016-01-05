@@ -280,5 +280,12 @@ public class DLSyncEventLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(DLSyncEventLocalService service) {
+	}
+
 	private static DLSyncEventLocalService _service;
 }

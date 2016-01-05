@@ -1,6 +1,4 @@
 ;(function() {
-	var LiferayAUI = Liferay.AUI;
-
 	var PATH_DDM_TYPE_VALIDATION = Liferay.ThemeDisplay.getPathContext() + '/o/dynamic-data-mapping-type-validation';
 
 	AUI().applyConfig(
@@ -8,7 +6,6 @@
 			groups: {
 				'field-validation': {
 					base: PATH_DDM_TYPE_VALIDATION + '/',
-					filter: LiferayAUI.getFilterConfig(),
 					modules: {
 						'liferay-ddm-form-field-validation': {
 							condition: {

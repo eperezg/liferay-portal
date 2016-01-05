@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.template.velocity.configuration.VelocityEngineConfiguration",
-	localization = "content/Language",
-	name = "%velocity.engine.configuration.name"
+	id = "com.liferay.portal.template.velocity.configuration.VelocityEngineConfiguration"
 )
 public interface VelocityEngineConfiguration {
 

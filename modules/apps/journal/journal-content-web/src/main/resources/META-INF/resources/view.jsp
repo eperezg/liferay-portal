@@ -16,8 +16,6 @@
 
 <%@ include file="/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.journal.content.web#/view.jsp#pre" />
-
 <%
 JournalArticle article = journalContentDisplayContext.getArticle();
 JournalArticleDisplay articleDisplay = journalContentDisplayContext.getArticleDisplay();
@@ -146,9 +144,8 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 				<liferay-ui:icon
 					cssClass="lfr-icon-action"
 					data="<%= data %>"
-					icon="pencil"
+					iconCssClass="icon-pencil"
 					label="<%= true %>"
-					markupView="lexicon"
 					message="edit"
 					method="get"
 					url="<%= latestArticleEditURL.toString() %>"
@@ -183,9 +180,8 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 				<liferay-ui:icon
 					cssClass="lfr-icon-action"
 					data="<%= data %>"
-					icon="pencil"
+					iconCssClass="icon-edit"
 					label="<%= true %>"
-					markupView="lexicon"
 					message="edit-template"
 					method="get"
 					url="<%= editTemplateURL.toString() %>"
@@ -196,9 +192,8 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 			<c:if test="<%= journalContentDisplayContext.isShowSelectArticleIcon() %>">
 				<liferay-ui:icon
 					cssClass="lfr-icon-action"
-					icon="cog"
+					iconCssClass="icon-cog"
 					label="<%= true %>"
-					markupView="lexicon"
 					message="select-web-content"
 					method="get"
 					onClick="<%= portletDisplay.getURLConfigurationJS() %>"
@@ -211,8 +206,7 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 					cssClass="lfr-icon-action lfr-icon-action-add"
 					direction="down"
 					extended="<%= false %>"
-					icon="plus"
-					markupView="lexicon"
+					icon="../aui/plus"
 					message="add"
 					showArrow="<%= false %>"
 					showWhenSingleIcon="<%= true %>"
@@ -265,5 +259,3 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 		<liferay-ui:asset-addon-entry-display assetAddonEntries="<%= journalContentDisplayContext.getSelectedContentMetadataAssetAddonEntries() %>" />
 	</div>
 </c:if>
-
-<liferay-util:dynamic-include key="com.liferay.journal.content.web#/view.jsp#post" />

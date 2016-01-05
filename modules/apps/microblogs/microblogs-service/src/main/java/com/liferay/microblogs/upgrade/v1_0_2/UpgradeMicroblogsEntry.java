@@ -28,7 +28,7 @@ public class UpgradeMicroblogsEntry extends UpgradeProcess {
 	}
 
 	protected void removeReceiverUserId() throws Exception {
-		if (!hasColumn("MicroblogsEntry", "receiverUserId")) {
+		if (!tableHasColumn("MicroblogsEntry", "receiverUserId")) {
 			return;
 		}
 
@@ -38,7 +38,7 @@ public class UpgradeMicroblogsEntry extends UpgradeProcess {
 	}
 
 	protected void renameReceiverMicroblogsEntryId() throws Exception {
-		if (!hasColumn("MicroblogsEntry", "receiverMicroblogsEntryId")) {
+		if (!tableHasColumn("MicroblogsEntry", "receiverMicroblogsEntryId")) {
 			return;
 		}
 

@@ -31,19 +31,13 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormLayoutRow;
 			{
 				@DDMFormLayoutColumn(
 					size = 12,
-					value = {
-						"url", "username", "password", "key", "value",
-						"cacheable"
-					}
+					value = {"url", "username", "password", "key", "value"}
 				)
 			}
 		)
 	})
 })
 public interface DDMRESTDataProviderSettings {
-
-	@DDMFormField
-	public boolean cacheable();
 
 	@DDMFormField
 	public String key();

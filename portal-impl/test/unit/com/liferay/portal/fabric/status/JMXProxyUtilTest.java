@@ -357,7 +357,6 @@ public class JMXProxyUtilTest {
 			public int hashCode() {
 				return super.hashCode();
 			}
-
 		}
 
 		Assert.assertFalse(
@@ -378,7 +377,6 @@ public class JMXProxyUtilTest {
 			public String toString() {
 				return super.toString();
 			}
-
 		}
 
 		Assert.assertFalse(
@@ -397,7 +395,6 @@ public class JMXProxyUtilTest {
 			@SuppressWarnings("unused")
 			public void method2() {
 			}
-
 		}
 
 		Assert.assertTrue(

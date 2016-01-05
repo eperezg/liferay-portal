@@ -24,7 +24,6 @@ import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSON;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -110,8 +109,8 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 
 	public static final String TABLE_SQL_CREATE = "create table MDRRuleGroup (uuid_ VARCHAR(75) null,ruleGroupId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null,lastPublishDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MDRRuleGroup";
-	public static final String ORDER_BY_JPQL = " ORDER BY mdrRuleGroup.createDate ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY MDRRuleGroup.createDate ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY mdrRuleGroup.ruleGroupId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY MDRRuleGroup.ruleGroupId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -127,7 +126,7 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long GROUPID_COLUMN_BITMASK = 2L;
 	public static final long UUID_COLUMN_BITMASK = 4L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
+	public static final long RULEGROUPID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -436,8 +435,6 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 
 	@Override
 	public void setCreateDate(Date createDate) {
-		_columnBitmask = -1L;
-
 		_createDate = createDate;
 	}
 
@@ -809,15 +806,17 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 
 	@Override
 	public int compareTo(MDRRuleGroup mdrRuleGroup) {
-		int value = 0;
+		long primaryKey = mdrRuleGroup.getPrimaryKey();
 
-		value = DateUtil.compareTo(getCreateDate(), mdrRuleGroup.getCreateDate());
-
-		if (value != 0) {
-			return value;
+		if (getPrimaryKey() < primaryKey) {
+			return -1;
 		}
-
-		return 0;
+		else if (getPrimaryKey() > primaryKey) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	@Override

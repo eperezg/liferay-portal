@@ -105,6 +105,13 @@ public class ShoppingCategoryServiceUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(ShoppingCategoryService service) {
+	}
+
 	private static ServiceTracker<ShoppingCategoryService, ShoppingCategoryService> _serviceTracker =
 		ServiceTrackerFactory.open(ShoppingCategoryService.class);
 }

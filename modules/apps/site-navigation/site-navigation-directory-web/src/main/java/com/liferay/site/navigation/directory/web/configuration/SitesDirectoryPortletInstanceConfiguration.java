@@ -21,14 +21,9 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 /**
  * @author Juergen Kappler
  */
-@ConfigurationAdmin(
-	category = "web-experience-management",
-	scope = ConfigurationAdmin.Scope.PORTLET_INSTANCE
-)
+@ConfigurationAdmin(category = "web-experience-management")
 @Meta.OCD(
-	id = "com.liferay.site.navigation.directory.web.configuration.SitesDirectoryPortletInstanceConfiguration",
-	localization = "content/Language",
-	name = "%sites.directory.portlet.instance.configuration.name"
+	id = "com.liferay.site.navigation.directory.web.configuration.SitesDirectoryPortletInstanceConfiguration"
 )
 public interface SitesDirectoryPortletInstanceConfiguration {
 

@@ -88,7 +88,7 @@ BlogsGroupServiceOverriddenConfiguration blogsGroupServiceOverriddenConfiguratio
 		%>
 
 		<liferay-ui:section>
-			<liferay-frontend:email-notification-settings
+			<liferay-ui:email-notification-settings
 				emailBody="<%= blogsGroupServiceSettings.getEmailEntryAddedBodyXml() %>"
 				emailDefinitionTerms="<%= emailDefinitionTerms %>"
 				emailEnabled="<%= blogsGroupServiceSettings.isEmailEntryAddedEnabled() %>"
@@ -98,7 +98,7 @@ BlogsGroupServiceOverriddenConfiguration blogsGroupServiceOverriddenConfiguratio
 		</liferay-ui:section>
 
 		<liferay-ui:section>
-			<liferay-frontend:email-notification-settings
+			<liferay-ui:email-notification-settings
 				emailBody="<%= blogsGroupServiceSettings.getEmailEntryUpdatedBodyXml() %>"
 				emailDefinitionTerms="<%= emailDefinitionTerms %>"
 					emailEnabled="<%= blogsGroupServiceSettings.isEmailEntryUpdatedEnabled() %>"

@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.social.NoSuchRequestException;
@@ -6475,8 +6474,6 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 		socialRequest.setUuid(uuid);
 
-		socialRequest.setCompanyId(companyProvider.getCompanyId());
-
 		return socialRequest;
 	}
 
@@ -7254,7 +7251,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

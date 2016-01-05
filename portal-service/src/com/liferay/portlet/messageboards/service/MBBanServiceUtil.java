@@ -72,5 +72,12 @@ public class MBBanServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(MBBanService service) {
+	}
+
 	private static MBBanService _service;
 }

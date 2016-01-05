@@ -74,14 +74,12 @@ public class DDLImpl implements DDL {
 
 	@Override
 	public JSONObject getRecordJSONObject(DDLRecord record) throws Exception {
-		Locale locale = LocaleThreadLocal.getThemeDisplayLocale();
-
-		return getRecordJSONObject(record, false, locale);
+		return getRecordJSONObject(record, false);
 	}
 
 	@Override
 	public JSONObject getRecordJSONObject(
-			DDLRecord record, boolean latestRecordVersion, Locale locale)
+			DDLRecord record, boolean latestRecordVersion)
 		throws Exception {
 
 		DDLRecordSet recordSet = record.getRecordSet();
@@ -112,7 +110,7 @@ public class DDLImpl implements DDL {
 		for (Field field : fields) {
 			String fieldName = field.getName();
 			String fieldType = field.getType();
-			Object fieldValue = field.getValue(locale);
+			Object fieldValue = field.getValue();
 
 			if (fieldValue instanceof Date) {
 				jsonObject.put(fieldName, ((Date)fieldValue).getTime());
@@ -143,6 +141,7 @@ public class DDLImpl implements DDL {
 				boolean privateLayout = fieldValueJSONObject.getBoolean(
 					"privateLayout");
 				long layoutId = fieldValueJSONObject.getLong("layoutId");
+				Locale locale = LocaleThreadLocal.getThemeDisplayLocale();
 
 				String layoutName = getLayoutName(
 					groupId, privateLayout, layoutId,
@@ -209,13 +208,15 @@ public class DDLImpl implements DDL {
 	}
 
 	@Override
-	public JSONArray getRecordSetJSONArray(
-			DDLRecordSet recordSet, Locale locale)
+	public JSONArray getRecordSetJSONArray(DDLRecordSet recordSet)
 		throws Exception {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+		Locale locale = LocaleUtil.fromLanguageId(
+			ddmStructure.getDefaultLanguageId());
 
 		List<DDMFormField> ddmFormFields = ddmStructure.getDDMFormFields(false);
 
@@ -258,9 +259,7 @@ public class DDLImpl implements DDL {
 	public JSONArray getRecordsJSONArray(DDLRecordSet recordSet)
 		throws Exception {
 
-		Locale locale = LocaleThreadLocal.getThemeDisplayLocale();
-
-		return getRecordsJSONArray(recordSet.getRecords(), false, locale);
+		return getRecordsJSONArray(recordSet.getRecords(), false);
 	}
 
 	@Override
@@ -280,14 +279,14 @@ public class DDLImpl implements DDL {
 
 	@Override
 	public JSONArray getRecordsJSONArray(
-			List<DDLRecord> records, boolean latestRecordVersion, Locale locale)
+			List<DDLRecord> records, boolean latestRecordVersion)
 		throws Exception {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (DDLRecord record : records) {
 			JSONObject jsonObject = getRecordJSONObject(
-				record, latestRecordVersion, locale);
+				record, latestRecordVersion);
 
 			jsonArray.put(jsonObject);
 		}

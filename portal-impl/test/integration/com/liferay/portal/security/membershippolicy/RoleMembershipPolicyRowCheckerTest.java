@@ -20,6 +20,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.rolesadmin.search.UserRoleChecker;
 
 import javax.portlet.RenderResponse;
@@ -40,7 +41,8 @@ public class RoleMembershipPolicyRowCheckerTest
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testIsCheckerDisabledWhenSettingForbiddenRoleToUser()

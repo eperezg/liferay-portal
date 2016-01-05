@@ -331,5 +331,12 @@ public class ResourceTypePermissionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(ResourceTypePermissionLocalService service) {
+	}
+
 	private static ResourceTypePermissionLocalService _service;
 }

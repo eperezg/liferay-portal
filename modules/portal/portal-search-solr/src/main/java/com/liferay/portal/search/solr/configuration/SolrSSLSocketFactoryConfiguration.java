@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.search.solr.configuration.SolrSSLSocketFactoryConfiguration",
-	localization = "content/Language",
-	name = "%solr.ssl.socket.factory.configuration.name"
+	id = "com.liferay.portal.search.solr.configuration.SolrSSLSocketFactoryConfiguration"
 )
 public interface SolrSSLSocketFactoryConfiguration {
 

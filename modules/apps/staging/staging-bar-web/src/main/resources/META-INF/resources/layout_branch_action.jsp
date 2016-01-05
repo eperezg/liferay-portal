@@ -26,7 +26,7 @@ LayoutBranch layoutBranch = rootLayoutRevision.getLayoutBranch();
 long currentLayoutBranchId = GetterUtil.getLong((String)request.getAttribute("view_layout_branches.jsp-currentLayoutBranchId"));
 %>
 
-<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
+<liferay-ui:icon-menu icon="<%= StringPool.BLANK %>" message="<%= StringPool.BLANK %>">
 	<c:if test="<%= LayoutBranchPermissionUtil.contains(permissionChecker, layoutBranch, ActionKeys.UPDATE) %>">
 		<liferay-portlet:renderURL var="editLayoutBranchURL">
 			<portlet:param name="mvcRenderCommandName" value="editLayoutBranch" />
@@ -36,6 +36,7 @@ long currentLayoutBranchId = GetterUtil.getLong((String)request.getAttribute("vi
 		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon
+			iconCssClass="icon-edit"
 			message="edit"
 			url="<%= editLayoutBranchURL %>"
 		/>

@@ -97,7 +97,7 @@ request.setAttribute("view.jsp-orderByType", orderByType);
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 </portlet:actionURL>
 
-<liferay-trash:undo
+<liferay-ui:trash-undo
 	portletURL="<%= restoreTrashEntriesURL %>"
 />
 
@@ -140,8 +140,6 @@ request.setAttribute("view.jsp-orderByType", orderByType);
 				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 				<aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
 				<aui:input name="newFolderId" type="hidden" />
-
-				<liferay-ui:error exception="<%= FileEntryLockException.MustOwnLock.class %>" message="you-can-only-checkin-documents-you-have-checked-out-yourself" />
 
 				<div class="document-container">
 					<c:choose>

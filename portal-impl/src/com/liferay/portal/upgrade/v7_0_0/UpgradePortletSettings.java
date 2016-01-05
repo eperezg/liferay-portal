@@ -122,7 +122,7 @@ public abstract class UpgradePortletSettings extends UpgradeProcess {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(rs.getStatement(), rs);
+			DataAccess.deepCleanUp(rs);
 		}
 	}
 
@@ -205,7 +205,7 @@ public abstract class UpgradePortletSettings extends UpgradeProcess {
 			}
 		}
 		finally {
-			DataAccess.cleanUp(rs.getStatement(), rs);
+			DataAccess.deepCleanUp(rs);
 		}
 	}
 

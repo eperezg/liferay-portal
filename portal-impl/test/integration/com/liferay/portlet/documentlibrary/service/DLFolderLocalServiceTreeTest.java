@@ -23,6 +23,7 @@ import com.liferay.portal.model.TreeModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.test.BaseLocalServiceTreeTestCase;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
@@ -42,7 +43,8 @@ public class DLFolderLocalServiceTreeTest extends BaseLocalServiceTreeTestCase {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testFolderTreePathWhenMovingFolderWithSubfolder()

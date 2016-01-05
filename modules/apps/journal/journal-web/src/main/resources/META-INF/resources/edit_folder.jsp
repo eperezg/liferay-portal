@@ -63,8 +63,7 @@ renderResponse.setTitle(title);
 
 <liferay-util:buffer var="removeDDMStructureIcon">
 	<liferay-ui:icon
-		icon="times"
-		markupView="lexicon"
+		iconCssClass="icon-remove"
 		message="remove"
 	/>
 </liferay-util:buffer>

@@ -144,11 +144,26 @@ public class DDLRecordSetServiceWrapper implements DDLRecordSetService,
 
 	@Override
 	public com.liferay.dynamic.data.lists.model.DDLRecordSet updateRecordSet(
-		long recordSetId,
-		com.liferay.dynamic.data.mapping.storage.DDMFormValues settingsDDMFormValues)
+		long recordSetId, java.lang.String settings)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _ddlRecordSetService.updateRecordSet(recordSetId,
-			settingsDDMFormValues);
+		return _ddlRecordSetService.updateRecordSet(recordSetId, settings);
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public DDLRecordSetService getWrappedDDLRecordSetService() {
+		return _ddlRecordSetService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedDDLRecordSetService(
+		DDLRecordSetService ddlRecordSetService) {
+		_ddlRecordSetService = ddlRecordSetService;
 	}
 
 	@Override

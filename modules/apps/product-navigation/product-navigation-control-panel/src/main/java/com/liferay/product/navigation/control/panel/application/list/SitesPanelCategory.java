@@ -57,7 +57,8 @@ public class SitesPanelCategory extends BasePanelCategory {
 	}
 
 	@Override
-	public boolean isShow(PermissionChecker permissionChecker, Group group)
+	public boolean hasAccessPermission(
+			PermissionChecker permissionChecker, Group group)
 		throws PortalException {
 
 		if (PortalPermissionUtil.contains(

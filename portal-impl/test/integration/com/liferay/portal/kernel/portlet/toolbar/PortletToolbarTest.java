@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.taglib.ui.Menu;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.registry.dependency.ServiceDependencyManager;
 
@@ -43,7 +44,7 @@ public class PortletToolbarTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			new SyntheticBundleRule("bundle.portlettoolbar"));
 
 	@Test

@@ -54,14 +54,12 @@ DDLRecordSet ddlRecordSet = ddlFormViewRecordsDisplayContext.getDDLRecordSet();
 			<%
 			DDMFormValues ddmFormValues = ddlFormViewRecordsDisplayContext.getDDMFormValues(record);
 
-			Map<String, List<DDMFormFieldValue>> ddmFormFieldValuesMap = ddmFormValues.getDDMFormFieldValuesMap();
-
-			for (DDMFormField ddmFormField : ddlFormViewRecordsDisplayContext.getDDMFormFields()) {
+			for (int i = 0; i < ddlFormViewRecordsDisplayContext.getTotalColumns(); i++) {
 			%>
 
 				<liferay-ui:search-container-column-text
-					name="<%= ddlFormViewRecordsDisplayContext.getColumnName(ddmFormField) %>"
-					value="<%= ddlFormViewRecordsDisplayContext.getColumnValue(ddmFormField, ddmFormFieldValuesMap.get(ddmFormField.getName())) %>"
+					name="<%= ddlFormViewRecordsDisplayContext.getColumnName(i, ddmFormValues) %>"
+					value="<%= ddlFormViewRecordsDisplayContext.getColumnValue(i, ddmFormValues) %>"
 				/>
 
 			<%

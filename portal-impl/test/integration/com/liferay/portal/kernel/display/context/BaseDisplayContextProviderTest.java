@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.display.context;
 import com.liferay.portal.kernel.display.context.bundle.basedisplaycontextfactory.TestBaseDisplayContextFactoryImpl;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portlet.documentlibrary.display.context.DLDisplayContextFactory;
 
@@ -38,7 +39,7 @@ public class BaseDisplayContextProviderTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			new SyntheticBundleRule("bundle.basedisplaycontextfactory"));
 
 	@BeforeClass

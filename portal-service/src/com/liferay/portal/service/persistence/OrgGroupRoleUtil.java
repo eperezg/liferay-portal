@@ -585,5 +585,12 @@ public class OrgGroupRoleUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(OrgGroupRolePersistence persistence) {
+	}
+
 	private static OrgGroupRolePersistence _persistence;
 }

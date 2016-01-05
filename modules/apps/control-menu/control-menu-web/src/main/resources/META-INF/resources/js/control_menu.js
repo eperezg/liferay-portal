@@ -1,21 +1,29 @@
 AUI.add(
 	'liferay-control-menu',
 	function(A) {
-		var AArray = A.Array;
-
 		var AObject = A.Object;
 
 		var Lang = A.Lang;
+
+		var ADD_PANEL_COMPONENTS = ['addApplication', 'addContent', 'addPage'];
 
 		var BODY = A.getBody();
 
 		var CSS_ADD_CONTENT = 'lfr-has-add-content';
 
+		var CSS_PREVIEW_CONTENT = 'lfr-has-device-preview';
+
 		var STR_ADD_PANEL = 'addPanel';
 
-		var TPL_ADD_CONTENT = '<div class="lfr-add-panel lfr-admin-panel product-menu" id="{0}" />';
+		var STR_EDIT_LAYOUT_PANEL = 'editLayoutPanel';
+
+		var STR_PREVIEW_PANEL = 'previewPanel';
+
+		var TPL_ADD_CONTENT = '<div class="lfr-add-panel lfr-admin-panel" id="{0}" />';
 
 		var TPL_LOADING = '<div class="loading-animation" />';
+
+		var TPL_PREVIEW_PANEL = '<div class="lfr-admin-panel lfr-device-preview-panel" id="{0}" />';
 
 		var ControlMenu = {
 			init: function(containerId) {
@@ -48,7 +56,7 @@ AUI.add(
 
 				var panelNode = null;
 
-				var panel = instance._panels[panelId];
+				var panel = CONTROL_MENU_PANELS[panelId];
 
 				if (panel) {
 					panelNode = panel.node;
@@ -77,44 +85,67 @@ AUI.add(
 				return panelNode;
 			},
 
-			registerPanel: function(panel) {
+			toggleAddPanel: function() {
+				var instance = this;
+
+				ControlMenu._togglePanel(STR_ADD_PANEL);
+			},
+
+			toggleEditLayoutPanel: function() {
+				var instance = this;
+
+				ControlMenu._togglePanel(STR_EDIT_LAYOUT_PANEL);
+			},
+
+			togglePreviewPanel: function() {
+				var instance = this;
+
+				ControlMenu._togglePanel(STR_PREVIEW_PANEL);
+			},
+
+			_registerPanels: function() {
 				var instance = this;
 
 				var namespace = instance._namespace;
 
-				var panelTrigger = panel.trigger || A.one('#' + namespace + panel.id);
+				AObject.each(
+					CONTROL_MENU_PANELS,
+					function(item, index) {
+						var panelId = item.id;
 
-				if (panelTrigger) {
-					panelTrigger.on(
-						'gesturemovestart',
-						function(event) {
-							event.currentTarget.once(
-								'gesturemoveend',
+						var panelTrigger = A.one('#' + namespace + panelId);
+
+						if (panelTrigger) {
+							panelTrigger.on(
+								'gesturemovestart',
 								function(event) {
-									event.halt();
+									event.currentTarget.once(
+										'gesturemoveend',
+										function(event) {
+											event.halt();
 
-									instance.togglePanel(panel.id);
+											instance._togglePanel(panelId);
+										}
+									);
 								}
 							);
 						}
-					);
-				}
-
-				instance._panels[panel.id] = panel;
+					}
+				);
 			},
 
-			toggleAddPanel: function() {
+			_setLoadingAnimation: function(panel) {
 				var instance = this;
 
-				ControlMenu.togglePanel(STR_ADD_PANEL);
+				instance.getPanelNode(panel).html(TPL_LOADING);
 			},
 
-			togglePanel: function(panelId) {
+			_togglePanel: function(panelId) {
 				var instance = this;
 
 				AObject.each(
-					instance._panels,
-					function(item) {
+					CONTROL_MENU_PANELS,
+					function(item, index) {
 						if (item.id !== panelId) {
 							BODY.removeClass(item.css);
 
@@ -127,7 +158,7 @@ AUI.add(
 					}
 				);
 
-				var panel = instance._panels[panelId];
+				var panel = CONTROL_MENU_PANELS[panelId];
 
 				var namespace = instance._namespace;
 
@@ -144,7 +175,7 @@ AUI.add(
 					var panelVisible = false;
 
 					if (panelNode && BODY.hasClass(panel.css)) {
-						panel.showFn.call(this, panelId);
+						panel.showFn(panelId);
 
 						panelDisplayEvent = 'dockbarShowPanel';
 						panelVisible = true;
@@ -152,14 +183,24 @@ AUI.add(
 						BODY.on(
 							'layoutControlsEsc|key',
 							function(event) {
-								if (panel.hideOnEscape) {
-									instance.togglePanel(panelId);
+								if (panelId !== STR_PREVIEW_PANEL) {
+									instance._togglePanel(panelId);
 								}
 
 								var navAddControls = A.one('#' + namespace + 'navAddControls');
 
 								if (navAddControls) {
-									var layoutControl = navAddControls.one(item.layoutControl);
+									var layoutControl;
+
+									if (panelId == STR_ADD_PANEL) {
+										layoutControl = navAddControls.one('.site-add-controls > a');
+									}
+									else if (panelId == STR_EDIT_LAYOUT_PANEL) {
+										layoutControl = navAddControls.one('.page-edit-controls > a');
+									}
+									else if (panelId == STR_PREVIEW_PANEL) {
+										layoutControl = navAddControls.one('.page-preview-controls > a');
+									}
 
 									if (layoutControl) {
 										layoutControl.focus();
@@ -189,36 +230,29 @@ AUI.add(
 					if (!panelVisible) {
 						BODY.detach('layoutControlsEsc|key');
 
-						if (panel.destroy) {
-							panel.destroy.call(this);
+						if (panelId === STR_ADD_PANEL) {
+							ADD_PANEL_COMPONENTS.forEach(
+								function(item, index) {
+									var componentName = Liferay.Util.ns(namespace, item);
+
+									var component = Liferay.component(componentName);
+
+									if (component) {
+										component.destroy();
+									}
+								}
+							);
 						}
 					}
 
 					panelNode.toggle(panelVisible);
 				}
-			},
-
-			_registerPanels: function() {
-				var instance = this;
-
-				instance._panels = {};
-
-				AArray.each(
-					DEFAULT_CONTROL_MENU_PANELS,
-					A.bind('registerPanel', instance)
-				);
-			},
-
-			_setLoadingAnimation: function(panel) {
-				var instance = this;
-
-				instance.getPanelNode(panel).html(TPL_LOADING);
 			}
 		};
 
 		Liferay.provide(
 			ControlMenu,
-			'showPanel',
+			'_showPanel',
 			function(panelId) {
 				var instance = this;
 
@@ -250,37 +284,30 @@ AUI.add(
 			['aui-io-request', 'aui-parse-content', 'event-outside']
 		);
 
-		var DEFAULT_CONTROL_MENU_PANELS = [
-			{
+		var showPanelFn = A.bind('_showPanel', ControlMenu);
+
+		var CONTROL_MENU_PANELS = {
+			'addPanel': {
 				css: CSS_ADD_CONTENT,
-				destroy: function() {
-					var namespace = this._namespace;
-
-					AArray.forEach(
-						['addApplication', 'addContent', 'addPage'],
-						function(item) {
-							var componentName = Liferay.Util.ns(namespace, item);
-
-							var component = Liferay.component(componentName);
-
-							if (component) {
-								component.destroy();
-							}
-						}
-					);
-				},
 				id: STR_ADD_PANEL,
-				layoutControl: '.site-add-controls > a',
 				node: null,
-				showFn: A.bind('showPanel', ControlMenu),
-				hideOnEscape: true,
+				showFn: showPanelFn,
 				tpl: TPL_ADD_CONTENT
+			},
+			'previewPanel': {
+				css: CSS_PREVIEW_CONTENT,
+				id: STR_PREVIEW_PANEL,
+				node: null,
+				showFn: showPanelFn,
+				tpl: TPL_PREVIEW_PANEL
 			}
-		];
+		};
 
 		Liferay.ControlMenu = ControlMenu;
 
 		Liferay.ControlMenu.ADD_PANEL = STR_ADD_PANEL;
+
+		Liferay.ControlMenu.PREVIEW_PANEL = STR_PREVIEW_PANEL;
 	},
 	'',
 	{

@@ -125,8 +125,6 @@ public interface LiferaySelenium extends Selenium {
 
 	public String getCurrentDay();
 
-	public String getCurrentDayName();
-
 	public String getCurrentMonth();
 
 	public String getCurrentYear();

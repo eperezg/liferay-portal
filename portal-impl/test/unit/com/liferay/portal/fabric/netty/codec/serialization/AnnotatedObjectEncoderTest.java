@@ -14,7 +14,7 @@
 
 package com.liferay.portal.fabric.netty.codec.serialization;
 
-import com.liferay.portal.kernel.io.ProtectedAnnotatedObjectInputStream;
+import com.liferay.portal.kernel.io.AnnotatedObjectInputStream;
 import com.liferay.portal.kernel.test.rule.CodeCoverageAssertor;
 
 import io.netty.buffer.ByteBuf;
@@ -54,9 +54,8 @@ public class AnnotatedObjectEncoderTest {
 
 		Assert.assertEquals(byteBuf.readInt(), byteBuf.readableBytes());
 
-		ProtectedAnnotatedObjectInputStream annotatedObjectInputStream =
-			new ProtectedAnnotatedObjectInputStream(
-				new ByteBufInputStream(byteBuf));
+		AnnotatedObjectInputStream annotatedObjectInputStream =
+			new AnnotatedObjectInputStream(new ByteBufInputStream(byteBuf));
 
 		Assert.assertEquals(date, annotatedObjectInputStream.readObject());
 		Assert.assertFalse(byteBuf.isReadable());

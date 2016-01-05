@@ -13,16 +13,16 @@
 
 		<execute macro="User#firstLoginPG" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="SitePage#addCP">
@@ -216,7 +216,7 @@
 			<var name="bookmarkURL" value="http://www.liferay.com/" />
 		</execute>
 
-		<execute macro="Bookmark#viewBookmark">
+		<execute macro="Bookmark#viewPG">
 			<var name="bookmarkName" value="Bookmark Name" />
 			<var name="bookmarkURL" value="http://www.liferay.com/" />
 		</execute>
@@ -263,7 +263,7 @@
 			<var name="bookmarkURL" value="http://www.liferay.com/" />
 		</execute>
 
-		<execute macro="Bookmark#viewBookmark">
+		<execute macro="Bookmark#viewPG">
 			<var name="bookmarkName" value="Bookmark Name" />
 			<var name="bookmarkURL" value="http://www.liferay.com/" />
 		</execute>
@@ -598,7 +598,7 @@
 		</execute>
 
 		<execute macro="Page#gotoPublishingTools">
-			<var name="portletName" value="Staging Processes" />
+			<var name="portletName" value="Staging Configuration" />
 			<var name="siteName" value="Site Name" />
 			<var name="siteURL" value="true" />
 		</execute>
@@ -650,10 +650,8 @@
 		</execute>
 
 		<execute macro="Page#gotoContentCP">
-			<var name="pageStaging" value="true" />
 			<var name="portletName" value="Recycle Bin" />
-			<var name="siteName" value="Site Name" />
-			<var name="siteURL" value="true" />
+			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
 		<execute macro="RecycleBin#viewCP">
@@ -821,11 +819,11 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
-		<execute macro="WikiNavigator#gotoNode">
+		<execute macro="WikiNode#gotoCP">
 			<var name="wikiNodeName" value="Wiki Node Name" />
 		</execute>
 
-		<execute macro="WikiNavigator#gotoAllPagesCP" />
+		<execute macro="WikiPage#gotoAllPagesCP" />
 
 		<execute macro="WikiPage#addCP">
 			<var name="wikiPageContent" value="Wiki Page Content" />
@@ -837,7 +835,7 @@
 			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
-		<execute macro="WikiNavigator#gotoNode">
+		<execute macro="WikiNode#gotoCP">
 			<var name="wikiNodeName" value="Wiki Node Name" />
 		</execute>
 
@@ -897,7 +895,7 @@
 			<var name="wikiNodeName" value="Wiki Node Name" />
 		</execute>
 
-		<execute macro="WikiNavigator#gotoCP">
+		<execute macro="WikiPage#gotoCP">
 			<var name="wikiPageTitle" value="Wiki Page Title" />
 		</execute>
 

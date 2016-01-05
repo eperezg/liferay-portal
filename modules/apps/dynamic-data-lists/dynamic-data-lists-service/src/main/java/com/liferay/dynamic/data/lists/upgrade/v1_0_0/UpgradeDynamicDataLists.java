@@ -17,7 +17,6 @@ package com.liferay.dynamic.data.lists.upgrade.v1_0_0;
 import com.liferay.dynamic.data.mapping.model.DDMContent;
 import com.liferay.dynamic.data.mapping.model.DDMStorageLink;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -31,12 +30,6 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.expando.model.ExpandoColumn;
-import com.liferay.portlet.expando.model.ExpandoRow;
-import com.liferay.portlet.expando.model.ExpandoValue;
-import com.liferay.portlet.expando.service.ExpandoRowLocalService;
-import com.liferay.portlet.expando.service.ExpandoTableLocalService;
-import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,7 +37,6 @@ import java.sql.Timestamp;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -53,16 +45,6 @@ import java.util.Set;
  * @author Marcellus Tavares
  */
 public class UpgradeDynamicDataLists extends UpgradeProcess {
-
-	public UpgradeDynamicDataLists(
-		ExpandoRowLocalService expandoRowLocalService,
-		ExpandoTableLocalService expandoTableLocalService,
-		ExpandoValueLocalService expandoValueLocalService) {
-
-		_expandoRowLocalService = expandoRowLocalService;
-		_expandoTableLocalService = expandoTableLocalService;
-		_expandoValueLocalService = expandoValueLocalService;
-	}
 
 	protected void addDDMContent(
 			String uuid_, long contentId, long groupId, long companyId,
@@ -132,29 +114,37 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 		}
 	}
 
-	protected void deleteExpandoData(Set<Long> expandoRowIds)
-		throws PortalException {
+	protected void deleteExpandoData(Set<Long> expandoRowIds) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		Set<Long> expandoTableIds = new HashSet<>();
+		try {
+			ps = connection.prepareStatement(
+				"select tableId from ExpandoRow where " +
+					getExpandoRowIds(expandoRowIds) + " group by tableId");
 
-		for (long expandoRowId : expandoRowIds) {
-			ExpandoRow expandoRow = _expandoRowLocalService.fetchExpandoRow(
-				expandoRowId);
+			int parameterIndex = 1;
 
-			if (expandoRow != null) {
-				expandoTableIds.add(expandoRow.getTableId());
+			for (long expandoRowId : expandoRowIds) {
+				ps.setLong(parameterIndex++, expandoRowId);
+			}
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long tableId = rs.getLong("tableId");
+
+				runSQL("delete from ExpandoTable where tableId = " + tableId);
+
+				runSQL("delete from ExpandoRow where tableId = " + tableId);
+
+				runSQL("delete from ExpandoColumn where tableId = " + tableId);
+
+				runSQL("delete from ExpandoValue where tableId = " + tableId);
 			}
 		}
-
-		for (long expandoTableId : expandoTableIds) {
-			try {
-				_expandoTableLocalService.deleteTable(expandoTableId);
-			}
-			catch (PortalException pe) {
-				_log.error("Unable delete expando table ", pe);
-
-				throw pe;
-			}
+		finally {
+			DataAccess.cleanUp(ps, rs);
 		}
 	}
 
@@ -184,20 +174,39 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 	}
 
 	protected Map<String, String> getExpandoValuesMap(long expandoRowId)
-		throws PortalException {
+		throws Exception {
 
-		Map<String, String> fieldsMap = new HashMap<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		List<ExpandoValue> expandoValues =
-			_expandoValueLocalService.getRowValues(expandoRowId);
+		try {
+			StringBundler sb = new StringBundler(4);
 
-		for (ExpandoValue expandoValue : expandoValues) {
-			ExpandoColumn expandoColumn = expandoValue.getColumn();
+			sb.append("select ExpandoColumn.name, ExpandoValue.data_ from ");
+			sb.append("ExpandoValue inner join ExpandoColumn on ");
+			sb.append("ExpandoColumn.columnId = ExpandoValue.columnId where ");
+			sb.append("rowId_ = ?");
 
-			fieldsMap.put(expandoColumn.getName(), expandoValue.getData());
+			ps = connection.prepareStatement(sb.toString());
+
+			ps.setLong(1, expandoRowId);
+
+			rs = ps.executeQuery();
+
+			Map<String, String> fieldsMap = new HashMap<>();
+
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String data_ = rs.getString("data_");
+
+				fieldsMap.put(name, data_);
+			}
+
+			return fieldsMap;
 		}
-
-		return fieldsMap;
+		finally {
+			DataAccess.cleanUp(ps, rs);
+		}
 	}
 
 	protected String getUpgradeRecordVersionsSQL() {
@@ -342,9 +351,6 @@ public class UpgradeDynamicDataLists extends UpgradeProcess {
 		UpgradeDynamicDataLists.class);
 
 	private long _ddmContentClassNameId;
-	private final ExpandoRowLocalService _expandoRowLocalService;
 	private long _expandoStorageAdapterClassNameId;
-	private final ExpandoTableLocalService _expandoTableLocalService;
-	private final ExpandoValueLocalService _expandoValueLocalService;
 
 }

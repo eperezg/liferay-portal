@@ -40,7 +40,6 @@ import com.liferay.portal.model.impl.WorkflowInstanceLinkModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
 import java.io.Serializable;
@@ -820,8 +819,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		workflowInstanceLink.setNew(true);
 		workflowInstanceLink.setPrimaryKey(workflowInstanceLinkId);
 
-		workflowInstanceLink.setCompanyId(companyProvider.getCompanyId());
-
 		return workflowInstanceLink;
 	}
 
@@ -1431,7 +1428,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

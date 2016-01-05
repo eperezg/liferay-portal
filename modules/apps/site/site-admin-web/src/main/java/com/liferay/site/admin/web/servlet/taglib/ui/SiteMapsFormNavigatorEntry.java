@@ -14,23 +14,15 @@
 
 package com.liferay.site.admin.web.servlet.taglib.ui;
 
-import com.liferay.map.constants.MapProviderWebKeys;
-import com.liferay.map.util.MapProviderHelper;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorConstants;
 import com.liferay.portal.kernel.servlet.taglib.ui.FormNavigatorEntry;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
-import com.liferay.portal.theme.ThemeDisplay;
-
-import java.io.IOException;
 
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -60,24 +52,6 @@ public class SiteMapsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 	}
 
 	@Override
-	public void include(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Group liveGroup = (Group)request.getAttribute("site.liveGroup");
-
-		request.setAttribute(
-			MapProviderWebKeys.MAP_PROVIDER_KEY,
-			_mapProviderHelper.getMapProviderKey(
-				themeDisplay.getCompanyId(), liveGroup.getGroupId()));
-
-		super.include(request, response);
-	}
-
-	@Override
 	public boolean isVisible(User user, Group group) {
 		if (group == null) {
 			return false;
@@ -99,12 +73,5 @@ public class SiteMapsFormNavigatorEntry extends BaseSiteFormNavigatorEntry {
 	protected String getJspPath() {
 		return "/site/maps.jsp";
 	}
-
-	@Reference(unbind = "-")
-	protected void setMapProviderHelper(MapProviderHelper mapProviderHelper) {
-		_mapProviderHelper = mapProviderHelper;
-	}
-
-	private volatile MapProviderHelper _mapProviderHelper;
 
 }

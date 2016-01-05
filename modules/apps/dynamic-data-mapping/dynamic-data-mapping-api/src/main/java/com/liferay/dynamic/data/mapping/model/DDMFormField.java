@@ -14,7 +14,6 @@
 
 package com.liferay.dynamic.data.mapping.model;
 
-import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -78,28 +77,6 @@ public class DDMFormField implements Serializable {
 		nestedDDMFormField.setDDMForm(_ddmForm);
 
 		_nestedDDMFormFields.add(nestedDDMFormField);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (!(obj instanceof DDMFormField)) {
-			return false;
-		}
-
-		DDMFormField ddmFormField = (DDMFormField)obj;
-
-		if (Validator.equals(_properties, ddmFormField._properties) &&
-			Validator.equals(
-				_nestedDDMFormFields, ddmFormField._nestedDDMFormFields)) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	public String getDataType() {
@@ -179,13 +156,6 @@ public class DDMFormField implements Serializable {
 
 	public String getVisibilityExpression() {
 		return MapUtil.getString(_properties, "visibilityExpression");
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = HashUtil.hash(0, _properties);
-
-		return HashUtil.hash(hash, _nestedDDMFormFields);
 	}
 
 	public boolean isLocalizable() {

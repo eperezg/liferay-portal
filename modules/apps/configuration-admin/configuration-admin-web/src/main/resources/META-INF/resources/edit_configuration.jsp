@@ -52,14 +52,24 @@ renderResponse.setTitle(configurationModel.getName());
 		<aui:button-row>
 			<c:choose>
 				<c:when test="<%= configurationModel.getConfiguration() != null %>">
-					<aui:button cssClass="btn-lg" type="submit" value="update" />
+					<aui:button type="submit" value="update" />
+
+					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteConfiguration();" %>' value="delete" />
 				</c:when>
 				<c:otherwise>
-					<aui:button cssClass="btn-lg" type="submit" value="save" />
+					<aui:button type="submit" value="save" />
 				</c:otherwise>
 			</c:choose>
 
-			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</aui:form>
 </div>
+
+<aui:script>
+	function <portlet:namespace />deleteConfiguration() {
+		document.<portlet:namespace />fm.action = '<%= deleteConfigurationActionURL %>';
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+</aui:script>

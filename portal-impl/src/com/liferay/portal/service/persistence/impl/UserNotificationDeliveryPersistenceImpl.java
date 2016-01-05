@@ -39,7 +39,6 @@ import com.liferay.portal.model.UserNotificationDelivery;
 import com.liferay.portal.model.impl.UserNotificationDeliveryImpl;
 import com.liferay.portal.model.impl.UserNotificationDeliveryModelImpl;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.UserNotificationDeliveryPersistence;
 
 import java.io.Serializable;
@@ -1111,8 +1110,6 @@ public class UserNotificationDeliveryPersistenceImpl extends BasePersistenceImpl
 		userNotificationDelivery.setNew(true);
 		userNotificationDelivery.setPrimaryKey(userNotificationDeliveryId);
 
-		userNotificationDelivery.setCompanyId(companyProvider.getCompanyId());
-
 		return userNotificationDelivery;
 	}
 
@@ -1696,7 +1693,7 @@ public class UserNotificationDeliveryPersistenceImpl extends BasePersistenceImpl
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

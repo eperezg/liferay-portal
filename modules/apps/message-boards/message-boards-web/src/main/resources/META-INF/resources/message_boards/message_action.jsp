@@ -33,7 +33,7 @@ MBCategory category = message.getCategory();
 MBThread thread = message.getThread();
 %>
 
-<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
+<liferay-ui:icon-menu icon="<%= StringPool.BLANK %>" message="<%= StringPool.BLANK %>">
 	<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) && !thread.isLocked() %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="/message_boards/edit_message" />
@@ -42,6 +42,7 @@ MBThread thread = message.getThread();
 		</portlet:renderURL>
 
 		<liferay-ui:icon
+			iconCssClass="icon-edit"
 			message="edit"
 			url="<%= editURL %>"
 		/>
@@ -57,6 +58,7 @@ MBThread thread = message.getThread();
 		/>
 
 		<liferay-ui:icon
+			iconCssClass="icon-lock"
 			message="permissions"
 			method="get"
 			url="<%= permissionsURL %>"
@@ -85,6 +87,7 @@ MBThread thread = message.getThread();
 					</portlet:actionURL>
 
 					<liferay-ui:icon
+						iconCssClass="icon-remove-sign"
 						message="unsubscribe"
 						url="<%= unsubscribeURL %>"
 					/>
@@ -97,6 +100,7 @@ MBThread thread = message.getThread();
 					</portlet:actionURL>
 
 					<liferay-ui:icon
+						iconCssClass="icon-ok-sign"
 						message="subscribe"
 						url="<%= subscribeURL %>"
 					/>
@@ -115,6 +119,7 @@ MBThread thread = message.getThread();
 				</portlet:actionURL>
 
 				<liferay-ui:icon
+					iconCssClass="icon-unlock"
 					message="unlock-thread"
 					url="<%= unlockThreadURL %>"
 				/>
@@ -128,6 +133,7 @@ MBThread thread = message.getThread();
 				</portlet:actionURL>
 
 				<liferay-ui:icon
+					iconCssClass="icon-lock"
 					message="lock-thread"
 					url="<%= lockThreadURL %>"
 				/>
@@ -144,6 +150,7 @@ MBThread thread = message.getThread();
 		</portlet:renderURL>
 
 		<liferay-ui:icon
+			iconCssClass="icon-move"
 			message="move"
 			url="<%= moveThreadURL %>"
 		/>

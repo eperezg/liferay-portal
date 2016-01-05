@@ -65,8 +65,8 @@
 			<var name="vocabularyName" value="Vocabulary Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#addCP">
@@ -76,8 +76,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#editPasswordCP">
@@ -86,8 +86,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="Page#gotoUsersCP">
@@ -102,8 +102,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#assignSiteRoleCP">
@@ -111,8 +111,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#editDisplaySettingsCP">
@@ -145,15 +145,6 @@
 			<var name="vocabularyName" value="Vocabulary Name" />
 			<var name="webContentContent" value="Web Content Content" />
 			<var name="webContentTitle" value="Web Content Title" />
-		</execute>
-
-		<execute macro="WebContentNavigator#gotoEditCP">
-			<var name="webContentTitle" value="Web Content Title" />
-		</execute>
-
-		<execute macro="WebContent#viewCategorizationCategoryCP">
-			<var name="categoryNameList" value="Category Name" />
-			<var name="vocabularyName" value="Vocabulary Name" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -193,16 +184,16 @@
 		<var name="pageName" value="Test Page Name" />
 		<var name="siteName" value="Test Site Name" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
 			<var name="siteName" value="${siteName}" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="SitePage#addCP">
@@ -211,8 +202,8 @@
 			<var name="sitePageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#addCP">
@@ -222,8 +213,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#editPasswordCP">
@@ -232,8 +223,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="Page#gotoUsersCP">
@@ -249,8 +240,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#addCP">
@@ -258,8 +249,8 @@
 			<var name="roleType" value="Site" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#definePermissionCP">
@@ -270,8 +261,8 @@
 			<var name="roleName" value="Category Role Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#definePermissionCP">
@@ -282,8 +273,8 @@
 			<var name="roleName" value="Category Role Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#definePermissionCP">
@@ -294,8 +285,8 @@
 			<var name="roleName" value="Category Role Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#definePermissionCP">
@@ -306,8 +297,8 @@
 			<var name="roleName" value="Category Role Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#definePermissionCP">
@@ -318,8 +309,8 @@
 			<var name="roleName" value="Category Role Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#assignSiteRoleCP">
@@ -456,15 +447,6 @@
 			<var name="webContentContent" value="Web Content Content" />
 			<var name="webContentTitle" value="Web Content Title" />
 		</execute>
-
-		<execute macro="WebContentNavigator#gotoEditCP">
-			<var name="webContentTitle" value="Web Content Title" />
-		</execute>
-
-		<execute macro="WebContent#viewCategorizationCategoryCP">
-			<var name="categoryNameList" value="Category Name" />
-			<var name="vocabularyName" value="Vocabulary Name" />
-		</execute>
 	</command>
 
 	<command name="AddWCWithOptionalVocabularyAssetType" priority="3">
@@ -505,15 +487,6 @@
 			<var name="webContentTitle" value="Web Content Title" />
 		</execute>
 
-		<execute macro="WebContentNavigator#gotoEditCP">
-			<var name="webContentTitle" value="Web Content Title" />
-		</execute>
-
-		<execute macro="WebContent#viewCategorizationCategoryCP">
-			<var name="categoryNameList" value="Category Name" />
-			<var name="vocabularyName" value="Vocabulary Name" />
-		</execute>
-
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -547,8 +520,8 @@
 			<var name="vocabularyName" value="Vocabulary Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#addCP">
@@ -558,8 +531,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#editPasswordCP">
@@ -568,8 +541,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="Page#gotoUsersCP">
@@ -584,8 +557,8 @@
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#addCP">
@@ -596,21 +569,19 @@
 		<execute macro="Role#definePermissionsCP">
 			<var name="permissionDefinitionKeys" value="SITE_ADMIN_CONTENT_CATEGORIES_GENERAL_PERMISSIONS_ACCESS_IN_SITE_ADMINISTRATION_CHECKBOX,SITE_ADMIN_CONTENT_CATEGORIES_GENERAL_PERMISSIONS_CONFIGURATION_CHECKBOX,SITE_ADMIN_CONTENT_CATEGORIES_GENERAL_PERMISSIONS_VIEW_CHECKBOX,SITE_ADMIN_CONTENT_CATEGORIES_RESOURCE_PERMISSIONS_ASSET_ENTRIES_ADD_CATEGORY_CHECKBOX,SITE_ADMIN_CONTENT_CATEGORIES_RESOURCE_PERMISSIONS_ASSET_ENTRIES_ADD_VOCABULARY_CHECKBOX" />
 			<var name="roleName" value="Category Role Name" />
-			<var name="roleType" value="Site" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Roles" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
 		</execute>
 
 		<execute macro="Role#definePermissionsCP">
 			<var name="permissionDefinitionKeys" value="SITE_ADMIN_APPLICATIONS_CATEGORIES_NAVIGATION_APPLICATION_PERMISSIONS_ADD_TO_PAGE_CHECKBOX,SITE_ADMIN_APPLICATIONS_CATEGORIES_NAVIGATION_APPLICATION_PERMISSIONS_CONFIGURATION_CHECKBOX,SITE_ADMIN_APPLICATIONS_CATEGORIES_NAVIGATION_APPLICATION_PERMISSIONS_VIEW_CHECKBOX" />
 			<var name="roleName" value="Category Role Name" />
-			<var name="roleType" value="Site" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelUsers">
-			<var name="portlet" value="Users and Organizations" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
 		</execute>
 
 		<execute macro="User#assignSiteRoleCP">
@@ -811,15 +782,6 @@
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 
-		<execute macro="WebContentNavigator#gotoEditCP">
-			<var name="webContentTitle" value="${webContentTitle}" />
-		</execute>
-
-		<execute macro="WebContent#viewCategorizationCategoryCP">
-			<var name="categoryNameList" value="${categoryName}" />
-			<var name="vocabularyName" value="${vocabularyName}" />
-		</execute>
-
 		<execute macro="WebContent#copyCP">
 			<var name="categoryName" value="${categoryName}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
@@ -827,16 +789,16 @@
 	</command>
 
 	<command name="ExportImportWCWithCategoryViaAP" priority="4">
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="SitePage#addCP">
@@ -879,15 +841,6 @@
 			<var name="vocabularyName" value="Vocabulary Name" />
 			<var name="webContentContent" value="Web Content Content" />
 			<var name="webContentTitle" value="Web Content Title" />
-		</execute>
-
-		<execute macro="WebContentNavigator#gotoEditCP">
-			<var name="webContentTitle" value="Web Content Title" />
-		</execute>
-
-		<execute macro="WebContent#viewCategorizationCategoryCP">
-			<var name="categoryNameList" value="Category Name" />
-			<var name="vocabularyName" value="Vocabulary Name" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -939,8 +892,8 @@
 		<execute function="DownloadTempFile" />
 		<execute function="SelectFrame" value1="relative=top" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">

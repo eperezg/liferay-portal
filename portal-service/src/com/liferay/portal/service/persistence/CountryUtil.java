@@ -588,5 +588,12 @@ public class CountryUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(CountryPersistence persistence) {
+	}
+
 	private static CountryPersistence _persistence;
 }

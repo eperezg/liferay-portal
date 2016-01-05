@@ -22,10 +22,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  * @author Jürgen Kappler
  */
 @ConfigurationAdmin(category = "web-experience-management")
-@Meta.OCD(
-	id = "com.liferay.journal.web.configuration.JournalWebConfiguration",
-	localization = "content/Language", name = "%journal.web.configuration.name"
-)
+@Meta.OCD(id = "com.liferay.journal.web.configuration.JournalWebConfiguration")
 public interface JournalWebConfiguration {
 
 	@Meta.AD(deflt = "15", required = false)

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestF
 import com.liferay.portal.kernel.search.facet.util.bundle.facetfactoryutil.TestFacetFactory;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SyntheticBundleRule;
 import com.liferay.portal.util.test.AtomicState;
 
@@ -39,7 +40,7 @@ public class FacetFactoryUtilTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			new SyntheticBundleRule("bundle.facetfactoryutil"));
 
 	@BeforeClass

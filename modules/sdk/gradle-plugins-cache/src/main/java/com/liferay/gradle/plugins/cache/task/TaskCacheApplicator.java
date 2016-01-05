@@ -136,12 +136,8 @@ public class TaskCacheApplicator {
 			}
 		}
 		else {
-			for (Task taskDependency : skippedTaskDependencies) {
+			for (Task taskDependency : taskCache.getSkippedTaskDependencies()) {
 				boolean removed = taskDependencies.remove(taskDependency);
-
-				if (!removed) {
-					removed = taskDependencies.remove(taskDependency.getName());
-				}
 
 				if (removed) {
 					if (_logger.isInfoEnabled()) {

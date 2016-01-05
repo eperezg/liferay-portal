@@ -29,7 +29,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("category", category);
 portletURL.setParameter("state", state);
-portletURL.setParameter("orderByType", orderByType);
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "app-manager"), null);
 %>
@@ -52,7 +51,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "app-man
 	<liferay-frontend:management-bar-buttons>
 		<liferay-frontend:management-bar-display-buttons
 			displayViews='<%= new String[] {"descriptive"} %>'
-			portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+			portletURL="<%= portletURL %>"
 			selectedDisplayStyle="descriptive"
 		/>
 	</liferay-frontend:management-bar-buttons>
@@ -61,20 +60,20 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "app-man
 		<liferay-frontend:management-bar-navigation
 			navigationKeys="<%= MarketplaceAppManagerUtil.getCategories(apps, bundles) %>"
 			navigationParam="category"
-			portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+			portletURL="<%= portletURL %>"
 		/>
 
 		<liferay-frontend:management-bar-navigation
 			navigationKeys='<%= new String[] {"all-statuses", BundleStateConstants.ACTIVE_LABEL, BundleStateConstants.RESOLVED_LABEL, BundleStateConstants.INSTALLED_LABEL} %>'
 			navigationParam="state"
-			portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+			portletURL="<%= portletURL %>"
 		/>
 
 		<liferay-frontend:management-bar-sort
 			orderByCol="title"
 			orderByType="<%= orderByType %>"
 			orderColumns='<%= new String[] {"title"} %>'
-			portletURL="<%= PortletURLUtil.clone(portletURL, liferayPortletResponse) %>"
+			portletURL="<%= portletURL %>"
 		/>
 	</liferay-frontend:management-bar-filters>
 </liferay-frontend:management-bar>
@@ -88,9 +87,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "app-man
 	/>
 
 	<liferay-ui:search-container
-		emptyResultsMessage="no-apps-were-found"
 		id="appDisplays"
-		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results>
 
@@ -120,21 +117,19 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "app-man
 			className="com.liferay.marketplace.app.manager.web.util.AppDisplay"
 			modelVar="appDisplay"
 		>
-			<liferay-ui:search-container-column-text>
-				<liferay-util:include page="/icon.jsp" servletContext="<%= application %>">
-					<liferay-util:param name="iconURL" value="<%= appDisplay.getIconURL(request) %>" />
-				</liferay-util:include>
-			</liferay-ui:search-container-column-text>
+			<liferay-ui:search-container-column-image
+				src="<%= appDisplay.getIconURL() %>"
+			/>
 
 			<liferay-ui:search-container-column-text colspan="<%= 2 %>">
 				<h5>
 					<a href="<%= HtmlUtil.escapeHREF(appDisplay.getDisplayURL(renderResponse)) %>">
-						<%= MarketplaceAppManagerUtil.getSearchContainerFieldText(appDisplay.getTitle()) %>
+						<%= appDisplay.getTitle() %>
 					</a>
 				</h5>
 
 				<h6 class="text-default">
-					<%= MarketplaceAppManagerUtil.getSearchContainerFieldText(appDisplay.getDescription()) %>
+					<%= appDisplay.getDescription() %>
 				</h6>
 
 				<div class="additional-info text-default">

@@ -136,9 +136,9 @@ public class PoshiRunner {
 				PoshiRunnerStackTraceUtil.emptyStackTrace();
 			}
 			finally {
-				CommandLoggerHandler.stopRunning();
-
 				LoggerUtil.stopLogger();
+
+				CommandLoggerHandler.stopRunning();
 
 				SeleniumUtil.stopSelenium();
 			}

@@ -338,6 +338,23 @@ public class ResourceTypePermissionLocalServiceWrapper
 		return _resourceTypePermissionLocalService.updateResourceTypePermission(resourceTypePermission);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public ResourceTypePermissionLocalService getWrappedResourceTypePermissionLocalService() {
+		return _resourceTypePermissionLocalService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedResourceTypePermissionLocalService(
+		ResourceTypePermissionLocalService resourceTypePermissionLocalService) {
+		_resourceTypePermissionLocalService = resourceTypePermissionLocalService;
+	}
+
 	@Override
 	public ResourceTypePermissionLocalService getWrappedService() {
 		return _resourceTypePermissionLocalService;

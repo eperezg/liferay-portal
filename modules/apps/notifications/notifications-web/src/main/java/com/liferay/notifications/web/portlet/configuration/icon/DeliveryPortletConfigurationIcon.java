@@ -49,10 +49,9 @@ public class DeliveryPortletConfigurationIcon
 
 	@Override
 	public String getOnClick() {
-		StringBundler sb = new StringBundler(12);
+		StringBundler sb = new StringBundler(11);
 
-		sb.append("Liferay.Portlet.openWindow({bodyCssClass: ");
-		sb.append("'dialog-with-footer', namespace: '");
+		sb.append("Liferay.Portlet.openWindow({namespace: '");
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 

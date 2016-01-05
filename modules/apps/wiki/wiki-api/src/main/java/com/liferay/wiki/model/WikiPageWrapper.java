@@ -255,6 +255,15 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 		return _wikiPage.fetchRedirectPage();
 	}
 
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Deprecated
+	@Override
+	public boolean getApproved() {
+		return _wikiPage.getApproved();
+	}
+
 	@Override
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getAttachmentsFileEntries()
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -1228,6 +1237,14 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _wikiPage.getStagedModelType();
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public WikiPage getWrappedWikiPage() {
+		return _wikiPage;
 	}
 
 	@Override

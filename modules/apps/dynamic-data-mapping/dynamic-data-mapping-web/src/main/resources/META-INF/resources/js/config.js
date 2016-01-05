@@ -1,6 +1,4 @@
 ;(function() {
-	var LiferayAUI = Liferay.AUI;
-
 	var PATH_DDM_WEB = Liferay.ThemeDisplay.getPathContext() + '/o/dynamic-data-mapping-web';
 
 	AUI().applyConfig(
@@ -8,7 +6,6 @@
 			groups: {
 				ddm: {
 					base: PATH_DDM_WEB + '/js/',
-					filter: LiferayAUI.getFilterConfig(),
 					modules: {
 						'liferay-portlet-dynamic-data-mapping': {
 							condition: {

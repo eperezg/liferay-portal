@@ -323,5 +323,12 @@ public class DLFileRankLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(DLFileRankLocalService service) {
+	}
+
 	private static DLFileRankLocalService _service;
 }

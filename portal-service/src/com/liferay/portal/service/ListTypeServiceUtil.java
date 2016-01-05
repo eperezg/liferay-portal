@@ -81,5 +81,12 @@ public class ListTypeServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(ListTypeService service) {
+	}
+
 	private static ListTypeService _service;
 }

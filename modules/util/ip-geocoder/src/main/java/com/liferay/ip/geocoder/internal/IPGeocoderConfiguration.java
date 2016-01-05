@@ -22,11 +22,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  * @author Julio Camarero
  */
 @ConfigurationAdmin(category = "platform")
-@Meta.OCD(
-	id = "com.liferay.ip.geocoder.internal.IPGeocoderConfiguration",
-	localization = "content/Language",
-	name = "%ip.geocoder.service.configuration.name"
-)
+@Meta.OCD(id = "com.liferay.ip.geocoder.internal.IPGeocoderConfiguration")
 public interface IPGeocoderConfiguration {
 
 	@Meta.AD(

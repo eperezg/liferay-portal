@@ -196,7 +196,6 @@ public class PortalPreferencesImpl
 
 				return null;
 			}
-
 		};
 
 		try {

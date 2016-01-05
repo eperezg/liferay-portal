@@ -41,7 +41,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 
 import java.io.Serializable;
 
@@ -179,8 +178,6 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 
 		account.setNew(true);
 		account.setPrimaryKey(accountId);
-
-		account.setCompanyId(companyProvider.getCompanyId());
 
 		return account;
 	}
@@ -762,7 +759,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

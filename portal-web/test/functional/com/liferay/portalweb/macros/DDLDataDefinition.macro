@@ -89,10 +89,9 @@
 
 		<execute function="SelectFrame" locator1="DDMSelectStructure#DDM_STRUCTURES_IFRAME_2" />
 
-		<execute macro="DDLDataDefinition#viewName">
-			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionCopyName}" />
-		</execute>
+		<var name="key_ddlDataDefinitionName" value="${ddlDataDefinitionCopyName}" />
 
+		<execute function="AssertTextEquals" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_NAME" value1="${ddlDataDefinitionCopyName}" />
 		<execute function="SelectFrame" value1="relative=top" />
 	</command>
 
@@ -198,10 +197,6 @@
 		<execute function="AssertTextEquals" locator1="TextInput#DATA_DEFINITION" value1="${ddlDataDefinitionName}" />
 	</command>
 
-	<command name="selectFrame">
-		<execute function="SelectFrame" locator1="IFrame#DIALOG" />
-	</command>
-
 	<command name="selectViaDDLDisplayPG">
 		<execute macro="DDLDataDefinition#_select">
 			<var name="ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
@@ -289,11 +284,5 @@
 		</if>
 
 		<execute function="SelectFrame" value1="relative=top" />
-	</command>
-
-	<command name="viewName">
-		<var name="key_ddlDataDefinitionName" value="${ddlDataDefinitionName}" />
-
-		<execute function="AssertTextEquals" locator1="DDMSelectStructure#DDM_STRUCTURE_TABLE_NAME" value1="${ddlDataDefinitionName}" />
 	</command>
 </definition>

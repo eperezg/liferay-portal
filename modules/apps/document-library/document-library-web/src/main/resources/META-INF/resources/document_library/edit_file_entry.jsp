@@ -182,12 +182,8 @@ if (portletTitleBasedNavigation) {
 		<aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
 		<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 		<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
-
-		<c:if test="<%= (fileEntry != null) && checkedOut %>">
-			<aui:input name="majorVersion" type="hidden" />
-			<aui:input name="changeLog" type="hidden" />
-		</c:if>
-
+		<aui:input name="majorVersion" type="hidden" />
+		<aui:input name="changeLog" type="hidden" />
 		<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 
 		<liferay-ui:error exception="<%= AntivirusScannerException.class %>">
@@ -429,14 +425,6 @@ if (portletTitleBasedNavigation) {
 							name="updateVersionDetails"
 							type="checkbox"
 						/>
-
-						<div id="<portlet:namespace />versionDetails" style="display: none">
-							<aui:input label="major-version" name="majorVersion" type="radio" value="<%= true %>" />
-
-							<aui:input checked="<%= true %>" label="minor-version" name="majorVersion" type="radio" value="<%= false %>" />
-
-							<aui:input label="change-log" model="<%= null %>" name="changeLog" type="textarea" />
-						</div>
 					</c:if>
 				</c:if>
 			</aui:fieldset>
@@ -477,6 +465,12 @@ if (portletTitleBasedNavigation) {
 				</aui:fieldset>
 			</c:if>
 
+			<c:if test="<%= approved && dlEditFileEntryDisplayContext.isVersionInfoVisible() %>">
+				<div class="alert alert-info">
+					<liferay-ui:message key="a-new-version-is-created-automatically-if-this-content-is-modified" />
+				</div>
+			</c:if>
+
 			<c:if test="<%= pending %>">
 				<div class="alert alert-info">
 					<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
@@ -515,9 +509,7 @@ if (portletTitleBasedNavigation) {
 	/>
 </div>
 
-<c:if test="<%= (fileEntry != null) && checkedOut %>">
-	<%@ include file="/document_library/version_details.jspf" %>
-</c:if>
+<%@ include file="/document_library/version_details.jspf" %>
 
 <aui:script>
 	function <portlet:namespace />changeFileEntryType() {
@@ -563,11 +555,19 @@ if (portletTitleBasedNavigation) {
 
 		form.fm('<%= Constants.CMD %>').val('<%= (fileEntry == null) ? Constants.ADD : Constants.UPDATE %>');
 
-		if (draft) {
-			form.fm('workflowAction').val('<%= WorkflowConstants.ACTION_SAVE_DRAFT %>');
-		}
+		var checkedOut = <%= (fileEntry != null) && checkedOut %>;
+		var showModalDialog = form.fm('updateVersionDetails').is(':checked');
 
-		submitForm(form);
+		if (draft || !showModalDialog) {
+			if (draft) {
+				form.fm('workflowAction').val('<%= WorkflowConstants.ACTION_SAVE_DRAFT %>');
+			}
+
+			submitForm(form);
+		}
+		else if (!checkedOut) {
+			<portlet:namespace />showVersionDetailsDialog(form);
+		}
 	}
 
 	Liferay.provide(
@@ -577,14 +577,13 @@ if (portletTitleBasedNavigation) {
 			Liferay.Portlet.DocumentLibrary.Checkin.showDialog(
 				'<portlet:namespace />versionDetails',
 				'<%= UnicodeLanguageUtil.get(request, "describe-your-changes") %>',
-				function(event) {
-					var $ = AUI.$;
+				['<portlet:namespace />versionDetailsMajorVersion', '<portlet:namespace />versionDetailsChangeLog'],
+				function(event, nodes) {
+					var majorVersionNode = nodes[0];
 
-					var majorVersionNode = $("input:radio[name='<portlet:namespace />versionDetailsMajorVersion']:checked");
+					form.fm('majorVersion').val(majorVersionNode.attr('checked'));
 
-					form.fm('majorVersion').val(majorVersionNode.val());
-
-					var changeLogNode = $('#<portlet:namespace />versionDetailsChangeLog');
+					var changeLogNode = nodes[1];
 
 					form.fm('changeLog').val(changeLogNode.val());
 
@@ -599,17 +598,6 @@ if (portletTitleBasedNavigation) {
 		Liferay.Form.get('<portlet:namespace />fm').formValidator.validateField('<portlet:namespace />title');
 	}
 </aui:script>
-
-<c:if test="<%= (fileEntry != null) && !checkedOut %>">
-	<aui:script use="aui-base">
-		$('#<portlet:namespace />updateVersionDetails').on(
-			'click',
-			function(event) {
-				$('#<portlet:namespace />versionDetails').show();
-			}
-		);
-	</aui:script>
-</c:if>
 
 <%
 if (fileEntry != null) {

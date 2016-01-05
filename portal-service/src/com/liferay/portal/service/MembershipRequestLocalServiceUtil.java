@@ -312,5 +312,12 @@ public class MembershipRequestLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(MembershipRequestLocalService service) {
+	}
+
 	private static MembershipRequestLocalService _service;
 }

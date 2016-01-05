@@ -42,7 +42,6 @@ import com.liferay.portal.model.impl.SubscriptionModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 
 import java.io.Serializable;
@@ -3050,8 +3049,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		subscription.setNew(true);
 		subscription.setPrimaryKey(subscriptionId);
 
-		subscription.setCompanyId(companyProvider.getCompanyId());
-
 		return subscription;
 	}
 
@@ -3738,7 +3735,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

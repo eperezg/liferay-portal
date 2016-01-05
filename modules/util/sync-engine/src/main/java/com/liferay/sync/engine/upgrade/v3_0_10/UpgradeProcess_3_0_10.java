@@ -14,12 +14,7 @@
 
 package com.liferay.sync.engine.upgrade.v3_0_10;
 
-import com.liferay.sync.engine.model.SyncAccount;
-import com.liferay.sync.engine.model.SyncFile;
-import com.liferay.sync.engine.model.SyncSite;
-import com.liferay.sync.engine.service.SyncAccountService;
 import com.liferay.sync.engine.service.SyncFileService;
-import com.liferay.sync.engine.service.SyncSiteService;
 import com.liferay.sync.engine.service.persistence.SyncFilePersistence;
 import com.liferay.sync.engine.upgrade.UpgradeProcess;
 import com.liferay.sync.engine.upgrade.util.UpgradeUtil;
@@ -37,7 +32,6 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -55,9 +49,7 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 	@Override
 	public void upgrade() throws Exception {
 		upgradeLogger();
-		upgradeSchema();
-
-		upgradeSyncSites();
+		upgradeTable();
 	}
 
 	protected void upgradeLogger() throws Exception {
@@ -122,7 +114,7 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 		UpgradeUtil.copyLoggerConfiguration();
 	}
 
-	protected void upgradeSchema() throws Exception {
+	protected void upgradeTable() throws Exception {
 		SyncFilePersistence syncFilePersistence =
 			SyncFileService.getSyncFilePersistence();
 
@@ -139,37 +131,6 @@ public class UpgradeProcess_3_0_10 extends UpgradeProcess {
 		syncFilePersistence.executeRaw(
 			"ALTER TABLE `SyncFile` ADD COLUMN localExtraSettings " +
 				"VARCHAR(16777216) BEFORE localSyncTime;");
-	}
-
-	protected void upgradeSyncSites() throws Exception {
-		List<SyncAccount> syncAccounts = SyncAccountService.findAll();
-
-		for (SyncAccount syncAccount : syncAccounts) {
-			List<SyncSite> syncSites = SyncSiteService.findSyncSites(
-				syncAccount.getSyncAccountId());
-
-			for (SyncSite syncSite : syncSites) {
-				if (syncSite.isActive() &&
-					!Files.exists(Paths.get(syncSite.getFilePathName()))) {
-
-					Files.createDirectories(
-						Paths.get(syncSite.getFilePathName()));
-				}
-
-				SyncFile syncFile = SyncFileService.fetchSyncFile(
-					syncSite.getFilePathName());
-
-				if (syncFile != null) {
-					continue;
-				}
-
-				SyncFileService.addSyncFile(
-					null, null, false, null, syncSite.getFilePathName(), null,
-					syncSite.getName(), 0, syncSite.getGroupId(), 0,
-					SyncFile.STATE_SYNCED, syncSite.getSyncAccountId(),
-					SyncFile.TYPE_SYSTEM);
-			}
-		}
 	}
 
 }

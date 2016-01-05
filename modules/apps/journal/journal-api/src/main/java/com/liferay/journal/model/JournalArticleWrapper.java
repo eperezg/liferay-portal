@@ -318,6 +318,15 @@ public class JournalArticleWrapper implements JournalArticle,
 	}
 
 	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Deprecated
+	@Override
+	public boolean getApproved() {
+		return _journalArticle.getApproved();
+	}
+
+	/**
 	* Returns the article ID of this journal article.
 	*
 	* @return the article ID of this journal article
@@ -1769,6 +1778,14 @@ public class JournalArticleWrapper implements JournalArticle,
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _journalArticle.getStagedModelType();
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public JournalArticle getWrappedJournalArticle() {
+		return _journalArticle;
 	}
 
 	@Override

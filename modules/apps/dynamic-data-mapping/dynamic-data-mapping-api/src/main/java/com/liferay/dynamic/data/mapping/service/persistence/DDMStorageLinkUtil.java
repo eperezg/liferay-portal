@@ -816,6 +816,13 @@ public class DDMStorageLinkUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(DDMStorageLinkPersistence persistence) {
+	}
+
 	private static ServiceTracker<DDMStorageLinkPersistence, DDMStorageLinkPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(DDMStorageLinkPersistence.class);
 }

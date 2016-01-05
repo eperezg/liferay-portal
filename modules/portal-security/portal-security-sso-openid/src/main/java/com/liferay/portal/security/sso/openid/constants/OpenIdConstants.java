@@ -19,8 +19,6 @@ package com.liferay.portal.security.sso.openid.constants;
  */
 public class OpenIdConstants {
 
-	public static final String AUTH_ENABLED = "enabled";
-
 	public static final String SERVICE_NAME =
 		"com.liferay.portal.security.sso.openid";
 

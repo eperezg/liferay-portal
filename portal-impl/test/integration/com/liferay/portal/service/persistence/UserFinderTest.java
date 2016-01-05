@@ -34,6 +34,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -57,7 +58,8 @@ public class UserFinderTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			TransactionalTestRule.INSTANCE);
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

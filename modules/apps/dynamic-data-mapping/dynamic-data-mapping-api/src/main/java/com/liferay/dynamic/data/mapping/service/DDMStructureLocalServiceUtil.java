@@ -1261,6 +1261,13 @@ public class DDMStructureLocalServiceUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(DDMStructureLocalService service) {
+	}
+
 	private static ServiceTracker<DDMStructureLocalService, DDMStructureLocalService> _serviceTracker =
 		ServiceTrackerFactory.open(DDMStructureLocalService.class);
 }

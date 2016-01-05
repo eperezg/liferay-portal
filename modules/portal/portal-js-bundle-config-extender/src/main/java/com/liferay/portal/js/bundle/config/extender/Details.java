@@ -24,7 +24,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
 	id = "com.liferay.portal.js.bundle.config.extender.BundleConfigServlet",
-	localization = "content/Language", name = "%details.configuration.name"
+	name = "%JS Bundle Config Servlet Configuration"
 )
 public @interface Details {
 

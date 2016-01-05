@@ -232,7 +232,6 @@ public class NettyFabricWorkerExecutionChannelHandler
 					StringUtil.merge(loadedBootstrapPaths, File.pathSeparator),
 					StringUtil.merge(loadedRuntimePaths, File.pathSeparator));
 			}
-
 		};
 	}
 

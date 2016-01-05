@@ -51,7 +51,7 @@ else {
 }
 %>
 
-<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
+<liferay-ui:icon-menu icon="<%= StringPool.BLANK %>" message="<%= StringPool.BLANK %>">
 	<c:if test="<%= !defaultParentCategory && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="/message_boards/edit_category" />
@@ -60,6 +60,7 @@ else {
 		</portlet:renderURL>
 
 		<liferay-ui:icon
+			iconCssClass="icon-edit"
 			message="edit"
 			url="<%= editURL %>"
 		/>
@@ -71,6 +72,7 @@ else {
 		</portlet:renderURL>
 
 		<liferay-ui:icon
+			iconCssClass="icon-move"
 			message="move"
 			url="<%= moveURL %>"
 		/>
@@ -86,6 +88,7 @@ else {
 		/>
 
 		<liferay-ui:icon
+			iconCssClass="icon-lock"
 			message="permissions"
 			method="get"
 			url="<%= permissionsURL %>"
@@ -131,6 +134,7 @@ else {
 					</portlet:actionURL>
 
 					<liferay-ui:icon
+						iconCssClass="icon-remove-sign"
 						message="unsubscribe"
 						url="<%= unsubscribeURL %>"
 					/>
@@ -143,6 +147,7 @@ else {
 					</portlet:actionURL>
 
 					<liferay-ui:icon
+						iconCssClass="icon-ok-sign"
 						message="subscribe"
 						url="<%= subscribeURL %>"
 					/>

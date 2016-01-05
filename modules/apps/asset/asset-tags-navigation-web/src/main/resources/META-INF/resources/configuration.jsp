@@ -24,52 +24,64 @@
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 
-	<aui:fieldset-group markupView="lexicon">
-		<aui:fieldset>
-			<div class="display-template">
+	<aui:fieldset>
+		<ul class="lfr-tree list-unstyled">
+			<li class="tree-item">
+				<aui:input label="show-unused-tags" name="preferences--showZeroAssetCount--" type="checkbox" value="<%= showZeroAssetCount %>" />
+			</li>
 
-				<%
-				List<String> displayStyles = new ArrayList<String>();
+			<li class="tree-item">
+				<aui:input name="preferences--showAssetCount--" type="checkbox" value="<%= showAssetCount %>" />
 
-				displayStyles.add("number");
-				displayStyles.add("cloud");
-				%>
+				<ul class="<%= showAssetCount ? "" : "hide" %> lfr-tree list-unstyled" id="<portlet:namespace />assetCountOptions">
+					<li class="tree-item">
+						<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="preferences--classNameId--">
+							<aui:option label="any" value="<%= classNameId == 0 %>" />
 
-				<liferay-ddm:template-selector
-					className="<%= AssetTag.class.getName() %>"
-					displayStyle="<%= displayStyle %>"
-					displayStyleGroupId="<%= displayStyleGroupId %>"
-					displayStyles="<%= displayStyles %>"
-					refreshURL="<%= configurationRenderURL %>"
-				/>
-			</div>
+							<%
+							List<AssetRendererFactory<?>> assetRendererFactories = ListUtil.sort(AssetRendererFactoryRegistryUtil.getAssetRendererFactories(company.getCompanyId()), new AssetRendererFactoryTypeNameComparator(locale));
 
-			<aui:input label="max-num-of-tags" name="preferences--maxAssetTags--" type="text" value="<%= maxAssetTags %>" />
+							for (AssetRendererFactory<?> assetRendererFactory : assetRendererFactories) {
+							%>
 
-			<aui:input label="show-unused-tags" name="preferences--showZeroAssetCount--" type="toggle-switch" value="<%= showZeroAssetCount %>" />
+								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, assetRendererFactory.getClassName()) %>" selected="<%= classNameId == assetRendererFactory.getClassNameId() %>" value="<%= assetRendererFactory.getClassNameId() %>" />
 
-			<aui:input name="preferences--showAssetCount--" type="toggle-switch" value="<%= showAssetCount %>" />
+							<%
+							}
+							%>
 
-			<div class="<%= showAssetCount ? "" : "hide" %>" id="<portlet:namespace />assetCountOptions">
-				<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="preferences--classNameId--">
-					<aui:option label="any" value="<%= classNameId == 0 %>" />
+						</aui:select>
+					</li>
+				</ul>
+			</li>
 
-					<%
-					List<AssetRendererFactory<?>> assetRendererFactories = ListUtil.sort(AssetRendererFactoryRegistryUtil.getAssetRendererFactories(company.getCompanyId()), new AssetRendererFactoryTypeNameComparator(locale));
+			<li class="tree-item">
+				<ul class="lfr-tree list-unstyled" id="<portlet:namespace />displayTemplateSettings">
+					<div class="display-template">
 
-					for (AssetRendererFactory<?> assetRendererFactory : assetRendererFactories) {
-					%>
+						<%
+						List<String> displayStyles = new ArrayList<String>();
 
-						<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, assetRendererFactory.getClassName()) %>" selected="<%= classNameId == assetRendererFactory.getClassNameId() %>" value="<%= assetRendererFactory.getClassNameId() %>" />
+						displayStyles.add("number");
+						displayStyles.add("cloud");
+						%>
 
-					<%
-					}
-					%>
+						<liferay-ddm:template-selector
+							className="<%= AssetTag.class.getName() %>"
+							displayStyle="<%= displayStyle %>"
+							displayStyleGroupId="<%= displayStyleGroupId %>"
+							displayStyles="<%= displayStyles %>"
+							refreshURL="<%= configurationRenderURL %>"
+						/>
+					</div>
+				</ul>
+			</li>
 
-				</aui:select>
-			</div>
-		</aui:fieldset>
-	</aui:fieldset-group>
+			<li class="tree-item">
+				<aui:input label="max-num-of-tags" name="preferences--maxAssetTags--" type="text" value="<%= maxAssetTags %>" />
+			</li>
+		</ul>
+	</aui:fieldset>
 
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" />
@@ -77,5 +89,15 @@
 </aui:form>
 
 <aui:script>
-	Liferay.Util.toggleBoxes('<portlet:namespace />showAssetCount', '<portlet:namespace />assetCountOptions');
+	var assetCountOptions = AUI.$('#<portlet:namespace />assetCountOptions');
+	var showAssetCount = AUI.$('#<portlet:namespace />showAssetCount');
+
+	showAssetCount.on(
+		'change',
+		function() {
+			var checked = showAssetCount.prop('checked');
+
+			assetCountOptions.toggleClass('hide', !checked);
+		}
+	);
 </aui:script>

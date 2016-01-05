@@ -16,8 +16,6 @@
 
 <%@ include file="/wiki/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.wiki.web#/wiki/view.jsp#pre" />
-
 <%
 boolean followRedirect = ParamUtil.getBoolean(request, "followRedirect", true);
 
@@ -419,5 +417,3 @@ if ((wikiPage != null) && !wikiPage.getTitle().equals(wikiGroupServiceConfigurat
 	PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), viewPageURL.toString());
 }
 %>
-
-<liferay-util:dynamic-include key="com.liferay.wiki.web#/wiki/view.jsp#post" />

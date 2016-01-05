@@ -1425,7 +1425,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 	}
 
 	private LayoutSet _layoutSet;
-	private transient LayoutType _layoutType;
+	private LayoutType _layoutType;
 	private UnicodeProperties _typeSettingsProperties;
 
 }

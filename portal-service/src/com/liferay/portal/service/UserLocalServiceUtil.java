@@ -3132,5 +3132,12 @@ public class UserLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(UserLocalService service) {
+	}
+
 	private static UserLocalService _service;
 }

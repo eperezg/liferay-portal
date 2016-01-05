@@ -2,7 +2,7 @@ AUI.add(
 	'document-library-checkin',
 	function(A) {
 		var DocumentLibraryCheckin = {
-			showDialog: function(contentId, title, onSave) {
+			showDialog: function(contentId, title, fieldIds, onSave) {
 				var instance = this;
 
 				var versionDetailsDialog = Liferay.Util.Window.getWindow(
@@ -19,7 +19,20 @@ AUI.add(
 
 				var saveButton = versionDetailsDialogBoundingBox.one('.btn-primary');
 
-				saveButton.on('click', onSave);
+				saveButton.on(
+					'click',
+					function(event) {
+						onSave(
+							event,
+							A.Array.map(
+								fieldIds,
+								function(fieldId) {
+									return versionDetailsDialogBoundingBox.one('#' + fieldId);
+								}
+							)
+						);
+					}
+				);
 
 				var cancelButton = versionDetailsDialogBoundingBox.one('.btn-cancel');
 

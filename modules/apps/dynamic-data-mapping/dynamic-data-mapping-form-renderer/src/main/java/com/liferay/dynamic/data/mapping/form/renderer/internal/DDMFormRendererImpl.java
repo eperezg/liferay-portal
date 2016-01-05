@@ -210,14 +210,7 @@ public class DDMFormRendererImpl implements DDMFormRenderer {
 			DDMFormRenderingContext ddmFormRenderingContext)
 		throws PortalException {
 
-		String containerId = ddmFormRenderingContext.getContainerId();
-
-		if (Validator.isNull(containerId)) {
-			containerId = StringUtil.randomId();
-		}
-
-		template.put("containerId", containerId);
-
+		template.put("containerId", StringUtil.randomId());
 		template.put(
 			"definition", DDMFormJSONSerializerUtil.serialize(ddmForm));
 

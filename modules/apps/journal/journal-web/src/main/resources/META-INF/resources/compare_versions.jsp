@@ -50,7 +50,7 @@ renderResponse.setTitle(LanguageUtil.get(request, "compare-versions"));
 </liferay-portlet:resourceURL>
 
 <div class="container-fluid-1280">
-	<liferay-frontend:diff-version-comparator
+	<liferay-ui:diff-version-comparator
 		availableLocales="<%= availableLocales %>"
 		diffHtmlResults="<%= diffHtmlResults %>"
 		diffVersionsInfo="<%= JournalUtil.getDiffVersionsInfo(groupId, articleId, sourceVersion, targetVersion) %>"

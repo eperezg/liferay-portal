@@ -138,6 +138,7 @@ boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getIni
 
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="more" />
 		</liferay-ui:search-container>
+
 	</aui:form>
 </div>
 

@@ -27,6 +27,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.test.log.CaptureAppender;
 import com.liferay.portal.test.log.Log4JLoggerTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -59,7 +60,8 @@ public class PersistenceNestedSetsTreeManagerTest {
 	@ClassRule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			CodeCoverageAssertor.INSTANCE, new LiferayIntegrationTestRule());
+			CodeCoverageAssertor.INSTANCE, new LiferayIntegrationTestRule(),
+			MainServletTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {

@@ -16,8 +16,6 @@
 
 <%@ include file="/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.calendar.web#/view_calendar_booking.jsp#pre" />
-
 <%
 String backURL = ParamUtil.getString(request, "backURL");
 
@@ -271,5 +269,3 @@ AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalendarBookin
 		summaryNode.html(recurrenceSummary);
 	</aui:script>
 </c:if>
-
-<liferay-util:dynamic-include key="com.liferay.calendar.web#/view_calendar_booking.jsp#post" />

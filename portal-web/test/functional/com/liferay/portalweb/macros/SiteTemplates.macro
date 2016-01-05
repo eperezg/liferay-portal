@@ -13,7 +13,15 @@
 
 		<var name="key_sitePageName" value="${sitePageName}" />
 
-		<execute function="Click" locator1="SitePages#PAGE_TREE_PAGE_EDIT_COG" />
+		<if>
+			<isset var="childSitepageName" />
+			<then>
+				<execute function="Click" locator1="SitePages#PAGE_TREE_PAGE_LINK_2" />
+			</then>
+			<else>
+				<execute function="Click" locator1="SitePages#PAGE_TREE_PAGE_EDIT_COG" />
+			</else>
+		</if>
 
 		<execute function="Pause" locator1="3000" />
 		<execute function="AssertClick" locator1="Button#ADD_PAGE" value1="Add Page" />
@@ -203,8 +211,8 @@
 	</command>
 
 	<command name="tearDownCP">
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Site Templates" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Templates" />
 		</execute>
 
 		<var name="key_siteTemplateName" value="Site Template Name" />
@@ -271,30 +279,34 @@
 	</command>
 
 	<command name="viewNoSiteOrWorkflowLinksCP">
-		<var name="key_portletCategoryName" value="Configuration" />
-		<var name="key_siteTemplateName" value="Site Template Name" />
+		<var name="key_portletCategoryName" value="${portletCategoryName}" />
+		<var name="key_portletName" value="${portletName}" />
+		<var name="key_siteTemplateName" value="${siteTemplateName}" />
 
-		<execute function="AssertTextEquals#assertPartialText" locator1="SiteTemplates#SITE_TEMPLATE_TABLE_NAME" value1="Site Template Name" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="SiteTemplates#SITE_TEMPLATE_TABLE_NAME" value1="${siteTemplateName}" />
 
 		<execute function="Click" locator1="SiteTemplates#SITE_TEMPLATE_TABLE_ACTIONS" />
 
 		<execute function="AssertClick" locator1="MenuItem#MANAGE" value1="Manage" />
 
-		<execute macro="ProductMenuHelper#gotoSites" />
+		<if>
+			<condition function="IsElementNotPresent" locator1="ProductMenu#PRODUCT_MENU_PANEL_MENU_ITEM" value1="Site Template Settings" />
+			<then>
+				<var name="key_portletCategoryName" value="${portletCategoryName}" />
 
-		<execute macro="ProductMenuHelper#expandCategory">
-			<var name="category" value="Configuration" />
-		</execute>
+				<execute function="AssertClick" locator1="ProductMenu#PRODUCT_MENU_PANEL_SITES_PANEL_TITLE" value1="${portletCategoryName}" />
+			</then>
+		</if>
 
-		<for list="Site Settings,Social Activities,Workflow Configuration" param="portletName">
+		<for list="${portletNames}" param="portletName">
 			<var name="key_portletName" value="${portletName}" />
 
 			<execute function="AssertTextNotPresent" locator1="Home#SITE_ADMINISTRATION_NAVIGATION" value1="${portletName}" />
 		</for>
 
-		<var name="key_portletCategoryName" value="${portletCategoryName}" />
+		<var name="key_portletCategoryName" value="${portletCategoryName2}" />
 
-		<execute function="AssertElementNotPresent" locator1="Home#SITE_ADMINISTRATION_CATEGORY_COLLAPSED" value1="Users" />
+		<execute function="AssertElementNotPresent" locator1="Home#SITE_ADMINISTRATION_CATEGORY_COLLAPSED" value1="${portletCategoryName2}" />
 	</command>
 
 	<command name="viewResetPageChanges">

@@ -42,7 +42,6 @@ import com.liferay.portal.model.impl.LayoutSetModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 
 import java.io.Serializable;
@@ -1534,8 +1533,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		layoutSet.setNew(true);
 		layoutSet.setPrimaryKey(layoutSetId);
 
-		layoutSet.setCompanyId(companyProvider.getCompanyId());
-
 		return layoutSet;
 	}
 
@@ -2162,7 +2159,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

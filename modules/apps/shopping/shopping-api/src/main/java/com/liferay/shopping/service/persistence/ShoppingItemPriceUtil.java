@@ -421,6 +421,13 @@ public class ShoppingItemPriceUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(ShoppingItemPricePersistence persistence) {
+	}
+
 	private static ServiceTracker<ShoppingItemPricePersistence, ShoppingItemPricePersistence> _serviceTracker =
 		ServiceTrackerFactory.open(ShoppingItemPricePersistence.class);
 }

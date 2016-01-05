@@ -145,6 +145,22 @@ public class DDLRecordServiceWrapper implements DDLRecordService,
 			displayIndex, fields, mergeFields, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public DDLRecordService getWrappedDDLRecordService() {
+		return _ddlRecordService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedDDLRecordService(DDLRecordService ddlRecordService) {
+		_ddlRecordService = ddlRecordService;
+	}
+
 	@Override
 	public DDLRecordService getWrappedService() {
 		return _ddlRecordService;

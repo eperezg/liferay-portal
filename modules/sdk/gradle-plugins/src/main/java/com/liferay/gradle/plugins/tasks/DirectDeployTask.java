@@ -14,8 +14,7 @@
 
 package com.liferay.gradle.plugins.tasks;
 
-import com.liferay.gradle.plugins.LiferayJavaPlugin;
-import com.liferay.gradle.plugins.util.FileUtil;
+import com.liferay.gradle.util.FileUtil;
 import com.liferay.gradle.util.GradleUtil;
 import com.liferay.gradle.util.StringUtil;
 import com.liferay.gradle.util.Validator;
@@ -25,12 +24,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gradle.api.artifacts.Configuration;
-
 /**
  * @author Andrea Di Giorgi
  */
-public class DirectDeployTask extends BasePortalToolsTask {
+public class DirectDeployTask extends BasePortalImplToolsTask {
 
 	public File getAppServerDeployDir() {
 		return GradleUtil.toFile(project, _appServerDeployDir);
@@ -38,14 +35,6 @@ public class DirectDeployTask extends BasePortalToolsTask {
 
 	public File getAppServerDir() {
 		return GradleUtil.toFile(project, _appServerDir);
-	}
-
-	public File getAppServerLibGlobalDir() {
-		return GradleUtil.toFile(project, _appServerLibGlobalDir);
-	}
-
-	public File getAppServerPortalDir() {
-		return GradleUtil.toFile(project, _appServerPortalDir);
 	}
 
 	public String getAppServerType() {
@@ -178,14 +167,6 @@ public class DirectDeployTask extends BasePortalToolsTask {
 		_appServerDir = appServerDir;
 	}
 
-	public void setAppServerLibGlobalDir(Object appServerLibGlobalDir) {
-		_appServerLibGlobalDir = appServerLibGlobalDir;
-	}
-
-	public void setAppServerPortalDir(Object appServerPortalDir) {
-		_appServerPortalDir = appServerPortalDir;
-	}
-
 	public void setAppServerType(Object appServerType) {
 		_appServerType = appServerType;
 	}
@@ -212,13 +193,7 @@ public class DirectDeployTask extends BasePortalToolsTask {
 
 	@Override
 	protected void addDependencies() {
-		Configuration configuration = GradleUtil.getConfiguration(
-			project, getConfigurationName());
-
-		Configuration portalConfiguration = GradleUtil.getConfiguration(
-			project, LiferayJavaPlugin.PORTAL_CONFIGURATION_NAME);
-
-		configuration.extendsFrom(portalConfiguration);
+		super.addDependencies();
 
 		String appServerType = getAppServerType();
 
@@ -226,13 +201,8 @@ public class DirectDeployTask extends BasePortalToolsTask {
 			File dir = new File(getAppServerDir(), "lib/endorsed");
 
 			GradleUtil.addDependency(
-				project, configuration.getName(),
-				FileUtil.getJarsFileTree(project, dir));
+				project, getConfigurationName(), getJarsFileTree(dir));
 		}
-	}
-
-	protected File getAppServerLibPortalDir() {
-		return new File(getAppServerPortalDir(), "WEB-INF/lib");
 	}
 
 	@Override
@@ -242,8 +212,6 @@ public class DirectDeployTask extends BasePortalToolsTask {
 
 	private Object _appServerDeployDir;
 	private Object _appServerDir;
-	private Object _appServerLibGlobalDir;
-	private Object _appServerPortalDir;
 	private Object _appServerType;
 	private Object _argAppServerType;
 	private boolean _customPortletXml;

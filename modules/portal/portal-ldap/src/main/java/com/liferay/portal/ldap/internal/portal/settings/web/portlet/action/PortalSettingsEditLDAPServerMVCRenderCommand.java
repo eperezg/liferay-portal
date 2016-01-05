@@ -17,10 +17,10 @@ package com.liferay.portal.ldap.internal.portal.settings.web.portlet.action;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.settings.web.constants.PortalSettingsPortletKeys;
 
-import javax.servlet.ServletContext;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Philip Jones
@@ -29,25 +29,16 @@ import org.osgi.service.component.annotations.Reference;
 	property = {
 		"javax.portlet.name=" + PortalSettingsPortletKeys.PORTAL_SETTINGS,
 		"mvc.command.name=/portal_settings/edit_ldap_server"
-	},
-	service = MVCRenderCommand.class
+	}
 )
 public class PortalSettingsEditLDAPServerMVCRenderCommand
-	extends BasePortalSettingsMVCRenderCommand {
+	implements MVCRenderCommand {
 
 	@Override
-	protected String getJspPath() {
-		return _JSP_PATH;
-	}
+	public String render(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.portal.ldap)", unbind = "-"
-	)
-	protected void setServletContext(ServletContext servletContext) {
-		super.servletContext = servletContext;
+		return "/edit_ldap_server.jsp";
 	}
-
-	private static final String _JSP_PATH =
-		"/com.liferay.portal.settings.web/edit_ldap_server.jsp";
 
 }

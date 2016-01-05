@@ -725,7 +725,7 @@ public class WebDriverHelper {
 						optionWebElement.getAttribute("value");
 
 					if (optionWebElementValue.equals(value)) {
-						label = optionWebElementValue;
+						label = optionWebElement.getText();
 
 						break;
 					}

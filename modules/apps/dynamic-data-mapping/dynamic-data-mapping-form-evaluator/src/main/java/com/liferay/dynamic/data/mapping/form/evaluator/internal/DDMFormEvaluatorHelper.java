@@ -233,10 +233,6 @@ public class DDMFormEvaluatorHelper {
 
 		Value value = ddmFormFieldValue.getValue();
 
-		if (value == null) {
-			return true;
-		}
-
 		String valueString = GetterUtil.getString(value.getString(_locale));
 
 		if (valueString.isEmpty()) {
@@ -278,11 +274,9 @@ public class DDMFormEvaluatorHelper {
 
 			Value value = ddmFormFieldValue.getValue();
 
-			if (value != null) {
-				setExpressionVariableValue(
-					expression, name, ddmFormField.getDataType(),
-					value.getString(_locale));
-			}
+			setExpressionVariableValue(
+				expression, name, ddmFormField.getDataType(),
+				value.getString(_locale));
 
 			setExpressionVariables(
 				expression, ddmFormFieldValue.getNestedDDMFormFieldValues(),

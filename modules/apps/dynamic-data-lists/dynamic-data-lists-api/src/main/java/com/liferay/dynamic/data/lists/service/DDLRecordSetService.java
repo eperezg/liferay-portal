@@ -118,7 +118,5 @@ public interface DDLRecordSetService extends BaseService {
 		throws PortalException;
 
 	public com.liferay.dynamic.data.lists.model.DDLRecordSet updateRecordSet(
-		long recordSetId,
-		com.liferay.dynamic.data.mapping.storage.DDMFormValues settingsDDMFormValues)
-		throws PortalException;
+		long recordSetId, java.lang.String settings) throws PortalException;
 }

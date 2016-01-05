@@ -292,11 +292,6 @@ public abstract class BaseMobileDriverImpl
 	}
 
 	@Override
-	public String getCurrentDayName() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public String getCurrentMonth() {
 		throw new UnsupportedOperationException();
 	}

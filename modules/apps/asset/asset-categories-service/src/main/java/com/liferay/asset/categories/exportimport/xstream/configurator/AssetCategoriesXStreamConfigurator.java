@@ -17,11 +17,9 @@ package com.liferay.asset.categories.exportimport.xstream.configurator;
 import com.liferay.exportimport.xstream.configurator.XStreamConfigurator;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portlet.asset.model.impl.AssetCategoryImpl;
-import com.liferay.portlet.asset.model.impl.AssetLinkImpl;
 import com.liferay.portlet.asset.model.impl.AssetVocabularyImpl;
 import com.liferay.portlet.exportimport.xstream.XStreamAlias;
 import com.liferay.portlet.exportimport.xstream.XStreamConverter;
-import com.liferay.portlet.exportimport.xstream.XStreamType;
 
 import java.util.List;
 
@@ -33,11 +31,6 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(immediate = true, service = XStreamConfigurator.class)
 public class AssetCategoriesXStreamConfigurator implements XStreamConfigurator {
-
-	@Override
-	public List<XStreamType> getAllowedXStreamTypes() {
-		return ListUtil.toList(_xStreamTypes);
-	}
 
 	@Override
 	public List<XStreamAlias> getXStreamAliases() {
@@ -55,13 +48,8 @@ public class AssetCategoriesXStreamConfigurator implements XStreamConfigurator {
 			new XStreamAlias(AssetCategoryImpl.class, "AssetCategory"),
 			new XStreamAlias(AssetVocabularyImpl.class, "AssetVocabulary")
 		};
-
-		_xStreamTypes = new XStreamType[] {
-			new XStreamType(AssetLinkImpl.class)
-		};
 	}
 
 	private XStreamAlias[] _xStreamAliases;
-	private XStreamType[] _xStreamTypes;
 
 }

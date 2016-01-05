@@ -105,5 +105,12 @@ public class RegionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(RegionService service) {
+	}
+
 	private static RegionService _service;
 }

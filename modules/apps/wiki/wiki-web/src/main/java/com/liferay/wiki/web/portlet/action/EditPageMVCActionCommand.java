@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.TrashedModel;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -53,9 +52,6 @@ import com.liferay.wiki.service.WikiPageLocalService;
 import com.liferay.wiki.service.WikiPageResourceLocalService;
 import com.liferay.wiki.service.WikiPageService;
 import com.liferay.wiki.web.util.WikiWebComponentProvider;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -87,46 +83,28 @@ public class EditPageMVCActionCommand extends BaseMVCActionCommand {
 		String title = ParamUtil.getString(actionRequest, "title");
 		double version = ParamUtil.getDouble(actionRequest, "version");
 
-		String[] deletePageTitles = null;
+		WikiPage wikiPage = null;
 
-		if (Validator.isNotNull(title)) {
-			deletePageTitles = new String[] {title};
-		}
-		else {
-			deletePageTitles = ParamUtil.getStringValues(
-				actionRequest, "rowIdsWikiPage");
-		}
-
-		List<TrashedModel> trashedModels = new ArrayList<>();
-
-		for (String deletePageTitle : deletePageTitles) {
-			if (moveToTrash) {
-				WikiPage trashedWikiPage = null;
-
-				if (version > 0) {
-					trashedWikiPage = _wikiPageService.movePageToTrash(
-						nodeId, deletePageTitle, version);
-				}
-				else {
-					trashedWikiPage = _wikiPageService.movePageToTrash(
-						nodeId, deletePageTitle);
-				}
-
-				trashedModels.add(trashedWikiPage);
+		if (moveToTrash) {
+			if (version > 0) {
+				wikiPage = _wikiPageService.movePageToTrash(
+					nodeId, title, version);
 			}
 			else {
-				if (version > 0) {
-					_wikiPageService.discardDraft(
-						nodeId, deletePageTitle, version);
-				}
-				else {
-					_wikiPageService.deletePage(nodeId, deletePageTitle);
-				}
+				wikiPage = _wikiPageService.movePageToTrash(nodeId, title);
+			}
+		}
+		else {
+			if (version > 0) {
+				_wikiPageService.discardDraft(nodeId, title, version);
+			}
+			else {
+				_wikiPageService.deletePage(nodeId, title);
 			}
 		}
 
-		if (moveToTrash && !trashedModels.isEmpty()) {
-			TrashUtil.addTrashSessionMessages(actionRequest, trashedModels);
+		if (moveToTrash && (wikiPage != null)) {
+			TrashUtil.addTrashSessionMessages(actionRequest, wikiPage);
 
 			hideDefaultSuccessMessage(actionRequest);
 		}

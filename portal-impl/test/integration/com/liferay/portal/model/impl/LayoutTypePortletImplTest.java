@@ -30,6 +30,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.util.test.PortletPreferencesTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -58,7 +59,8 @@ public class LayoutTypePortletImplTest {
 		@ClassRule
 		@Rule
 		public static final AggregateTestRule aggregateTestRule =
-			new LiferayIntegrationTestRule();
+			new AggregateTestRule(
+				new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 		@Before
 		public void setUp() throws Exception {
@@ -121,7 +123,8 @@ public class LayoutTypePortletImplTest {
 		@ClassRule
 		@Rule
 		public static final AggregateTestRule aggregateTestRule =
-			new LiferayIntegrationTestRule();
+			new AggregateTestRule(
+				new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 		@Before
 		public void setUp() throws Exception {
@@ -180,7 +183,8 @@ public class LayoutTypePortletImplTest {
 		@ClassRule
 		@Rule
 		public static final AggregateTestRule aggregateTestRule =
-			new LiferayIntegrationTestRule();
+			new AggregateTestRule(
+				new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 		@Before
 		public void setUp() throws Exception {

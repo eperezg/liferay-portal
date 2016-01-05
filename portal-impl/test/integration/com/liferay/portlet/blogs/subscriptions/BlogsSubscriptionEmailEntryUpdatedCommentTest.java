@@ -38,6 +38,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SynchronousMailTestRule;
 import com.liferay.portal.util.test.MailServiceTestUtil;
 import com.liferay.portlet.blogs.constants.BlogsConstants;
@@ -61,7 +62,8 @@ public class BlogsSubscriptionEmailEntryUpdatedCommentTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), SynchronousMailTestRule.INSTANCE);
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			SynchronousMailTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {

@@ -452,14 +452,14 @@
 						if (typeof parentWindow.location.href == 'undefined') {
 							break;
 						}
-
-						parentThemeDisplay = parentWindow.themeDisplay;
 					}
 					catch (e) {
 						break;
 					}
 
-					if (!parentThemeDisplay || window.name === 'simulationDeviceIframe') {
+					parentThemeDisplay = parentWindow.themeDisplay;
+
+					if (!parentThemeDisplay || window.name === 'devicePreviewIframe') {
 						break;
 					}
 					else if (!parentThemeDisplay.isStatePopUp() || parentWindow == parentWindow.parent) {
@@ -680,14 +680,14 @@
 			return value;
 		},
 
-		openInDialog: function(event, config) {
+		openInDialog: function(event) {
 			event.preventDefault();
 
 			var currentTarget = Util.getDOM(event.currentTarget);
 
 			currentTarget = $(currentTarget);
 
-			config = A.mix(currentTarget.data(), config);
+			var config = currentTarget.data();
 
 			if (!config.uri) {
 				config.uri = currentTarget.data('href') || currentTarget.attr('href');

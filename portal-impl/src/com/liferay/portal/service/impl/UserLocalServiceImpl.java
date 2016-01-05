@@ -889,7 +889,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Groups
 
-		if (!ArrayUtil.isEmpty(groupIds)) {
+		if (groupIds != null) {
 			List<Group> groups = new ArrayList<>();
 
 			for (long groupId : groupIds) {
@@ -2395,10 +2395,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelationType",
-			new Long[] {
-				userId1, Long.valueOf(socialRelationType), userId2,
-				Long.valueOf(socialRelationType)
-			});
+			new Long[] {userId1, Long.valueOf(socialRelationType), userId2,
+			Long.valueOf(socialRelationType)
+		});
 
 		return search(
 			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
@@ -2555,10 +2554,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelationType",
-			new Long[] {
-				userId1, Long.valueOf(socialRelationType), userId2,
-				Long.valueOf(socialRelationType)
-			});
+			new Long[] {userId1, Long.valueOf(socialRelationType), userId2,
+			Long.valueOf(socialRelationType)
+		});
 
 		return searchCount(
 			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,

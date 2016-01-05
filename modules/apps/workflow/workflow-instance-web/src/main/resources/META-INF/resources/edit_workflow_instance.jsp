@@ -17,8 +17,15 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
+String tabs2 = ParamUtil.getString(request, "tabs2");
+%>
 
+<portlet:renderURL var="backURL">
+	<portlet:param name="mvcPath" value="/view.jsp" />
+	<portlet:param name="tabs2" value="<%= tabs2 %>" />
+</portlet:renderURL>
+
+<%
 WorkflowInstanceEditDisplayContext workflowInstanceEditDisplayContext = null;
 
 if (portletName.equals(WorkflowInstancePortletKeys.WORKFLOW_INSTANCE)) {
@@ -29,7 +36,7 @@ else {
 }
 
 portletDisplay.setShowBackIcon(true);
-portletDisplay.setURLBack(redirect);
+portletDisplay.setURLBack(backURL.toString());
 
 renderResponse.setTitle(workflowInstanceEditDisplayContext.getHeaderTitle());
 %>
@@ -149,6 +156,7 @@ renderResponse.setTitle(workflowInstanceEditDisplayContext.getHeaderTitle());
 									name="completed"
 									value="<%= workflowInstanceEditDisplayContext.getTaskCompleted(workflowTask) %>"
 								/>
+
 							</liferay-ui:search-container-row>
 							<liferay-ui:search-iterator displayStyle="list" markupView="lexicon" />
 						</liferay-ui:search-container>

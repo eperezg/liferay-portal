@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.exportimport.configuration.ExportImportConfigurationConstants;
-import com.liferay.portlet.exportimport.configuration.ExportImportConfigurationHelper;
 import com.liferay.portlet.exportimport.model.ExportImportConfiguration;
 import com.liferay.portlet.exportimport.service.ExportImportConfigurationLocalService;
 import com.liferay.portlet.exportimport.staging.StagingUtil;
@@ -75,10 +74,7 @@ public class EditPublishConfigurationMVCActionCommand
 			long exportImportConfigurationId = ParamUtil.getLong(
 				actionRequest, "exportImportConfigurationId");
 
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updatePublishConfiguration(actionRequest);
-			}
-			else if (cmd.equals(Constants.PUBLISH_TO_LIVE)) {
+			if (cmd.equals(Constants.PUBLISH_TO_LIVE)) {
 				StagingUtil.publishLayouts(
 					themeDisplay.getUserId(), exportImportConfigurationId);
 			}
@@ -145,42 +141,6 @@ public class EditPublishConfigurationMVCActionCommand
 			exportImportConfigurationLocalService) {
 
 		_exportImportConfigurationLocalService = null;
-	}
-
-	protected ExportImportConfiguration updatePublishConfiguration(
-			ActionRequest actionRequest)
-		throws Exception {
-
-		long exportImportConfigurationId = ParamUtil.getLong(
-			actionRequest, "exportImportConfigurationId");
-
-		boolean localPublishing = ParamUtil.getBoolean(
-			actionRequest, "localPublishing");
-
-		if (exportImportConfigurationId > 0) {
-			if (localPublishing) {
-				return ExportImportConfigurationHelper.
-					updatePublishLayoutLocalExportImportConfiguration(
-						actionRequest);
-			}
-			else {
-				return ExportImportConfigurationHelper.
-					updatePublishLayoutRemoteExportImportConfiguration(
-						actionRequest);
-			}
-		}
-		else {
-			if (localPublishing) {
-				return ExportImportConfigurationHelper.
-					addPublishLayoutLocalExportImportConfiguration(
-						actionRequest);
-			}
-			else {
-				return ExportImportConfigurationHelper.
-					addPublishLayoutRemoteExportImportConfiguration(
-						actionRequest);
-			}
-		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

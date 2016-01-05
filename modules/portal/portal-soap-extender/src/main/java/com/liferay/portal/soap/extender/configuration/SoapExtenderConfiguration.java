@@ -26,9 +26,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 )
 @Meta.OCD(
 	factory = true,
-	id = "com.liferay.portal.soap.extender.configuration.SoapExtenderConfiguration",
-	localization = "content/Language",
-	name = "%soap.extender.configuration.name"
+	id = "com.liferay.portal.soap.extender.configuration.SoapExtenderConfiguration"
 )
 public interface SoapExtenderConfiguration {
 

@@ -629,5 +629,12 @@ public class UserNotificationEventLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(UserNotificationEventLocalService service) {
+	}
+
 	private static UserNotificationEventLocalService _service;
 }

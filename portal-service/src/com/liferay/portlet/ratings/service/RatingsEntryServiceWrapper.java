@@ -55,6 +55,23 @@ public class RatingsEntryServiceWrapper implements RatingsEntryService,
 		return _ratingsEntryService.updateEntry(className, classPK, score);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public RatingsEntryService getWrappedRatingsEntryService() {
+		return _ratingsEntryService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedRatingsEntryService(
+		RatingsEntryService ratingsEntryService) {
+		_ratingsEntryService = ratingsEntryService;
+	}
+
 	@Override
 	public RatingsEntryService getWrappedService() {
 		return _ratingsEntryService;

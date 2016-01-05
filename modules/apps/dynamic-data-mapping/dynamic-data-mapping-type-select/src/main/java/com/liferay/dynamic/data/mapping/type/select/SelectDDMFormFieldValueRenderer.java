@@ -20,7 +20,6 @@ import com.liferay.dynamic.data.mapping.model.DDMFormFieldOptions;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -79,8 +78,8 @@ public class SelectDDMFormFieldValueRenderer
 	}
 
 	protected boolean isManualDataSourceType(DDMFormField ddmFormField) {
-		String dataSourceType = GetterUtil.getString(
-			ddmFormField.getProperty("dataSourceType"), "manual");
+		String dataSourceType = (String)ddmFormField.getProperty(
+			"dataSourceType");
 
 		if (Validator.equals(dataSourceType, "manual")) {
 			return true;

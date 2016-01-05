@@ -7,7 +7,7 @@
 
 <#assign fieldValue = paramUtil.getString(request, "${inputEditorName}", fieldValue)>
 
-<#if editorName?starts_with("alloyeditor")>
+<#if editorName == "alloy-editor">
 	<#assign cssClass = "form-control">
 </#if>
 

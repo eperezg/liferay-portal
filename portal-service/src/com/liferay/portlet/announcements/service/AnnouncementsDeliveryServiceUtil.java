@@ -68,5 +68,12 @@ public class AnnouncementsDeliveryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(AnnouncementsDeliveryService service) {
+	}
+
 	private static AnnouncementsDeliveryService _service;
 }

@@ -15,12 +15,14 @@
 package com.liferay.journal.web.portlet.configuration.icon;
 
 import com.liferay.journal.constants.JournalPortletKeys;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+import javax.portlet.WindowStateException;
 
 /**
  * @author Eudaldo Alonso
@@ -44,7 +46,12 @@ public class FeedsPortletConfigurationIcon
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("mvcPath", "/view_feeds.jsp");
-		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
+
+		try {
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
+		}
+		catch (WindowStateException wse) {
+		}
 
 		return portletURL.toString();
 	}
@@ -71,7 +78,7 @@ public class FeedsPortletConfigurationIcon
 
 	@Override
 	public boolean isUseDialog() {
-		return false;
+		return true;
 	}
 
 }

@@ -488,6 +488,14 @@ public class UserTrackerWrapper implements UserTracker,
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public UserTracker getWrappedUserTracker() {
+		return _userTracker;
+	}
+
 	@Override
 	public UserTracker getWrappedModel() {
 		return _userTracker;

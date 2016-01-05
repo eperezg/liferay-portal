@@ -651,6 +651,23 @@ public class OrganizationServiceWrapper implements OrganizationService,
 			comments, site, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public OrganizationService getWrappedOrganizationService() {
+		return _organizationService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedOrganizationService(
+		OrganizationService organizationService) {
+		_organizationService = organizationService;
+	}
+
 	@Override
 	public OrganizationService getWrappedService() {
 		return _organizationService;

@@ -31,8 +31,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 </portlet:actionURL>
 
 <liferay-ui:icon
-	icon="trash"
-	markupView="lexicon"
+	iconCssClass="icon-trash"
 	message="delete"
 	url="<%= deleteTeamUserGroupsURL %>"
 />

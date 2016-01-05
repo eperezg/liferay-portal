@@ -24,7 +24,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
 	id = "com.liferay.service.access.policy.configuration.SAPConfiguration",
-	localization = "content/Language", name = "%sap.configuration.name"
+	localization = "content/Language"
 )
 public interface SAPConfiguration {
 

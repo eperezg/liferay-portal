@@ -278,5 +278,12 @@ public class WebDAVPropsLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(WebDAVPropsLocalService service) {
+	}
+
 	private static WebDAVPropsLocalService _service;
 }

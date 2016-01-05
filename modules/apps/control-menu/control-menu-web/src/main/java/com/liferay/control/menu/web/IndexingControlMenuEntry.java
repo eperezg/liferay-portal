@@ -85,7 +85,9 @@ public class IndexingControlMenuEntry
 	}
 
 	@Override
-	public boolean isShow(HttpServletRequest request) throws PortalException {
+	public boolean hasAccessPermission(HttpServletRequest request)
+		throws PortalException {
+
 		int count = _backgroundTaskManager.getBackgroundTasksCount(
 			CompanyConstants.SYSTEM,
 			new String[] {
@@ -98,7 +100,7 @@ public class IndexingControlMenuEntry
 			return false;
 		}
 
-		return super.isShow(request);
+		return super.hasAccessPermission(request);
 	}
 
 	@Reference(unbind = "-")

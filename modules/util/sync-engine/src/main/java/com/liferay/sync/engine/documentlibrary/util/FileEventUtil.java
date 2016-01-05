@@ -209,8 +209,19 @@ public class FileEventUtil {
 	public static void downloadFile(
 		long syncAccountId, SyncFile syncFile, boolean batch) {
 
-		if (isDownloadInProgress(syncFile)) {
-			return;
+		Set<Event> events = FileEventManager.getEvents(
+			syncFile.getSyncFileId());
+
+		for (Event event : events) {
+			if (event instanceof DownloadFileEvent) {
+				if (_logger.isDebugEnabled()) {
+					_logger.debug(
+						"Download already in progress {}",
+						syncFile.getFilePathName());
+				}
+
+				return;
+			}
 		}
 
 		Map<String, Object> parameters = new HashMap<>();
@@ -229,8 +240,19 @@ public class FileEventUtil {
 		long sourceVersionId, long syncAccountId, SyncFile syncFile,
 		long targetVersionId) {
 
-		if (isDownloadInProgress(syncFile)) {
-			return;
+		Set<Event> events = FileEventManager.getEvents(
+			syncFile.getSyncFileId());
+
+		for (Event event : events) {
+			if (event instanceof DownloadFileEvent) {
+				if (_logger.isDebugEnabled()) {
+					_logger.debug(
+						"Download already in progress {}",
+						syncFile.getFilePathName());
+				}
+
+				return;
+			}
 		}
 
 		Map<String, Object> parameters = new HashMap<>();
@@ -341,17 +363,6 @@ public class FileEventUtil {
 			syncAccountId, SyncFile.UI_EVENT_DELETED_LOCAL, "syncFileId", true);
 
 		for (SyncFile deletingSyncFile : deletingSyncFiles) {
-			if (!Files.notExists(
-					Paths.get(deletingSyncFile.getFilePathName()))) {
-
-				deletingSyncFile.setState(SyncFile.STATE_SYNCED);
-				deletingSyncFile.setUiEvent(SyncFile.UI_EVENT_NONE);
-
-				SyncFileService.update(deletingSyncFile);
-
-				continue;
-			}
-
 			if (deletingSyncFile.isFolder()) {
 				deleteFolder(syncAccountId, deletingSyncFile);
 			}
@@ -506,34 +517,6 @@ public class FileEventUtil {
 			syncAccountId, parameters);
 
 		updateFolderEvent.run();
-	}
-
-	protected static boolean isDownloadInProgress(SyncFile syncFile) {
-		Set<Event> events = FileEventManager.getEvents(
-			syncFile.getSyncFileId());
-
-		for (Event event : events) {
-			if (event instanceof DownloadFileEvent) {
-				SyncFile downloadingSyncFile =
-					(SyncFile)event.getParameterValue("syncFile");
-
-				if (downloadingSyncFile.getVersionId() !=
-						syncFile.getVersionId()) {
-
-					continue;
-				}
-
-				if (_logger.isDebugEnabled()) {
-					_logger.debug(
-						"Download already in progress {}",
-						syncFile.getFilePathName());
-				}
-
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private static final Logger _logger = LoggerFactory.getLogger(

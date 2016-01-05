@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 MDRRule rule = (MDRRule)renderRequest.getAttribute(MDRWebKeys.MOBILE_DEVICE_RULES_RULE);
 
@@ -41,18 +42,25 @@ if (ruleGroup != null) {
 }
 
 Collection<String> ruleHandlerTypes = RuleGroupProcessorUtil.getRuleHandlerTypes();
-
-portletDisplay.setShowBackIcon(true);
-portletDisplay.setURLBack(redirect);
-
-renderResponse.setTitle(title);
 %>
+
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	localizeTitle="<%= false %>"
+	title="<%= title %>"
+/>
+
+<c:if test="<%= rule == null %>">
+	<div class="alert alert-info">
+		<liferay-ui:message key="classification-rule-help" />
+	</div>
+</c:if>
 
 <portlet:actionURL name="/mobile_device_rules/edit_rule" var="editRuleURL">
 	<portlet:param name="mvcRenderCommandName" value="/mobile_device_rules/edit_rule" />
 </portlet:actionURL>
 
-<aui:form action="<%= editRuleURL %>" cssClass="container-fluid-1280" enctype="multipart/form-data" method="post" name="fm">
+<aui:form action="<%= editRuleURL %>" enctype="multipart/form-data" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (rule == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="ruleGroupId" type="hidden" value="<%= ruleGroupId %>" />
@@ -62,58 +70,50 @@ renderResponse.setTitle(title);
 	<liferay-ui:error exception="<%= NoSuchRuleGroupException.class %>" message="device-family-does-not-exist" />
 	<liferay-ui:error exception="<%= UnknownRuleHandlerException.class %>" message="please-select-a-rule-type" />
 
-	<c:if test="<%= rule == null %>">
-		<div class="alert alert-info">
-			<liferay-ui:message key="classification-rule-help" />
-		</div>
-	</c:if>
-
 	<aui:model-context bean="<%= rule %>" model="<%= MDRRule.class %>" />
 
-	<aui:fieldset-group markupView="lexicon">
-		<aui:fieldset>
-			<aui:input name="name" />
+	<aui:fieldset>
+		<aui:input name="name" />
 
-			<aui:input name="description" />
+		<aui:input name="description" />
 
-			<c:choose>
-				<c:when test="<%= ruleHandlerTypes.size() == 1 %>">
+		<c:choose>
+			<c:when test="<%= ruleHandlerTypes.size() == 1 %>">
+
+				<%
+				String ruleHandlerType = ruleHandlerTypes.iterator().next();
+				%>
+
+				<aui:input name="type" type="hidden" value="<%= ruleHandlerType %>" />
+
+			</c:when>
+			<c:otherwise>
+				<aui:select changesContext="<%= true %>" name="type" showEmptyOption="<%= true %>">
 
 					<%
-					String ruleHandlerType = ruleHandlerTypes.iterator().next();
+					for (String ruleHandlerType : ruleHandlerTypes) {
 					%>
 
-					<aui:input name="type" type="hidden" value="<%= ruleHandlerType %>" />
+						<aui:option label="<%= ruleHandlerType %>" selected="<%= type.equals(ruleHandlerType) %>" />
 
-				</c:when>
-				<c:otherwise>
-					<aui:select changesContext="<%= true %>" name="type" showEmptyOption="<%= true %>">
+					<%
+					}
+					%>
 
-						<%
-						for (String ruleHandlerType : ruleHandlerTypes) {
-						%>
-
-							<aui:option label="<%= ruleHandlerType %>" selected="<%= type.equals(ruleHandlerType) %>" />
-
-						<%
-						}
-						%>
-
-					</aui:select>
-				</c:otherwise>
-			</c:choose>
-		</aui:fieldset>
+				</aui:select>
+			</c:otherwise>
+		</c:choose>
 
 		<div id="<%= renderResponse.getNamespace() %>typeSettings">
 			<c:if test="<%= Validator.isNotNull(editorJSP) %>">
 				<liferay-util:include page="<%= editorJSP %>" servletContext="<%= application %>" />
 			</c:if>
 		</div>
-	</aui:fieldset-group>
+	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
-		<aui:button cssClass="btn-lg" href="<%= redirect %>" value="cancel" />
+		<aui:button type="submit" />
+		<aui:button href="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
 
@@ -122,7 +122,7 @@ renderResponse.setTitle(title);
 	var typeSettings = $('#<portlet:namespace />typeSettings');
 
 	var loadTypeFields = function() {
-		<portlet:resourceURL id="/mobile_device_rules/edit_rule" var="editorURL" />
+		<portlet:resourceURL id="/mobile_device_rules/edit_rule_editor" var="editorURL" />
 
 		$.ajax(
 			'<%= editorURL.toString() %>',

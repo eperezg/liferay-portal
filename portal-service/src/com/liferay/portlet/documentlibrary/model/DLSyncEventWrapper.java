@@ -364,6 +364,14 @@ public class DLSyncEventWrapper implements DLSyncEvent,
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public DLSyncEvent getWrappedDLSyncEvent() {
+		return _dlSyncEvent;
+	}
+
 	@Override
 	public DLSyncEvent getWrappedModel() {
 		return _dlSyncEvent;

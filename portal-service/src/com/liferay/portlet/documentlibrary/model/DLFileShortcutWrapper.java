@@ -216,6 +216,15 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 	}
 
 	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Deprecated
+	@Override
+	public boolean getApproved() {
+		return _dlFileShortcut.getApproved();
+	}
+
+	/**
 	* Returns the company ID of this document library file shortcut.
 	*
 	* @return the company ID of this document library file shortcut
@@ -925,6 +934,14 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _dlFileShortcut.getStagedModelType();
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public DLFileShortcut getWrappedDLFileShortcut() {
+		return _dlFileShortcut;
 	}
 
 	@Override

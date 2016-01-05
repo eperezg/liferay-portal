@@ -1927,6 +1927,13 @@ public class MicroblogsEntryUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(MicroblogsEntryPersistence persistence) {
+	}
+
 	private static ServiceTracker<MicroblogsEntryPersistence, MicroblogsEntryPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(MicroblogsEntryPersistence.class);
 }

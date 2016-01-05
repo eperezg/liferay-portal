@@ -243,7 +243,7 @@ public class FacetedSearcher extends BaseSearcher {
 
 			fullQuery.setQueryConfig(queryConfig);
 
-			return IndexSearcherHelperUtil.search(searchContext, fullQuery);
+			return SearchEngineUtil.search(searchContext, fullQuery);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);

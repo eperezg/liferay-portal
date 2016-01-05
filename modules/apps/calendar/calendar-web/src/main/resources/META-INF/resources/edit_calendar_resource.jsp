@@ -111,6 +111,7 @@ String code = BeanParamUtil.getString(calendarResource, request, "code");
 			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
+
 </aui:form>
 
 <aui:script>

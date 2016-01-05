@@ -499,13 +499,19 @@ public class DDLRecordSetWrapper implements DDLRecordSet,
 	}
 
 	@Override
-	public com.liferay.dynamic.data.mapping.storage.DDMFormValues getSettingsDDMFormValues() {
-		return _ddlRecordSet.getSettingsDDMFormValues();
+	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties() {
+		return _ddlRecordSet.getSettingsProperties();
 	}
 
 	@Override
-	public com.liferay.dynamic.data.lists.model.DDLRecordSetSettings getSettingsModel() {
-		return _ddlRecordSet.getSettingsModel();
+	public java.lang.String getSettingsProperty(java.lang.String key) {
+		return _ddlRecordSet.getSettingsProperty(key);
+	}
+
+	@Override
+	public java.lang.String getSettingsProperty(java.lang.String key,
+		java.lang.String defaultValue) {
+		return _ddlRecordSet.getSettingsProperty(key, defaultValue);
 	}
 
 	/**
@@ -951,6 +957,14 @@ public class DDLRecordSetWrapper implements DDLRecordSet,
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _ddlRecordSet.getStagedModelType();
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public DDLRecordSet getWrappedDDLRecordSet() {
+		return _ddlRecordSet;
 	}
 
 	@Override

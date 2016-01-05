@@ -206,10 +206,6 @@ public class BaseHandler implements Handler<Void> {
 	public void processResponse(String response) throws Exception {
 	}
 
-	public void removeEvent() {
-		FileEventManager.removeEvent(_event);
-	}
-
 	protected void doHandleResponse(HttpResponse httpResponse)
 		throws Exception {
 	}
@@ -259,6 +255,10 @@ public class BaseHandler implements Handler<Void> {
 
 	protected boolean isEventCancelled() {
 		return _event.isCancelled();
+	}
+
+	protected void removeEvent() {
+		FileEventManager.removeEvent(_event);
 	}
 
 	protected void retryServerConnection(int uiEvent) {

@@ -939,5 +939,12 @@ public class MBDiscussionUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(MBDiscussionPersistence persistence) {
+	}
+
 	private static MBDiscussionPersistence _persistence;
 }

@@ -16,8 +16,6 @@
 
 <%@ include file="/message_boards/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.message.boards.web#/message_boards/view_thread_message.jsp#pre" />
-
 <%
 MBCategory category = (MBCategory)request.getAttribute("edit_message.jsp-category");
 String className = (String)request.getAttribute("edit_message.jsp-className");
@@ -517,5 +515,3 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 
 	</table>
 </div>
-
-<liferay-util:dynamic-include key="com.liferay.message.boards.web#/message_boards/view_thread_message.jsp#post" />

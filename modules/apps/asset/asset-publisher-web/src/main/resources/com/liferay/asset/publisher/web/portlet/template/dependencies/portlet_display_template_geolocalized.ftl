@@ -1,5 +1,4 @@
 <#assign liferay_aui = taglibLiferayHash["/WEB-INF/tld/liferay-aui.tld"] />
-<#assign liferay_map = taglibLiferayHash["/META-INF/resources/liferay-map.tld"] />
 <#assign liferay_portlet = taglibLiferayHash["/WEB-INF/tld/liferay-portlet.tld"] />
 <#assign liferay_ui = taglibLiferayHash["/WEB-INF/tld/liferay-ui.tld"] />
 
@@ -116,7 +115,7 @@
 	}
 </style>
 
-<@liferay_map["map-display"]
+<@liferay_ui["map"]
 	name='Map'
 	points="${featureCollectionJSONObject}"
 />

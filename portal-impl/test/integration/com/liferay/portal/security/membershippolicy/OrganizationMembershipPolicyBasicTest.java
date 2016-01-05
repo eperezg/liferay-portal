@@ -16,6 +16,7 @@ package com.liferay.portal.security.membershippolicy;
 
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -31,7 +32,8 @@ public class OrganizationMembershipPolicyBasicTest
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testIsMembershipAllowed() throws Exception {

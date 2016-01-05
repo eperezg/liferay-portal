@@ -20,9 +20,7 @@ import aQute.bnd.annotation.metatype.Meta;
  * @author Shuyang Zhou
  */
 @Meta.OCD(
-	id = "com.liferay.portlet.tck.bridge.configuration.PortletTCKBridgeConfiguration",
-	localization = "content/Language",
-	name = "%portlet.tck.bridge.configuration.name"
+	id = "com.liferay.portlet.tck.bridge.configuration.PortletTCKBridgeConfiguration"
 )
 public interface PortletTCKBridgeConfiguration {
 

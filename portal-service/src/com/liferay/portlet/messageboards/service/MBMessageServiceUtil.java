@@ -330,5 +330,12 @@ public class MBMessageServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(MBMessageService service) {
+	}
+
 	private static MBMessageService _service;
 }

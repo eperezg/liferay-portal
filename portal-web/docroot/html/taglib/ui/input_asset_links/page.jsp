@@ -44,9 +44,7 @@
 
 <liferay-util:buffer var="removeLinkIcon">
 	<liferay-ui:icon
-		icon="times"
-		label="<%= true %>"
-		markupView="lexicon"
+		iconCssClass="icon-remove"
 		message="remove"
 	/>
 </liferay-util:buffer>

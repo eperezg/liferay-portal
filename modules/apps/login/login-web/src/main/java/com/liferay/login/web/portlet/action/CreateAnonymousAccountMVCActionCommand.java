@@ -223,6 +223,16 @@ public class CreateAnonymousAccountMVCActionCommand
 				JSONPortletResponseUtil.writeJSON(
 					actionRequest, actionResponse, jsonObject);
 			}
+			else if (e instanceof CaptchaConfigurationException ||
+					 e instanceof CaptchaTextException ||
+					 e instanceof CompanyMaxUsersException ||
+					 e instanceof ContactNameException ||
+					 e instanceof EmailAddressException ||
+					 e instanceof GroupFriendlyURLException ||
+					 e instanceof UserEmailAddressException) {
+
+				SessionErrors.add(actionRequest, e.getClass(), e);
+			}
 			else if (e instanceof
 						UserEmailAddressException.MustNotBeDuplicate) {
 
@@ -236,16 +246,6 @@ public class CreateAnonymousAccountMVCActionCommand
 					sendRedirect(
 						actionRequest, actionResponse, portletURL.toString());
 				}
-			}
-			else if (e instanceof CaptchaConfigurationException ||
-					 e instanceof CaptchaTextException ||
-					 e instanceof CompanyMaxUsersException ||
-					 e instanceof ContactNameException ||
-					 e instanceof EmailAddressException ||
-					 e instanceof GroupFriendlyURLException ||
-					 e instanceof UserEmailAddressException) {
-
-				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
 				_log.error("Unable to create anonymous account", e);

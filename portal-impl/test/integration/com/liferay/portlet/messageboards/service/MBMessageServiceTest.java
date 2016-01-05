@@ -36,6 +36,7 @@ import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.log.CaptureAppender;
 import com.liferay.portal.test.log.Log4JLoggerTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -68,7 +69,8 @@ public class MBMessageServiceTest {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
-			SynchronousDestinationTestRule.INSTANCE);
+			SynchronousDestinationTestRule.INSTANCE,
+			MainServletTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {

@@ -17,11 +17,18 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1");
+%>
+
+<portlet:renderURL var="backURL">
+	<portlet:param name="mvcPath" value="/view.jsp" />
+	<portlet:param name="tabs1" value="<%= tabs1 %>" />
+</portlet:renderURL>
+
+<%
 String randomId = StringUtil.randomId();
 
 String redirect = ParamUtil.getString(request, "redirect");
-
-String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 WorkflowTask workflowTask = workflowTaskDisplayContext.getWorkflowTask();
 
@@ -29,16 +36,19 @@ long classPK = workflowTaskDisplayContext.getWorkflowContextEntryClassPK(workflo
 
 WorkflowHandler<?> workflowHandler = workflowTaskDisplayContext.getWorkflowHandler(workflowTask);
 
+AssetEntry assetEntry = null;
+
 AssetRenderer<?> assetRenderer = workflowHandler.getAssetRenderer(classPK);
+AssetRendererFactory<?> assetRendererFactory = workflowHandler.getAssetRendererFactory();
 
-AssetRendererFactory<?> assetRendererFactory = assetRenderer.getAssetRendererFactory();
-
-AssetEntry assetEntry = assetRendererFactory.getAssetEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
+if (assetRenderer != null) {
+	assetEntry = assetRendererFactory.getAssetEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
+}
 
 String headerTitle = workflowTaskDisplayContext.getHeaderTitle(workflowTask);
 
 portletDisplay.setShowBackIcon(true);
-portletDisplay.setURLBack(backURL);
+portletDisplay.setURLBack(backURL.toString());
 
 renderResponse.setTitle(headerTitle);
 %>

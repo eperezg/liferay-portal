@@ -317,5 +317,12 @@ public class PasswordPolicyRelLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(PasswordPolicyRelLocalService service) {
+	}
+
 	private static PasswordPolicyRelLocalService _service;
 }

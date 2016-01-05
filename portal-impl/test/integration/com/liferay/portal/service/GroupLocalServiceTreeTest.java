@@ -22,6 +22,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.TreeModel;
 import com.liferay.portal.service.test.BaseLocalServiceTreeTestCase;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -34,7 +35,8 @@ public class GroupLocalServiceTreeTest extends BaseLocalServiceTreeTestCase {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Override
 	protected TreeModel addTreeModel(TreeModel parentTreeModel)

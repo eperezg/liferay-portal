@@ -91,7 +91,7 @@ if (comment instanceof WorkflowableComment) {
 
 	<aui:button-row>
 		<c:if test="<%= (comment == null) || !approved %>">
-			<aui:button cssClass="btn-lg" type="submit" />
+			<aui:button type="submit" />
 		</c:if>
 
 		<c:if test="<%= (workflowableComment != null) && approved && WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(workflowableComment.getCompanyId(), workflowableComment.getGroupId(), CommentConstants.getDiscussionClassName()) %>">
@@ -100,6 +100,6 @@ if (comment instanceof WorkflowableComment) {
 			</div>
 		</c:if>
 
-		<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>

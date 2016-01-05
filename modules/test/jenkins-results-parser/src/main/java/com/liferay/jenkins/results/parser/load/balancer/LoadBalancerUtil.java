@@ -29,8 +29,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -97,21 +95,9 @@ public class LoadBalancerUtil {
 				StringBuilder sb = new StringBuilder();
 
 				for (int i = 0; i < futureTasks.size(); i++) {
-					Integer availableSlaveCount = null;
-
 					FutureTask<Integer> futureTask = futureTasks.get(i);
 
-					try {
-						availableSlaveCount = futureTask.get(
-							15, TimeUnit.SECONDS);
-					}
-					catch (TimeoutException te) {
-						System.out.println(
-							"Unable to assess master availability for " +
-								hostNames.get(i));
-
-						availableSlaveCount = null;
-					}
+					Integer availableSlaveCount = futureTask.get();
 
 					if (availableSlaveCount == null) {
 						badIndices.add(i);
@@ -174,6 +160,8 @@ public class LoadBalancerUtil {
 				return "http://" + hostNames.get(x);
 			}
 			finally {
+				JenkinsResultsParserUtil.write(semaphoreFile, "");
+
 				if (recentJobPeriod > 0) {
 					StringBuilder sb = new StringBuilder();
 
@@ -204,8 +192,6 @@ public class LoadBalancerUtil {
 					JenkinsResultsParserUtil.write(
 						recentJobFile, sb.toString());
 				}
-
-				JenkinsResultsParserUtil.write(semaphoreFile, "");
 			}
 		}
 	}

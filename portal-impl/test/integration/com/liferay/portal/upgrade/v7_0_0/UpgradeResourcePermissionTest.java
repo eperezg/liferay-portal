@@ -28,6 +28,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class UpgradeResourcePermissionTest extends UpgradeResourcePermission {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			SynchronousDestinationTestRule.INSTANCE);
 
 	@Before

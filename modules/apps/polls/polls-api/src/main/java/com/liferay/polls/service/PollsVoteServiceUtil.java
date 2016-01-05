@@ -60,6 +60,13 @@ public class PollsVoteServiceUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(PollsVoteService service) {
+	}
+
 	private static ServiceTracker<PollsVoteService, PollsVoteService> _serviceTracker =
 		ServiceTrackerFactory.open(PollsVoteService.class);
 }

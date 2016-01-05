@@ -38,7 +38,7 @@
 
 		<var name="key_page" value="${page}" />
 
-		<execute function="Click" locator1="ProductMenu#EDIT_PAGE" value1="${page}" />
+		<execute function="Click" locator1="SitePages#PAGE_TREE_PAGE_EDIT_COG" value1="${page}" />
 	</command>
 
 	<command name="gotoEditPublicPages">
@@ -96,8 +96,8 @@
 	<command name="openProductMenu">
 		<if>
 			<and>
-				<condition function="IsElementPresent" locator1="Button#CLOSE_PANEL" />
-				<condition function="IsVisible" locator1="Button#CLOSE_PANEL" />
+				<condition function="IsElementPresent" locator1="DockbarAddpanelcontent#CONTENT_TAB" />
+				<condition function="IsVisible" locator1="DockbarAddpanelcontent#CONTENT_TAB" />
 			</and>
 			<then>
 				<execute function="Click#clickAt" locator1="ControlMenu#ADD" />

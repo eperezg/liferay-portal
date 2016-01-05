@@ -26,6 +26,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
 import com.liferay.portlet.social.model.SocialRelationConstants;
 
@@ -47,7 +48,8 @@ public class SocialRelationLocalServiceTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

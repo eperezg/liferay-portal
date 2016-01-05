@@ -35,6 +35,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		</portlet:renderURL>
 
 		<liferay-ui:icon
+			iconCssClass="icon-edit"
 			message="edit"
 			url="<%= editURL %>"
 		/>
@@ -54,6 +55,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		/>
 
 		<liferay-ui:icon
+			iconCssClass="icon-lock"
 			message="permissions"
 			method="get"
 			url="<%= permissionsURL %>"
@@ -77,6 +79,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		/>
 
 		<liferay-ui:icon
+			iconCssClass="icon-lock"
 			message="user-group-pages-permissions"
 			method="get"
 			url="<%= permissionsURL %>"
@@ -93,6 +96,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		%>
 
 		<liferay-ui:icon
+			iconCssClass="icon-copy"
 			message="manage-pages"
 			url="<%= managePagesURL.toString() %>"
 		/>
@@ -104,6 +108,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 	<c:if test="<%= hasViewPermission && (userGroupGroup.getPublicLayoutsPageCount() > 0) %>">
 		<liferay-ui:icon
+			iconCssClass="icon-search"
 			message="go-to-profile-pages"
 			target="_blank"
 			url="<%= userGroupGroup.getDisplayURL(themeDisplay, false) %>"
@@ -112,6 +117,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 	<c:if test="<%= hasViewPermission && (userGroupGroup.getPrivateLayoutsPageCount() > 0) %>">
 		<liferay-ui:icon
+			iconCssClass="icon-search"
 			message="go-to-dashboard-pages"
 			target="_blank"
 			url="<%= userGroupGroup.getDisplayURL(themeDisplay, true) %>"
@@ -126,6 +132,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		</portlet:renderURL>
 
 		<liferay-ui:icon
+			iconCssClass="icon-signin"
 			message="assign-members"
 			url="<%= assignURL %>"
 		/>
@@ -139,6 +146,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 		<liferay-ui:icon
 			cssClass="item-remove"
+			iconCssClass="icon-remove"
 			message="delete"
 			url="<%= taglibDeleteURL %>"
 		/>

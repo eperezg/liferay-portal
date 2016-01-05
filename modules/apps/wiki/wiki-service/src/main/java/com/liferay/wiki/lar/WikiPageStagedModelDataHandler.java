@@ -124,7 +124,7 @@ public class WikiPageStagedModelDataHandler
 				replaceExportContentReferences(
 					portletDataContext, page, page.getContent(),
 					portletDataContext.getBooleanParameter(
-						"wiki", "referenced-content"),
+						WikiPortletDataHandler.NAMESPACE, "referenced-content"),
 					true);
 
 		page.setContent(content);

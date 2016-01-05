@@ -526,6 +526,14 @@ public class LayoutBranchWrapper implements LayoutBranch,
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public LayoutBranch getWrappedLayoutBranch() {
+		return _layoutBranch;
+	}
+
 	@Override
 	public LayoutBranch getWrappedModel() {
 		return _layoutBranch;

@@ -448,5 +448,12 @@ public class ResourceLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(ResourceLocalService service) {
+	}
+
 	private static ResourceLocalService _service;
 }

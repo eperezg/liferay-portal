@@ -1399,6 +1399,14 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public AssetEntry getWrappedAssetEntry() {
+		return _assetEntry;
+	}
+
 	@Override
 	public AssetEntry getWrappedModel() {
 		return _assetEntry;

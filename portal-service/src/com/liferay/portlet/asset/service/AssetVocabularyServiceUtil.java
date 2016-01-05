@@ -262,5 +262,12 @@ public class AssetVocabularyServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(AssetVocabularyService service) {
+	}
+
 	private static AssetVocabularyService _service;
 }

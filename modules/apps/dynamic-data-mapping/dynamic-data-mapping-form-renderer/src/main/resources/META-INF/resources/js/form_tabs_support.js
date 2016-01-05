@@ -19,7 +19,9 @@ AUI.add(
 
 					instance.tabView = new A.TabView(
 						{
-							srcNode: container.one('.lfr-ddm-form-tabs')
+							boundingBox: container,
+							srcNode: container.one('.lfr-ddm-form-tabs'),
+							type: 'pills'
 						}
 					);
 				}
@@ -30,9 +32,13 @@ AUI.add(
 			_afterTabsRender: function() {
 				var instance = this;
 
-				var tabView = instance.getTabView();
+				var container = instance.get('container');
 
-				tabView.render();
+				if (container.one('.lfr-ddm-form-tabs')) {
+					var tabView = instance.getTabView();
+
+					tabView.render();
+				}
 			}
 		};
 

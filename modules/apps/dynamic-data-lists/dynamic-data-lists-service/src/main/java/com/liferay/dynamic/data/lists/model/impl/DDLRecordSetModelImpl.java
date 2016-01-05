@@ -794,14 +794,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_lastPublishDate = lastPublishDate;
 	}
 
-	public com.liferay.dynamic.data.mapping.storage.DDMFormValues getDDMFormValues() {
-		return null;
-	}
-
-	public void setDDMFormValues(
-		com.liferay.dynamic.data.mapping.storage.DDMFormValues ddmFormValues) {
-	}
-
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
@@ -1013,8 +1005,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 
 		ddlRecordSetModelImpl._originalRecordSetKey = ddlRecordSetModelImpl._recordSetKey;
 
-		setDDMFormValues(null);
-
 		ddlRecordSetModelImpl._columnBitmask = 0;
 	}
 
@@ -1110,8 +1100,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		else {
 			ddlRecordSetCacheModel.lastPublishDate = Long.MIN_VALUE;
 		}
-
-		ddlRecordSetCacheModel._ddmFormValues = getDDMFormValues();
 
 		return ddlRecordSetCacheModel;
 	}

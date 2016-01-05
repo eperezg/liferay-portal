@@ -113,5 +113,12 @@ public class CountryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(CountryService service) {
+	}
+
 	private static CountryService _service;
 }

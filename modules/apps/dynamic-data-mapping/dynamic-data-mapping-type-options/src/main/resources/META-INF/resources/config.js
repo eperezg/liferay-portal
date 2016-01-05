@@ -1,6 +1,4 @@
 ;(function() {
-	var LiferayAUI = Liferay.AUI;
-
 	var PATH_DDM_TYPE_OPTIONS = Liferay.ThemeDisplay.getPathContext() + '/o/dynamic-data-mapping-type-options';
 
 	AUI().applyConfig(
@@ -8,7 +6,6 @@
 			groups: {
 				'field-options': {
 					base: PATH_DDM_TYPE_OPTIONS + '/',
-					filter: LiferayAUI.getFilterConfig(),
 					modules: {
 						'liferay-ddm-form-field-options': {
 							condition: {

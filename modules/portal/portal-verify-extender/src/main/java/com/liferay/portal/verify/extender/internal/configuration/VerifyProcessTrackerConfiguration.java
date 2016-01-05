@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.verify.extender.internal.configuration.VerifyProcessTrackerConfiguration",
-	localization = "content/Language",
-	name = "%verify.process.configuration.name"
+	id = "com.liferay.portal.verify.extender.internal.configuration.VerifyProcessTrackerConfiguration"
 )
 public interface VerifyProcessTrackerConfiguration {
 

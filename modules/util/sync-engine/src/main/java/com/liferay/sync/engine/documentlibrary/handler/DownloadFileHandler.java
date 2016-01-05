@@ -110,7 +110,7 @@ public class DownloadFileHandler extends BaseHandler {
 				FileEventUtil.downloadFile(getSyncAccountId(), syncFile, false);
 			}
 			else {
-				SyncFileService.deleteSyncFile(syncFile);
+				SyncFileService.deleteSyncFile(syncFile, false);
 			}
 
 			return;
@@ -157,7 +157,7 @@ public class DownloadFileHandler extends BaseHandler {
 					 "com.liferay.portlet.documentlibrary." +
 						 "NoSuchFileException")) {
 
-			SyncFileService.deleteSyncFile(syncFile);
+			SyncFileService.deleteSyncFile(syncFile, false);
 
 			return true;
 		}

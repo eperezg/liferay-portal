@@ -1,3 +1,4 @@
+/* @generated */
 /*
  * Copyright 2011 the original author or authors.
  *
@@ -399,4 +400,3 @@ public class GradlePomModuleDescriptorBuilder {
         return pomReader.findDependencyDefaults(dependency.getId());
     }
 }
-/* @generated */

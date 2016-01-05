@@ -821,6 +821,13 @@ public class LockUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(LockPersistence persistence) {
+	}
+
 	private static ServiceTracker<LockPersistence, LockPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(LockPersistence.class);
 }

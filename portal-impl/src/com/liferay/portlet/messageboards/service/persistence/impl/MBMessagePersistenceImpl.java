@@ -49,7 +49,6 @@ import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.messageboards.NoSuchMessageException;
@@ -19010,8 +19009,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 		mbMessage.setUuid(uuid);
 
-		mbMessage.setCompanyId(companyProvider.getCompanyId());
-
 		return mbMessage;
 	}
 
@@ -20188,7 +20185,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

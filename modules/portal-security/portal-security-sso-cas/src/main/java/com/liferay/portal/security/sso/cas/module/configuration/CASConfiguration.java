@@ -19,20 +19,12 @@ import aQute.bnd.annotation.metatype.Meta;
 import com.liferay.configuration.admin.ConfigurationAdmin;
 
 /**
- * Defines the configuration property keys and sensible default values.
- *
- * <p>
- * This class also defines the identity of the configuration schema which, among
- * other things, defines the filename (minus the <code>.cfg</code> extension)
- * for setting values via a file.
- * </p>
- *
  * @author Michael C. Han
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
 	id = "com.liferay.portal.security.sso.cas.module.configuration.CASConfiguration",
-	localization = "content/Language", name ="%cas.configuration.name"
+	localization = "content/Language"
 )
 public interface CASConfiguration {
 

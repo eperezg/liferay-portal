@@ -9,6 +9,3 @@ Import-Package:\
 Include-Resource: \
 	classes,\
 	@lib/rhino.jar
-Liferay-Releng-Module-Group-Description:
-Liferay-Releng-Module-Group-Title: Scripting Engines
--include: ../../../marketplace/platform/bnd.bnd

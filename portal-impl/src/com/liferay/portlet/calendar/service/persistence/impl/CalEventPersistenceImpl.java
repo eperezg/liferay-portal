@@ -47,7 +47,6 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
@@ -5544,8 +5543,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 		calEvent.setUuid(uuid);
 
-		calEvent.setCompanyId(companyProvider.getCompanyId());
-
 		return calEvent;
 	}
 
@@ -6308,7 +6305,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

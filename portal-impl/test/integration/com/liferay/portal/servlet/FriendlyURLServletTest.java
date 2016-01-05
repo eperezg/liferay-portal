@@ -28,6 +28,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.test.LayoutTestUtil;
@@ -54,7 +55,8 @@ public class FriendlyURLServletTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {

@@ -2204,5 +2204,12 @@ public class SocialRequestUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(SocialRequestPersistence persistence) {
+	}
+
 	private static SocialRequestPersistence _persistence;
 }

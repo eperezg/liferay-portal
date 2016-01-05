@@ -45,8 +45,6 @@ public class PatcherPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
-		GradleUtil.applyPlugin(project, JavaPlugin.class);
-
 		TaskContainer taskContainer = project.getTasks();
 
 		taskContainer.withType(

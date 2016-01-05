@@ -406,10 +406,8 @@ public class SyncAccountService {
 			}
 			catch (Exception e1) {
 				try {
-					FileUtils.copyDirectory(
+					FileUtils.moveDirectory(
 						sourceFilePath.toFile(), targetFilePath.toFile());
-
-					FileUtil.deleteFile(sourceFilePath);
 
 					resetFileKeys = true;
 				}

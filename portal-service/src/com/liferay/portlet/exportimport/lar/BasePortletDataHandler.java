@@ -16,7 +16,6 @@ package com.liferay.portlet.exportimport.lar;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.plugin.Version;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -339,11 +338,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	@Override
-	public String getSchemaVersion() {
-		return "1.0.0";
-	}
-
-	@Override
 	public String getServiceName() {
 		return null;
 	}
@@ -517,16 +511,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		_rank = rank;
 	}
 
-	@Override
-	public boolean validateSchemaVersion(String schemaVersion) {
-		try {
-			return doValidateSchemaVersion(schemaVersion);
-		}
-		catch (Exception e) {
-			return false;
-		}
-	}
-
 	protected Element addExportDataRootElement(
 		PortletDataContext portletDataContext) {
 
@@ -660,18 +644,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		throws Exception {
 
 		return portletPreferences;
-	}
-
-	protected boolean doValidateSchemaVersion(String schemaVersion)
-		throws Exception {
-
-		Version currentVersion = Version.getInstance(getSchemaVersion());
-
-		if (currentVersion.isLaterVersionThan(schemaVersion)) {
-			return false;
-		}
-
-		return true;
 	}
 
 	protected String getExportDataRootElementString(Element rootElement) {

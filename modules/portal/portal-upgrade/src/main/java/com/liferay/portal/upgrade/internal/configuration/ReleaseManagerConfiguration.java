@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration",
-	localization = "content/Language",
-	name = "%release.manager.configuration.name"
+	id = "com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration"
 )
 public interface ReleaseManagerConfiguration {
 

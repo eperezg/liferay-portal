@@ -604,6 +604,14 @@ public class UserNotificationEventWrapper implements UserNotificationEvent,
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public UserNotificationEvent getWrappedUserNotificationEvent() {
+		return _userNotificationEvent;
+	}
+
 	@Override
 	public UserNotificationEvent getWrappedModel() {
 		return _userNotificationEvent;

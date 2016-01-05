@@ -18,6 +18,7 @@
 
 <%
 List<PanelCategory> childPanelCategories = (List<PanelCategory>)request.getAttribute("liferay-application-list:panel:childPanelCategories");
+PanelCategory panelCategory = (PanelCategory)request.getAttribute("liferay-application-list:panel:panelCategory");
 %>
 
 <c:if test="<%= !childPanelCategories.isEmpty() %>">

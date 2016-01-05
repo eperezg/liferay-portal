@@ -170,18 +170,4 @@ public class DDLRecordStagedModelDataHandlerTest
 			recordSet.getUuid(), group.getGroupId());
 	}
 
-	@Override
-	protected void validateImportedStagedModel(
-			StagedModel stagedModel, StagedModel importedStagedModel)
-		throws Exception {
-
-		super.validateImportedStagedModel(stagedModel, importedStagedModel);
-
-		DDLRecord record = (DDLRecord)stagedModel;
-		DDLRecord importedRecord = (DDLRecord)importedStagedModel;
-
-		Assert.assertEquals(
-			record.getDisplayIndex(), importedRecord.getDisplayIndex());
-	}
-
 }

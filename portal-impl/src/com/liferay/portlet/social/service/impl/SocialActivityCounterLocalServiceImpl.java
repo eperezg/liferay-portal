@@ -1344,7 +1344,6 @@ public class SocialActivityCounterLocalServiceImpl
 
 				return activityLimit;
 			}
-
 		};
 
 		lockProtectedAction.performAction();

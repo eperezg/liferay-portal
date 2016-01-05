@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
@@ -44,13 +43,12 @@ public interface DDL {
 	public JSONObject getRecordJSONObject(DDLRecord record) throws Exception;
 
 	public JSONObject getRecordJSONObject(
-			DDLRecord record, boolean latestRecordVersion, Locale locale)
+			DDLRecord record, boolean latestRecordVersion)
 		throws Exception;
 
 	public List<DDLRecord> getRecords(Hits hits) throws Exception;
 
-	public JSONArray getRecordSetJSONArray(
-			DDLRecordSet recordSet, Locale locale)
+	public JSONArray getRecordSetJSONArray(DDLRecordSet recordSet)
 		throws Exception;
 
 	public JSONArray getRecordsJSONArray(DDLRecordSet recordSet)
@@ -60,7 +58,7 @@ public interface DDL {
 		throws Exception;
 
 	public JSONArray getRecordsJSONArray(
-			List<DDLRecord> records, boolean latestRecordVersion, Locale locale)
+			List<DDLRecord> records, boolean latestRecordVersion)
 		throws Exception;
 
 	/**

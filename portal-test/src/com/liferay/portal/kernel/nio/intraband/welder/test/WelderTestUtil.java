@@ -60,7 +60,6 @@ public class WelderTestUtil {
 
 					return null;
 				}
-
 			});
 
 		Thread writeThread = new Thread(writeFutureTask);
@@ -80,7 +79,6 @@ public class WelderTestUtil {
 
 					return byteBuffer.array();
 				}
-
 			});
 
 		Thread readThread = new Thread(readFutureTask);

@@ -61,10 +61,6 @@ public interface BlogsEntryLocalService extends BaseLocalService,
 	public com.liferay.portlet.blogs.model.BlogsEntry addBlogsEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry);
 
-	public void addCoverImage(long entryId,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector imageSelector)
-		throws PortalException;
-
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
 		java.lang.String title, java.lang.String content,
 		java.util.Date displayDate,
@@ -137,10 +133,6 @@ public interface BlogsEntryLocalService extends BaseLocalService,
 
 	public long addOriginalImageFileEntry(long userId, long groupId,
 		long entryId,
-		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector imageSelector)
-		throws PortalException;
-
-	public void addSmallImage(long entryId,
 		com.liferay.portal.kernel.servlet.taglib.ui.ImageSelector imageSelector)
 		throws PortalException;
 

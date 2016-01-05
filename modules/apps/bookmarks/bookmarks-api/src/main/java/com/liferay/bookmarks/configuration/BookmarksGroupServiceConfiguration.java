@@ -22,13 +22,9 @@ import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 /**
  * @author Adolfo Pérez
  */
-@ConfigurationAdmin(
-	category = "collaboration", scope = ConfigurationAdmin.Scope.GROUP
-)
+@ConfigurationAdmin(category = "collaboration")
 @Meta.OCD(
-	id = "com.liferay.bookmarks.configuration.BookmarksGroupServiceConfiguration",
-	localization = "content/Language",
-	name = "%bookmarks.group.service.configuration.name"
+	id = "com.liferay.bookmarks.configuration.BookmarksGroupServiceConfiguration"
 )
 public interface BookmarksGroupServiceConfiguration {
 

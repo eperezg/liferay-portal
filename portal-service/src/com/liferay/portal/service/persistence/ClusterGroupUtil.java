@@ -267,5 +267,12 @@ public class ClusterGroupUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(ClusterGroupPersistence persistence) {
+	}
+
 	private static ClusterGroupPersistence _persistence;
 }

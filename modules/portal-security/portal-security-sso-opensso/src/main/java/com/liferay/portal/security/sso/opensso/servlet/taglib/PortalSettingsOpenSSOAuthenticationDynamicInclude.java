@@ -25,9 +25,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * Adds an OpenSSO tab to the Authentication section of the Portal Settings user
- * interface in the Control Panel.
- *
  * @author Philip Jones
  */
 @Component(
@@ -48,7 +45,6 @@ public class PortalSettingsOpenSSOAuthenticationDynamicInclude
 		return _log;
 	}
 
-	@Override
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.portal.security.sso.opensso)",
 		unbind = "-"

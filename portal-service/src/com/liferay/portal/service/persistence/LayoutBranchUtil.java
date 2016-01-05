@@ -885,5 +885,12 @@ public class LayoutBranchUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(LayoutBranchPersistence persistence) {
+	}
+
 	private static LayoutBranchPersistence _persistence;
 }

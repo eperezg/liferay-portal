@@ -16,8 +16,6 @@
 
 <%@ include file="/blogs/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.blogs.web#/blogs/view_entry.jsp#pre" />
-
 <%
 String mvcRenderCommandName = ParamUtil.getString(request, "mvcRenderCommandName");
 
@@ -206,5 +204,3 @@ PortalUtil.setPageKeywords(ListUtil.toString(assetTags, AssetTag.NAME_ACCESSOR),
 
 PortalUtil.addPortletBreadcrumbEntry(request, entry.getTitle(), currentURL);
 %>
-
-<liferay-util:dynamic-include key="com.liferay.blogs.web#/blogs/view_entry.jsp#post" />

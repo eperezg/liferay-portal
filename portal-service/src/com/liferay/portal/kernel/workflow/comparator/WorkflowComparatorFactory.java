@@ -31,9 +31,6 @@ public interface WorkflowComparatorFactory {
 	public OrderByComparator<WorkflowDefinition> getDefinitionNameComparator(
 		boolean ascending);
 
-	public OrderByComparator<WorkflowInstance> getInstanceCompletedComparator(
-		boolean ascending);
-
 	public OrderByComparator<WorkflowInstance> getInstanceEndDateComparator(
 		boolean ascending);
 

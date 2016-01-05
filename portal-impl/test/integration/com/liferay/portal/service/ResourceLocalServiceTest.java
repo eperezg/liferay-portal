@@ -27,6 +27,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,7 +43,8 @@ public class ResourceLocalServiceTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {

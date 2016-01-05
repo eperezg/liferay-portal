@@ -1045,6 +1045,13 @@ public class KaleoDefinitionUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(KaleoDefinitionPersistence persistence) {
+	}
+
 	private static ServiceTracker<KaleoDefinitionPersistence, KaleoDefinitionPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(KaleoDefinitionPersistence.class);
 }

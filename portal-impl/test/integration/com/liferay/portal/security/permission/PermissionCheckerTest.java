@@ -31,11 +31,11 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.test.log.CaptureAppender;
 import com.liferay.portal.test.log.Log4JLoggerTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class PermissionCheckerTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
 			SynchronousDestinationTestRule.INSTANCE);
 
 	@Before
@@ -284,19 +284,13 @@ public class PermissionCheckerTest {
 
 	@Test
 	public void testIsOmniAdminWithCompanyAdmin() throws Exception {
-		long companyId = CompanyThreadLocal.getCompanyId();
-
 		_company = CompanyTestUtil.addCompany();
 
-		CompanyThreadLocal.setCompanyId(_company.getCompanyId());
+		User adminUser = UserTestUtil.addCompanyAdminUser(_company);
 
-		_user = UserTestUtil.addCompanyAdminUser(_company);
-
-		PermissionChecker permissionChecker = _getPermissionChecker(_user);
+		PermissionChecker permissionChecker = _getPermissionChecker(adminUser);
 
 		Assert.assertFalse(permissionChecker.isOmniadmin());
-
-		CompanyThreadLocal.setCompanyId(companyId);
 	}
 
 	@Test

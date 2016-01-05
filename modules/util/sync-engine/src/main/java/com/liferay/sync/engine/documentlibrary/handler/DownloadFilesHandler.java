@@ -138,9 +138,6 @@ public class DownloadFilesHandler extends BaseHandler {
 						_logger.error(e.getMessage(), e);
 					}
 				}
-				finally {
-					downloadFileHandler.removeEvent();
-				}
 			}
 		}
 		catch (Exception e) {

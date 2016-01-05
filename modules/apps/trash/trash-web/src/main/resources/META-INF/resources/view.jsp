@@ -114,6 +114,7 @@ if (Validator.isNotNull(keywords)) {
 		<c:if test="<%= tpe.getType() == TrashPermissionException.RESTORE_RENAME %>">
 			<liferay-ui:message key="you-do-not-have-permission-to-rename-this-item" />
 		</c:if>
+
 	</liferay-ui:error>
 
 	<c:if test="<%= group.isStagingGroup() %>">
@@ -289,7 +290,7 @@ if (Validator.isNotNull(keywords)) {
 				<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 			</portlet:actionURL>
 
-			<liferay-trash:empty
+			<liferay-ui:trash-empty
 				portletURL="<%= emptyTrashURL %>"
 				totalEntries="<%= searchContainer.getTotal() %>"
 			/>

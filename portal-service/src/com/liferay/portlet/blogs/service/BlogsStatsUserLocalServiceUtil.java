@@ -348,5 +348,12 @@ public class BlogsStatsUserLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(BlogsStatsUserLocalService service) {
+	}
+
 	private static BlogsStatsUserLocalService _service;
 }

@@ -15,21 +15,13 @@
 package com.liferay.dynamic.data.lists.model.impl;
 
 import com.liferay.dynamic.data.lists.model.DDLRecord;
-import com.liferay.dynamic.data.lists.model.DDLRecordSetSettings;
 import com.liferay.dynamic.data.lists.service.DDLRecordLocalServiceUtil;
-import com.liferay.dynamic.data.mapping.io.DDMFormValuesJSONDeserializerUtil;
-import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil;
-import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
-import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
-import com.liferay.dynamic.data.mapping.util.DDMFormInstanceFactory;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.CacheField;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.List;
 
@@ -72,47 +64,30 @@ public class DDLRecordSetImpl extends DDLRecordSetBaseImpl {
 	}
 
 	@Override
-	public DDMFormValues getSettingsDDMFormValues() {
-		if (_ddmFormValues == null) {
-			try {
-				DDMForm ddmForm = DDMFormFactory.create(
-					DDLRecordSetSettings.class);
+	public UnicodeProperties getSettingsProperties() {
+		if (_settingsProperties == null) {
+			_settingsProperties = new UnicodeProperties(true);
 
-				_ddmFormValues = DDMFormValuesJSONDeserializerUtil.deserialize(
-					ddmForm, getSettings());
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+			_settingsProperties.fastLoad(super.getSettings());
 		}
 
-		return _ddmFormValues;
+		return _settingsProperties;
 	}
 
 	@Override
-	public DDLRecordSetSettings getSettingsModel() {
-		if (_recordSetSettings == null) {
-			_recordSetSettings = DDMFormInstanceFactory.create(
-				DDLRecordSetSettings.class, getSettingsDDMFormValues());
-		}
+	public String getSettingsProperty(String key) {
+		UnicodeProperties settingsProperties = getSettingsProperties();
 
-		return _recordSetSettings;
+		return settingsProperties.getProperty(key);
 	}
 
 	@Override
-	public void setSettings(String settings) {
-		super.setSettings(settings);
+	public String getSettingsProperty(String key, String defaultValue) {
+		UnicodeProperties settingsProperties = getSettingsProperties();
 
-		_ddmFormValues = null;
-		_recordSetSettings = null;
+		return settingsProperties.getProperty(key, defaultValue);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		DDLRecordSetImpl.class);
-
-	@CacheField(methodName = "DDMFormValues")
-	private DDMFormValues _ddmFormValues;
-
-	private DDLRecordSetSettings _recordSetSettings;
+	private UnicodeProperties _settingsProperties;
 
 }

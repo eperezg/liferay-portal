@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil;
 
 import java.util.ArrayList;
@@ -37,7 +38,8 @@ public class UserLocalServiceTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testGetNoAnnouncementsDeliveries() throws Exception {

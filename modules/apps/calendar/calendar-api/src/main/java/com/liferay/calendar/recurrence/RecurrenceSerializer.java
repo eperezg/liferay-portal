@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.text.ParseException;
 
@@ -43,11 +42,7 @@ import java.util.TimeZone;
  */
 public class RecurrenceSerializer {
 
-	public static Recurrence deserialize(String data, TimeZone timeZone) {
-		if (Validator.isNull(data)) {
-			return null;
-		}
-
+	public static Recurrence deserialize(String data) {
 		try {
 			Recurrence recurrence = new Recurrence();
 
@@ -57,10 +52,11 @@ public class RecurrenceSerializer {
 				String exceptionDates = data.substring(
 					index + 1, data.length());
 
-				RDateList rDateList = new RDateList(exceptionDates, timeZone);
+				RDateList rDateList = new RDateList(
+					exceptionDates, TimeZone.getTimeZone(StringPool.UTC));
 
 				for (DateValue dateValue : rDateList.getDatesUtc()) {
-					Calendar jCalendar = _toJCalendar(dateValue, timeZone);
+					Calendar jCalendar = _toJCalendar(dateValue);
 
 					recurrence.addExceptionDate(jCalendar);
 				}
@@ -74,12 +70,11 @@ public class RecurrenceSerializer {
 			recurrence.setFrequency(
 				Frequency.parse(String.valueOf(rRule.getFreq())));
 			recurrence.setInterval(rRule.getInterval());
-			recurrence.setTimeZone(timeZone);
 
 			DateValue dateValue = rRule.getUntil();
 
 			if (dateValue != null) {
-				Calendar jCalendar = _toJCalendar(dateValue, timeZone);
+				Calendar jCalendar = _toJCalendar(dateValue);
 
 				recurrence.setUntilJCalendar(jCalendar);
 			}
@@ -109,10 +104,6 @@ public class RecurrenceSerializer {
 	}
 
 	public static String serialize(Recurrence recurrence) {
-		if (recurrence == null) {
-			return null;
-		}
-
 		RRule rRule = new RRule();
 
 		List<WeekdayNum> weekdayNums = new ArrayList<>();
@@ -193,24 +184,23 @@ public class RecurrenceSerializer {
 		return dateValue;
 	}
 
-	private static Calendar _toJCalendar(
-		DateValue dateValue, TimeZone timeZone) {
+	private static Calendar _toJCalendar(DateValue dateValue) {
+		Calendar jCalendar = CalendarFactoryUtil.getCalendar(
+			TimeZone.getTimeZone(StringPool.UTC));
 
-		int hour = 0;
-		int minute = 0;
-		int second = 0;
+		jCalendar.set(Calendar.DATE, dateValue.day());
+		jCalendar.set(Calendar.MONTH, dateValue.month() - 1);
+		jCalendar.set(Calendar.YEAR, dateValue.year());
 
 		if (dateValue instanceof DateTimeValue) {
 			DateTimeValue dateTimeValue = (DateTimeValue)dateValue;
 
-			hour = dateTimeValue.hour();
-			minute = dateTimeValue.minute();
-			second = dateTimeValue.second();
+			jCalendar.set(Calendar.HOUR_OF_DAY, dateTimeValue.hour());
+			jCalendar.set(Calendar.MINUTE, dateTimeValue.minute());
+			jCalendar.set(Calendar.SECOND, dateTimeValue.second());
 		}
 
-		return CalendarFactoryUtil.getCalendar(
-			dateValue.year(), dateValue.month() - 1, dateValue.day(), hour,
-			minute, second, 0, timeZone);
+		return jCalendar;
 	}
 
 	private static final String _EXDATE = "EXDATE";

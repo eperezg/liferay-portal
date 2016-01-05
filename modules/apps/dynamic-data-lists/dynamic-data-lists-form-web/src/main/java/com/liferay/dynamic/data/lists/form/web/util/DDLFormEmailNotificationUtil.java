@@ -15,7 +15,6 @@
 package com.liferay.dynamic.data.lists.form.web.util;
 
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
-import com.liferay.dynamic.data.lists.model.DDLRecordSetSettings;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -37,29 +36,23 @@ import java.util.ResourceBundle;
 public class DDLFormEmailNotificationUtil {
 
 	public static String getEmailFromAddress(DDLRecordSet recordSet) {
-		DDLRecordSetSettings recordSettings = recordSet.getSettingsModel();
-
 		String defaultEmailFromAddress = PrefsPropsUtil.getString(
 			recordSet.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
-		return GetterUtil.getString(
-			recordSettings.emailFromAddress(), defaultEmailFromAddress);
+		return recordSet.getSettingsProperty(
+			"emailFromAddress", defaultEmailFromAddress);
 	}
 
 	public static String getEmailFromName(DDLRecordSet recordSet) {
-		DDLRecordSetSettings recordSettings = recordSet.getSettingsModel();
-
 		String defaultEmailFromName = PrefsPropsUtil.getString(
 			recordSet.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
 
-		return GetterUtil.getString(
-			recordSettings.emailFromName(), defaultEmailFromName);
+		return recordSet.getSettingsProperty(
+			"emailFromName", defaultEmailFromName);
 	}
 
 	public static String getEmailSubject(DDLRecordSet recordSet)
 		throws PortalException {
-
-		DDLRecordSetSettings recordSettings = recordSet.getSettingsModel();
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
@@ -74,14 +67,12 @@ public class DDLFormEmailNotificationUtil {
 			resourceBundle, "new-x-form-submitted", recordSet.getName(locale),
 			false);
 
-		return GetterUtil.getString(
-			recordSettings.emailSubject(), defaultEmailSubject);
+		return recordSet.getSettingsProperty(
+			"emailSubject", defaultEmailSubject);
 	}
 
 	public static String getEmailToAddress(DDLRecordSet recordSet) {
 		String defaultEmailToAddress = StringPool.BLANK;
-
-		DDLRecordSetSettings recordSettings = recordSet.getSettingsModel();
 
 		User user = UserLocalServiceUtil.fetchUser(recordSet.getUserId());
 
@@ -89,14 +80,14 @@ public class DDLFormEmailNotificationUtil {
 			defaultEmailToAddress = user.getEmailAddress();
 		}
 
-		return GetterUtil.getString(
-			recordSettings.emailToAddress(), defaultEmailToAddress);
+		return recordSet.getSettingsProperty(
+			"emailToAddress", defaultEmailToAddress);
 	}
 
 	public static boolean isEmailNotificationEnabled(DDLRecordSet recordSet) {
-		DDLRecordSetSettings recordSettings = recordSet.getSettingsModel();
-
-		return recordSettings.sendEmailNotification();
+		return GetterUtil.getBoolean(
+			recordSet.getSettingsProperty(
+				"sendEmailNotification", Boolean.FALSE.toString()));
 	}
 
 }

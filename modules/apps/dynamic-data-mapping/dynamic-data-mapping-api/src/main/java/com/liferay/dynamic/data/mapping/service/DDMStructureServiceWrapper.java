@@ -597,6 +597,23 @@ public class DDMStructureServiceWrapper implements DDMStructureService,
 			serviceContext);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public DDMStructureService getWrappedDDMStructureService() {
+		return _ddmStructureService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedDDMStructureService(
+		DDMStructureService ddmStructureService) {
+		_ddmStructureService = ddmStructureService;
+	}
+
 	@Override
 	public DDMStructureService getWrappedService() {
 		return _ddmStructureService;

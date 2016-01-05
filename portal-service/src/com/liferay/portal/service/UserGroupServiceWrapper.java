@@ -238,6 +238,22 @@ public class UserGroupServiceWrapper implements UserGroupService,
 			description, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public UserGroupService getWrappedUserGroupService() {
+		return _userGroupService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedUserGroupService(UserGroupService userGroupService) {
+		_userGroupService = userGroupService;
+	}
+
 	@Override
 	public UserGroupService getWrappedService() {
 		return _userGroupService;

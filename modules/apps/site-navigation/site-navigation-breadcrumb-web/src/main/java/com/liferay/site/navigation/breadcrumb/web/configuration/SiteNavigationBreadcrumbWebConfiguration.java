@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "web-experience-management")
 @Meta.OCD(
-	id = "com.liferay.site.navigation.breadcrumb.web.configuration.SiteNavigationBreadcrumbWebConfiguration",
-	localization = "content/Language",
-	name = "%site.navigation.breadcrumb.web.configuration.name"
+	id = "com.liferay.site.navigation.breadcrumb.web.configuration.SiteNavigationBreadcrumbWebConfiguration"
 )
 public interface SiteNavigationBreadcrumbWebConfiguration {
 

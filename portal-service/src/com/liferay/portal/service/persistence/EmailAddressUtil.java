@@ -1504,5 +1504,12 @@ public class EmailAddressUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(EmailAddressPersistence persistence) {
+	}
+
 	private static EmailAddressPersistence _persistence;
 }

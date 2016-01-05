@@ -504,5 +504,12 @@ public class PluginSettingUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(PluginSettingPersistence persistence) {
+	}
+
 	private static PluginSettingPersistence _persistence;
 }

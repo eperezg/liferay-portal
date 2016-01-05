@@ -134,11 +134,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>SCOPE</td>
-	<td>//div[label[contains(.,'Scope')]]/select</td>
-	<td></td>
-</tr>
-<tr>
 	<td>TIME_ZONE</td>
 	<td>//select[contains(@id,'timeZoneId')]</td>
 	<td></td>

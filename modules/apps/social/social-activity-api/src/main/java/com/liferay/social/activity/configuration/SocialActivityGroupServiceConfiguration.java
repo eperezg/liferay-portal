@@ -21,13 +21,9 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 /**
  * @author Roberto Díaz
  */
-@ConfigurationAdmin(
-	category = "collaboration", scope = ConfigurationAdmin.Scope.GROUP
-)
+@ConfigurationAdmin(category = "collaboration")
 @Meta.OCD(
-	id = "com.liferay.social.activity.configuration.SocialActivityGroupServiceConfiguration",
-	localization = "content/Language",
-	name = "%social.activity.group.service.configuration.name"
+	id = "com.liferay.social.activity.configuration.SocialActivityGroupServiceConfiguration"
 )
 public interface SocialActivityGroupServiceConfiguration {
 

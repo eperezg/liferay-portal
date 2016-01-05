@@ -329,5 +329,12 @@ public class RatingsStatsUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(RatingsStatsPersistence persistence) {
+	}
+
 	private static RatingsStatsPersistence _persistence;
 }

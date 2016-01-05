@@ -118,5 +118,12 @@ public class AddressServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(AddressService service) {
+	}
+
 	private static AddressService _service;
 }

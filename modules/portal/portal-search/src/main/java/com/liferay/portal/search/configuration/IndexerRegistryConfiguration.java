@@ -24,8 +24,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
 	id = "com.liferay.portal.search.configuration.IndexerRegistryConfiguration",
-	localization = "content/Language",
-	name = "%indexer.registry.configuration.name"
+	localization = "content/Language"
 )
 public interface IndexerRegistryConfiguration {
 

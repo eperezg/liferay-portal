@@ -61,5 +61,12 @@ public class PortalLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(PortalLocalService service) {
+	}
+
 	private static PortalLocalService _service;
 }

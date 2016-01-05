@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.security.auto.login.request.header.module.configuration.RequestHeaderAutoLoginConfiguration",
-	localization = "content/Language",
-	name = "%request.header.auto.login.configuration.name"
+	id = "com.liferay.portal.security.auto.login.request.header.module.configuration.RequestHeaderAutoLoginConfiguration"
 )
 public interface RequestHeaderAutoLoginConfiguration {
 

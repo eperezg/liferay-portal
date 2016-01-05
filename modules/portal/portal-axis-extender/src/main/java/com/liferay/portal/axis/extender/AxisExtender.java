@@ -146,7 +146,6 @@ public class AxisExtender {
 
 								return bundle.getResource(name);
 							}
-
 						},
 						properties);
 

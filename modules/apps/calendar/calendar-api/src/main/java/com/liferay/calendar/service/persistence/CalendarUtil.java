@@ -1377,6 +1377,13 @@ public class CalendarUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(CalendarPersistence persistence) {
+	}
+
 	private static ServiceTracker<CalendarPersistence, CalendarPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(CalendarPersistence.class);
 }

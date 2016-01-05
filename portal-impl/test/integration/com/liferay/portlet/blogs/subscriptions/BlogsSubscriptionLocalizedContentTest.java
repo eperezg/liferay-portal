@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.test.rule.SynchronousMailTestRule;
 import com.liferay.portlet.blogs.constants.BlogsConstants;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -44,7 +45,8 @@ public class BlogsSubscriptionLocalizedContentTest
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), SynchronousMailTestRule.INSTANCE);
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			SynchronousMailTestRule.INSTANCE);
 
 	@Override
 	protected long addBaseModel(long userId, long containerModelId)

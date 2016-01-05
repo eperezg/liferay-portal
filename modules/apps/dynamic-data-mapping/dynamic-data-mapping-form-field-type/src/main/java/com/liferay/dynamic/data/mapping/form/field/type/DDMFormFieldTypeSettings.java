@@ -24,7 +24,7 @@ import com.liferay.dynamic.data.mapping.annotations.DDMFormLayoutRow;
 /**
  * @author Marcellus Tavares
  */
-@DDMForm
+@DDMForm(localization = "content/Language")
 @DDMFormLayout(
 	{
 		@DDMFormLayoutPage(

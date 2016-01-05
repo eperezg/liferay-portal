@@ -96,6 +96,23 @@ public class ExpandoValueServiceWrapper implements ExpandoValueService,
 		return _expandoValueService.getOSGiServiceIdentifier();
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public ExpandoValueService getWrappedExpandoValueService() {
+		return _expandoValueService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedExpandoValueService(
+		ExpandoValueService expandoValueService) {
+		_expandoValueService = expandoValueService;
+	}
+
 	@Override
 	public ExpandoValueService getWrappedService() {
 		return _expandoValueService;

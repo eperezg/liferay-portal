@@ -30,7 +30,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + ExportImportPortletKeys.EXPORT,
+		"javax.portlet.name=" + ExportImportPortletKeys.EXPORT_IMPORT,
 		"mvc.command.name=exportLayouts"
 	},
 	service = MVCResourceCommand.class
@@ -44,8 +44,7 @@ public class ExportLayoutsMVCResourceCommand extends BaseMVCResourceCommand {
 
 		PortletRequestDispatcher portletRequestDispatcher =
 			getPortletRequestDispatcher(
-				resourceRequest,
-				"/export/processes_list/export_layouts_processes.jsp");
+				resourceRequest, "/export_layouts_processes.jsp");
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}

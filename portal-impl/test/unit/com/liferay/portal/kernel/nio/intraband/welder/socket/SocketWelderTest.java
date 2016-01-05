@@ -137,7 +137,6 @@ public class SocketWelderTest {
 						return (MockRegistrationReference)
 							serverSocketWelder.weld(new MockIntraband());
 					}
-
 				});
 
 		Thread serverWeldingThread = new Thread(serverWeldingTask);
@@ -153,7 +152,6 @@ public class SocketWelderTest {
 						return (MockRegistrationReference)
 							clientSocketWelder.weld(new MockIntraband());
 					}
-
 				});
 
 		Thread clientWeldingThread = new Thread(clientWeldingTask);

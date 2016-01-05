@@ -938,5 +938,12 @@ public class WorkflowDefinitionLinkUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(WorkflowDefinitionLinkPersistence persistence) {
+	}
+
 	private static WorkflowDefinitionLinkPersistence _persistence;
 }

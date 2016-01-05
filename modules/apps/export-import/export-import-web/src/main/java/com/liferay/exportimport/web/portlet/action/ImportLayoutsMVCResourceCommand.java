@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + ExportImportPortletKeys.IMPORT,
+		"javax.portlet.name=" + ExportImportPortletKeys.EXPORT_IMPORT,
 		"mvc.command.name=importLayouts"
 	},
 	service = MVCResourceCommand.class
@@ -50,13 +50,11 @@ public class ImportLayoutsMVCResourceCommand extends BaseMVCResourceCommand {
 
 		if (cmd.equals(Constants.IMPORT)) {
 			portletRequestDispatcher = getPortletRequestDispatcher(
-				resourceRequest,
-				"/import/processes_list/import_layouts_processes.jsp");
+				resourceRequest, "/import_layouts_processes.jsp");
 		}
 		else {
 			portletRequestDispatcher = getPortletRequestDispatcher(
-				resourceRequest,
-				"/import/new_import/import_layouts_resources.jsp");
+				resourceRequest, "/import_layouts_resources.jsp");
 		}
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);

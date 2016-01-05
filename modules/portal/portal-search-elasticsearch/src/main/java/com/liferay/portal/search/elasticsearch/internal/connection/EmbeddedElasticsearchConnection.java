@@ -137,10 +137,6 @@ public class EmbeddedElasticsearchConnection
 			return;
 		}
 
-		builder.put(
-			"http.cors.allow-origin",
-			elasticsearchConfiguration.httpCORSAllowOrigin());
-
 		String[] httpCORSConfigurations =
 			elasticsearchConfiguration.httpCORSConfigurations();
 

@@ -36,13 +36,6 @@ public class WorkflowComparatorFactoryProxyBean
 	}
 
 	@Override
-	public OrderByComparator<WorkflowInstance> getInstanceCompletedComparator(
-		boolean ascending) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public OrderByComparator<WorkflowInstance> getInstanceEndDateComparator(
 		boolean ascending) {
 

@@ -440,7 +440,6 @@ public class ProcessUtilTest {
 				public Void processStdOut(InputStream stdOutInputStream) {
 					return null;
 				}
-
 			},
 			_buildArguments(Pause.class));
 

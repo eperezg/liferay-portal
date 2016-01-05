@@ -126,6 +126,13 @@ public class DDMDataProviderInstanceServiceUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(DDMDataProviderInstanceService service) {
+	}
+
 	private static ServiceTracker<DDMDataProviderInstanceService, DDMDataProviderInstanceService> _serviceTracker =
 		ServiceTrackerFactory.open(DDMDataProviderInstanceService.class);
 }

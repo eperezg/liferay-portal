@@ -207,10 +207,9 @@
 		</execute>
 
 		<var name="kbArticleRelatedAssetTitle" value="Blogs Entry Title" />
+		<var name="key_relatedAssetTitle" value="${relatedAssetTitle}" />
 
-		<var name="key_kbArticleRelatedAssetTitle" value="${kbArticleRelatedAssetTitle}" />
-
-		<execute function="AssertClick" locator1="AssetRelatedAssets#KB_RELATED_ASSETS_LINKS" value1="${kbArticleRelatedAssetTitle}" />
+		<execute function="AssertClick" locator1="AssetRelatedAssets#ASSET_TITLE" value1="${kbArticleRelatedAssetTitle}" />
 
 		<execute macro="KBArticle#viewBlogsEntryRelatedAsset" />
 	</command>
@@ -261,7 +260,7 @@
 	</command>
 
 	<command name="AddKBArticleWithInvalidAttachmentSize" priority="3">
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoControlPanelSystem">
 			<var name="portlet" value="Server Administration" />
 		</execute>
 

@@ -20,6 +20,7 @@ import com.liferay.portal.lar.test.BaseStagedModelDataHandlerTestCase;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.util.test.AssetTestUtil;
@@ -27,7 +28,6 @@ import com.liferay.portlet.asset.util.test.AssetTestUtil;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
 
@@ -41,7 +41,8 @@ public class AssetTagStagedModelDataHandlerTest
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			TransactionalTestRule.INSTANCE);
 
 	@Override
 	protected StagedModel addStagedModel(
@@ -66,19 +67,6 @@ public class AssetTagStagedModelDataHandlerTest
 	@Override
 	protected Class<? extends StagedModel> getStagedModelClass() {
 		return AssetTag.class;
-	}
-
-	@Override
-	protected void validateImportedStagedModel(
-			StagedModel stagedModel, StagedModel importedStagedModel)
-		throws Exception {
-
-		super.validateImportedStagedModel(stagedModel, importedStagedModel);
-
-		AssetTag tag = (AssetTag)stagedModel;
-		AssetTag importedTag = (AssetTag)importedStagedModel;
-
-		Assert.assertEquals(tag.getName(), importedTag.getName());
 	}
 
 }

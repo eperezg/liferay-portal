@@ -1157,5 +1157,12 @@ public class AssetLinkUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(AssetLinkPersistence persistence) {
+	}
+
 	private static AssetLinkPersistence _persistence;
 }

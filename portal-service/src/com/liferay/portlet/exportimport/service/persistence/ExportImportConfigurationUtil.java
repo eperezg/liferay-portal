@@ -1151,5 +1151,12 @@ public class ExportImportConfigurationUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(ExportImportConfigurationPersistence persistence) {
+	}
+
 	private static ExportImportConfigurationPersistence _persistence;
 }

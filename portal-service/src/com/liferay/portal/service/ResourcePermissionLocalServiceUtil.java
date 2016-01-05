@@ -894,5 +894,12 @@ public class ResourcePermissionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(ResourcePermissionLocalService service) {
+	}
+
 	private static ResourcePermissionLocalService _service;
 }

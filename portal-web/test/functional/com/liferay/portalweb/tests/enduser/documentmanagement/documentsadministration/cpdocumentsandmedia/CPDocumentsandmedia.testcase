@@ -33,8 +33,6 @@
 	</tear-down>
 
 	<command name="AddDocument" priority="5">
-		<property name="portal.acceptance" value="true" />
-
 		<var name="dmDocumentDescription" value="DM Document Description" />
 		<var name="dmDocumentFile" value="Document_1.txt" />
 		<var name="dmDocumentSize" value="0KB" />
@@ -64,8 +62,6 @@
 	</command>
 
 	<command name="AddFolder" priority="5">
-		<property name="portal.acceptance" value="true" />
-
 		<var name="dmFolderDescription" value="DM Folder Description" />
 		<var name="dmFolderName" value="DM Folder Name" />
 
@@ -293,8 +289,6 @@
 	</command>
 
 	<command name="MoveToRecycleBinFolder" priority="5">
-		<property name="portal.acceptance" value="true" />
-
 		<var name="assetName" value="${dmFolderName}" />
 		<var name="assetType" value="Documents Folder" />
 		<var name="dmFolderDescription" value="DM Folder Description" />

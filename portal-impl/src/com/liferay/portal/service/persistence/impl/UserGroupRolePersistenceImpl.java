@@ -38,7 +38,6 @@ import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.impl.UserGroupRoleImpl;
 import com.liferay.portal.model.impl.UserGroupRoleModelImpl;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 
@@ -2774,8 +2773,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		userGroupRole.setNew(true);
 		userGroupRole.setPrimaryKey(userGroupRolePK);
 
-		userGroupRole.setCompanyId(companyProvider.getCompanyId());
-
 		return userGroupRole;
 	}
 
@@ -3345,7 +3342,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

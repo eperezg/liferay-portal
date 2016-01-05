@@ -1,6 +1,4 @@
 ;(function() {
-	var LiferayAUI = Liferay.AUI;
-
 	var PATH_FORM_RENDERER = Liferay.ThemeDisplay.getPathContext() + '/o/dynamic-data-mapping-form-renderer';
 
 	AUI().applyConfig(
@@ -8,7 +6,6 @@
 			groups: {
 				'form': {
 					base: PATH_FORM_RENDERER + '/js/',
-					filter: LiferayAUI.getFilterConfig(),
 					modules: {
 						'liferay-ddm-form-renderer': {
 							path: 'form.js',

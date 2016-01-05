@@ -29,8 +29,8 @@ public class UpgradeMicroblogsEntry extends UpgradeProcess {
 	}
 
 	protected void updateMicroBlogsEntry() throws Exception {
-		if (hasColumn("MicroblogsEntry", "creatorClassNameId") ||
-			hasColumn("MicroblogsEntry", "creatorClassPK")) {
+		if (tableHasColumn("MicroblogsEntry", "creatorClassNameId") ||
+			tableHasColumn("MicroblogsEntry", "creatorClassPK")) {
 
 			return;
 		}

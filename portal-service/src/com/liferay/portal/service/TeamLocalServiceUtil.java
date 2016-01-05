@@ -557,5 +557,12 @@ public class TeamLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(TeamLocalService service) {
+	}
+
 	private static TeamLocalService _service;
 }

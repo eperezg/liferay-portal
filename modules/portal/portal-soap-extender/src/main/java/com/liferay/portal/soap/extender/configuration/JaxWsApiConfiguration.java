@@ -23,8 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.soap.extender.configuration.JaxWsApiConfiguration",
-	localization = "content/Language", name = "%jax.ws.api.configuration.name"
+	id = "com.liferay.portal.soap.extender.configuration.JaxWsApiConfiguration"
 )
 public interface JaxWsApiConfiguration {
 

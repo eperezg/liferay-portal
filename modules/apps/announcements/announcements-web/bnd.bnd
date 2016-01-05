@@ -8,7 +8,4 @@ Import-Package:\
 Include-Resource:\
 	classes,\
 	META-INF/resources=src/main/resources/META-INF/resources
-Liferay-Releng-Module-Group-Description:
-Liferay-Releng-Module-Group-Title:
 Web-ContextPath: /announcements-web
--include: ../../../../marketplace/collaboration/bnd.bnd

@@ -34,6 +34,7 @@ import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.test.LayoutTestUtil;
 import com.liferay.portal.verify.test.BaseVerifyProcessTestCase;
 
@@ -51,7 +52,8 @@ public class VerifyPortletPreferencesTest extends BaseVerifyProcessTestCase {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Before
 	@Override

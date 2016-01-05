@@ -525,6 +525,14 @@ public class AssetTagWrapper implements AssetTag, ModelWrapper<AssetTag> {
 		return _assetTag.getStagedModelType();
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public AssetTag getWrappedAssetTag() {
+		return _assetTag;
+	}
+
 	@Override
 	public AssetTag getWrappedModel() {
 		return _assetTag;

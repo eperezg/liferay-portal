@@ -23,8 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.template.xsl.configuration.XSLEngineConfiguration",
-	localization = "content/Language", name = "%xsl.engine.configuration.name"
+	id = "com.liferay.portal.template.xsl.configuration.XSLEngineConfiguration"
 )
 public interface XSLEngineConfiguration {
 

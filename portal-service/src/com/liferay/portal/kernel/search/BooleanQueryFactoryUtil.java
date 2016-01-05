@@ -32,7 +32,7 @@ public class BooleanQueryFactoryUtil {
 
 		String searchEngineId = searchContext.getSearchEngineId();
 
-		SearchEngine searchEngine = SearchEngineHelperUtil.getSearchEngine(
+		SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
 			searchEngineId);
 
 		return searchEngine.getBooleanQueryFactory();

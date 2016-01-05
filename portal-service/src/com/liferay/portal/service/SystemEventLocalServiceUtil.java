@@ -304,5 +304,12 @@ public class SystemEventLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(SystemEventLocalService service) {
+	}
+
 	private static SystemEventLocalService _service;
 }

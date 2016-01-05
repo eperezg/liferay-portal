@@ -439,6 +439,23 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 			newPrimKey);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public ResourceLocalService getWrappedResourceLocalService() {
+		return _resourceLocalService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		_resourceLocalService = resourceLocalService;
+	}
+
 	@Override
 	public ResourceLocalService getWrappedService() {
 		return _resourceLocalService;

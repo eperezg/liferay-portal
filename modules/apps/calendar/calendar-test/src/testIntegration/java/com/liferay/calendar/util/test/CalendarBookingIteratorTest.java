@@ -18,14 +18,11 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.calendar.model.CalendarBooking;
 import com.liferay.calendar.model.impl.CalendarBookingImpl;
 import com.liferay.calendar.util.CalendarBookingIterator;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.text.ParseException;
 
 import java.util.Calendar;
-import java.util.TimeZone;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -48,7 +45,7 @@ public class CalendarBookingIteratorTest {
 	public void testRecurrenceIsNull() throws ParseException {
 		Calendar calendar = Calendar.getInstance();
 
-		CalendarBooking calendarBooking = new MockCalendarBooking();
+		CalendarBooking calendarBooking = new CalendarBookingImpl();
 
 		calendarBooking.setStartTime(calendar.getTimeInMillis());
 		calendarBooking.setRecurrence(null);
@@ -75,7 +72,7 @@ public class CalendarBookingIteratorTest {
 
 		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 
-		CalendarBooking calendarBooking = new MockCalendarBooking();
+		CalendarBooking calendarBooking = new CalendarBookingImpl();
 
 		calendarBooking.setStartTime(calendar.getTimeInMillis());
 		calendarBooking.setRecurrence(
@@ -103,7 +100,7 @@ public class CalendarBookingIteratorTest {
 
 		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
 
-		CalendarBooking calendarBooking = new MockCalendarBooking();
+		CalendarBooking calendarBooking = new CalendarBookingImpl();
 
 		calendarBooking.setStartTime(calendar.getTimeInMillis());
 		calendarBooking.setRecurrence(
@@ -121,15 +118,6 @@ public class CalendarBookingIteratorTest {
 		}
 
 		Assert.assertEquals(2, count);
-	}
-
-	protected class MockCalendarBooking extends CalendarBookingImpl {
-
-		@Override
-		public TimeZone getTimeZone() {
-			return TimeZoneUtil.getTimeZone(StringPool.UTC);
-		}
-
 	}
 
 }

@@ -43,7 +43,6 @@ import com.liferay.portal.model.impl.RepositoryEntryModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.RepositoryEntryPersistence;
 
 import java.io.Serializable;
@@ -2455,8 +2454,6 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 
 		repositoryEntry.setUuid(uuid);
 
-		repositoryEntry.setCompanyId(companyProvider.getCompanyId());
-
 		return repositoryEntry;
 	}
 
@@ -3106,7 +3103,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

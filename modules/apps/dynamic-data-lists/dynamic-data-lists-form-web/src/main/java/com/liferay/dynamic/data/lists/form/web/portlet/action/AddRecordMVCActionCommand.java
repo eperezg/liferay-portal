@@ -17,11 +17,9 @@ package com.liferay.dynamic.data.lists.form.web.portlet.action;
 import com.liferay.dynamic.data.lists.form.web.constants.DDLFormPortletKeys;
 import com.liferay.dynamic.data.lists.form.web.notification.DDLFormEmailNotificationSender;
 import com.liferay.dynamic.data.lists.form.web.util.DDLFormEmailNotificationUtil;
-import com.liferay.dynamic.data.lists.model.DDLFormRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecordConstants;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
-import com.liferay.dynamic.data.lists.model.DDLRecordSetSettings;
 import com.liferay.dynamic.data.lists.service.DDLRecordService;
 import com.liferay.dynamic.data.lists.service.DDLRecordSetService;
 import com.liferay.dynamic.data.mapping.form.values.factory.DDMFormValuesFactory;
@@ -35,7 +33,9 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -80,9 +80,6 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DDLRecord.class.getName(), actionRequest);
 
-		serviceContext.setAttribute(
-			"assetClassName", DDLFormRecord.class.getName());
-
 		DDLRecord ddlRecord = _ddlRecordService.addRecord(
 			groupId, recordSetId, DDLRecordConstants.DISPLAY_INDEX_DEFAULT,
 			ddmFormValues, serviceContext);
@@ -94,9 +91,8 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 				actionRequest, ddlRecord);
 		}
 
-		DDLRecordSetSettings recordSetSettings = recordSet.getSettingsModel();
-
-		String redirectURL = recordSetSettings.redirectURL();
+		String redirectURL = recordSet.getSettingsProperty(
+			"redirectURL", StringPool.BLANK);
 
 		if (SessionErrors.isEmpty(actionRequest) &&
 			Validator.isNotNull(redirectURL)) {
@@ -149,9 +145,11 @@ public class AddRecordMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, DDLRecordSet recordSet)
 		throws Exception {
 
-		DDLRecordSetSettings recordSetSettings = recordSet.getSettingsModel();
+		boolean requireCaptcha = GetterUtil.getBoolean(
+			recordSet.getSettingsProperty(
+				"requireCaptcha", Boolean.FALSE.toString()));
 
-		if (recordSetSettings.requireCaptcha()) {
+		if (requireCaptcha) {
 			try {
 				CaptchaUtil.check(actionRequest);
 			}

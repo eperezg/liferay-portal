@@ -160,20 +160,6 @@ public class StagingUtil {
 			remoteGroupId, remotePrivateLayout, startDate, endDate);
 	}
 
-	public static void copyRemoteLayouts(
-			long sourceGroupId, boolean privateLayout,
-			Map<Long, Boolean> layoutIdMap, String name,
-			Map<String, String[]> parameterMap, String remoteAddress,
-			int remotePort, String remotePathContext, boolean secureConnection,
-			long remoteGroupId, boolean remotePrivateLayout)
-		throws PortalException {
-
-		_staging.copyRemoteLayouts(
-			sourceGroupId, privateLayout, layoutIdMap, name, parameterMap,
-			remoteAddress, remotePort, remotePathContext, secureConnection,
-			remoteGroupId, remotePrivateLayout);
-	}
-
 	public static void deleteLastImportSettings(
 			Group liveGroup, boolean privateLayout)
 		throws PortalException {
@@ -522,17 +508,6 @@ public class StagingUtil {
 		_staging.publishLayouts(
 			userId, sourceGroupId, targetGroupId, privateLayout, layoutIds,
 			parameterMap, startDate, endDate);
-	}
-
-	public static void publishLayouts(
-			long userId, long sourceGroupId, long targetGroupId,
-			boolean privateLayout, long[] layoutIds, String name,
-			Map<String, String[]> parameterMap)
-		throws PortalException {
-
-		_staging.publishLayouts(
-			userId, sourceGroupId, targetGroupId, privateLayout, layoutIds,
-			name, parameterMap);
 	}
 
 	/**

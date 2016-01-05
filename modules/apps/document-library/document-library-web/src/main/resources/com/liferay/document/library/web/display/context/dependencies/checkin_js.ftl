@@ -5,16 +5,15 @@ Liferay.provide(
 		Liferay.Portlet.DocumentLibrary.Checkin.showDialog(
 			'${namespace}versionDetails',
 			'${dialogTitle}',
-			function(event) {
-				var $ = AUI.$;
-
+			['${namespace}versionDetailsMajorVersion', '${namespace}versionDetailsChangeLog'],
+			function(event, nodes) {
 				var portletURL = new Liferay.PortletURL(null, null, saveURL);
 
-				var majorVersionNode = $("input:radio[name='${namespace}versionDetailsMajorVersion']:checked");
+				var majorVersionNode = nodes[0];
 
-				portletURL.setParameter('majorVersion', majorVersionNode.val());
+				portletURL.setParameter('majorVersion', majorVersionNode.attr('checked'));
 
-				var changeLogNode = $('#${namespace}versionDetailsChangeLog');
+				var changeLogNode = nodes[1];
 
 				portletURL.setParameter('changeLog', changeLogNode.val());
 

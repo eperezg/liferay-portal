@@ -24,8 +24,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 @ConfigurationAdmin(category = "collaboration")
 @Meta.OCD(
 	id = "com.liferay.document.library.repository.cmis.configuration.CMISRepositoryConfiguration",
-	localization = "content/Language",
-	name = "%cmis.repository.configuration.name"
+	localization = "content/Language"
 )
 public interface CMISRepositoryConfiguration {
 

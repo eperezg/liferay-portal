@@ -58,7 +58,7 @@ public class PortalCacheConfiguration {
 	}
 
 	public Set<Properties> getPortalCacheListenerPropertiesSet() {
-		return _portalCacheListenerPropertiesSet;
+		return Collections.unmodifiableSet(_portalCacheListenerPropertiesSet);
 	}
 
 	public String getPortalCacheName() {
@@ -73,14 +73,7 @@ public class PortalCacheConfiguration {
 			_portalCacheBootstrapLoaderProperties);
 	}
 
-	public void setPortalCacheBootstrapLoaderProperties(
-		Properties portalCacheBootstrapLoaderProperties) {
-
-		_portalCacheBootstrapLoaderProperties =
-			portalCacheBootstrapLoaderProperties;
-	}
-
-	private Properties _portalCacheBootstrapLoaderProperties;
+	private final Properties _portalCacheBootstrapLoaderProperties;
 	private final Set<Properties> _portalCacheListenerPropertiesSet;
 	private final String _portalCacheName;
 

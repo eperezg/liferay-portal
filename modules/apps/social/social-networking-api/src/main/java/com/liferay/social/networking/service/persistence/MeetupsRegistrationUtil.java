@@ -678,6 +678,13 @@ public class MeetupsRegistrationUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(MeetupsRegistrationPersistence persistence) {
+	}
+
 	private static ServiceTracker<MeetupsRegistrationPersistence, MeetupsRegistrationPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(MeetupsRegistrationPersistence.class);
 }

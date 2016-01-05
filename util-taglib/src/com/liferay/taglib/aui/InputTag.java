@@ -309,12 +309,12 @@ public class InputTag extends BaseInputTag {
 	}
 
 	protected void updateFormCheckboxNames() {
-		if (!Validator.equals(getBaseType(), "checkbox")) {
+		if (!Validator.equals(getType(), "checkbox")) {
 			return;
 		}
 
 		List<String> checkboxNames = (List<String>)request.getAttribute(
-			"LIFERAY_SHARED_aui:form:checkboxNames");
+			"aui:form:checkboxNames");
 
 		if (checkboxNames != null) {
 			String inputName = getInputName();

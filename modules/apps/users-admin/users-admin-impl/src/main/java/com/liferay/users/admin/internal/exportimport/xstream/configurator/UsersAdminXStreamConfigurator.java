@@ -16,11 +16,9 @@ package com.liferay.users.admin.internal.exportimport.xstream.configurator;
 
 import com.liferay.exportimport.xstream.configurator.XStreamConfigurator;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portlet.exportimport.xstream.XStreamAlias;
 import com.liferay.portlet.exportimport.xstream.XStreamConverter;
-import com.liferay.portlet.exportimport.xstream.XStreamType;
 
 import java.util.List;
 
@@ -32,11 +30,6 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(immediate = true, service = XStreamConfigurator.class)
 public class UsersAdminXStreamConfigurator implements XStreamConfigurator {
-
-	@Override
-	public List<XStreamType> getAllowedXStreamTypes() {
-		return ListUtil.toList(_xStreamTypes);
-	}
 
 	@Override
 	public List<XStreamAlias> getXStreamAliases() {
@@ -53,11 +46,8 @@ public class UsersAdminXStreamConfigurator implements XStreamConfigurator {
 		_xStreamAliases = new XStreamAlias[] {
 			new XStreamAlias(OrganizationImpl.class, "Organization")
 		};
-
-		_xStreamTypes = new XStreamType[] {new XStreamType(OrgLaborImpl.class)};
 	}
 
 	private XStreamAlias[] _xStreamAliases;
-	private XStreamType[] _xStreamTypes;
 
 }

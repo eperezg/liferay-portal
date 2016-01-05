@@ -2034,6 +2034,14 @@ public class UserWrapper implements User, ModelWrapper<User> {
 		return _user.getStagedModelType();
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public User getWrappedUser() {
+		return _user;
+	}
+
 	@Override
 	public User getWrappedModel() {
 		return _user;

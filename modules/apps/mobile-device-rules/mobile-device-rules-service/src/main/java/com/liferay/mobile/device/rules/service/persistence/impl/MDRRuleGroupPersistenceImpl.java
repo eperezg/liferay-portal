@@ -45,7 +45,6 @@ import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
@@ -108,8 +107,7 @@ public class MDRRuleGroupPersistenceImpl extends BasePersistenceImpl<MDRRuleGrou
 			MDRRuleGroupModelImpl.FINDER_CACHE_ENABLED, MDRRuleGroupImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
 			new String[] { String.class.getName() },
-			MDRRuleGroupModelImpl.UUID_COLUMN_BITMASK |
-			MDRRuleGroupModelImpl.CREATEDATE_COLUMN_BITMASK);
+			MDRRuleGroupModelImpl.UUID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(MDRRuleGroupModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
@@ -907,8 +905,7 @@ public class MDRRuleGroupPersistenceImpl extends BasePersistenceImpl<MDRRuleGrou
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid_C",
 			new String[] { String.class.getName(), Long.class.getName() },
 			MDRRuleGroupModelImpl.UUID_COLUMN_BITMASK |
-			MDRRuleGroupModelImpl.COMPANYID_COLUMN_BITMASK |
-			MDRRuleGroupModelImpl.CREATEDATE_COLUMN_BITMASK);
+			MDRRuleGroupModelImpl.COMPANYID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_C = new FinderPath(MDRRuleGroupModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid_C",
@@ -1492,8 +1489,7 @@ public class MDRRuleGroupPersistenceImpl extends BasePersistenceImpl<MDRRuleGrou
 			MDRRuleGroupModelImpl.FINDER_CACHE_ENABLED, MDRRuleGroupImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
 			new String[] { Long.class.getName() },
-			MDRRuleGroupModelImpl.GROUPID_COLUMN_BITMASK |
-			MDRRuleGroupModelImpl.CREATEDATE_COLUMN_BITMASK);
+			MDRRuleGroupModelImpl.GROUPID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(MDRRuleGroupModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
@@ -2956,8 +2952,6 @@ public class MDRRuleGroupPersistenceImpl extends BasePersistenceImpl<MDRRuleGrou
 
 		mdrRuleGroup.setUuid(uuid);
 
-		mdrRuleGroup.setCompanyId(companyProvider.getCompanyId());
-
 		return mdrRuleGroup;
 	}
 
@@ -3603,7 +3597,7 @@ public class MDRRuleGroupPersistenceImpl extends BasePersistenceImpl<MDRRuleGrou
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@ServiceReference(type = CompanyProviderWrapper.class)
+	@ServiceReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

@@ -972,6 +972,13 @@ public class DDMContentUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(DDMContentPersistence persistence) {
+	}
+
 	private static ServiceTracker<DDMContentPersistence, DDMContentPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(DDMContentPersistence.class);
 }

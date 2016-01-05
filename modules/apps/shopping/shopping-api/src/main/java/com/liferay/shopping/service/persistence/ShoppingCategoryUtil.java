@@ -821,6 +821,13 @@ public class ShoppingCategoryUtil {
 		return _serviceTracker.getService();
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(ShoppingCategoryPersistence persistence) {
+	}
+
 	private static ServiceTracker<ShoppingCategoryPersistence, ShoppingCategoryPersistence> _serviceTracker =
 		ServiceTrackerFactory.open(ShoppingCategoryPersistence.class);
 }

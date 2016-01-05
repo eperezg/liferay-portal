@@ -40,7 +40,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletModelImpl;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.PortletPersistence;
 
 import java.io.Serializable;
@@ -990,8 +989,6 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		portlet.setNew(true);
 		portlet.setPrimaryKey(id);
 
-		portlet.setCompanyId(companyProvider.getCompanyId());
-
 		return portlet;
 	}
 
@@ -1560,7 +1557,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

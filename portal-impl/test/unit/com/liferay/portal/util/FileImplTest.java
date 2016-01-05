@@ -26,7 +26,7 @@ import org.junit.Test;
 public class FileImplTest {
 
 	@Test
-	public void testAppendParentheticalSuffixWhenFileNameHasParenthesis() {
+	public void testAppendSuffixWhenFileNameHasParenthesis() {
 		String fileName = _fileImpl.appendParentheticalSuffix(
 			"test(1).jsp", "1");
 
@@ -34,7 +34,7 @@ public class FileImplTest {
 	}
 
 	@Test
-	public void testAppendParentheticalSuffixWithMultipleCharacterValue() {
+	public void testAppendSuffixWithMultipleCharacterValue() {
 		String fileName = _fileImpl.appendParentheticalSuffix(
 			"test.jsp", "1!$eae1");
 
@@ -42,7 +42,7 @@ public class FileImplTest {
 	}
 
 	@Test
-	public void testAppendParentheticalSuffixWithMultipleNumericalValue() {
+	public void testAppendSuffixWithMultipleNumericalValue() {
 		String fileName = _fileImpl.appendParentheticalSuffix(
 			"test.jsp", "1111111");
 
@@ -50,7 +50,7 @@ public class FileImplTest {
 	}
 
 	@Test
-	public void testAppendParentheticalSuffixWithMultipleStringValue() {
+	public void testAppendSuffixWithMultipleStringValue() {
 		String fileName = _fileImpl.appendParentheticalSuffix(
 			"test.jsp", "AAAAAAA");
 
@@ -58,9 +58,7 @@ public class FileImplTest {
 	}
 
 	@Test
-	public void
-		testAppendParentheticalSuffixWithMultipleStringWithSpaceValue() {
-
+	public void testAppendSuffixWithMultipleStringWithSpaceValue() {
 		String fileName = _fileImpl.appendParentheticalSuffix(
 			"test.jsp", "A B");
 
@@ -68,27 +66,17 @@ public class FileImplTest {
 	}
 
 	@Test
-	public void testAppendParentheticalSuffixWithSingleNumericalValue() {
+	public void testAppendSuffixWithSingleNumericalValue() {
 		String fileName = _fileImpl.appendParentheticalSuffix("test.jsp", "1");
 
 		Assert.assertEquals("test (1).jsp", fileName);
 	}
 
 	@Test
-	public void testAppendParentheticalSuffixWithSingleStringValue() {
+	public void testAppendSuffixWithSingleStringValue() {
 		String fileName = _fileImpl.appendParentheticalSuffix("test.jsp", "A");
 
 		Assert.assertEquals("test (A).jsp", fileName);
-	}
-
-	@Test
-	public void testAppendSuffix() {
-		Assert.assertEquals("test_rtl", _fileImpl.appendSuffix("test", "_rtl"));
-		Assert.assertEquals(
-			"test_rtl.css", _fileImpl.appendSuffix("test.css", "_rtl"));
-		Assert.assertEquals(
-			"/folder/test_rtl.css",
-			_fileImpl.appendSuffix("/folder/test.css", "_rtl"));
 	}
 
 	@Test

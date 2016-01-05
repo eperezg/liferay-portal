@@ -147,5 +147,6 @@
 		<exception>RecordSetDDMStructureId</exception>
 		<exception>RecordSetDuplicateRecordSetKey</exception>
 		<exception>RecordSetName</exception>
+		<exception>RecordSetSettings</exception>
 	</exceptions>
 </service-builder>

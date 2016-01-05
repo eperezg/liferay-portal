@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 
 import java.util.Enumeration;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -79,29 +78,13 @@ public class RequestDispatcherUtil {
 					return HttpMethods.GET;
 				}
 
-			},
-			bufferCacheServletResponse);
+			}, bufferCacheServletResponse);
 
 		return new ObjectValuePair<>(
 			bufferCacheServletResponse.getString(),
 			GetterUtil.getLong(
 				bufferCacheServletResponse.getHeader(HttpHeaders.LAST_MODIFIED),
 				-1));
-	}
-
-	public static String getEffectivePath(HttpServletRequest request) {
-		DispatcherType dispatcherType = request.getDispatcherType();
-
-		if (dispatcherType.equals(DispatcherType.FORWARD)) {
-			return (String)request.getAttribute(
-				RequestDispatcher.FORWARD_SERVLET_PATH);
-		}
-		else if (dispatcherType.equals(DispatcherType.INCLUDE)) {
-			return (String)request.getAttribute(
-				RequestDispatcher.INCLUDE_SERVLET_PATH);
-		}
-
-		return request.getServletPath();
 	}
 
 	public static long getLastModifiedTime(
@@ -120,8 +103,7 @@ public class RequestDispatcherUtil {
 					return HttpMethods.HEAD;
 				}
 
-			},
-			metaInfoCacheServletResponse);
+			}, metaInfoCacheServletResponse);
 
 		return GetterUtil.getLong(
 			metaInfoCacheServletResponse.getHeader(HttpHeaders.LAST_MODIFIED),

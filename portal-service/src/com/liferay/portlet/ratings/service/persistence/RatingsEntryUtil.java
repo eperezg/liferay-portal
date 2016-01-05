@@ -1037,5 +1037,12 @@ public class RatingsEntryUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(RatingsEntryPersistence persistence) {
+	}
+
 	private static RatingsEntryPersistence _persistence;
 }

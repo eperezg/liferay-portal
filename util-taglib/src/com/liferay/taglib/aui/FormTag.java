@@ -79,8 +79,7 @@ public class FormTag extends BaseFormTag {
 			super.setAction(HtmlUtil.escape(action));
 		}
 
-		request.setAttribute(
-			"LIFERAY_SHARED_aui:form:checkboxNames", _checkboxNames);
+		request.setAttribute("aui:form:checkboxNames", _checkboxNames);
 		request.setAttribute("aui:form:validatorTagsMap", _validatorTagsMap);
 	}
 

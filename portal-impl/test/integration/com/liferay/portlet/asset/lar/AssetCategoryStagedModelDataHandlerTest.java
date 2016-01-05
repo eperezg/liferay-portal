@@ -20,6 +20,7 @@ import com.liferay.portal.lar.test.BaseStagedModelDataHandlerTestCase;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -44,7 +45,8 @@ public class AssetCategoryStagedModelDataHandlerTest
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			TransactionalTestRule.INSTANCE);
 
 	@Override
 	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
@@ -135,22 +137,6 @@ public class AssetCategoryStagedModelDataHandlerTest
 
 		AssetVocabularyLocalServiceUtil.getAssetVocabularyByUuidAndGroupId(
 			vocabulary.getUuid(), group.getGroupId());
-	}
-
-	@Override
-	protected void validateImportedStagedModel(
-			StagedModel stagedModel, StagedModel importedStagedModel)
-		throws Exception {
-
-		super.validateImportedStagedModel(stagedModel, importedStagedModel);
-
-		AssetCategory category = (AssetCategory)stagedModel;
-		AssetCategory importedCategory = (AssetCategory)importedStagedModel;
-
-		Assert.assertEquals(category.getName(), importedCategory.getName());
-		Assert.assertEquals(category.getTitle(), importedCategory.getTitle());
-		Assert.assertEquals(
-			category.getDescription(), importedCategory.getDescription());
 	}
 
 }

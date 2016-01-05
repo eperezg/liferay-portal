@@ -41,7 +41,6 @@ import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
@@ -2628,8 +2627,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 		ddmContent.setUuid(uuid);
 
-		ddmContent.setCompanyId(companyProvider.getCompanyId());
-
 		return ddmContent;
 	}
 
@@ -3290,7 +3287,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@ServiceReference(type = CompanyProviderWrapper.class)
+	@ServiceReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;

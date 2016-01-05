@@ -96,7 +96,7 @@ List fileEntries = DLAppServiceUtil.getGroupFileEntries(scopeGroupId, 0, folderI
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 	</portlet:actionURL>
 
-	<liferay-trash:undo
+	<liferay-ui:trash-undo
 		portletURL="<%= restoreTrashEntriesURL %>"
 	/>
 

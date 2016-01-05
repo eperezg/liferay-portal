@@ -144,14 +144,20 @@ public class DDLRecordSetServiceUtil {
 	}
 
 	public static com.liferay.dynamic.data.lists.model.DDLRecordSet updateRecordSet(
-		long recordSetId,
-		com.liferay.dynamic.data.mapping.storage.DDMFormValues settingsDDMFormValues)
+		long recordSetId, java.lang.String settings)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().updateRecordSet(recordSetId, settingsDDMFormValues);
+		return getService().updateRecordSet(recordSetId, settings);
 	}
 
 	public static DDLRecordSetService getService() {
 		return _serviceTracker.getService();
+	}
+
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(DDLRecordSetService service) {
 	}
 
 	private static ServiceTracker<DDLRecordSetService, DDLRecordSetService> _serviceTracker =

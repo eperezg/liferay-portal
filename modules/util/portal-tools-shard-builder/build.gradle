@@ -1,4 +1,0 @@
-dependencies {
-	provided fileTree(dir: "third-party", include: "*.jar")
-	provided group: "com.zaxxer", name: "HikariCP", version: "2.4.1"
-}

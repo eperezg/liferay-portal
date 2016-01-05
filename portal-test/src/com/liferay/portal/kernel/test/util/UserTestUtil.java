@@ -47,7 +47,11 @@ import java.util.Locale;
 public class UserTestUtil {
 
 	public static User addCompanyAdminUser(Company company) throws Exception {
-		User user = addUser(company);
+		User user = addUser();
+
+		user.setCompanyId(company.getCompanyId());
+
+		UserLocalServiceUtil.updateUser(user);
 
 		Role role = RoleLocalServiceUtil.getRole(
 			company.getCompanyId(), RoleConstants.ADMINISTRATOR);
@@ -179,16 +183,6 @@ public class UserTestUtil {
 				birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
 				userGroupIds, sendMail, serviceContext);
 		}
-	}
-
-	public static User addUser(Company company) throws Exception {
-		return addUser(
-			company.getCompanyId(), TestPropsValues.getUserId(),
-			RandomTestUtil.randomString(NumericStringRandomizerBumper.INSTANCE),
-			LocaleUtil.getDefault(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(),
-			new long[] {TestPropsValues.getGroupId()},
-			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static User addUser(long... groupIds) throws Exception {

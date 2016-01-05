@@ -40,13 +40,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class PollsDisplayPortletDataHandler extends BasePortletDataHandler {
 
-	public static final String SCHEMA_VERSION = "1.0.0";
-
-	@Override
-	public String getSchemaVersion() {
-		return SCHEMA_VERSION;
-	}
-
 	@Activate
 	protected void activate() {
 		setDataLevel(DataLevel.PORTLET_INSTANCE);

@@ -288,8 +288,6 @@
 
 	<command name="gotoPreviewEdit">
 		<execute function="AssertClick" locator1="WorkflowSubmissionsTask#PREVIEW_EDIT" value1="Edit" />
-
-		<execute function="SelectFrame" locator1="IFrame#EDIT_ASSET" />
 	</command>
 
 	<command name="gotoPreviewView">
@@ -447,8 +445,8 @@
 	</command>
 
 	<command name="tearDownPortalWorkflow">
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
-			<var name="portlet" value="Workflow Configuration" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Workflow Configuration" />
 		</execute>
 
 		<var name="noWorkflow" value="Default: No Workflow" />
@@ -497,8 +495,8 @@
 	</command>
 
 	<command name="tearDownSpecificWorkflowDefinition">
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
-			<var name="portlet" value="Workflow Definition" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Workflow Definition" />
 		</execute>
 
 		<var name="key_workflowDefinitionTitle" value="${workflowDefinitionTitle}" />
@@ -516,8 +514,8 @@
 	</command>
 
 	<command name="tearDownWorkflowDefinitionDraftsViaKDCP">
-		<execute macro="ProductMenu#gotoControlPanelApps">
-			<var name="portlet" value="Kaleo Designer" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Kaleo Designer" />
 		</execute>
 
 		<while>
@@ -536,8 +534,8 @@
 	</command>
 
 	<command name="tearDownWorkflowDefinitionsViaWorkflowCP">
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
-			<var name="portlet" value="Workflow Definition" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Workflow Definition" />
 		</execute>
 
 		<while>

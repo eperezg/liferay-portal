@@ -66,6 +66,7 @@ String notificationTemplateBody = BeanPropertiesUtil.getString(calendarNotificat
 			label="reminder-email"
 			selected='<%= tabs3.equals("reminder-email") %>'
 		/>
+
 	</aui:nav>
 </aui:nav-bar>
 

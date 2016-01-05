@@ -26,6 +26,7 @@ import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 
 import java.util.Collections;
@@ -46,7 +47,8 @@ public class UserGroupMembershipPolicyMembershipsTest
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@After
 	@Override

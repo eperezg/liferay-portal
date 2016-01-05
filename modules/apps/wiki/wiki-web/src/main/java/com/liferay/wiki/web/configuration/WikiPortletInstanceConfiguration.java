@@ -21,14 +21,9 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 /**
  * @author Iván Zaera
  */
-@ConfigurationAdmin(
-	category = "collaboration",
-	scope = ConfigurationAdmin.Scope.PORTLET_INSTANCE
-)
+@ConfigurationAdmin(category = "collaboration")
 @Meta.OCD(
-	id = "com.liferay.wiki.configuration.WikiPortletInstanceConfiguration",
-	localization = "content/Language",
-	name = "%wiki.portlet.instance.configuration.name"
+	id = "com.liferay.wiki.configuration.WikiPortletInstanceConfiguration"
 )
 public interface WikiPortletInstanceConfiguration {
 

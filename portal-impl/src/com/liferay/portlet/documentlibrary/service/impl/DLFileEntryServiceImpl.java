@@ -27,9 +27,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.documentlibrary.FileEntryLockException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -102,8 +100,12 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		boolean isLocked = LockManagerUtil.isLocked(
 			DLFileEntry.class.getName(), fileEntryId);
 
-		if (isLocked && !hasFileEntryLock(fileEntryId)) {
-			throw new FileEntryLockException.MustOwnLock();
+		if (isLocked && !hasFileEntryLock(fileEntryId) &&
+			!_hasOverrideCheckoutPermission(fileEntryId)) {
+
+			throw new PrincipalException.MustHavePermission(
+				getUserId(), DLFileEntry.class.getName(), fileEntryId,
+				ActionKeys.OVERRIDE_CHECKOUT);
 		}
 
 		dlFileEntryLocalService.checkInFileEntry(
@@ -127,11 +129,12 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			long fileEntryId, String lockUuid, ServiceContext serviceContext)
 		throws PortalException {
 
-		boolean locked = LockManagerUtil.isLocked(
-			DLFileEntryConstants.getClassName(), fileEntryId);
+		if (!hasFileEntryLock(fileEntryId) &&
+			!_hasOverrideCheckoutPermission(fileEntryId)) {
 
-		if (locked && !hasFileEntryLock(fileEntryId)) {
-			throw new FileEntryLockException.MustOwnLock();
+			throw new PrincipalException.MustHavePermission(
+				getUserId(), DLFileEntry.class.getName(), fileEntryId,
+				ActionKeys.OVERRIDE_CHECKOUT);
 		}
 
 		dlFileEntryLocalService.checkInFileEntry(
@@ -680,17 +683,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
-
-		if (LockManagerUtil.isLocked(
-				DLFileEntryConstants.getClassName(), fileEntryId)) {
-
-			boolean hasLock = LockManagerUtil.hasLock(
-				getUserId(), DLFileEntry.class.getName(), fileEntryId);
-
-			if (!hasLock) {
-				throw new FileEntryLockException.MustOwnLock();
-			}
-		}
 
 		return dlFileEntryLocalService.updateFileEntry(
 			getUserId(), fileEntryId, sourceFileName, mimeType, title,

@@ -22,14 +22,9 @@ import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 /**
  * @author Juergen Kappler
  */
-@ConfigurationAdmin(
-	category = "web-experience-management",
-	scope = ConfigurationAdmin.Scope.GROUP
-)
+@ConfigurationAdmin(category = "web-experience-management")
 @Meta.OCD(
-	id = "com.liferay.journal.configuration.JournalGroupServiceConfiguration",
-	localization = "content/Language",
-	name = "%journal.group.service.configuration.name"
+	id = "com.liferay.journal.configuration.JournalGroupServiceConfiguration"
 )
 public interface JournalGroupServiceConfiguration {
 

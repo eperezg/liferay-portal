@@ -44,7 +44,7 @@ public class DDLRecordSetSettingsConfigurationIconFactory
 
 	@Override
 	public double getWeight() {
-		return 110.0;
+		return 100.0;
 	}
 
 }

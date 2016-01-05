@@ -5,6 +5,3 @@ Export-Package:\
 	com.liferay.frontend.editor.lang
 Include-Resource:\
 	classes
-Liferay-Releng-Module-Group-Description:
-Liferay-Releng-Module-Group-Title: Rich Text Editors
--include: ../../../../marketplace/platform/bnd.bnd

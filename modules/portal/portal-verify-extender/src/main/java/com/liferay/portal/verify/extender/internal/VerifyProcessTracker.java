@@ -215,8 +215,7 @@ public class VerifyProcessTracker {
 					executeVerifyProcess(verifyProcessName, outputStream);
 				}
 
-			},
-			outputStreamName, outputStream);
+			}, outputStreamName, outputStream);
 
 		close(outputStream);
 	}

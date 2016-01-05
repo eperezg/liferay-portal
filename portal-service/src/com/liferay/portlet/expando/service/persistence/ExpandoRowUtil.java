@@ -642,5 +642,12 @@ public class ExpandoRowUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(ExpandoRowPersistence persistence) {
+	}
+
 	private static ExpandoRowPersistence _persistence;
 }

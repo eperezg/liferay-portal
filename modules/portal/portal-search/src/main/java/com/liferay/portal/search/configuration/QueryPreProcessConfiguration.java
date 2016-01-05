@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
-	id = "com.liferay.portal.search.configuration.QueryPreProcessConfiguration",
-	localization = "content/Language",
-	name = "%query.pre.process.configuration.name"
+	id = "com.liferay.portal.search.configuration.QueryPreProcessConfiguration"
 )
 public interface QueryPreProcessConfiguration {
 

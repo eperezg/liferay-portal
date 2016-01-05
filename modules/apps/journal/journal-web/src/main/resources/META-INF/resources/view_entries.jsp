@@ -25,14 +25,32 @@ request.setAttribute("view.jsp-total", String.valueOf(articleSearchContainer.get
 
 request.setAttribute("view_entries.jsp-entryStart", String.valueOf(articleSearchContainer.getStart()));
 request.setAttribute("view_entries.jsp-entryEnd", String.valueOf(articleSearchContainer.getEnd()));
+%>
 
+<c:if test="<%= ListUtil.isEmpty(articleSearchContainer.getResults()) %>">
+	<div class="alert alert-info entries-empty">
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(journalDisplayContext.getDDMStructureKey()) %>">
+				<c:if test="<%= articleSearchContainer.getTotal() == 0 %>">
+					<liferay-ui:message arguments="<%= HtmlUtil.escape(journalDisplayContext.getDdmStructureName()) %>" key="there-is-no-web-content-with-structure-x" translateArguments="<%= false %>" />
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<c:if test="<%= articleSearchContainer.getTotal() == 0 %>">
+					<liferay-ui:message key="no-web-content-was-found" />
+				</c:if>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</c:if>
+
+<%
 String displayStyle = journalDisplayContext.getDisplayStyle();
 
 String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 %>
 
 <liferay-ui:search-container
-	emptyResultsMessage="no-web-content-was-found"
 	id="<%= searchContainerId %>"
 	searchContainer="<%= articleSearchContainer %>"
 >
@@ -112,7 +130,7 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 							<h5>
 								<aui:a href="<%= rowURL != null ? rowURL.toString() : null %>">
-									<%= HtmlUtil.escape(curArticle.getTitle(locale)) %>
+									<%= curArticle.getTitle(locale) %>
 								</aui:a>
 							</h5>
 
@@ -123,7 +141,6 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 						<c:if test="<%= journalDisplayContext.isShowEditActions() %>">
 							<liferay-ui:search-container-column-jsp
-								cssClass="list-group-item-field"
 								path="/article_action.jsp"
 							/>
 						</c:if>
@@ -140,34 +157,38 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 							String articleImageURL = curArticle.getArticleImageURL(themeDisplay);
 							%>
 
-							<c:choose>
-								<c:when test="<%= Validator.isNotNull(articleImageURL) %>">
-									<liferay-frontend:vertical-card
-										actionJsp='<%= journalDisplayContext.isShowEditActions() ? "/article_action.jsp" : null %>'
-										actionJspServletContext="<%= application %>"
-										imageUrl="<%= articleImageURL %>"
-										resultRow="<%= row %>"
-										rowChecker="<%= articleSearchContainer.getRowChecker() %>"
-										title="<%= curArticle.getTitle(locale) %>"
-										url="<%= rowURL != null ? rowURL.toString() : null %>"
-									>
-										<%@ include file="/article_vertical_card.jspf" %>
-									</liferay-frontend:vertical-card>
-								</c:when>
-								<c:otherwise>
-									 <liferay-frontend:icon-vertical-card
-										actionJsp='<%= journalDisplayContext.isShowEditActions() ? "/article_action.jsp" : null %>'
-										actionJspServletContext="<%= application %>"
-										icon="web-content"
-										resultRow="<%= row %>"
-										rowChecker="<%= articleSearchContainer.getRowChecker() %>"
-										title="<%= curArticle.getTitle(locale) %>"
-										url="<%= rowURL != null ? rowURL.toString() : null %>"
-									>
-										 <%@ include file="/article_vertical_card.jspf" %>
-									</liferay-frontend:icon-vertical-card>
-								</c:otherwise>
-							</c:choose>
+							<liferay-frontend:vertical-card
+								actionJsp='<%= journalDisplayContext.isShowEditActions() ? "/article_action.jsp" : null %>'
+								actionJspServletContext="<%= application %>"
+								imageUrl='<%= Validator.isNotNull(articleImageURL) ? articleImageURL : themeDisplay.getPathThemeImages() + "/file_system/large/article.png" %>'
+								resultRow="<%= row %>"
+								rowChecker="<%= articleSearchContainer.getRowChecker() %>"
+								title="<%= curArticle.getTitle(locale) %>"
+								url="<%= rowURL != null ? rowURL.toString() : null %>"
+							>
+								<liferay-frontend:vertical-card-sticker-bottom>
+									<liferay-ui:user-portrait
+										cssClass="sticker sticker-bottom"
+										imageCssClass="user-icon-lg"
+										userId="<%= curArticle.getUserId() %>"
+									/>
+								</liferay-frontend:vertical-card-sticker-bottom>
+
+								<liferay-frontend:vertical-card-header>
+
+									<%
+									Date createDate = curArticle.getModifiedDate();
+
+									String modifiedDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - createDate.getTime(), true);
+									%>
+
+									<liferay-ui:message arguments="<%= new String[] {curArticle.getUserName(), modifiedDateDescription} %>" key="x-modified-x-ago" />
+								</liferay-frontend:vertical-card-header>
+
+								<liferay-frontend:vertical-card-footer>
+									<aui:workflow-status markupView="lexicon" showIcon="<%= false %>" showLabel="<%= false %>" status="<%= curArticle.getStatus() %>" />
+								</liferay-frontend:vertical-card-footer>
+							</liferay-frontend:vertical-card>
 						</liferay-ui:search-container-column-text>
 					</c:when>
 					<c:otherwise>
@@ -213,7 +234,8 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 						<c:if test="<%= journalDisplayContext.isShowEditActions() %>">
 							<liferay-ui:search-container-column-jsp
-								cssClass="list-group-item-field"
+								align="right"
+								cssClass="checkbox-cell entry-action"
 								path="/article_action.jsp"
 							/>
 						</c:if>
@@ -276,7 +298,6 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 						<c:if test="<%= journalDisplayContext.isShowEditActions() %>">
 							<liferay-ui:search-container-column-jsp
-								cssClass="list-group-item-field"
 								path="/folder_action.jsp"
 							/>
 						</c:if>
@@ -340,7 +361,8 @@ String searchContainerId = ParamUtil.getString(request, "searchContainerId");
 
 						<c:if test="<%= journalDisplayContext.isShowEditActions() %>">
 							<liferay-ui:search-container-column-jsp
-								cssClass="list-group-item-field"
+								align="right"
+								cssClass="checkbox-cell entry-action"
 								path="/folder_action.jsp"
 							/>
 						</c:if>

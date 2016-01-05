@@ -83,9 +83,9 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 			</div>
 		</div>
 
-		<aui:button-row>
-			<aui:button cssClass="btn-lg" name="chooseDisplayPage" value="choose" />
-		</aui:button-row>
+		<div>
+			<aui:button name="chooseDisplayPage" value="choose" />
+		</div>
 
 		<c:if test="<%= (article != null) && Validator.isNotNull(layoutUuid) %>">
 

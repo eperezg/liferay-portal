@@ -238,12 +238,6 @@ AUI.add(
 						return ids;
 					},
 
-					getForm: function() {
-						var instance = this;
-
-						return instance.get(STR_BOUNDING_BOX).ancestor('form');
-					},
-
 					getSize: function() {
 						var instance = this;
 

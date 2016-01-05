@@ -296,6 +296,23 @@ public class MeetupsRegistrationLocalServiceWrapper
 			meetupsEntryId, status, comments);
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
+	 */
+	@Deprecated
+	public MeetupsRegistrationLocalService getWrappedMeetupsRegistrationLocalService() {
+		return _meetupsRegistrationLocalService;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #setWrappedService}
+	 */
+	@Deprecated
+	public void setWrappedMeetupsRegistrationLocalService(
+		MeetupsRegistrationLocalService meetupsRegistrationLocalService) {
+		_meetupsRegistrationLocalService = meetupsRegistrationLocalService;
+	}
+
 	@Override
 	public MeetupsRegistrationLocalService getWrappedService() {
 		return _meetupsRegistrationLocalService;

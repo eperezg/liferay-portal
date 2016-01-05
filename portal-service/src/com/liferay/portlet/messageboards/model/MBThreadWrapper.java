@@ -232,6 +232,15 @@ public class MBThreadWrapper implements MBThread, ModelWrapper<MBThread> {
 		return _mbThread.compareTo(mbThread);
 	}
 
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Deprecated
+	@Override
+	public boolean getApproved() {
+		return _mbThread.getApproved();
+	}
+
 	@Override
 	public long getAttachmentsFolderId() {
 		return _mbThread.getAttachmentsFolderId();
@@ -1119,6 +1128,14 @@ public class MBThreadWrapper implements MBThread, ModelWrapper<MBThread> {
 	@Override
 	public StagedModelType getStagedModelType() {
 		return _mbThread.getStagedModelType();
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public MBThread getWrappedMBThread() {
+		return _mbThread;
 	}
 
 	@Override

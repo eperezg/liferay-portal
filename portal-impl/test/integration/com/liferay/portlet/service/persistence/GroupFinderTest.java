@@ -38,6 +38,7 @@ import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceTypePermissionLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupFinderUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.portal.util.test.LayoutTestUtil;
@@ -63,7 +64,8 @@ public class GroupFinderTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			new LiferayIntegrationTestRule(), TransactionalTestRule.INSTANCE);
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE,
+			TransactionalTestRule.INSTANCE);
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

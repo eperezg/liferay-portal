@@ -20,6 +20,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.usergroupsadmin.search.SetUserUserGroupChecker;
 import com.liferay.portlet.usergroupsadmin.search.UnsetUserUserGroupChecker;
 
@@ -41,7 +42,8 @@ public class UserGroupMembershipPolicyRowCheckerTest
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testIsCheckerDisabledWhenSettingForbiddenUserGroupToUser()

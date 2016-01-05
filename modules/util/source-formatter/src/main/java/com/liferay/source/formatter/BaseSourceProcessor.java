@@ -215,22 +215,13 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 
 			if (insideQuotes) {
 				if (c == delimeter) {
-					int precedingBackSlashCount = 0;
+					if ((c > 1) && (s.charAt(i - 1) == CharPool.BACK_SLASH) &&
+						(s.charAt(i - 2) != CharPool.BACK_SLASH)) {
 
-					for (int j = (i - 1); j >= 0; j--) {
-						if (s.charAt(j) == CharPool.BACK_SLASH) {
-							precedingBackSlashCount += 1;
-						}
-						else {
-							break;
-						}
+						continue;
 					}
 
-					if ((precedingBackSlashCount == 0) ||
-						((precedingBackSlashCount % 2) == 0)) {
-
-						insideQuotes = false;
-					}
+					insideQuotes = false;
 				}
 			}
 			else if (c == delimeter) {

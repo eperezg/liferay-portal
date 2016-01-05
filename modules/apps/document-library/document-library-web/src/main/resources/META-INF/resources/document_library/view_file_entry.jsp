@@ -16,8 +16,6 @@
 
 <%@ include file="/document_library/init.jsp" %>
 
-<liferay-util:dynamic-include key="com.liferay.document.library.web#/document_library/view_file_entry.jsp#pre" />
-
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
@@ -403,6 +401,7 @@ if (portletTitleBasedNavigation) {
 											requestedLocale="<%= locale %>"
 											showEmptyFieldLabel="<%= false %>"
 										/>
+
 									</liferay-ui:panel>
 
 							<%
@@ -454,6 +453,7 @@ if (portletTitleBasedNavigation) {
 												requestedLocale="<%= locale %>"
 												showEmptyFieldLabel="<%= false %>"
 											/>
+
 										</liferay-ui:panel>
 
 							<%
@@ -555,7 +555,7 @@ if (portletTitleBasedNavigation) {
 											<aui:input name="targetFileVersionId" type="hidden" value="<%= fileVersion.getFileVersionId() %>" />
 
 											<aui:button-row>
-												<aui:button cssClass="btn-lg" type="submit" value="compare-versions" />
+												<aui:button type="submit" value="compare-versions" />
 											</aui:button-row>
 										</aui:form>
 
@@ -687,5 +687,3 @@ if (addPortletBreadcrumbEntries) {
 	DLBreadcrumbUtil.addPortletBreadcrumbEntries(fileEntry, request, renderResponse);
 }
 %>
-
-<liferay-util:dynamic-include key="com.liferay.document.library.web#/document_library/view_file_entry.jsp#post" />

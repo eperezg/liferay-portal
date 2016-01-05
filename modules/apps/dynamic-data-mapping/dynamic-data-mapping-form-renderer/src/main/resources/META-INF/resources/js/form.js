@@ -113,11 +113,9 @@ AUI.add(
 
 						var definition = instance.get('definition');
 
-						var defaultLanguageId = themeDisplay.getLanguageId();
-
 						return {
-							availableLanguageIds: [defaultLanguageId],
-							defaultLanguageId: defaultLanguageId,
+							availableLanguageIds: definition.availableLanguageIds,
+							defaultLanguageId: definition.defaultLanguageId,
 							fieldValues: AArray.invoke(instance.getImmediateFields(), 'toJSON')
 						};
 					},

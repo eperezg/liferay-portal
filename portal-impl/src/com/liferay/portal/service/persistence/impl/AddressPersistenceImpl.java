@@ -44,7 +44,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 
 import java.io.Serializable;
 
@@ -4685,8 +4684,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 
 		address.setUuid(uuid);
 
-		address.setCompanyId(companyProvider.getCompanyId());
-
 		return address;
 	}
 
@@ -5442,7 +5439,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

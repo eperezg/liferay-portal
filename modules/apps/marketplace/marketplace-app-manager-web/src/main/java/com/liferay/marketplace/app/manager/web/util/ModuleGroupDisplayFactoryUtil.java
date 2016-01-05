@@ -17,7 +17,7 @@ package com.liferay.marketplace.app.manager.web.util;
 import com.liferay.marketplace.app.manager.web.constants.BundleConstants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Dictionary;
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class ModuleGroupDisplayFactoryUtil {
 		if (moduleGroupTitle.equals(
 				ModuleGroupDisplay.MODULE_GROUP_TITLE_UNCATEGORIZED)) {
 
-			moduleGroupTitle = StringPool.BLANK;
+			moduleGroupTitle = null;
 		}
 
 		List<Bundle> bundles = appDisplay.getBundles();
@@ -49,10 +49,15 @@ public class ModuleGroupDisplayFactoryUtil {
 		for (Bundle bundle : bundles) {
 			Dictionary<String, String> headers = bundle.getHeaders();
 
-			String curModuleGroupTitle = GetterUtil.getString(
-				headers.get(BundleConstants.LIFERAY_RELENG_MODULE_GROUP_TITLE));
+			String curModuleGroupTitle = headers.get(
+				BundleConstants.LIFERAY_RELENG_MODULE_GROUP_TITLE);
 
-			if (!moduleGroupTitle.equals(curModuleGroupTitle)) {
+			if (Validator.isNotNull(moduleGroupTitle) &&
+				!moduleGroupTitle.equals(curModuleGroupTitle)) {
+
+				continue;
+			}
+			else if (curModuleGroupTitle == null) {
 				continue;
 			}
 

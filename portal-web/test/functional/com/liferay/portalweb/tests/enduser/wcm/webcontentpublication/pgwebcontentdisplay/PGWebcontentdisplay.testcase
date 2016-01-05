@@ -93,16 +93,16 @@
 	</command>
 
 	<command name="AddPortletWCDSite" priority="4">
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="SitePage#addCP">
@@ -458,7 +458,7 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Language Selector" />
+			<var name="portletName" value="Language" />
 		</execute>
 
 		<execute macro="WebContent#addPGViaWCD">
@@ -638,6 +638,10 @@
 		<execute macro="WebContent#viewPGViaWCD">
 			<var name="webContentContent" value="WC WebContent Content" />
 		</execute>
+
+		<execute macro="WebContent#tearDownCP">
+			<var name="siteScopeName" value="Global" />
+		</execute>
 	</command>
 
 	<command name="ViewAllFileTypesEnabled" priority="4">
@@ -650,7 +654,7 @@
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+		<execute macro="ProductMenu#gotoControlPanelSystem">
 			<var name="portlet" value="Server Administration" />
 		</execute>
 

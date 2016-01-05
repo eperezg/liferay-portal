@@ -265,5 +265,12 @@ public class CounterUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(CounterPersistence persistence) {
+	}
+
 	private static CounterPersistence _persistence;
 }

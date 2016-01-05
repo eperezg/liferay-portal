@@ -285,5 +285,12 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(AnnouncementsFlagLocalService service) {
+	}
+
 	private static AnnouncementsFlagLocalService _service;
 }

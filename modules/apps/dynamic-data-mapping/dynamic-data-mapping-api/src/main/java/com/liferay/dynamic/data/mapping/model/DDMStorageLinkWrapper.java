@@ -392,6 +392,14 @@ public class DDMStorageLinkWrapper implements DDMStorageLink,
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public DDMStorageLink getWrappedDDMStorageLink() {
+		return _ddmStorageLink;
+	}
+
 	@Override
 	public DDMStorageLink getWrappedModel() {
 		return _ddmStorageLink;

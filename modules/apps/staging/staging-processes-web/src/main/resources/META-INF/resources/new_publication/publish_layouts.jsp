@@ -215,8 +215,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			}
 			%>
 
-			<aui:input name="name" />
-
 			<aui:fieldset cssClass="options-group" label="date">
 				<%@ include file="/new_publication/publish_layouts_scheduler.jspf" %>
 			</aui:fieldset>
@@ -246,15 +244,16 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 				<aui:fieldset cssClass="options-group" label="remote-live-connection-settings">
 					<%@ include file="/new_publication/publish_layouts_remote_options.jspf" %>
 				</aui:fieldset>
+
 			</c:if>
 		</div>
 
 		<aui:button-row>
-			<aui:button cssClass="btn-lg" id="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
+			<aui:button id="addButton" onClick='<%= renderResponse.getNamespace() + "schedulePublishEvent();" %>' value="add-event" />
 
-			<aui:button cssClass="btn-lg" id="publishButton" type="submit" value="<%= publishActionKey %>" />
+			<aui:button id="publishButton" type="submit" value="<%= publishActionKey %>" />
 
-			<aui:button cssClass="btn-lg" href="<%= basePortletURL %>" type="reset" value="cancel" />
+			<aui:button href="<%= basePortletURL %>" type="reset" value="cancel" />
 		</aui:button-row>
 	</div>
 </aui:form>

@@ -481,5 +481,12 @@ public class AssetVocabularyLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setService(AssetVocabularyLocalService service) {
+	}
+
 	private static AssetVocabularyLocalService _service;
 }

@@ -193,18 +193,6 @@ define("frontend-js-metal-web@1.0.0/metal/src/dom/dom", ['exports', 'metal/src/c
 			return false;
 		};
 
-		dom.next = function next(element, selector) {
-			do {
-				element = element.nextSibling;
-
-				if (element && dom.match(element, selector)) {
-					return element;
-				}
-			} while (element);
-
-			return null;
-		};
-
 		dom.normalizeDelegateEvent_ = function normalizeDelegateEvent_(event) {
 			event.stopPropagation = dom.stopPropagation_;
 			event.stopImmediatePropagation = dom.stopImmediatePropagation_;

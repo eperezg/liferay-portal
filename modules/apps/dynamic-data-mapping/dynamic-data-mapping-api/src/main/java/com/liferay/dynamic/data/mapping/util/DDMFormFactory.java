@@ -20,7 +20,7 @@ import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,28 +35,33 @@ public class DDMFormFactory {
 				"Unsupported class " + clazz.getName());
 		}
 
+		Map<String, DDMFormField> ddmFormFieldsMap = new HashMap<>();
+
+		collectDDMFormFields(clazz, ddmFormFieldsMap);
+
 		DDMForm ddmForm = new DDMForm();
 
-		for (Method method : getDDMFormFieldMethods(clazz)) {
-			DDMFormField ddmFormField = createDDMFormField(clazz, method);
-
-			ddmForm.addDDMFormField(ddmFormField);
-		}
+		ddmForm.setDDMFormFields(
+			new ArrayList<DDMFormField>(ddmFormFieldsMap.values()));
 
 		return ddmForm;
 	}
 
-	protected static void collectDDMFormFieldMethodsMap(
-		Class<?> clazz, Map<String, Method> methodsMap) {
+	protected static void collectDDMFormFields(
+		Class<?> clazz, Map<String, DDMFormField> ddmFormFieldsMap) {
 
 		for (Class<?> interfaceClass : clazz.getInterfaces()) {
-			collectDDMFormFieldMethodsMap(interfaceClass, methodsMap);
+			collectDDMFormFields(interfaceClass, ddmFormFieldsMap);
 		}
 
 		for (Method method : clazz.getDeclaredMethods()) {
-			if (method.isAnnotationPresent(_DDM_FORM_FIELD_ANNOTATION)) {
-				methodsMap.put(method.getName(), method);
+			if (!method.isAnnotationPresent(_DDM_FORM_FIELD_ANNOTATION)) {
+				continue;
 			}
+
+			DDMFormField ddmFormField = createDDMFormField(clazz, method);
+
+			ddmFormFieldsMap.put(ddmFormField.getName(), ddmFormField);
 		}
 	}
 
@@ -95,22 +100,12 @@ public class DDMFormFactory {
 			ddmFormFactoryHelper.isDDMFormFieldLocalizable(method));
 		ddmFormField.setPredefinedValue(
 			ddmFormFactoryHelper.getDDMFormFieldPredefinedValue());
-		ddmFormField.setRepeatable(
-			ddmFormFactoryHelper.isDDMFormFieldRepeatable());
 		ddmFormField.setRequired(ddmFormFactoryHelper.isDDMFormFieldRequired());
 		ddmFormField.setTip(ddmFormFactoryHelper.getDDMFormFieldTip());
 		ddmFormField.setVisibilityExpression(
 			ddmFormFactoryHelper.getDDMFormFieldVisibilityExpression());
 
 		return ddmFormField;
-	}
-
-	protected static Collection<Method> getDDMFormFieldMethods(Class<?> clazz) {
-		Map<String, Method> methodsMap = new HashMap<>();
-
-		collectDDMFormFieldMethodsMap(clazz, methodsMap);
-
-		return methodsMap.values();
 	}
 
 	private static final Class<? extends Annotation> _DDM_FORM_ANNOTATION =

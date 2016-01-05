@@ -232,21 +232,12 @@ public class JournalPortlet extends MVCPortlet {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long[] deleteFeedIds = null;
+		String[] deleteFeedIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "deleteFeedIds"));
 
-		long deleteFeedId = ParamUtil.getLong(actionRequest, "deleteFeedId");
-
-		if (deleteFeedId > 0) {
-			deleteFeedIds = new long[] {deleteFeedId};
-		}
-		else {
-			deleteFeedIds = ParamUtil.getLongValues(actionRequest, "rowIds");
-		}
-
-		for (long curDeleteFeedId : deleteFeedIds) {
+		for (int i = 0; i < deleteFeedIds.length; i++) {
 			_journalFeedService.deleteFeed(
-				themeDisplay.getScopeGroupId(),
-				String.valueOf(curDeleteFeedId));
+				themeDisplay.getScopeGroupId(), deleteFeedIds[i]);
 		}
 	}
 

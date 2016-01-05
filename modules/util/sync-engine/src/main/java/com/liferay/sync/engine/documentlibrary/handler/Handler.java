@@ -31,6 +31,4 @@ public interface Handler<T> extends ResponseHandler<T> {
 
 	public void processResponse(String response) throws Exception;
 
-	public void removeEvent() throws Exception;
-
 }

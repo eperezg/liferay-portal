@@ -99,7 +99,9 @@ public class ManageLayoutControlMenuEntry
 	}
 
 	@Override
-	public boolean isShow(HttpServletRequest request) throws PortalException {
+	public boolean hasAccessPermission(HttpServletRequest request)
+		throws PortalException {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -115,7 +117,7 @@ public class ManageLayoutControlMenuEntry
 			return false;
 		}
 
-		return super.isShow(request);
+		return super.hasAccessPermission(request);
 	}
 
 }

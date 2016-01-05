@@ -173,7 +173,6 @@ public class JavaSecurityTest {
 
 						return assignedDomains;
 					}
-
 				}
 			);
 
@@ -302,7 +301,6 @@ public class JavaSecurityTest {
 
 					return null;
 				}
-
 			};
 
 			callable.call();

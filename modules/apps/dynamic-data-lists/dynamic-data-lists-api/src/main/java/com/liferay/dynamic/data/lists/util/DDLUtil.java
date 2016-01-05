@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermissio
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
@@ -55,22 +54,20 @@ public class DDLUtil {
 	}
 
 	public static JSONObject getRecordJSONObject(
-			DDLRecord record, boolean latestRecordVersion, Locale locale)
+			DDLRecord record, boolean latestRecordVersion)
 		throws Exception {
 
-		return getDDL().getRecordJSONObject(
-			record, latestRecordVersion, locale);
+		return getDDL().getRecordJSONObject(record, latestRecordVersion);
 	}
 
 	public static List<DDLRecord> getRecords(Hits hits) throws Exception {
 		return getDDL().getRecords(hits);
 	}
 
-	public static JSONArray getRecordSetJSONArray(
-			DDLRecordSet recordSet, Locale locale)
+	public static JSONArray getRecordSetJSONArray(DDLRecordSet recordSet)
 		throws Exception {
 
-		return getDDL().getRecordSetJSONArray(recordSet, locale);
+		return getDDL().getRecordSetJSONArray(recordSet);
 	}
 
 	public static JSONArray getRecordsJSONArray(List<DDLRecord> records)
@@ -80,11 +77,10 @@ public class DDLUtil {
 	}
 
 	public static JSONArray getRecordsJSONArray(
-			List<DDLRecord> records, boolean latestRecordVersion, Locale locale)
+			List<DDLRecord> records, boolean latestRecordVersion)
 		throws Exception {
 
-		return getDDL().getRecordsJSONArray(
-			records, latestRecordVersion, locale);
+		return getDDL().getRecordsJSONArray(records, latestRecordVersion);
 	}
 
 	/**

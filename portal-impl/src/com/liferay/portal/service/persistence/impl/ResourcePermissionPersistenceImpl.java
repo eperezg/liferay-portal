@@ -42,7 +42,6 @@ import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.model.impl.ResourcePermissionModelImpl;
 import com.liferay.portal.service.persistence.CompanyProvider;
-import com.liferay.portal.service.persistence.CompanyProviderWrapper;
 import com.liferay.portal.service.persistence.ResourcePermissionPersistence;
 
 import java.io.Serializable;
@@ -5407,8 +5406,6 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		resourcePermission.setNew(true);
 		resourcePermission.setPrimaryKey(resourcePermissionId);
 
-		resourcePermission.setCompanyId(companyProvider.getCompanyId());
-
 		return resourcePermission;
 	}
 
@@ -6109,7 +6106,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	@BeanReference(type = CompanyProviderWrapper.class)
+	@BeanReference(type = CompanyProvider.class)
 	protected CompanyProvider companyProvider;
 	protected EntityCache entityCache = EntityCacheUtil.getEntityCache();
 	protected FinderCache finderCache = FinderCacheUtil.getFinderCache();

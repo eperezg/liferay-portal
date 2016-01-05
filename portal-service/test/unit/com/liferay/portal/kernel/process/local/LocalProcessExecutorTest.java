@@ -1825,7 +1825,6 @@ public class LocalProcessExecutorTest {
 							// Swallow unconcerned uncaught exception
 
 						}
-
 					});
 
 				if (!result || !ProcessContext.isAttached()) {

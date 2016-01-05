@@ -30,8 +30,7 @@ Organization organization = (Organization)row.getObject();
 	</portlet:actionURL>
 
 	<liferay-ui:icon
-		icon="trash"
-		markupView="lexicon"
+		iconCssClass="icon-trash"
 		message="remove-membership"
 		url="<%= deleteGroupOrganizationsURL %>"
 	/>

@@ -24,7 +24,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
 @ConfigurationAdmin(category = "platform")
 @Meta.OCD(
 	id = "com.liferay.portal.js.loader.modules.extender.LoaderModulesServlet",
-	localization = "content/Language", name = "%details.configuration.name"
+	name = "%JS Loader Modules Servlet Configuration"
 )
 public @interface Details {
 

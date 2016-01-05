@@ -58,7 +58,7 @@ public class UpgradeNamespace extends UpgradeProcess {
 			String tableSqlCreate, String tableSqlDrop)
 		throws Exception {
 
-		if (hasRows(newTableName)) {
+		if (tableHasData(newTableName)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Not renaming " + oldTableName + " to " + newTableName +
@@ -68,7 +68,7 @@ public class UpgradeNamespace extends UpgradeProcess {
 			return;
 		}
 
-		if (!hasRows(oldTableName)) {
+		if (!tableHasData(oldTableName)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Not renaming " + oldTableName + " to " + newTableName +

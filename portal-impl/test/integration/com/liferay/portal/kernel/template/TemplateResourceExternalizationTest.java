@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.template.CacheTemplateResource;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.dynamicdatamapping.DDMTemplate;
 
 import java.io.DataInputStream;
@@ -53,7 +54,8 @@ public class TemplateResourceExternalizationTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testCacheTemplateResourceExternalization() throws Exception {

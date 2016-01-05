@@ -24,11 +24,8 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -99,14 +96,9 @@ public class CalendarResourceUtil {
 
 		User user = UserLocalServiceUtil.fetchUserById(userId);
 
-		if ((user == null) || user.isDefaultUser()) {
-			Role role = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.ADMINISTRATOR);
-
-			long[] userIds = UserLocalServiceUtil.getRoleUserIds(
-				role.getRoleId());
-
-			userId = userIds[0];
+		if (user == null) {
+			userId = UserLocalServiceUtil.getDefaultUserId(
+				group.getCompanyId());
 		}
 
 		Map<Locale, String> nameMap = new HashMap<>();

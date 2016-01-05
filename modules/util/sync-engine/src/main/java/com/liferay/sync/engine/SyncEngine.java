@@ -221,11 +221,18 @@ public class SyncEngine {
 			}
 		}
 
+		SyncWatchEventService.deleteSyncWatchEvents(syncAccountId);
+
 		if (!ConnectionRetryUtil.retryInProgress(syncAccountId)) {
 			ServerEventUtil.synchronizeSyncSites(syncAccountId);
 		}
 
-		SyncWatchEventService.deleteSyncWatchEvents(syncAccountId);
+		SyncWatchEventProcessor syncWatchEventProcessor =
+			new SyncWatchEventProcessor(syncAccountId);
+
+		ScheduledFuture<?> scheduledFuture =
+			_localEventsScheduledExecutorService.scheduleWithFixedDelay(
+				syncWatchEventProcessor, 0, 3, TimeUnit.SECONDS);
 
 		WatchEventListener watchEventListener = new SyncSiteWatchEventListener(
 			syncAccountId);
@@ -240,18 +247,14 @@ public class SyncEngine {
 			watcher = new JPathWatcher(syncAccountFilePath, watchEventListener);
 		}
 
-		watcher.walkFileTree(syncAccountFilePath);
-
-		SyncWatchEventProcessor syncWatchEventProcessor =
-			new SyncWatchEventProcessor(syncAccountId);
-
-		syncWatchEventProcessor.run();
+		_executorService.execute(watcher);
 
 		if (!ConnectionRetryUtil.retryInProgress(syncAccountId)) {
 			synchronizeSyncFiles(syncAccountId);
 		}
 
-		scheduleEvents(syncAccount, syncWatchEventProcessor, watcher);
+		scheduleGetSyncDLObjectUpdateEvent(
+			syncAccount, syncWatchEventProcessor, scheduledFuture, watcher);
 	}
 
 	protected static void doStart() throws Exception {
@@ -309,16 +312,10 @@ public class SyncEngine {
 		_running = false;
 	}
 
-	protected static void scheduleEvents(
+	protected static void scheduleGetSyncDLObjectUpdateEvent(
 		final SyncAccount syncAccount,
 		final SyncWatchEventProcessor syncWatchEventProcessor,
-		Watcher watcher) {
-
-		_executorService.execute(watcher);
-
-		ScheduledFuture<?> localEventsScheduledFuture =
-			_localEventsScheduledExecutorService.scheduleWithFixedDelay(
-				syncWatchEventProcessor, 0, 3, TimeUnit.SECONDS);
+		ScheduledFuture<?> localEventsScheduledFuture, Watcher watcher) {
 
 		Runnable runnable = new Runnable() {
 

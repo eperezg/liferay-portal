@@ -491,9 +491,9 @@ public class UserImpl extends UserBaseImpl {
 
 	@Override
 	public String getInitials() {
-		StringBundler sb = new StringBundler(2);
+		String[] names = StringUtil.split(getFullName(), StringPool.SPACE);
 
-		String[] names = new String[] {getFirstName(), getLastName()};
+		StringBundler sb = new StringBundler(names.length);
 
 		for (String name : names) {
 			sb.append(StringUtil.toUpperCase(StringUtil.shorten(name, 1)));

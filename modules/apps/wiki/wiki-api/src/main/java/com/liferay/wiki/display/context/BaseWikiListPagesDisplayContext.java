@@ -14,11 +14,12 @@
 
 package com.liferay.wiki.display.context;
 
-import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.servlet.taglib.ui.Menu;
+import com.liferay.portal.kernel.servlet.taglib.ui.ToolbarItem;
 import com.liferay.wiki.model.WikiPage;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Iván Zaera
- * @author Roberto Díaz
  */
 public class BaseWikiListPagesDisplayContext
 	extends BaseWikiDisplayContext<WikiListPagesDisplayContext>
@@ -40,20 +40,13 @@ public class BaseWikiListPagesDisplayContext
 	}
 
 	@Override
-	public String getEmptyResultsMessage() {
-		return parentDisplayContext.getEmptyResultsMessage();
-	}
-
-	@Override
 	public Menu getMenu(WikiPage wikiPage) throws PortalException {
 		return parentDisplayContext.getMenu(wikiPage);
 	}
 
 	@Override
-	public void populateResultsAndTotal(SearchContainer searchContainer)
-		throws PortalException {
-
-		parentDisplayContext.populateResultsAndTotal(searchContainer);
+	public List<ToolbarItem> getToolbarItems() throws PortalException {
+		return parentDisplayContext.getToolbarItems();
 	}
 
 }

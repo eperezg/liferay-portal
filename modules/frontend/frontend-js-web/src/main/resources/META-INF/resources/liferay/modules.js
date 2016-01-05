@@ -24,6 +24,15 @@
 				('onpopstate' in WIN || A.UA.gecko >= 2);
 	};
 
+	var filterConfig = null;
+
+	if (!COMBINE) {
+		filterConfig = {
+			replaceStr: '.js' + LiferayAUI.getStaticResourceURLParams(),
+			searchExp: '\\.js$'
+		};
+	}
+
 	window.YUI_config = {
 		base: PATH_JAVASCRIPT + '/aui/',
 		combine: COMBINE,
@@ -44,7 +53,7 @@
 			liferay: {
 				base: PATH_JAVASCRIPT + '/liferay/',
 				combine: COMBINE,
-				filter: Liferay.AUI.getFilterConfig(),
+				filter: filterConfig,
 				modules: {
 					'liferay-alert': {
 						path: 'alert.js',
@@ -209,6 +218,15 @@
 							'liferay-item-selector-dialog',
 							'liferay-map-base',
 							'liferay-translation-manager'
+						]
+					},
+					'liferay-diff-version-comparator': {
+						path: 'diff_version_comparator.js',
+						requires: [
+							'aui-io-request',
+							'autocomplete-base',
+							'autocomplete-filters',
+							'liferay-portlet-base'
 						]
 					},
 					'liferay-dynamic-select': {
@@ -468,6 +486,33 @@
 							'aui-base'
 						]
 					},
+					'liferay-management-bar': {
+						path: 'management_bar.js',
+						requires: [
+							'aui-component',
+							'liferay-portlet-base'
+						]
+					},
+					'liferay-map-base': {
+						path: 'map_base.js',
+						requires: [
+							'aui-base'
+						]
+					},
+					'liferay-map-google': {
+						path: 'map_google.js',
+						requires: [
+							'liferay-map-base'
+						]
+					},
+					'liferay-map-openstreet': {
+						path: 'map_openstreet.js',
+						requires: [
+							'jsonp',
+							'liferay-map-base',
+							'timers'
+						]
+					},
 					'liferay-menu': {
 						path: 'menu.js',
 						requires: [
@@ -686,7 +731,7 @@
 							'aui-io-request',
 							'aui-timer',
 							'cookie',
-							'liferay-alert'
+							'liferay-notice'
 						]
 					},
 					'liferay-sign-in-modal': {

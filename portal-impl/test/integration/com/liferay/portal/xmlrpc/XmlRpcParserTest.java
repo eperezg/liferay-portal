@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.xmlrpc.Fault;
 import com.liferay.portal.kernel.xmlrpc.Response;
 import com.liferay.portal.kernel.xmlrpc.Success;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -35,7 +36,8 @@ public class XmlRpcParserTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testFaultResponseGenerator() throws Exception {

@@ -25,6 +25,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.VirtualLayoutConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
@@ -43,7 +44,8 @@ public class PortalImplControlPanelFullURLTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Before
 	public void setUp() throws Exception {

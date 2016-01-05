@@ -20,7 +20,7 @@
 	cssClass="portlet-options"
 	direction="<%= direction %>"
 	extended="<%= false %>"
-	icon='<%= (markupView != null) && markupView.equals("lexicon") ? StringPool.BLANK : "../aui/ellipsis-vertical" %>'
+	icon="../aui/ellipsis-vertical"
 	markupView="<%= markupView %>"
 	message="options"
 	showArrow="<%= false %>"

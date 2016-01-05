@@ -61,6 +61,7 @@ for (WorkflowLog workflowLog : workflowLogs) {
 						</div>
 					</c:when>
 					<c:otherwise>
+
 						<c:choose>
 							<c:when test="<%= workflowLog.getRoleId() == 0 %>">
 								<div>
@@ -77,6 +78,7 @@ for (WorkflowLog workflowLog : workflowLogs) {
 								</div>
 							</c:otherwise>
 						</c:choose>
+
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>

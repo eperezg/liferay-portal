@@ -34,10 +34,10 @@ public class UpgradeProcess_3_0_8 extends UpgradeProcess {
 	public void upgrade() throws Exception {
 		UpgradeUtil.copyLoggerConfiguration();
 
-		upgradeSchema();
+		upgradeTable();
 	}
 
-	protected void upgradeSchema() throws Exception {
+	protected void upgradeTable() throws Exception {
 		SyncFilePersistence syncFilePersistence =
 			SyncFileService.getSyncFilePersistence();
 

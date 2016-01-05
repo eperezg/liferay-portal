@@ -27,6 +27,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 
@@ -47,7 +48,8 @@ public class OrganizationLocalServiceTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new LiferayIntegrationTestRule();
+		new AggregateTestRule(
+			new LiferayIntegrationTestRule(), MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testAddOrganization() throws Exception {

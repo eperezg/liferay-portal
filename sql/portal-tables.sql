@@ -115,14 +115,14 @@ create table AssetEntries_AssetCategories (
 	companyId LONG not null,
 	categoryId LONG not null,
 	entryId LONG not null,
-	primary key (categoryId, entryId)
+	primary key (companyId, categoryId, entryId)
 );
 
 create table AssetEntries_AssetTags (
 	companyId LONG not null,
 	entryId LONG not null,
 	tagId LONG not null,
-	primary key (entryId, tagId)
+	primary key (companyId, entryId, tagId)
 );
 
 create table AssetEntry (
@@ -433,7 +433,7 @@ create table DLFileEntryTypes_DLFolders (
 	companyId LONG not null,
 	fileEntryTypeId LONG not null,
 	folderId LONG not null,
-	primary key (fileEntryTypeId, folderId)
+	primary key (companyId, fileEntryTypeId, folderId)
 );
 
 create table DLFileRank (
@@ -633,21 +633,21 @@ create table Groups_Orgs (
 	companyId LONG not null,
 	groupId LONG not null,
 	organizationId LONG not null,
-	primary key (groupId, organizationId)
+	primary key (companyId, groupId, organizationId)
 );
 
 create table Groups_Roles (
 	companyId LONG not null,
 	groupId LONG not null,
 	roleId LONG not null,
-	primary key (groupId, roleId)
+	primary key (companyId, groupId, roleId)
 );
 
 create table Groups_UserGroups (
 	companyId LONG not null,
 	groupId LONG not null,
 	userGroupId LONG not null,
-	primary key (groupId, userGroupId)
+	primary key (companyId, groupId, userGroupId)
 );
 
 create table Image (
@@ -1663,7 +1663,7 @@ create table UserGroups_Teams (
 	companyId LONG not null,
 	teamId LONG not null,
 	userGroupId LONG not null,
-	primary key (teamId, userGroupId)
+	primary key (companyId, teamId, userGroupId)
 );
 
 create table UserIdMapper (
@@ -1696,35 +1696,35 @@ create table Users_Groups (
 	companyId LONG not null,
 	groupId LONG not null,
 	userId LONG not null,
-	primary key (groupId, userId)
+	primary key (companyId, groupId, userId)
 );
 
 create table Users_Orgs (
 	companyId LONG not null,
 	organizationId LONG not null,
 	userId LONG not null,
-	primary key (organizationId, userId)
+	primary key (companyId, organizationId, userId)
 );
 
 create table Users_Roles (
 	companyId LONG not null,
 	roleId LONG not null,
 	userId LONG not null,
-	primary key (roleId, userId)
+	primary key (companyId, roleId, userId)
 );
 
 create table Users_Teams (
 	companyId LONG not null,
 	teamId LONG not null,
 	userId LONG not null,
-	primary key (teamId, userId)
+	primary key (companyId, teamId, userId)
 );
 
 create table Users_UserGroups (
 	companyId LONG not null,
 	userId LONG not null,
 	userGroupId LONG not null,
-	primary key (userId, userGroupId)
+	primary key (companyId, userId, userGroupId)
 );
 
 create table UserTracker (

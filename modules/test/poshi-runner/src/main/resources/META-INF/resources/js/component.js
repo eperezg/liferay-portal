@@ -17,21 +17,11 @@ YUI.add(
 
 		var CSS_FAIL = 'fail';
 
-		var CSS_FAILED = 'failed';
-
 		var CSS_HIDDEN = 'hidden';
-
-		var CSS_PASS = 'pass';
-
-		var CSS_PENDING = 'pending';
-
-		var CSS_RUNNING = 'running';
 
 		var CSS_TOGGLE = 'toggle';
 
 		var CSS_TRANSITIONING = 'transitioning';
-
-		var CSS_WARNING = 'warning';
 
 		var STR_BLANK = '';
 
@@ -45,7 +35,7 @@ YUI.add(
 
 		var STR_DOT = '.';
 
-		var STR_ERRORS = 'errors';
+		var STR_FAILS = 'fails';
 
 		var STR_HEIGHT = 'height';
 
@@ -57,15 +47,9 @@ YUI.add(
 
 		var STR_STATUS = 'status';
 
-		var STR_TRANSITIONING = 'transitioning';
-
 		var STR_XML_LOG = 'xmlLog';
 
 		var SELECTOR_FAIL = STR_DOT + CSS_FAIL;
-
-		var SELECTOR_FAILED = STR_DOT + CSS_FAILED;
-
-		var SELECTOR_WARNING = STR_DOT + CSS_WARNING;
 
 		var TPL_ERROR_BUTTONS = '<button class="btn {cssClass}" data-errorlinkid="{linkId}" onclick="loggerInterface.handleErrorBtns">' +
 				'<div class="btn-content"></div>' +
@@ -90,18 +74,18 @@ YUI.add(
 						setter: A.one
 					},
 
-					errors: {
+					fails: {
 						setter: function() {
 							var instance = this;
 
 							var xmlLog = instance.get(STR_XML_LOG);
 
-							return xmlLog.all(SELECTOR_FAIL + ', ' + SELECTOR_WARNING);
+							return xmlLog.all(SELECTOR_FAIL);
 						}
 					},
 
 					running: {
-						value: false
+						value: null
 					},
 
 					sidebar: {
@@ -110,11 +94,7 @@ YUI.add(
 
 					status: {
 						validator: Lang.isArray,
-						value: [CSS_FAIL, CSS_PASS, CSS_PENDING, CSS_WARNING]
-					},
-
-					transitioning: {
-						value: null
+						value: ['fail', 'pass', 'pending']
 					},
 
 					xmlLog: {
@@ -125,14 +105,21 @@ YUI.add(
 				NAME: 'poshilogger',
 
 				prototype: {
-					initializer: function() {
+					renderUI: function() {
 						var instance = this;
 
 						var sidebar = instance.get(STR_SIDEBAR);
+						var xmlLog = instance.get(STR_XML_LOG);
+
+						xmlLog.toggleClass(STR_RUNNING);
 
 						var commandLog = sidebar.one('.command-log');
 
 						instance._toggleCommandLog(commandLog);
+
+						if (!xmlLog.hasClass(STR_RUNNING)) {
+							instance._minimizeSidebar();
+						}
 					},
 
 					bindUI: function() {
@@ -152,12 +139,17 @@ YUI.add(
 						var latestCommand = commandLog.one('.line-group:last-child');
 
 						if (latestCommand) {
+							instance._parseCommandLog(latestCommand);
+
 							var linkedFunction = instance.get(STR_XML_LOG).one('#' + id);
 
 							instance._displayNode(linkedFunction);
+
+							instance._selectCurrentScope(linkedFunction);
+
 							instance._setXmlNodeClass(linkedFunction);
 
-							if (latestCommand.hasClass(CSS_FAILED) || latestCommand.hasClass(CSS_WARNING)) {
+							if (latestCommand.hasClass('failed')) {
 								instance._injectXmlError(latestCommand);
 							}
 						}
@@ -181,7 +173,8 @@ YUI.add(
 
 							var linkedFunction = xmlLog.one('.line-group[data-functionLinkId="' + functionLinkId + '"]');
 
-							instance._displayNode(linkedFunction, true);
+							instance._displayNode(linkedFunction);
+
 							instance._selectCurrentScope(linkedFunction);
 						}
 					},
@@ -196,7 +189,8 @@ YUI.add(
 								event.halt(true);
 							}
 
-							instance._displayNode(currentTargetAncestor, true);
+							instance._displayNode(currentTargetAncestor);
+
 							instance._selectCurrentScope(currentTargetAncestor);
 						}
 					},
@@ -248,30 +242,7 @@ YUI.add(
 					handleGoToErrorBtn: function(event) {
 						var instance = this;
 
-						var currentScope = instance.get(STR_CURRENT_SCOPE);
-						var errorNodes = instance.get(STR_ERRORS);
-
-						var lastIndex = errorNodes.size() - 1;
-
-						var newIndex = lastIndex;
-
-						if (currentScope) {
-							var index = errorNodes.indexOf(currentScope);
-
-							if (index > -1) {
-								if (index < lastIndex) {
-									newIndex = index + 1;
-								}
-								else {
-									newIndex = 0;
-								}
-							}
-						}
-
-						var failure = errorNodes.item(newIndex);
-
-						instance._selectCurrentScope(failure);
-						instance._displayNode(failure, true);
+						instance._displayNode();
 					},
 
 					handleLineTrigger: function(id, starting) {
@@ -286,8 +257,10 @@ YUI.add(
 						if (container) {
 							if (starting && container.hasClass(CSS_COLLAPSE)) {
 								instance._toggleContainer(container, false);
+								instance._scrollToNode(linkedLine);
 							}
-							else if (linkedLine.hasClass('conditional-fail')) {
+
+							else if (!starting && !container.hasClass(CSS_COLLAPSE)) {
 								instance._toggleContainer(container, false);
 							}
 						}
@@ -425,9 +398,9 @@ YUI.add(
 
 						var returnVal = false;
 
-						var transitioning = instance.get(STR_TRANSITIONING);
+						var running = instance.get(STR_RUNNING);
 
-						if (targetNode && (!transitioning || !transitioning.contains(targetNode))) {
+						if (targetNode && (!running || !running.contains(targetNode))) {
 							var height;
 
 							var collapsing = targetNode.getStyle(STR_HEIGHT) != '0px';
@@ -437,7 +410,7 @@ YUI.add(
 
 								targetNode.height(height);
 
-								instance.set(STR_TRANSITIONING, targetNode);
+								instance.set(STR_RUNNING, targetNode);
 
 								targetNode.addClass(CSS_TRANSITIONING);
 							}
@@ -465,21 +438,21 @@ YUI.add(
 						return returnVal;
 					},
 
-					_displayNode: function(node, scrollTo) {
+					_displayNode: function(node) {
 						var instance = this;
 
-						node = node || instance.get(STR_ERRORS).last();
+						node = node || instance.get(STR_FAILS).last();
 
 						if (node) {
 							var parentContainers = node.ancestors('.child-container');
 
 							if (parentContainers) {
-								instance._expandParentContainers(parentContainers, node, scrollTo);
+								instance._expandParentContainers(parentContainers, node);
 							}
 						}
 					},
 
-					_expandParentContainers: function(parentContainers, node, scrollTo) {
+					_expandParentContainers: function(parentContainers, node) {
 						var instance = this;
 
 						var timeout = 0;
@@ -489,21 +462,20 @@ YUI.add(
 						if (container.hasClass(CSS_COLLAPSE)) {
 							instance._toggleContainer(container, false);
 
-							timeout = 10;
+							instance._scrollToNode(container.one('.line-group'));
+
+							timeout = 200;
 						}
 
-						A.later(
-							timeout,
-							instance,
-							function() {
-								if (parentContainers.size()) {
-									instance._expandParentContainers(parentContainers, node, scrollTo);
-								}
-								else if (scrollTo) {
-									instance._scrollToNode(node);
-								}
-							}
-						);
+						if (parentContainers.size()) {
+							setTimeout(
+								A.bind('_expandParentContainers', instance, parentContainers, node),
+								timeout
+							);
+						}
+						else {
+							instance._scrollToNode(node);
+						}
 					},
 
 					_getCommandLogNode: function(logId) {
@@ -519,7 +491,7 @@ YUI.add(
 					_getTransition: function(targetNode, height, collapsing) {
 						var instance = this;
 
-						var duration = Math.pow(height, 0.15) / 15;
+						var duration = Math.pow(height, 0.35) / 15;
 
 						var ease = 'ease-in';
 
@@ -548,13 +520,13 @@ YUI.add(
 								},
 
 								marginTop: {
-									duration: 0.05,
+									duration: 0.1,
 									easing: ease,
 									value: margin
 								},
 
 								marginBottom: {
-									duration: 0.05,
+									duration: 0.1,
 									easing: ease,
 									value: margin
 								}
@@ -569,7 +541,7 @@ YUI.add(
 									targetNode.height('auto');
 								}
 
-								instance.set(STR_TRANSITIONING, null);
+								instance.set(STR_RUNNING, null);
 
 								targetNode.removeClass(CSS_TRANSITIONING);
 							}
@@ -788,7 +760,7 @@ YUI.add(
 
 								new A.Anim(
 									{
-										duration: 0.12,
+										duration: 2,
 										easing: 'easeOutStrong',
 										node: scrollNode,
 										to: {
@@ -863,17 +835,17 @@ YUI.add(
 
 							newLogId = logId;
 
-							var commandErrors = commandLog.all(SELECTOR_FAILED + ', ' + SELECTOR_WARNING);
+							var commandFailures = commandLog.all('.failed');
 
-							commandErrors.each(instance._injectXmlError, instance);
+							commandFailures.each(instance._injectXmlError, instance);
 						}
 						else {
 							newLogId = null;
 
-							var errors = instance.get(STR_XML_LOG).all(SELECTOR_FAIL + ', ' + SELECTOR_WARNING);
+							var fails = instance.get(STR_XML_LOG).all(SELECTOR_FAIL);
 
-							if (errors.size()) {
-								errors.each(instance._clearXmlErrors);
+							if (fails.size()) {
+								fails.each(instance._clearXmlErrors);
 							}
 						}
 
@@ -881,25 +853,16 @@ YUI.add(
 
 						instance._toggleXmlLogClasses(logId);
 
-						var errorNodes = instance.get(STR_XML_LOG).all(SELECTOR_FAIL + ', ' + SELECTOR_WARNING);
+						var failNodes = instance.get(STR_XML_LOG).all(SELECTOR_FAIL);
 
-						instance.set(STR_ERRORS, errorNodes);
+						instance.set(STR_FAILS, failNodes);
 
 						instance._transitionCommandLog(commandLog);
 
-						var running = commandLog.hasClass(CSS_RUNNING);
+						if (failNodes.size()) {
+							failNodes.each(instance._displayNode, instance);
 
-						instance.set(STR_RUNNING, running);
-
-						instance.get(STR_CONTENT_BOX).toggleClass(CSS_RUNNING, running);
-
-						if (errorNodes.size() > 0) {
-							errorNodes.each(instance._displayNode, instance);
-
-							var lastFailNode = errorNodes.first();
-
-							instance._selectCurrentScope(lastFailNode);
-							instance._scrollToNode(lastFailNode);
+							instance._selectCurrentScope(failNodes.first());
 						}
 					},
 

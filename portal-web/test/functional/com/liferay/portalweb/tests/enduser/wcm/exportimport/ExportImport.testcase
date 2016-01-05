@@ -161,8 +161,8 @@
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
@@ -244,16 +244,16 @@
 	</command>
 
 	<command name="ExportImportDDLViaGlobal" priority="5">
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="SitePage#addCP">
@@ -308,10 +308,10 @@
 			<var name="fieldName" value="TextName" />
 		</execute>
 
-		<execute macro="DDLRecord#publish" />
+		<execute macro="DDLRecord#publishCP" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Page#gotoContentCP">
@@ -379,8 +379,8 @@
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
@@ -501,8 +501,8 @@
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
@@ -528,7 +528,6 @@
 	</command>
 
 	<command name="ExportImportSampleLARPortlet" priority="5">
-		<property name="portal.acceptance" value="true" />
 		<property name="portlet.plugins.includes" value="sample-lar-portlet" />
 
 		<execute macro="Page#addPG">
@@ -560,16 +559,16 @@
 			<var name="larFileName" value="SampleLARPortlet.lar" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="SitePage#addCP">
@@ -607,8 +606,6 @@
 	</command>
 
 	<command name="ExportImportSiteWithChangedSiteDefaultLanguage" priority="5">
-		<property name="portal.acceptance" value="true" />
-
 		<execute macro="Page#gotoConfigurationCP">
 			<var name="portletName" value="Site Settings" />
 			<var name="siteName" value="Site Name" />
@@ -677,8 +674,8 @@
 		<execute function="DownloadTempFile" />
 		<execute function="SelectFrame" value1="relative=top" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
@@ -759,8 +756,8 @@
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">
@@ -812,8 +809,8 @@
 		<execute function="Click" locator1="SitePagesExport#CURRENT_AND_PREVIOUS_DOWNLOAD" />
 		<execute function="DownloadTempFile" />
 
-		<execute macro="ProductMenu#gotoControlPanelSites">
-			<var name="portlet" value="Sites" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
 		</execute>
 
 		<execute macro="Site#addBlankCP">

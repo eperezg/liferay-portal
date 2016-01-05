@@ -724,5 +724,12 @@ public class ResourceBlockUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0
+	 */
+	@Deprecated
+	public void setPersistence(ResourceBlockPersistence persistence) {
+	}
+
 	private static ResourceBlockPersistence _persistence;
 }

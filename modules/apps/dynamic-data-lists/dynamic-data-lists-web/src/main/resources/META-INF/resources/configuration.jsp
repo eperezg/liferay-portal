@@ -82,15 +82,21 @@ DDLRecordSet selRecordSet = ddlDisplayContext.getRecordSet();
 					href="<%= rowURL %>"
 					name="name"
 					orderable="<%= false %>"
-					value="<%= recordSet.getName(locale) %>"
+					property="name"
 				/>
 
 				<liferay-ui:search-container-column-text
+					buffer="buffer"
 					href="<%= rowURL %>"
 					name="description"
 					orderable="<%= false %>"
-					value="<%= StringUtil.shorten(recordSet.getDescription(locale), 100) %>"
-				/>
+				>
+
+					<%
+					buffer.append(StringUtil.shorten(recordSet.getDescription(locale), 100));
+					%>
+
+				</liferay-ui:search-container-column-text>
 
 				<liferay-ui:search-container-column-date
 					href="<%= rowURL %>"
@@ -165,7 +171,7 @@ DDLRecordSet selRecordSet = ddlDisplayContext.getRecordSet();
 	</c:if>
 
 	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
+		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
 

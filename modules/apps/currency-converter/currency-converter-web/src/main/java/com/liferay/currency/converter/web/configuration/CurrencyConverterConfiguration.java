@@ -23,9 +23,7 @@ import com.liferay.configuration.admin.ConfigurationAdmin;
  */
 @ConfigurationAdmin(category = "other")
 @Meta.OCD(
-	id = "com.liferay.currency.converter.web.configuration.CurrencyConverterConfiguration",
-	localization = "content/Language",
-	name = "%currency.converter.configuration.name"
+	id = "com.liferay.currency.converter.web.configuration.CurrencyConverterConfiguration"
 )
 public interface CurrencyConverterConfiguration {
 

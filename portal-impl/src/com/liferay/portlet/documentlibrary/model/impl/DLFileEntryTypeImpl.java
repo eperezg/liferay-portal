@@ -88,7 +88,6 @@ public class DLFileEntryTypeImpl extends DLFileEntryTypeBaseImpl {
 
 					return false;
 				}
-
 			});
 
 		if (hasAmbiguousName) {

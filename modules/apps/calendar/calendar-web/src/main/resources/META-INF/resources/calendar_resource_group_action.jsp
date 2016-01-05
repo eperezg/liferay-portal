@@ -22,7 +22,7 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Group group = (Group)row.getObject();
 %>
 
-<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
+<liferay-ui:icon-menu icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>">
 	<portlet:renderURL var="calendarsURL">
 		<portlet:param name="mvcPath" value="/view_calendars.jsp" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

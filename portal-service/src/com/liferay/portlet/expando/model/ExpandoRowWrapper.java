@@ -336,6 +336,14 @@ public class ExpandoRowWrapper implements ExpandoRow, ModelWrapper<ExpandoRow> {
 		return false;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedModel}
+	 */
+	@Deprecated
+	public ExpandoRow getWrappedExpandoRow() {
+		return _expandoRow;
+	}
+
 	@Override
 	public ExpandoRow getWrappedModel() {
 		return _expandoRow;

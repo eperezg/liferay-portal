@@ -81,6 +81,7 @@ for (int i = values.size() - 1; i >= 0; i--) {
 					name="quantity"
 					path="/html/portlet/shopping/edit_item_quantities_column.jsp"
 				/>
+
 			</liferay-ui:search-container-row>
 
 			<aui:script>
@@ -148,9 +149,9 @@ for (int i = values.size() - 1; i >= 0; i--) {
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button cssClass="btn-lg" onClick='<%= renderResponse.getNamespace() + "updateItemQuantities();" %>' value="update" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "updateItemQuantities();" %>' value="update" />
 
-		<aui:button cssClass="btn-lg" onClick='<%= renderResponse.getNamespace() + "closeDialog();" %>' type="cancel" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "closeDialog();" %>' type="cancel" />
 	</aui:button-row>
 </aui:form>
 

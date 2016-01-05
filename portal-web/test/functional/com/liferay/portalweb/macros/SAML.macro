@@ -4,8 +4,8 @@
 
 		<!-- Configure IdP (Identity Provider) on http://localhost:8080 with database lportal and saml deployed -->
 
-		<execute macro="ProductMenu#gotoControlPanelApps">
-			<var name="portlet" value="SAML Admin" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="SAML Admin" />
 		</execute>
 
 		<execute macro="SAMLRole#configure">
@@ -38,12 +38,9 @@
 			<var name="userScreenName" value="${userScreenName}" />
 		</execute>
 
-		<execute macro="Navigator#openSpecificURL">
-			<var name="url" value="http://www.able.com:9080" />
-		</execute>
-
-		<execute macro="ProductMenu#gotoControlPanelApps">
-			<var name="portlet" value="SAML Admin" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="SAML Admin" />
+			<var name="specificURL" value="http://www.able.com:9080" />
 		</execute>
 
 		<execute macro="SAMLRole#configure">
@@ -87,8 +84,8 @@
 			<var name="virtualHostsURL" value="${virtualHostsURL}" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoControlPanelApps">
-			<var name="portlet" value="SAML Admin" />
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="SAML Admin" />
 		</execute>
 
 		<execute macro="SAMLNavigation#gotoServiceProviderConnection" />

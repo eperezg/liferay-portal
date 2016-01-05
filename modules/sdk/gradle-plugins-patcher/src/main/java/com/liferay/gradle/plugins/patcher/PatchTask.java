@@ -90,18 +90,6 @@ public class PatchTask extends DefaultTask {
 			}
 
 		};
-
-		args("--binary", "--strip=1", "--no-backup-if-mismatch");
-	}
-
-	public PatchTask args(Iterable<Object> args) {
-		GUtil.addToCollection(_args, args);
-
-		return this;
-	}
-
-	public PatchTask args(Object ... args) {
-		return args(Arrays.asList(args));
 	}
 
 	public PatchTask fileNames(Iterable<Object> fileNames) {
@@ -112,10 +100,6 @@ public class PatchTask extends DefaultTask {
 
 	public PatchTask fileNames(Object ... fileNames) {
 		return fileNames(Arrays.asList(fileNames));
-	}
-
-	public List<String> getArgs() {
-		return GradleUtil.toStringList(_args);
 	}
 
 	@Input
@@ -275,11 +259,11 @@ public class PatchTask extends DefaultTask {
 						execSpec.setIgnoreExitValue(true);
 						execSpec.setWorkingDir(temporaryDir);
 
-						execSpec.args(getArgs());
-
+						execSpec.args("--binary");
 						execSpec.args(
 							"--input=" +
 								FileUtil.relativize(patchFile, temporaryDir));
+						execSpec.args("--strip=1");
 
 						execSpec.setStandardOutput(byteArrayOutputStream);
 					}
@@ -330,16 +314,6 @@ public class PatchTask extends DefaultTask {
 
 	public PatchTask patchFiles(Object ... patchFiles) {
 		return patchFiles(Arrays.asList(patchFiles));
-	}
-
-	public void setArgs(Iterable<Object> args) {
-		_args.clear();
-
-		args(args);
-	}
-
-	public void setArgs(Object ... args) {
-		setArgs(Arrays.asList(args));
 	}
 
 	public void setCopyOriginalLibClasses(boolean copyOriginalLibClasses) {
@@ -520,7 +494,6 @@ public class PatchTask extends DefaultTask {
 	private static final String _BASE_URL =
 		"http://repo.maven.apache.org/maven2/";
 
-	private final List<Object> _args = new ArrayList<>();
 	private boolean _copyOriginalLibClasses = true;
 	private final List<Object> _fileNames = new ArrayList<>();
 	private Object _originalLibConfigurationName =

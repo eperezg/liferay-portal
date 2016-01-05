@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+import com.liferay.portal.test.rule.MainServletTestRule;
 import com.liferay.portal.verify.test.BaseVerifyProcessTestCase;
 
 import org.junit.ClassRule;
@@ -38,7 +39,8 @@ public class VerifyResourcePermissionsTest extends BaseVerifyProcessTestCase {
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
-			SynchronousDestinationTestRule.INSTANCE);
+			SynchronousDestinationTestRule.INSTANCE,
+			MainServletTestRule.INSTANCE);
 
 	@Test
 	public void testVerifyMoreThanOneCompany() throws Exception {
