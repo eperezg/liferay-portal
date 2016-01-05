@@ -311,6 +311,20 @@ public class StringUtil {
 		return true;
 	}
 
+	public static boolean containsIgnoreCase(String s, String text) {
+		return containsIgnoreCase(s, text, StringPool.COMMA);
+	}
+
+	public static boolean containsIgnoreCase(
+		String s, String text, String delimiter) {
+
+		if ((s == null) || (text == null) || (delimiter == null)) {
+			return false;
+		}
+
+		return contains(toLowerCase(s), toLowerCase(text), delimiter);
+	}
+
 	/**
 	 * Returns the number of times the text appears in the string.
 	 *
