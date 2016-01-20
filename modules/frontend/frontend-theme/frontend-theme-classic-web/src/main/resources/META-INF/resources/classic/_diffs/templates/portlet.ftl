@@ -1,3 +1,4 @@
+<#assign liferay_portlet=PortalJspTagLibs["/WEB-INF/tld/liferay-portlet-ext.tld"]>
 <#assign liferay_ui=PortalJspTagLibs["/WEB-INF/tld/liferay-ui.tld"]>
 
 <#assign portlet_display = portletDisplay>
@@ -10,21 +11,23 @@
 <#assign portlet_title = htmlUtil.escape(portlet_display.getTitle())>
 <#assign portlet_toolbar = portlet_display.getPortletToolbar()>
 
+<#assign portlet_title_menus = portlet_toolbar.getPortletTitleMenus(portlet_display_root_portlet_id, renderRequest)>
+
 <section class="portlet" id="portlet_${portlet_id}">
-	<#if portlet_display.isPortletDecorate() && !portlet_display.isStateMax()>
+	<#if portlet_display.isPortletDecorate() && !portlet_display.isStateMax() && (portlet_display.isShowConfigurationIcon() || portlet_title_menus?has_content)>
 		<header class="portlet-topper">
 			<div class="portlet-title-default">
 				<span class="portlet-name-text">${portlet_display_name}</span>
 			</div>
 
-			<#foreach portletTitleMenu in portlet_toolbar.getPortletTitleMenus(portlet_display_root_portlet_id, renderRequest)>
+			<#foreach portletTitleMenu in portlet_title_menus>
 				<menu class="icon-monospaced portlet-title-menu portlet-topper-toolbar" id="portlet-title-menu_${portlet_id}_${portletTitleMenu_index}" type="toolbar">
 					<@liferay_ui["menu"] menu=portletTitleMenu />
 				</menu>
 			</#foreach>
 
 			<menu class="portlet-topper-toolbar" id="portlet-topper-toolbar_${portlet_id}" type="toolbar">
-				${theme.portletIconOptions()}
+				<@liferay_portlet["icon-options"] />
 			</menu>
 		</header>
 

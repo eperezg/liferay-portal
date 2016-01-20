@@ -501,6 +501,17 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		}
 	}
 
+	protected void checkChaining(String line, String fileName, int lineCount) {
+		if (line.startsWith("this(")) {
+			return;
+		}
+
+		if (line.contains(".getClass().")) {
+			processErrorMessage(
+				fileName, "chaining: " + fileName + " " + lineCount);
+		}
+	}
+
 	protected void checkStringBundler(
 		String line, String fileName, int lineCount) {
 
@@ -905,6 +916,8 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		linePart = formatIncorrectSyntax(linePart, "){", ") {", false);
 		linePart = formatIncorrectSyntax(linePart, "]{", "] {", false);
 		linePart = formatIncorrectSyntax(linePart, " [", "[", false);
+		linePart = formatIncorrectSyntax(linePart, "{ ", "{", false);
+		linePart = formatIncorrectSyntax(linePart, " }", "}", false);
 
 		for (int x = 0;;) {
 			x = linePart.indexOf(CharPool.EQUAL, x + 1);
@@ -1088,7 +1101,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		_annotationsExclusions = SetUtil.fromArray(
 			new String[] {
 				"ArquillianResource", "BeanReference", "Inject", "Mock",
-				"SuppressWarnings"
+				"ServiceReference", "SuppressWarnings"
 			});
 
 		return _annotationsExclusions;
@@ -1379,6 +1392,12 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		}
 
 		return new String[0];
+	}
+
+	protected int getLineCount(String content, int pos) {
+		String beforePos = content.substring(0, pos);
+
+		return StringUtil.count(beforePos, StringPool.NEW_LINE) + 1;
 	}
 
 	protected String getMainReleaseVersion() {

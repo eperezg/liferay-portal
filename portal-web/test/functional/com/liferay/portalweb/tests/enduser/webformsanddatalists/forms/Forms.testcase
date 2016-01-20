@@ -43,8 +43,8 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="Portlet#viewDisplayStyles">
-			<var name="displayStyleList" value="Descriptive,Icon,List" />
+		<execute macro="Portlet#viewDefaultDisplayStyle">
+			<var name="displayStyle" value="Descriptive" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
@@ -59,22 +59,21 @@
 			<var name="configurationName" value="Forms" />
 		</execute>
 
-		<execute macro="FormFields#removeRepeatableField" />
+		<execute macro="FormFields#selectSelectOption">
+			<var name="fieldName" value="DisplayView" />
+			<var name="selectOption" value="Icon" />
+		</execute>
 
 		<execute macro="Button#clickSave" />
 
-		<execute macro="Alert#viewSuccess" />
+		<execute macro="Alert#viewRequestCompletedSuccessMessage" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="Portlet#viewDisplayStyles">
-			<var name="displayStyleList" value="Icon,List" />
-		</execute>
-
-		<execute macro="Portlet#viewDisplayStylesNotPresent">
-			<var name="displayStyleList" value="Descriptive" />
+		<execute macro="Portlet#viewDefaultDisplayStyle">
+			<var name="displayStyle" value="Icon" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
@@ -90,8 +89,8 @@
 			<var name="portlet" value="Forms" />
 		</execute>
 
-		<execute macro="Portlet#viewDisplayStyles">
-			<var name="displayStyleList" value="Icon,Descriptive,List" />
+		<execute macro="Portlet#viewDefaultDisplayStyle">
+			<var name="displayStyle" value="Descriptive" />
 		</execute>
 	</command>
 
@@ -245,7 +244,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -458,7 +457,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -512,7 +511,9 @@
 		</for>
 	</command>
 
-	<command name="SubmitFormWithCustomTextContainingValidation" priority="4">
+	<command name="SubmitFormWithCustomTextContainingValidation" priority="5">
+		<property name="portal.acceptance" value="true" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -555,7 +556,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -719,7 +720,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -872,7 +873,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -968,7 +969,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -992,9 +993,11 @@
 		</execute>
 
 		<execute macro="FormFields#viewTextLabel">
-			<var name="fieldLabel" value="Text Field*" />
+			<var name="fieldLabel" value="Text Field" />
 			<var name="fieldName" value="TextField" />
 		</execute>
+
+		<execute macro="FormFields#viewRequiredAsterisk" />
 
 		<execute macro="FormFields#editBlankMultiTextFieldWithEnterKey">
 			<var name="fieldName" value="TextField" />
@@ -1076,7 +1079,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -1100,9 +1103,11 @@
 		</execute>
 
 		<execute macro="FormFields#viewRadioLabel">
-			<var name="fieldLabel" value="Radio Field*" />
+			<var name="fieldLabel" value="Radio Field" />
 			<var name="fieldName" value="RadioField" />
 		</execute>
+
+		<execute macro="FormFields#viewRequiredAsterisk" />
 
 		<execute macro="FormPortlet#submitWithValidationError" />
 
@@ -1133,7 +1138,9 @@
 		</execute>
 	</command>
 
-	<command name="SubmitFormWithRequiredRepeatingTextField" priority="4">
+	<command name="SubmitFormWithRequiredRepeatingTextField" priority="5">
+		<property name="portal.acceptance" value="true" />
+
 		<description message="This is a use case for LPS-59335." />
 
 		<execute macro="Navigator#openURL" />
@@ -1175,7 +1182,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -1267,7 +1274,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -1291,9 +1298,11 @@
 		</execute>
 
 		<execute macro="FormFields#viewTextLabel">
-			<var name="fieldLabel" value="Text Field*" />
+			<var name="fieldLabel" value="Text Field" />
 			<var name="fieldName" value="TextField" />
 		</execute>
+
+		<execute macro="FormFields#viewRequiredAsterisk" />
 
 		<execute macro="FormPortlet#submitWithValidationError" />
 
@@ -1360,7 +1369,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -1446,7 +1455,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -1590,7 +1599,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -1720,7 +1729,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 
@@ -1809,7 +1818,7 @@
 
 		<execute macro="Form#save" />
 
-		<execute macro="Page#addPG">
+		<execute macro="Page#add">
 			<var name="pageName" value="Form Page" />
 		</execute>
 

@@ -113,15 +113,18 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
-			<var name="sitePageName" value="Test Public Page" />
+			<var name="pageName" value="Test Public Page" />
 			<var name="siteScopeSelected" value="true" />
 		</execute>
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Site Settings" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Site Settings" />
 		</execute>
 
 		<execute macro="Site#addVirtualHostsURLCP">
@@ -303,9 +306,12 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Site Settings" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Site Settings" />
 		</execute>
 
 		<execute macro="Site#editCP">
@@ -335,20 +341,17 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
-			<var name="page" value="Public Pages" />
-			<var name="sitePageName" value="Test Public Page" />
-			<var name="siteScopeSelected" value="true" />
+		<execute macro="Page#add">
+			<var name="pageName" value="Test Public Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesPages">
 			<var name="page" value="Private Pages" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
-			<var name="page" value="Private Pages" />
-			<var name="sitePageName" value="Test Private Page" />
-			<var name="siteScopeSelected" value="true" />
+		<execute macro="Page#add">
+			<var name="pageName" value="Test Private Page" />
+			<var name="sitePagePrivacy" value="Private" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesConfiguration">
@@ -394,15 +397,18 @@
 			<var name="page" value="Public Pages" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
-			<var name="sitePageName" value="Site Page" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteScopeSelected" value="true" />
 		</execute>
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Site Settings" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Site Settings" />
 		</execute>
 
 		<execute macro="Site#editFriendlyURLCP">
@@ -450,9 +456,12 @@
 			<var name="siteName" value="Site Name" />
 		</execute>
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Site Settings" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Site Settings" />
 		</execute>
 
 		<execute macro="Site#selectParentSite">
@@ -471,9 +480,12 @@
 			<var name="uncheckPropagation" value="true" />
 		</execute>
 
-		<execute macro="Page#gotoPublishingTools">
-			<var name="portletName" value="Staging Processes" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesPublishingTools">
+			<var name="portlet" value="Staging" />
 		</execute>
 
 		<execute macro="Staging#activateStagingCP">
@@ -489,9 +501,12 @@
 
 		<execute macro="Staging#viewStagingLocalLivePG" />
 
-		<execute macro="Page#gotoConfigurationCP">
-			<var name="portletName" value="Site Settings" />
-			<var name="siteScopeName" value="Site Name" />
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Site Name" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesConfiguration">
+			<var name="portlet" value="Site Settings" />
 		</execute>
 
 		<execute macro="Site#selectParentSite">
@@ -513,10 +528,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Site Name" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -532,10 +547,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Child SiteName" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -551,10 +566,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Child ChildSiteName" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -609,10 +624,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Site Name" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -628,10 +643,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Child Site1Name" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -647,10 +662,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Child ChildSite1Name" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -666,10 +681,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Child ChildSite2Name" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -685,10 +700,10 @@
 			<var name="portlet" value="Sites" />
 		</execute>
 
-		<execute macro="SitePage#addCP">
+		<execute macro="Page#add">
 			<var name="page" value="Public Pages" />
+			<var name="pageName" value="Site Page" />
 			<var name="siteName" value="Child Site2Name" />
-			<var name="sitePageName" value="Site Page" />
 		</execute>
 
 		<execute macro="Page#gotoPG">

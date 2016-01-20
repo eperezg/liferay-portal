@@ -14,7 +14,7 @@
 
 package com.liferay.portal.service.persistence.impl;
 
-import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.exception.NoSuchModelException;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
@@ -286,9 +286,12 @@ public class TableMapperTest {
 		PortalCache<Long, long[]> leftToRightPortalCache =
 			_tableMapperImpl.leftToRightPortalCache;
 
+		Class<?> clazz = leftToRightPortalCache.getClass();
+
 		Assert.assertEquals(
 			"com.liferay.portal.tools.ToolDependencies$TestPortalCache",
-			leftToRightPortalCache.getClass().getName());
+			clazz.getName());
+
 		Assert.assertEquals(
 			TableMapper.class.getName() + "-" + _TABLE_NAME + "-LeftToRight",
 			leftToRightPortalCache.getPortalCacheName());
@@ -301,9 +304,12 @@ public class TableMapperTest {
 		PortalCache<Long, long[]> rightToLeftPortalCache =
 			_tableMapperImpl.rightToLeftPortalCache;
 
+		clazz = rightToLeftPortalCache.getClass();
+
 		Assert.assertEquals(
 			"com.liferay.portal.tools.ToolDependencies$TestPortalCache",
-			rightToLeftPortalCache.getClass().getName());
+			clazz.getName());
+
 		Assert.assertEquals(
 			TableMapper.class.getName() + "-" + _TABLE_NAME + "-RightToLeft",
 			rightToLeftPortalCache.getPortalCacheName());
@@ -1222,8 +1228,8 @@ public class TableMapperTest {
 		RecordInvocationHandler recordInvocationHandler =
 			new RecordInvocationHandler();
 
-		TableMapper<Left, Right> tableMapper = (TableMapper<Left, Right>)
-			ProxyUtil.newProxyInstance(
+		TableMapper<Left, Right> tableMapper =
+			(TableMapper<Left, Right>)ProxyUtil.newProxyInstance(
 				classLoader, new Class<?>[] {TableMapper.class},
 				recordInvocationHandler);
 
@@ -1416,7 +1422,7 @@ public class TableMapperTest {
 
 	private DataSource _dataSource;
 	private MockBasePersistence<Left> _leftBasePersistence;
-		private final Map<Long, long[]> _mappingStore = new HashMap<>();
+	private final Map<Long, long[]> _mappingStore = new HashMap<>();
 	private MockBasePersistence<Right> _rightBasePersistence;
 	private TableMapperImpl<Left, Right> _tableMapperImpl;
 
@@ -1442,10 +1448,13 @@ public class TableMapperTest {
 
 	}
 
-	private interface Left
-		extends LeftModel {}; private interface LeftModel
-		extends BaseModel<Left> {}; private class MockAddMappingSqlUpdate
-		implements SqlUpdate {
+	private interface Left extends LeftModel {
+	};
+
+	private interface LeftModel extends BaseModel<Left> {
+	};
+
+	private class MockAddMappingSqlUpdate implements SqlUpdate {
 
 		public MockAddMappingSqlUpdate(
 			DataSource dataSource, String sql, int[] types) {
@@ -1457,8 +1466,7 @@ public class TableMapperTest {
 						"VALUES (?, ?, ?)",
 				sql);
 			Assert.assertArrayEquals(
-				new int[] {Types.BIGINT, Types.BIGINT, Types.BIGINT},
-				types);
+				new int[] {Types.BIGINT, Types.BIGINT, Types.BIGINT}, types);
 		}
 
 		@Override
