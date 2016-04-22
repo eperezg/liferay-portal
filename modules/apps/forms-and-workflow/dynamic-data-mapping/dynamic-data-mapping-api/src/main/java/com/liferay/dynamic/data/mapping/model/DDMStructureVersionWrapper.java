@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -191,6 +191,33 @@ public class DDMStructureVersionWrapper implements DDMStructureVersion,
 		}
 	}
 
+	@Override
+	public DDMForm getDDMForm() {
+		return _ddmStructureVersion.getDDMForm();
+	}
+
+	@Override
+	public DDMFormLayout getDDMFormLayout()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _ddmStructureVersion.getDDMFormLayout();
+	}
+
+	@Override
+	public DDMStructure getStructure()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _ddmStructureVersion.getStructure();
+	}
+
+	@Override
+	public DDMStructureVersion toEscapedModel() {
+		return new DDMStructureVersionWrapper(_ddmStructureVersion.toEscapedModel());
+	}
+
+	@Override
+	public DDMStructureVersion toUnescapedModel() {
+		return new DDMStructureVersionWrapper(_ddmStructureVersion.toUnescapedModel());
+	}
+
 	/**
 	* Returns <code>true</code> if this d d m structure version is approved.
 	*
@@ -287,45 +314,17 @@ public class DDMStructureVersionWrapper implements DDMStructureVersion,
 	}
 
 	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMForm getDDMForm() {
-		return _ddmStructureVersion.getDDMForm();
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMFormLayout getDDMFormLayout()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _ddmStructureVersion.getDDMFormLayout();
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMStructure getStructure()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _ddmStructureVersion.getStructure();
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMStructureVersion toEscapedModel() {
-		return new DDMStructureVersionWrapper(_ddmStructureVersion.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMStructureVersion toUnescapedModel() {
-		return new DDMStructureVersionWrapper(_ddmStructureVersion.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _ddmStructureVersion.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.dynamic.data.mapping.model.DDMStructureVersion> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<DDMStructureVersion> toCacheModel() {
 		return _ddmStructureVersion.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.dynamic.data.mapping.model.DDMStructureVersion ddmStructureVersion) {
+	public int compareTo(DDMStructureVersion ddmStructureVersion) {
 		return _ddmStructureVersion.compareTo(ddmStructureVersion);
 	}
 
@@ -753,8 +752,7 @@ public class DDMStructureVersionWrapper implements DDMStructureVersion,
 	}
 
 	@Override
-	public void setDDMForm(
-		com.liferay.dynamic.data.mapping.model.DDMForm ddmForm) {
+	public void setDDMForm(DDMForm ddmForm) {
 		_ddmStructureVersion.setDDMForm(ddmForm);
 	}
 
@@ -1091,7 +1089,7 @@ public class DDMStructureVersionWrapper implements DDMStructureVersion,
 
 		DDMStructureVersionWrapper ddmStructureVersionWrapper = (DDMStructureVersionWrapper)obj;
 
-		if (Validator.equals(_ddmStructureVersion,
+		if (Objects.equals(_ddmStructureVersion,
 					ddmStructureVersionWrapper._ddmStructureVersion)) {
 			return true;
 		}

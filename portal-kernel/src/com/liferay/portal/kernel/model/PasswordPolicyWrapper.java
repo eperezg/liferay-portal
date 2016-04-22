@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -313,8 +313,18 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.PasswordPolicy> toCacheModel() {
+	public CacheModel<PasswordPolicy> toCacheModel() {
 		return _passwordPolicy.toCacheModel();
+	}
+
+	@Override
+	public PasswordPolicy toEscapedModel() {
+		return new PasswordPolicyWrapper(_passwordPolicy.toEscapedModel());
+	}
+
+	@Override
+	public PasswordPolicy toUnescapedModel() {
+		return new PasswordPolicyWrapper(_passwordPolicy.toUnescapedModel());
 	}
 
 	/**
@@ -518,18 +528,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.PasswordPolicy toEscapedModel() {
-		return new PasswordPolicyWrapper(_passwordPolicy.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.PasswordPolicy toUnescapedModel() {
-		return new PasswordPolicyWrapper(_passwordPolicy.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.PasswordPolicy passwordPolicy) {
+	public int compareTo(PasswordPolicy passwordPolicy) {
 		return _passwordPolicy.compareTo(passwordPolicy);
 	}
 
@@ -1255,7 +1254,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 
 		PasswordPolicyWrapper passwordPolicyWrapper = (PasswordPolicyWrapper)obj;
 
-		if (Validator.equals(_passwordPolicy,
+		if (Objects.equals(_passwordPolicy,
 					passwordPolicyWrapper._passwordPolicy)) {
 			return true;
 		}

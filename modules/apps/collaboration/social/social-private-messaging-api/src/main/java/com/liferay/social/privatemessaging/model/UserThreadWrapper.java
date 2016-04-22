@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -134,6 +134,16 @@ public class UserThreadWrapper implements UserThread, ModelWrapper<UserThread> {
 		}
 	}
 
+	@Override
+	public UserThread toEscapedModel() {
+		return new UserThreadWrapper(_userThread.toEscapedModel());
+	}
+
+	@Override
+	public UserThread toUnescapedModel() {
+		return new UserThreadWrapper(_userThread.toUnescapedModel());
+	}
+
 	/**
 	* Returns the deleted of this user thread.
 	*
@@ -195,23 +205,12 @@ public class UserThreadWrapper implements UserThread, ModelWrapper<UserThread> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.social.privatemessaging.model.UserThread> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<UserThread> toCacheModel() {
 		return _userThread.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.social.privatemessaging.model.UserThread toEscapedModel() {
-		return new UserThreadWrapper(_userThread.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.social.privatemessaging.model.UserThread toUnescapedModel() {
-		return new UserThreadWrapper(_userThread.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.social.privatemessaging.model.UserThread userThread) {
+	public int compareTo(UserThread userThread) {
 		return _userThread.compareTo(userThread);
 	}
 
@@ -508,7 +507,7 @@ public class UserThreadWrapper implements UserThread, ModelWrapper<UserThread> {
 
 		UserThreadWrapper userThreadWrapper = (UserThreadWrapper)obj;
 
-		if (Validator.equals(_userThread, userThreadWrapper._userThread)) {
+		if (Objects.equals(_userThread, userThreadWrapper._userThread)) {
 			return true;
 		}
 

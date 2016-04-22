@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -271,6 +271,16 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 		}
 	}
 
+	@Override
+	public BlogsEntry toEscapedModel() {
+		return new BlogsEntryWrapper(_blogsEntry.toEscapedModel());
+	}
+
+	@Override
+	public BlogsEntry toUnescapedModel() {
+		return new BlogsEntryWrapper(_blogsEntry.toUnescapedModel());
+	}
+
 	/**
 	* Returns the allow pingbacks of this blogs entry.
 	*
@@ -462,22 +472,12 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 	}
 
 	@Override
-	public com.liferay.blogs.kernel.model.BlogsEntry toEscapedModel() {
-		return new BlogsEntryWrapper(_blogsEntry.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.blogs.kernel.model.BlogsEntry toUnescapedModel() {
-		return new BlogsEntryWrapper(_blogsEntry.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _blogsEntry.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.blogs.kernel.model.BlogsEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<BlogsEntry> toCacheModel() {
 		return _blogsEntry.toCacheModel();
 	}
 
@@ -503,7 +503,7 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 	}
 
 	@Override
-	public int compareTo(com.liferay.blogs.kernel.model.BlogsEntry blogsEntry) {
+	public int compareTo(BlogsEntry blogsEntry) {
 		return _blogsEntry.compareTo(blogsEntry);
 	}
 
@@ -1236,7 +1236,7 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 
 		BlogsEntryWrapper blogsEntryWrapper = (BlogsEntryWrapper)obj;
 
-		if (Validator.equals(_blogsEntry, blogsEntryWrapper._blogsEntry)) {
+		if (Objects.equals(_blogsEntry, blogsEntryWrapper._blogsEntry)) {
 			return true;
 		}
 

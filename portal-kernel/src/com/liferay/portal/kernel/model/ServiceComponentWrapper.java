@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -106,8 +106,18 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.ServiceComponent> toCacheModel() {
+	public CacheModel<ServiceComponent> toCacheModel() {
 		return _serviceComponent.toCacheModel();
+	}
+
+	@Override
+	public ServiceComponent toEscapedModel() {
+		return new ServiceComponentWrapper(_serviceComponent.toEscapedModel());
+	}
+
+	@Override
+	public ServiceComponent toUnescapedModel() {
+		return new ServiceComponentWrapper(_serviceComponent.toUnescapedModel());
 	}
 
 	@Override
@@ -131,18 +141,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.ServiceComponent toEscapedModel() {
-		return new ServiceComponentWrapper(_serviceComponent.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.ServiceComponent toUnescapedModel() {
-		return new ServiceComponentWrapper(_serviceComponent.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.ServiceComponent serviceComponent) {
+	public int compareTo(ServiceComponent serviceComponent) {
 		return _serviceComponent.compareTo(serviceComponent);
 	}
 
@@ -373,7 +372,7 @@ public class ServiceComponentWrapper implements ServiceComponent,
 
 		ServiceComponentWrapper serviceComponentWrapper = (ServiceComponentWrapper)obj;
 
-		if (Validator.equals(_serviceComponent,
+		if (Objects.equals(_serviceComponent,
 					serviceComponentWrapper._serviceComponent)) {
 			return true;
 		}

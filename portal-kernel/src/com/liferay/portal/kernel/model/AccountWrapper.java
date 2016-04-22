@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -183,7 +183,17 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Account> toCacheModel() {
+	public Account toEscapedModel() {
+		return new AccountWrapper(_account.toEscapedModel());
+	}
+
+	@Override
+	public Account toUnescapedModel() {
+		return new AccountWrapper(_account.toUnescapedModel());
+	}
+
+	@Override
+	public CacheModel<Account> toCacheModel() {
 		return _account.toCacheModel();
 	}
 
@@ -208,17 +218,7 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Account toEscapedModel() {
-		return new AccountWrapper(_account.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Account toUnescapedModel() {
-		return new AccountWrapper(_account.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.Account account) {
+	public int compareTo(Account account) {
 		return _account.compareTo(account);
 	}
 
@@ -674,7 +674,7 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 
 		AccountWrapper accountWrapper = (AccountWrapper)obj;
 
-		if (Validator.equals(_account, accountWrapper._account)) {
+		if (Objects.equals(_account, accountWrapper._account)) {
 			return true;
 		}
 

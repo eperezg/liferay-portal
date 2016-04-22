@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -304,6 +304,21 @@ public class ShoppingItemWrapper implements ShoppingItem,
 		}
 	}
 
+	@Override
+	public ShoppingCategory getCategory() {
+		return _shoppingItem.getCategory();
+	}
+
+	@Override
+	public ShoppingItem toEscapedModel() {
+		return new ShoppingItemWrapper(_shoppingItem.toEscapedModel());
+	}
+
+	@Override
+	public ShoppingItem toUnescapedModel() {
+		return new ShoppingItemWrapper(_shoppingItem.toUnescapedModel());
+	}
+
 	/**
 	* Returns the featured of this shopping item.
 	*
@@ -510,23 +525,8 @@ public class ShoppingItemWrapper implements ShoppingItem,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.shopping.model.ShoppingItem> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ShoppingItem> toCacheModel() {
 		return _shoppingItem.toCacheModel();
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingCategory getCategory() {
-		return _shoppingItem.getCategory();
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingItem toEscapedModel() {
-		return new ShoppingItemWrapper(_shoppingItem.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingItem toUnescapedModel() {
-		return new ShoppingItemWrapper(_shoppingItem.toUnescapedModel());
 	}
 
 	/**
@@ -560,7 +560,7 @@ public class ShoppingItemWrapper implements ShoppingItem,
 	}
 
 	@Override
-	public int compareTo(com.liferay.shopping.model.ShoppingItem shoppingItem) {
+	public int compareTo(ShoppingItem shoppingItem) {
 		return _shoppingItem.compareTo(shoppingItem);
 	}
 
@@ -751,7 +751,7 @@ public class ShoppingItemWrapper implements ShoppingItem,
 	}
 
 	@Override
-	public java.util.List<com.liferay.shopping.model.ShoppingItemPrice> getItemPrices()
+	public java.util.List<ShoppingItemPrice> getItemPrices()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _shoppingItem.getItemPrices();
 	}
@@ -1260,7 +1260,7 @@ public class ShoppingItemWrapper implements ShoppingItem,
 
 		ShoppingItemWrapper shoppingItemWrapper = (ShoppingItemWrapper)obj;
 
-		if (Validator.equals(_shoppingItem, shoppingItemWrapper._shoppingItem)) {
+		if (Objects.equals(_shoppingItem, shoppingItemWrapper._shoppingItem)) {
 			return true;
 		}
 

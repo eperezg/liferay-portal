@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -191,6 +191,16 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
 		}
 	}
 
+	@Override
+	public ShoppingCoupon toEscapedModel() {
+		return new ShoppingCouponWrapper(_shoppingCoupon.toEscapedModel());
+	}
+
+	@Override
+	public ShoppingCoupon toUnescapedModel() {
+		return new ShoppingCouponWrapper(_shoppingCoupon.toUnescapedModel());
+	}
+
 	/**
 	* Returns the active of this shopping coupon.
 	*
@@ -247,18 +257,8 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.shopping.model.ShoppingCoupon> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ShoppingCoupon> toCacheModel() {
 		return _shoppingCoupon.toCacheModel();
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingCoupon toEscapedModel() {
-		return new ShoppingCouponWrapper(_shoppingCoupon.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingCoupon toUnescapedModel() {
-		return new ShoppingCouponWrapper(_shoppingCoupon.toUnescapedModel());
 	}
 
 	/**
@@ -282,8 +282,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.shopping.model.ShoppingCoupon shoppingCoupon) {
+	public int compareTo(ShoppingCoupon shoppingCoupon) {
 		return _shoppingCoupon.compareTo(shoppingCoupon);
 	}
 
@@ -730,7 +729,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon,
 
 		ShoppingCouponWrapper shoppingCouponWrapper = (ShoppingCouponWrapper)obj;
 
-		if (Validator.equals(_shoppingCoupon,
+		if (Objects.equals(_shoppingCoupon,
 					shoppingCouponWrapper._shoppingCoupon)) {
 			return true;
 		}

@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -151,8 +151,30 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.LayoutSetPrototype> toCacheModel() {
+	public CacheModel<LayoutSetPrototype> toCacheModel() {
 		return _layoutSetPrototype.toCacheModel();
+	}
+
+	@Override
+	public Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _layoutSetPrototype.getGroup();
+	}
+
+	@Override
+	public LayoutSet getLayoutSet()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _layoutSetPrototype.getLayoutSet();
+	}
+
+	@Override
+	public LayoutSetPrototype toEscapedModel() {
+		return new LayoutSetPrototypeWrapper(_layoutSetPrototype.toEscapedModel());
+	}
+
+	@Override
+	public LayoutSetPrototype toUnescapedModel() {
+		return new LayoutSetPrototypeWrapper(_layoutSetPrototype.toUnescapedModel());
 	}
 
 	/**
@@ -201,35 +223,12 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Group getGroup()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _layoutSetPrototype.getGroup();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.LayoutSet getLayoutSet()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _layoutSetPrototype.getLayoutSet();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.LayoutSetPrototype toEscapedModel() {
-		return new LayoutSetPrototypeWrapper(_layoutSetPrototype.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.LayoutSetPrototype toUnescapedModel() {
-		return new LayoutSetPrototypeWrapper(_layoutSetPrototype.toUnescapedModel());
-	}
-
-	@Override
 	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties() {
 		return _layoutSetPrototype.getSettingsProperties();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.LayoutSetPrototype layoutSetPrototype) {
+	public int compareTo(LayoutSetPrototype layoutSetPrototype) {
 		return _layoutSetPrototype.compareTo(layoutSetPrototype);
 	}
 
@@ -855,7 +854,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 
 		LayoutSetPrototypeWrapper layoutSetPrototypeWrapper = (LayoutSetPrototypeWrapper)obj;
 
-		if (Validator.equals(_layoutSetPrototype,
+		if (Objects.equals(_layoutSetPrototype,
 					layoutSetPrototypeWrapper._layoutSetPrototype)) {
 			return true;
 		}

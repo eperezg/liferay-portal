@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -107,6 +107,16 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField,
 	}
 
 	@Override
+	public ShoppingItemField toEscapedModel() {
+		return new ShoppingItemFieldWrapper(_shoppingItemField.toEscapedModel());
+	}
+
+	@Override
+	public ShoppingItemField toUnescapedModel() {
+		return new ShoppingItemFieldWrapper(_shoppingItemField.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _shoppingItemField.isCachedModel();
 	}
@@ -127,23 +137,12 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.shopping.model.ShoppingItemField> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ShoppingItemField> toCacheModel() {
 		return _shoppingItemField.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.shopping.model.ShoppingItemField toEscapedModel() {
-		return new ShoppingItemFieldWrapper(_shoppingItemField.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingItemField toUnescapedModel() {
-		return new ShoppingItemFieldWrapper(_shoppingItemField.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.shopping.model.ShoppingItemField shoppingItemField) {
+	public int compareTo(ShoppingItemField shoppingItemField) {
 		return _shoppingItemField.compareTo(shoppingItemField);
 	}
 
@@ -370,7 +369,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField,
 
 		ShoppingItemFieldWrapper shoppingItemFieldWrapper = (ShoppingItemFieldWrapper)obj;
 
-		if (Validator.equals(_shoppingItemField,
+		if (Objects.equals(_shoppingItemField,
 					shoppingItemFieldWrapper._shoppingItemField)) {
 			return true;
 		}

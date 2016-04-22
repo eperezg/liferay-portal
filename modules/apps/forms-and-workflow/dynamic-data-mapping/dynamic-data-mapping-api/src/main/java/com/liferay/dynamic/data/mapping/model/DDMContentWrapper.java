@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -144,6 +144,16 @@ public class DDMContentWrapper implements DDMContent, ModelWrapper<DDMContent> {
 	}
 
 	@Override
+	public DDMContent toEscapedModel() {
+		return new DDMContentWrapper(_ddmContent.toEscapedModel());
+	}
+
+	@Override
+	public DDMContent toUnescapedModel() {
+		return new DDMContentWrapper(_ddmContent.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _ddmContent.isCachedModel();
 	}
@@ -159,28 +169,17 @@ public class DDMContentWrapper implements DDMContent, ModelWrapper<DDMContent> {
 	}
 
 	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMContent toEscapedModel() {
-		return new DDMContentWrapper(_ddmContent.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMContent toUnescapedModel() {
-		return new DDMContentWrapper(_ddmContent.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _ddmContent.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.dynamic.data.mapping.model.DDMContent> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<DDMContent> toCacheModel() {
 		return _ddmContent.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.dynamic.data.mapping.model.DDMContent ddmContent) {
+	public int compareTo(DDMContent ddmContent) {
 		return _ddmContent.compareTo(ddmContent);
 	}
 
@@ -658,7 +657,7 @@ public class DDMContentWrapper implements DDMContent, ModelWrapper<DDMContent> {
 
 		DDMContentWrapper ddmContentWrapper = (DDMContentWrapper)obj;
 
-		if (Validator.equals(_ddmContent, ddmContentWrapper._ddmContent)) {
+		if (Objects.equals(_ddmContent, ddmContentWrapper._ddmContent)) {
 			return true;
 		}
 

@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -162,6 +162,28 @@ public class KaleoNodeWrapper implements KaleoNode, ModelWrapper<KaleoNode> {
 		}
 	}
 
+	@Override
+	public KaleoNode toEscapedModel() {
+		return new KaleoNodeWrapper(_kaleoNode.toEscapedModel());
+	}
+
+	@Override
+	public KaleoNode toUnescapedModel() {
+		return new KaleoNodeWrapper(_kaleoNode.toUnescapedModel());
+	}
+
+	@Override
+	public KaleoTransition getDefaultKaleoTransition()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _kaleoNode.getDefaultKaleoTransition();
+	}
+
+	@Override
+	public KaleoTransition getKaleoTransition(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _kaleoNode.getKaleoTransition(name);
+	}
+
 	/**
 	* Returns the initial of this kaleo node.
 	*
@@ -228,36 +250,12 @@ public class KaleoNodeWrapper implements KaleoNode, ModelWrapper<KaleoNode> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.workflow.kaleo.model.KaleoNode> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<KaleoNode> toCacheModel() {
 		return _kaleoNode.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoNode toEscapedModel() {
-		return new KaleoNodeWrapper(_kaleoNode.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoNode toUnescapedModel() {
-		return new KaleoNodeWrapper(_kaleoNode.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoTransition getDefaultKaleoTransition()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _kaleoNode.getDefaultKaleoTransition();
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoTransition getKaleoTransition(
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _kaleoNode.getKaleoTransition(name);
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.workflow.kaleo.model.KaleoNode kaleoNode) {
+	public int compareTo(KaleoNode kaleoNode) {
 		return _kaleoNode.compareTo(kaleoNode);
 	}
 
@@ -367,7 +365,7 @@ public class KaleoNodeWrapper implements KaleoNode, ModelWrapper<KaleoNode> {
 	}
 
 	@Override
-	public java.util.List<com.liferay.portal.workflow.kaleo.model.KaleoTransition> getKaleoTransitions() {
+	public java.util.List<KaleoTransition> getKaleoTransitions() {
 		return _kaleoNode.getKaleoTransitions();
 	}
 
@@ -639,7 +637,7 @@ public class KaleoNodeWrapper implements KaleoNode, ModelWrapper<KaleoNode> {
 
 		KaleoNodeWrapper kaleoNodeWrapper = (KaleoNodeWrapper)obj;
 
-		if (Validator.equals(_kaleoNode, kaleoNodeWrapper._kaleoNode)) {
+		if (Objects.equals(_kaleoNode, kaleoNodeWrapper._kaleoNode)) {
 			return true;
 		}
 

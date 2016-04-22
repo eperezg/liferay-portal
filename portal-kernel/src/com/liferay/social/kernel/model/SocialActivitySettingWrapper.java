@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -115,6 +115,16 @@ public class SocialActivitySettingWrapper implements SocialActivitySetting,
 	}
 
 	@Override
+	public SocialActivitySetting toEscapedModel() {
+		return new SocialActivitySettingWrapper(_socialActivitySetting.toEscapedModel());
+	}
+
+	@Override
+	public SocialActivitySetting toUnescapedModel() {
+		return new SocialActivitySettingWrapper(_socialActivitySetting.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _socialActivitySetting.isCachedModel();
 	}
@@ -135,23 +145,12 @@ public class SocialActivitySettingWrapper implements SocialActivitySetting,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.social.kernel.model.SocialActivitySetting> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<SocialActivitySetting> toCacheModel() {
 		return _socialActivitySetting.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.social.kernel.model.SocialActivitySetting toEscapedModel() {
-		return new SocialActivitySettingWrapper(_socialActivitySetting.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.social.kernel.model.SocialActivitySetting toUnescapedModel() {
-		return new SocialActivitySettingWrapper(_socialActivitySetting.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.social.kernel.model.SocialActivitySetting socialActivitySetting) {
+	public int compareTo(SocialActivitySetting socialActivitySetting) {
 		return _socialActivitySetting.compareTo(socialActivitySetting);
 	}
 
@@ -403,7 +402,7 @@ public class SocialActivitySettingWrapper implements SocialActivitySetting,
 
 		SocialActivitySettingWrapper socialActivitySettingWrapper = (SocialActivitySettingWrapper)obj;
 
-		if (Validator.equals(_socialActivitySetting,
+		if (Objects.equals(_socialActivitySetting,
 					socialActivitySettingWrapper._socialActivitySetting)) {
 			return true;
 		}

@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -130,8 +130,18 @@ public class UserNotificationDeliveryWrapper implements UserNotificationDelivery
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.UserNotificationDelivery> toCacheModel() {
+	public CacheModel<UserNotificationDelivery> toCacheModel() {
 		return _userNotificationDelivery.toCacheModel();
+	}
+
+	@Override
+	public UserNotificationDelivery toEscapedModel() {
+		return new UserNotificationDeliveryWrapper(_userNotificationDelivery.toEscapedModel());
+	}
+
+	@Override
+	public UserNotificationDelivery toUnescapedModel() {
+		return new UserNotificationDeliveryWrapper(_userNotificationDelivery.toUnescapedModel());
 	}
 
 	/**
@@ -175,18 +185,7 @@ public class UserNotificationDeliveryWrapper implements UserNotificationDelivery
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.UserNotificationDelivery toEscapedModel() {
-		return new UserNotificationDeliveryWrapper(_userNotificationDelivery.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.UserNotificationDelivery toUnescapedModel() {
-		return new UserNotificationDeliveryWrapper(_userNotificationDelivery.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.UserNotificationDelivery userNotificationDelivery) {
+	public int compareTo(UserNotificationDelivery userNotificationDelivery) {
 		return _userNotificationDelivery.compareTo(userNotificationDelivery);
 	}
 
@@ -487,7 +486,7 @@ public class UserNotificationDeliveryWrapper implements UserNotificationDelivery
 
 		UserNotificationDeliveryWrapper userNotificationDeliveryWrapper = (UserNotificationDeliveryWrapper)obj;
 
-		if (Validator.equals(_userNotificationDelivery,
+		if (Objects.equals(_userNotificationDelivery,
 					userNotificationDeliveryWrapper._userNotificationDelivery)) {
 			return true;
 		}

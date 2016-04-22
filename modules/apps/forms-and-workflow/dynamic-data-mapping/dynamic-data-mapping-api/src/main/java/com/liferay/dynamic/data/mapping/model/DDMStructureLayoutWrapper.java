@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -138,6 +138,21 @@ public class DDMStructureLayoutWrapper implements DDMStructureLayout,
 	}
 
 	@Override
+	public DDMFormLayout getDDMFormLayout() {
+		return _ddmStructureLayout.getDDMFormLayout();
+	}
+
+	@Override
+	public DDMStructureLayout toEscapedModel() {
+		return new DDMStructureLayoutWrapper(_ddmStructureLayout.toEscapedModel());
+	}
+
+	@Override
+	public DDMStructureLayout toUnescapedModel() {
+		return new DDMStructureLayoutWrapper(_ddmStructureLayout.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _ddmStructureLayout.isCachedModel();
 	}
@@ -153,33 +168,17 @@ public class DDMStructureLayoutWrapper implements DDMStructureLayout,
 	}
 
 	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMFormLayout getDDMFormLayout() {
-		return _ddmStructureLayout.getDDMFormLayout();
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMStructureLayout toEscapedModel() {
-		return new DDMStructureLayoutWrapper(_ddmStructureLayout.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMStructureLayout toUnescapedModel() {
-		return new DDMStructureLayoutWrapper(_ddmStructureLayout.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _ddmStructureLayout.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.dynamic.data.mapping.model.DDMStructureLayout> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<DDMStructureLayout> toCacheModel() {
 		return _ddmStructureLayout.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.dynamic.data.mapping.model.DDMStructureLayout ddmStructureLayout) {
+	public int compareTo(DDMStructureLayout ddmStructureLayout) {
 		return _ddmStructureLayout.compareTo(ddmStructureLayout);
 	}
 
@@ -496,7 +495,7 @@ public class DDMStructureLayoutWrapper implements DDMStructureLayout,
 
 		DDMStructureLayoutWrapper ddmStructureLayoutWrapper = (DDMStructureLayoutWrapper)obj;
 
-		if (Validator.equals(_ddmStructureLayout,
+		if (Objects.equals(_ddmStructureLayout,
 					ddmStructureLayoutWrapper._ddmStructureLayout)) {
 			return true;
 		}

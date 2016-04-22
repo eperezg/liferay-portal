@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -151,6 +151,22 @@ public class PollsVoteWrapper implements PollsVote, ModelWrapper<PollsVote> {
 	}
 
 	@Override
+	public PollsChoice getChoice()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _pollsVote.getChoice();
+	}
+
+	@Override
+	public PollsVote toEscapedModel() {
+		return new PollsVoteWrapper(_pollsVote.toEscapedModel());
+	}
+
+	@Override
+	public PollsVote toUnescapedModel() {
+		return new PollsVoteWrapper(_pollsVote.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _pollsVote.isCachedModel();
 	}
@@ -171,28 +187,12 @@ public class PollsVoteWrapper implements PollsVote, ModelWrapper<PollsVote> {
 	}
 
 	@Override
-	public com.liferay.polls.model.PollsChoice getChoice()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _pollsVote.getChoice();
-	}
-
-	@Override
-	public com.liferay.polls.model.PollsVote toEscapedModel() {
-		return new PollsVoteWrapper(_pollsVote.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.polls.model.PollsVote toUnescapedModel() {
-		return new PollsVoteWrapper(_pollsVote.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.polls.model.PollsVote> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<PollsVote> toCacheModel() {
 		return _pollsVote.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(com.liferay.polls.model.PollsVote pollsVote) {
+	public int compareTo(PollsVote pollsVote) {
 		return _pollsVote.compareTo(pollsVote);
 	}
 
@@ -549,7 +549,7 @@ public class PollsVoteWrapper implements PollsVote, ModelWrapper<PollsVote> {
 
 		PollsVoteWrapper pollsVoteWrapper = (PollsVoteWrapper)obj;
 
-		if (Validator.equals(_pollsVote, pollsVoteWrapper._pollsVote)) {
+		if (Objects.equals(_pollsVote, pollsVoteWrapper._pollsVote)) {
 			return true;
 		}
 

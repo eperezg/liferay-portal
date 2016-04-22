@@ -1223,6 +1223,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 			<update-gradle-properties />
 
+			<ant antfile="build-test.xml" target="update-test-gradle-properties" inheritAll="false" />
+
 			<gradle-execute task="setupPortalTools">
 				<arg value="--build-file=${project.dir}/modules/util.gradle" />
 			</gradle-execute>
@@ -1549,12 +1551,12 @@ rerun your task.
 					<matches pattern="ee-.+" string="${liferay.releng.branch}" />
 				</or>
 				<then>
-					<var name="liferay.releng.app.title.suffix" value="\s EE" />
+					<var name="liferay.releng.app.title.prefix" value="Liferay" />
 					<var name="liferay.releng.public" value="false" />
 					<var name="liferay.releng.supported" value="true" />
 				</then>
 				<else>
-					<var name="liferay.releng.app.title.suffix" value="" />
+					<var name="liferay.releng.app.title.prefix" value="Liferay CE" />
 					<var name="liferay.releng.public" value="true" />
 					<var name="liferay.releng.supported" value="false" />
 				</else>
@@ -1606,11 +1608,12 @@ rerun your task.
 				app.server.type=${app.server.type}
 				baseline.jar.report.level=${baseline.jar.report.level}
 				baseline.jar.report.only.dirty.packages=${baseline.jar.report.only.dirty.packages}
+				database.jdbc.oracle.driver=${jdbc.oracle.driver}
 				jsp.precompile.enabled=${jsp.precompile.enabled}
 				junit.java.integration.gc=${junit.java.integration.gc}
 				junit.java.unit.gc=${junit.java.unit.gc}
 				liferay.home=${liferay.home}
-				liferay.releng.app.title.suffix=${liferay.releng.app.title.suffix}
+				liferay.releng.app.title.prefix=${liferay.releng.app.title.prefix}
 				liferay.releng.public=${liferay.releng.public}
 				liferay.releng.supported=${liferay.releng.supported}
 				microsoft.translator.client.id=${microsoft.translator.client.id}
@@ -1622,8 +1625,6 @@ rerun your task.
 				sass.generate.source.map=${sass.generate.source.map}
 				sass.precision=${sass.precision}
 				systemProp.build.performance.logger.enabled=${build.performance.logger.enabled}
-				systemProp.portal.build.modules.excludes=${build.modules.excludes}
-				systemProp.portal.build.modules.includes=${build.modules.includes}
 				upgrade.table.dir=${upgrade.table.dir}
 			</echo>
 		</sequential>

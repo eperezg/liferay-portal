@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -151,8 +151,30 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.LayoutPrototype> toCacheModel() {
+	public CacheModel<LayoutPrototype> toCacheModel() {
 		return _layoutPrototype.toCacheModel();
+	}
+
+	@Override
+	public Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _layoutPrototype.getGroup();
+	}
+
+	@Override
+	public Layout getLayout()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _layoutPrototype.getLayout();
+	}
+
+	@Override
+	public LayoutPrototype toEscapedModel() {
+		return new LayoutPrototypeWrapper(_layoutPrototype.toEscapedModel());
+	}
+
+	@Override
+	public LayoutPrototype toUnescapedModel() {
+		return new LayoutPrototypeWrapper(_layoutPrototype.toUnescapedModel());
 	}
 
 	/**
@@ -201,30 +223,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Group getGroup()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _layoutPrototype.getGroup();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Layout getLayout()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _layoutPrototype.getLayout();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.LayoutPrototype toEscapedModel() {
-		return new LayoutPrototypeWrapper(_layoutPrototype.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.LayoutPrototype toUnescapedModel() {
-		return new LayoutPrototypeWrapper(_layoutPrototype.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.LayoutPrototype layoutPrototype) {
+	public int compareTo(LayoutPrototype layoutPrototype) {
 		return _layoutPrototype.compareTo(layoutPrototype);
 	}
 
@@ -839,7 +838,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 
 		LayoutPrototypeWrapper layoutPrototypeWrapper = (LayoutPrototypeWrapper)obj;
 
-		if (Validator.equals(_layoutPrototype,
+		if (Objects.equals(_layoutPrototype,
 					layoutPrototypeWrapper._layoutPrototype)) {
 			return true;
 		}

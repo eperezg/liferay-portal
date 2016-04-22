@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -113,8 +113,18 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.ResourceBlock> toCacheModel() {
+	public CacheModel<ResourceBlock> toCacheModel() {
 		return _resourceBlock.toCacheModel();
+	}
+
+	@Override
+	public ResourceBlock toEscapedModel() {
+		return new ResourceBlockWrapper(_resourceBlock.toEscapedModel());
+	}
+
+	@Override
+	public ResourceBlock toUnescapedModel() {
+		return new ResourceBlockWrapper(_resourceBlock.toUnescapedModel());
 	}
 
 	@Override
@@ -138,18 +148,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.ResourceBlock toEscapedModel() {
-		return new ResourceBlockWrapper(_resourceBlock.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.ResourceBlock toUnescapedModel() {
-		return new ResourceBlockWrapper(_resourceBlock.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.ResourceBlock resourceBlock) {
+	public int compareTo(ResourceBlock resourceBlock) {
 		return _resourceBlock.compareTo(resourceBlock);
 	}
 
@@ -385,7 +384,7 @@ public class ResourceBlockWrapper implements ResourceBlock,
 
 		ResourceBlockWrapper resourceBlockWrapper = (ResourceBlockWrapper)obj;
 
-		if (Validator.equals(_resourceBlock, resourceBlockWrapper._resourceBlock)) {
+		if (Objects.equals(_resourceBlock, resourceBlockWrapper._resourceBlock)) {
 			return true;
 		}
 

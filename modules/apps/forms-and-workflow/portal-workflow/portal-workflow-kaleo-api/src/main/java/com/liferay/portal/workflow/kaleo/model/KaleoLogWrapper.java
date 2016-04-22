@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -282,6 +282,16 @@ public class KaleoLogWrapper implements KaleoLog, ModelWrapper<KaleoLog> {
 		}
 	}
 
+	@Override
+	public KaleoLog toEscapedModel() {
+		return new KaleoLogWrapper(_kaleoLog.toEscapedModel());
+	}
+
+	@Override
+	public KaleoLog toUnescapedModel() {
+		return new KaleoLogWrapper(_kaleoLog.toUnescapedModel());
+	}
+
 	/**
 	* Returns the terminal kaleo node of this kaleo log.
 	*
@@ -323,23 +333,12 @@ public class KaleoLogWrapper implements KaleoLog, ModelWrapper<KaleoLog> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.workflow.kaleo.model.KaleoLog> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<KaleoLog> toCacheModel() {
 		return _kaleoLog.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoLog toEscapedModel() {
-		return new KaleoLogWrapper(_kaleoLog.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoLog toUnescapedModel() {
-		return new KaleoLogWrapper(_kaleoLog.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.workflow.kaleo.model.KaleoLog kaleoLog) {
+	public int compareTo(KaleoLog kaleoLog) {
 		return _kaleoLog.compareTo(kaleoLog);
 	}
 
@@ -1049,7 +1048,7 @@ public class KaleoLogWrapper implements KaleoLog, ModelWrapper<KaleoLog> {
 
 		KaleoLogWrapper kaleoLogWrapper = (KaleoLogWrapper)obj;
 
-		if (Validator.equals(_kaleoLog, kaleoLogWrapper._kaleoLog)) {
+		if (Objects.equals(_kaleoLog, kaleoLogWrapper._kaleoLog)) {
 			return true;
 		}
 

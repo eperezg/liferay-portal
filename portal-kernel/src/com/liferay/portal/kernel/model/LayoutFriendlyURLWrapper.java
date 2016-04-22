@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -165,8 +165,18 @@ public class LayoutFriendlyURLWrapper implements LayoutFriendlyURL,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.LayoutFriendlyURL> toCacheModel() {
+	public CacheModel<LayoutFriendlyURL> toCacheModel() {
 		return _layoutFriendlyURL.toCacheModel();
+	}
+
+	@Override
+	public LayoutFriendlyURL toEscapedModel() {
+		return new LayoutFriendlyURLWrapper(_layoutFriendlyURL.toEscapedModel());
+	}
+
+	@Override
+	public LayoutFriendlyURL toUnescapedModel() {
+		return new LayoutFriendlyURLWrapper(_layoutFriendlyURL.toUnescapedModel());
 	}
 
 	/**
@@ -210,18 +220,7 @@ public class LayoutFriendlyURLWrapper implements LayoutFriendlyURL,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.LayoutFriendlyURL toEscapedModel() {
-		return new LayoutFriendlyURLWrapper(_layoutFriendlyURL.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.LayoutFriendlyURL toUnescapedModel() {
-		return new LayoutFriendlyURLWrapper(_layoutFriendlyURL.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.LayoutFriendlyURL layoutFriendlyURL) {
+	public int compareTo(LayoutFriendlyURL layoutFriendlyURL) {
 		return _layoutFriendlyURL.compareTo(layoutFriendlyURL);
 	}
 
@@ -607,7 +606,7 @@ public class LayoutFriendlyURLWrapper implements LayoutFriendlyURL,
 
 		LayoutFriendlyURLWrapper layoutFriendlyURLWrapper = (LayoutFriendlyURLWrapper)obj;
 
-		if (Validator.equals(_layoutFriendlyURL,
+		if (Objects.equals(_layoutFriendlyURL,
 					layoutFriendlyURLWrapper._layoutFriendlyURL)) {
 			return true;
 		}

@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -113,8 +113,18 @@ public class PluginSettingWrapper implements PluginSetting,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.PluginSetting> toCacheModel() {
+	public CacheModel<PluginSetting> toCacheModel() {
 		return _pluginSetting.toCacheModel();
+	}
+
+	@Override
+	public PluginSetting toEscapedModel() {
+		return new PluginSettingWrapper(_pluginSetting.toEscapedModel());
+	}
+
+	@Override
+	public PluginSetting toUnescapedModel() {
+		return new PluginSettingWrapper(_pluginSetting.toUnescapedModel());
 	}
 
 	/**
@@ -182,18 +192,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.PluginSetting toEscapedModel() {
-		return new PluginSettingWrapper(_pluginSetting.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.PluginSetting toUnescapedModel() {
-		return new PluginSettingWrapper(_pluginSetting.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.PluginSetting pluginSetting) {
+	public int compareTo(PluginSetting pluginSetting) {
 		return _pluginSetting.compareTo(pluginSetting);
 	}
 
@@ -445,7 +444,7 @@ public class PluginSettingWrapper implements PluginSetting,
 
 		PluginSettingWrapper pluginSettingWrapper = (PluginSettingWrapper)obj;
 
-		if (Validator.equals(_pluginSetting, pluginSettingWrapper._pluginSetting)) {
+		if (Objects.equals(_pluginSetting, pluginSettingWrapper._pluginSetting)) {
 			return true;
 		}
 

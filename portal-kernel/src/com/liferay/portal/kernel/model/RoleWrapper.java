@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -171,8 +171,18 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Role> toCacheModel() {
+	public CacheModel<Role> toCacheModel() {
 		return _role.toCacheModel();
+	}
+
+	@Override
+	public Role toEscapedModel() {
+		return new RoleWrapper(_role.toEscapedModel());
+	}
+
+	@Override
+	public Role toUnescapedModel() {
+		return new RoleWrapper(_role.toUnescapedModel());
 	}
 
 	@Override
@@ -206,17 +216,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Role toEscapedModel() {
-		return new RoleWrapper(_role.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Role toUnescapedModel() {
-		return new RoleWrapper(_role.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.Role role) {
+	public int compareTo(Role role) {
 		return _role.compareTo(role);
 	}
 
@@ -921,7 +921,7 @@ public class RoleWrapper implements Role, ModelWrapper<Role> {
 
 		RoleWrapper roleWrapper = (RoleWrapper)obj;
 
-		if (Validator.equals(_role, roleWrapper._role)) {
+		if (Objects.equals(_role, roleWrapper._role)) {
 			return true;
 		}
 

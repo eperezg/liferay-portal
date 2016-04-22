@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -150,6 +150,16 @@ public class MemberRequestWrapper implements MemberRequest,
 	}
 
 	@Override
+	public MemberRequest toEscapedModel() {
+		return new MemberRequestWrapper(_memberRequest.toEscapedModel());
+	}
+
+	@Override
+	public MemberRequest toUnescapedModel() {
+		return new MemberRequestWrapper(_memberRequest.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _memberRequest.isCachedModel();
 	}
@@ -170,23 +180,12 @@ public class MemberRequestWrapper implements MemberRequest,
 	}
 
 	@Override
-	public com.liferay.invitation.invite.members.model.MemberRequest toEscapedModel() {
-		return new MemberRequestWrapper(_memberRequest.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.invitation.invite.members.model.MemberRequest toUnescapedModel() {
-		return new MemberRequestWrapper(_memberRequest.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.invitation.invite.members.model.MemberRequest> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MemberRequest> toCacheModel() {
 		return _memberRequest.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.invitation.invite.members.model.MemberRequest memberRequest) {
+	public int compareTo(MemberRequest memberRequest) {
 		return _memberRequest.compareTo(memberRequest);
 	}
 
@@ -563,7 +562,7 @@ public class MemberRequestWrapper implements MemberRequest,
 
 		MemberRequestWrapper memberRequestWrapper = (MemberRequestWrapper)obj;
 
-		if (Validator.equals(_memberRequest, memberRequestWrapper._memberRequest)) {
+		if (Objects.equals(_memberRequest, memberRequestWrapper._memberRequest)) {
 			return true;
 		}
 

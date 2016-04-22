@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -158,8 +158,24 @@ public class EmailAddressWrapper implements EmailAddress,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.EmailAddress> toCacheModel() {
+	public CacheModel<EmailAddress> toCacheModel() {
 		return _emailAddress.toCacheModel();
+	}
+
+	@Override
+	public EmailAddress toEscapedModel() {
+		return new EmailAddressWrapper(_emailAddress.toEscapedModel());
+	}
+
+	@Override
+	public EmailAddress toUnescapedModel() {
+		return new EmailAddressWrapper(_emailAddress.toUnescapedModel());
+	}
+
+	@Override
+	public ListType getType()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _emailAddress.getType();
 	}
 
 	/**
@@ -203,24 +219,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.EmailAddress toEscapedModel() {
-		return new EmailAddressWrapper(_emailAddress.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.EmailAddress toUnescapedModel() {
-		return new EmailAddressWrapper(_emailAddress.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.ListType getType()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _emailAddress.getType();
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.EmailAddress emailAddress) {
+	public int compareTo(EmailAddress emailAddress) {
 		return _emailAddress.compareTo(emailAddress);
 	}
 
@@ -601,7 +600,7 @@ public class EmailAddressWrapper implements EmailAddress,
 
 		EmailAddressWrapper emailAddressWrapper = (EmailAddressWrapper)obj;
 
-		if (Validator.equals(_emailAddress, emailAddressWrapper._emailAddress)) {
+		if (Objects.equals(_emailAddress, emailAddressWrapper._emailAddress)) {
 			return true;
 		}
 

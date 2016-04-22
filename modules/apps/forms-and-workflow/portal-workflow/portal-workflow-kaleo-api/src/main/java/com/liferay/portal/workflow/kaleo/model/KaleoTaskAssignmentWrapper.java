@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -189,6 +189,16 @@ public class KaleoTaskAssignmentWrapper implements KaleoTaskAssignment,
 	}
 
 	@Override
+	public KaleoTaskAssignment toEscapedModel() {
+		return new KaleoTaskAssignmentWrapper(_kaleoTaskAssignment.toEscapedModel());
+	}
+
+	@Override
+	public KaleoTaskAssignment toUnescapedModel() {
+		return new KaleoTaskAssignmentWrapper(_kaleoTaskAssignment.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _kaleoTaskAssignment.isCachedModel();
 	}
@@ -209,23 +219,12 @@ public class KaleoTaskAssignmentWrapper implements KaleoTaskAssignment,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignment> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<KaleoTaskAssignment> toCacheModel() {
 		return _kaleoTaskAssignment.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignment toEscapedModel() {
-		return new KaleoTaskAssignmentWrapper(_kaleoTaskAssignment.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignment toUnescapedModel() {
-		return new KaleoTaskAssignmentWrapper(_kaleoTaskAssignment.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignment kaleoTaskAssignment) {
+	public int compareTo(KaleoTaskAssignment kaleoTaskAssignment) {
 		return _kaleoTaskAssignment.compareTo(kaleoTaskAssignment);
 	}
 
@@ -684,7 +683,7 @@ public class KaleoTaskAssignmentWrapper implements KaleoTaskAssignment,
 
 		KaleoTaskAssignmentWrapper kaleoTaskAssignmentWrapper = (KaleoTaskAssignmentWrapper)obj;
 
-		if (Validator.equals(_kaleoTaskAssignment,
+		if (Objects.equals(_kaleoTaskAssignment,
 					kaleoTaskAssignmentWrapper._kaleoTaskAssignment)) {
 			return true;
 		}

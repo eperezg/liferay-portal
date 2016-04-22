@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -148,6 +148,16 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 		}
 	}
 
+	@Override
+	public Lock toEscapedModel() {
+		return new LockWrapper(_lock.toEscapedModel());
+	}
+
+	@Override
+	public Lock toUnescapedModel() {
+		return new LockWrapper(_lock.toUnescapedModel());
+	}
+
 	/**
 	* Returns the inheritable of this lock.
 	*
@@ -199,22 +209,12 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.lock.model.Lock> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<Lock> toCacheModel() {
 		return _lock.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.lock.model.Lock toEscapedModel() {
-		return new LockWrapper(_lock.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.lock.model.Lock toUnescapedModel() {
-		return new LockWrapper(_lock.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.lock.model.Lock lock) {
+	public int compareTo(Lock lock) {
 		return _lock.compareTo(lock);
 	}
 
@@ -566,7 +566,7 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 
 		LockWrapper lockWrapper = (LockWrapper)obj;
 
-		if (Validator.equals(_lock, lockWrapper._lock)) {
+		if (Objects.equals(_lock, lockWrapper._lock)) {
 			return true;
 		}
 

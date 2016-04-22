@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -156,6 +156,16 @@ public class SocialRequestWrapper implements SocialRequest,
 	}
 
 	@Override
+	public SocialRequest toEscapedModel() {
+		return new SocialRequestWrapper(_socialRequest.toEscapedModel());
+	}
+
+	@Override
+	public SocialRequest toUnescapedModel() {
+		return new SocialRequestWrapper(_socialRequest.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _socialRequest.isCachedModel();
 	}
@@ -176,23 +186,12 @@ public class SocialRequestWrapper implements SocialRequest,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.social.kernel.model.SocialRequest> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<SocialRequest> toCacheModel() {
 		return _socialRequest.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.social.kernel.model.SocialRequest toEscapedModel() {
-		return new SocialRequestWrapper(_socialRequest.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.social.kernel.model.SocialRequest toUnescapedModel() {
-		return new SocialRequestWrapper(_socialRequest.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.social.kernel.model.SocialRequest socialRequest) {
+	public int compareTo(SocialRequest socialRequest) {
 		return _socialRequest.compareTo(socialRequest);
 	}
 
@@ -604,7 +603,7 @@ public class SocialRequestWrapper implements SocialRequest,
 
 		SocialRequestWrapper socialRequestWrapper = (SocialRequestWrapper)obj;
 
-		if (Validator.equals(_socialRequest, socialRequestWrapper._socialRequest)) {
+		if (Objects.equals(_socialRequest, socialRequestWrapper._socialRequest)) {
 			return true;
 		}
 

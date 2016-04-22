@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -228,6 +228,16 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 		}
 	}
 
+	@Override
+	public DLFolder toEscapedModel() {
+		return new DLFolderWrapper(_dlFolder.toEscapedModel());
+	}
+
+	@Override
+	public DLFolder toUnescapedModel() {
+		return new DLFolderWrapper(_dlFolder.toUnescapedModel());
+	}
+
 	/**
 	* Returns the hidden of this document library folder.
 	*
@@ -419,19 +429,9 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 	}
 
 	@Override
-	public com.liferay.document.library.kernel.model.DLFolder getParentFolder()
+	public DLFolder getParentFolder()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFolder.getParentFolder();
-	}
-
-	@Override
-	public com.liferay.document.library.kernel.model.DLFolder toEscapedModel() {
-		return new DLFolderWrapper(_dlFolder.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.document.library.kernel.model.DLFolder toUnescapedModel() {
-		return new DLFolderWrapper(_dlFolder.toUnescapedModel());
 	}
 
 	@Override
@@ -440,7 +440,7 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.document.library.kernel.model.DLFolder> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<DLFolder> toCacheModel() {
 		return _dlFolder.toCacheModel();
 	}
 
@@ -466,8 +466,7 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.document.library.kernel.model.DLFolder dlFolder) {
+	public int compareTo(DLFolder dlFolder) {
 		return _dlFolder.compareTo(dlFolder);
 	}
 
@@ -681,7 +680,7 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 	}
 
 	@Override
-	public java.util.List<com.liferay.document.library.kernel.model.DLFolder> getAncestors()
+	public java.util.List<DLFolder> getAncestors()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _dlFolder.getAncestors();
 	}
@@ -1139,7 +1138,7 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 
 		DLFolderWrapper dlFolderWrapper = (DLFolderWrapper)obj;
 
-		if (Validator.equals(_dlFolder, dlFolderWrapper._dlFolder)) {
+		if (Objects.equals(_dlFolder, dlFolderWrapper._dlFolder)) {
 			return true;
 		}
 

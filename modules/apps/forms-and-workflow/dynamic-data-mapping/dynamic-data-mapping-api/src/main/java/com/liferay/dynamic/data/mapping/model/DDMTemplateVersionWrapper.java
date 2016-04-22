@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -191,6 +191,22 @@ public class DDMTemplateVersionWrapper implements DDMTemplateVersion,
 		}
 	}
 
+	@Override
+	public DDMTemplate getTemplate()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _ddmTemplateVersion.getTemplate();
+	}
+
+	@Override
+	public DDMTemplateVersion toEscapedModel() {
+		return new DDMTemplateVersionWrapper(_ddmTemplateVersion.toEscapedModel());
+	}
+
+	@Override
+	public DDMTemplateVersion toUnescapedModel() {
+		return new DDMTemplateVersionWrapper(_ddmTemplateVersion.toUnescapedModel());
+	}
+
 	/**
 	* Returns <code>true</code> if this d d m template version is approved.
 	*
@@ -287,34 +303,17 @@ public class DDMTemplateVersionWrapper implements DDMTemplateVersion,
 	}
 
 	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMTemplate getTemplate()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _ddmTemplateVersion.getTemplate();
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMTemplateVersion toEscapedModel() {
-		return new DDMTemplateVersionWrapper(_ddmTemplateVersion.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMTemplateVersion toUnescapedModel() {
-		return new DDMTemplateVersionWrapper(_ddmTemplateVersion.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _ddmTemplateVersion.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.dynamic.data.mapping.model.DDMTemplateVersion> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<DDMTemplateVersion> toCacheModel() {
 		return _ddmTemplateVersion.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.dynamic.data.mapping.model.DDMTemplateVersion ddmTemplateVersion) {
+	public int compareTo(DDMTemplateVersion ddmTemplateVersion) {
 		return _ddmTemplateVersion.compareTo(ddmTemplateVersion);
 	}
 
@@ -1089,7 +1088,7 @@ public class DDMTemplateVersionWrapper implements DDMTemplateVersion,
 
 		DDMTemplateVersionWrapper ddmTemplateVersionWrapper = (DDMTemplateVersionWrapper)obj;
 
-		if (Validator.equals(_ddmTemplateVersion,
+		if (Objects.equals(_ddmTemplateVersion,
 					ddmTemplateVersionWrapper._ddmTemplateVersion)) {
 			return true;
 		}

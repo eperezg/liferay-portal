@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -105,8 +105,18 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Region> toCacheModel() {
+	public CacheModel<Region> toCacheModel() {
 		return _region.toCacheModel();
+	}
+
+	@Override
+	public Region toEscapedModel() {
+		return new RegionWrapper(_region.toEscapedModel());
+	}
+
+	@Override
+	public Region toUnescapedModel() {
+		return new RegionWrapper(_region.toUnescapedModel());
 	}
 
 	/**
@@ -150,17 +160,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Region toEscapedModel() {
-		return new RegionWrapper(_region.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Region toUnescapedModel() {
-		return new RegionWrapper(_region.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.Region region) {
+	public int compareTo(Region region) {
 		return _region.compareTo(region);
 	}
 
@@ -361,7 +361,7 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 
 		RegionWrapper regionWrapper = (RegionWrapper)obj;
 
-		if (Validator.equals(_region, regionWrapper._region)) {
+		if (Objects.equals(_region, regionWrapper._region)) {
 			return true;
 		}
 

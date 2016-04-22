@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -142,8 +142,18 @@ public class SubscriptionWrapper implements Subscription,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Subscription> toCacheModel() {
+	public CacheModel<Subscription> toCacheModel() {
 		return _subscription.toCacheModel();
+	}
+
+	@Override
+	public Subscription toEscapedModel() {
+		return new SubscriptionWrapper(_subscription.toEscapedModel());
+	}
+
+	@Override
+	public Subscription toUnescapedModel() {
+		return new SubscriptionWrapper(_subscription.toUnescapedModel());
 	}
 
 	@Override
@@ -167,18 +177,7 @@ public class SubscriptionWrapper implements Subscription,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Subscription toEscapedModel() {
-		return new SubscriptionWrapper(_subscription.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Subscription toUnescapedModel() {
-		return new SubscriptionWrapper(_subscription.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.Subscription subscription) {
+	public int compareTo(Subscription subscription) {
 		return _subscription.compareTo(subscription);
 	}
 
@@ -529,7 +528,7 @@ public class SubscriptionWrapper implements Subscription,
 
 		SubscriptionWrapper subscriptionWrapper = (SubscriptionWrapper)obj;
 
-		if (Validator.equals(_subscription, subscriptionWrapper._subscription)) {
+		if (Objects.equals(_subscription, subscriptionWrapper._subscription)) {
 			return true;
 		}
 

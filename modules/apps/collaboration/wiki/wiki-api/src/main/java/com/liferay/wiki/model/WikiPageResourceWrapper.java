@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -107,6 +107,16 @@ public class WikiPageResourceWrapper implements WikiPageResource,
 	}
 
 	@Override
+	public WikiPageResource toEscapedModel() {
+		return new WikiPageResourceWrapper(_wikiPageResource.toEscapedModel());
+	}
+
+	@Override
+	public WikiPageResource toUnescapedModel() {
+		return new WikiPageResourceWrapper(_wikiPageResource.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _wikiPageResource.isCachedModel();
 	}
@@ -127,23 +137,12 @@ public class WikiPageResourceWrapper implements WikiPageResource,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.wiki.model.WikiPageResource> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<WikiPageResource> toCacheModel() {
 		return _wikiPageResource.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.wiki.model.WikiPageResource toEscapedModel() {
-		return new WikiPageResourceWrapper(_wikiPageResource.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.wiki.model.WikiPageResource toUnescapedModel() {
-		return new WikiPageResourceWrapper(_wikiPageResource.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.wiki.model.WikiPageResource wikiPageResource) {
+	public int compareTo(WikiPageResource wikiPageResource) {
 		return _wikiPageResource.compareTo(wikiPageResource);
 	}
 
@@ -360,7 +359,7 @@ public class WikiPageResourceWrapper implements WikiPageResource,
 
 		WikiPageResourceWrapper wikiPageResourceWrapper = (WikiPageResourceWrapper)obj;
 
-		if (Validator.equals(_wikiPageResource,
+		if (Objects.equals(_wikiPageResource,
 					wikiPageResourceWrapper._wikiPageResource)) {
 			return true;
 		}

@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -126,8 +126,18 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Country> toCacheModel() {
+	public CacheModel<Country> toCacheModel() {
 		return _country.toCacheModel();
+	}
+
+	@Override
+	public Country toEscapedModel() {
+		return new CountryWrapper(_country.toEscapedModel());
+	}
+
+	@Override
+	public Country toUnescapedModel() {
+		return new CountryWrapper(_country.toUnescapedModel());
 	}
 
 	/**
@@ -191,17 +201,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Country toEscapedModel() {
-		return new CountryWrapper(_country.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Country toUnescapedModel() {
-		return new CountryWrapper(_country.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.Country country) {
+	public int compareTo(Country country) {
 		return _country.compareTo(country);
 	}
 
@@ -472,7 +472,7 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 
 		CountryWrapper countryWrapper = (CountryWrapper)obj;
 
-		if (Validator.equals(_country, countryWrapper._country)) {
+		if (Objects.equals(_country, countryWrapper._country)) {
 			return true;
 		}
 

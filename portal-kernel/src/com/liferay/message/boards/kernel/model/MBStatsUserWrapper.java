@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -108,6 +108,16 @@ public class MBStatsUserWrapper implements MBStatsUser,
 	}
 
 	@Override
+	public MBStatsUser toEscapedModel() {
+		return new MBStatsUserWrapper(_mbStatsUser.toEscapedModel());
+	}
+
+	@Override
+	public MBStatsUser toUnescapedModel() {
+		return new MBStatsUserWrapper(_mbStatsUser.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _mbStatsUser.isCachedModel();
 	}
@@ -128,23 +138,12 @@ public class MBStatsUserWrapper implements MBStatsUser,
 	}
 
 	@Override
-	public com.liferay.message.boards.kernel.model.MBStatsUser toEscapedModel() {
-		return new MBStatsUserWrapper(_mbStatsUser.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBStatsUser toUnescapedModel() {
-		return new MBStatsUserWrapper(_mbStatsUser.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.message.boards.kernel.model.MBStatsUser> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MBStatsUser> toCacheModel() {
 		return _mbStatsUser.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.message.boards.kernel.model.MBStatsUser mbStatsUser) {
+	public int compareTo(MBStatsUser mbStatsUser) {
 		return _mbStatsUser.compareTo(mbStatsUser);
 	}
 
@@ -401,7 +400,7 @@ public class MBStatsUserWrapper implements MBStatsUser,
 
 		MBStatsUserWrapper mbStatsUserWrapper = (MBStatsUserWrapper)obj;
 
-		if (Validator.equals(_mbStatsUser, mbStatsUserWrapper._mbStatsUser)) {
+		if (Objects.equals(_mbStatsUser, mbStatsUserWrapper._mbStatsUser)) {
 			return true;
 		}
 

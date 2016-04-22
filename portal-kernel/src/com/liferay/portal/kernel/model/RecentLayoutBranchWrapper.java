@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -120,8 +120,18 @@ public class RecentLayoutBranchWrapper implements RecentLayoutBranch,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.RecentLayoutBranch> toCacheModel() {
+	public CacheModel<RecentLayoutBranch> toCacheModel() {
 		return _recentLayoutBranch.toCacheModel();
+	}
+
+	@Override
+	public RecentLayoutBranch toEscapedModel() {
+		return new RecentLayoutBranchWrapper(_recentLayoutBranch.toEscapedModel());
+	}
+
+	@Override
+	public RecentLayoutBranch toUnescapedModel() {
+		return new RecentLayoutBranchWrapper(_recentLayoutBranch.toUnescapedModel());
 	}
 
 	@Override
@@ -145,18 +155,7 @@ public class RecentLayoutBranchWrapper implements RecentLayoutBranch,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.RecentLayoutBranch toEscapedModel() {
-		return new RecentLayoutBranchWrapper(_recentLayoutBranch.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.RecentLayoutBranch toUnescapedModel() {
-		return new RecentLayoutBranchWrapper(_recentLayoutBranch.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.RecentLayoutBranch recentLayoutBranch) {
+	public int compareTo(RecentLayoutBranch recentLayoutBranch) {
 		return _recentLayoutBranch.compareTo(recentLayoutBranch);
 	}
 
@@ -432,7 +431,7 @@ public class RecentLayoutBranchWrapper implements RecentLayoutBranch,
 
 		RecentLayoutBranchWrapper recentLayoutBranchWrapper = (RecentLayoutBranchWrapper)obj;
 
-		if (Validator.equals(_recentLayoutBranch,
+		if (Objects.equals(_recentLayoutBranch,
 					recentLayoutBranchWrapper._recentLayoutBranch)) {
 			return true;
 		}

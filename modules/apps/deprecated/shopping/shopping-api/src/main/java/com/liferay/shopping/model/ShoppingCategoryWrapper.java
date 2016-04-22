@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -136,6 +136,16 @@ public class ShoppingCategoryWrapper implements ShoppingCategory,
 	}
 
 	@Override
+	public ShoppingCategory toEscapedModel() {
+		return new ShoppingCategoryWrapper(_shoppingCategory.toEscapedModel());
+	}
+
+	@Override
+	public ShoppingCategory toUnescapedModel() {
+		return new ShoppingCategoryWrapper(_shoppingCategory.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _shoppingCategory.isCachedModel();
 	}
@@ -161,23 +171,12 @@ public class ShoppingCategoryWrapper implements ShoppingCategory,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.shopping.model.ShoppingCategory> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ShoppingCategory> toCacheModel() {
 		return _shoppingCategory.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.shopping.model.ShoppingCategory toEscapedModel() {
-		return new ShoppingCategoryWrapper(_shoppingCategory.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingCategory toUnescapedModel() {
-		return new ShoppingCategoryWrapper(_shoppingCategory.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.shopping.model.ShoppingCategory shoppingCategory) {
+	public int compareTo(ShoppingCategory shoppingCategory) {
 		return _shoppingCategory.compareTo(shoppingCategory);
 	}
 
@@ -494,7 +493,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory,
 
 		ShoppingCategoryWrapper shoppingCategoryWrapper = (ShoppingCategoryWrapper)obj;
 
-		if (Validator.equals(_shoppingCategory,
+		if (Objects.equals(_shoppingCategory,
 					shoppingCategoryWrapper._shoppingCategory)) {
 			return true;
 		}

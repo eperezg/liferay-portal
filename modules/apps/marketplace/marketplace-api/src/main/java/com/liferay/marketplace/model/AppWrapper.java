@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -164,6 +164,16 @@ public class AppWrapper implements App, ModelWrapper<App> {
 		}
 	}
 
+	@Override
+	public App toEscapedModel() {
+		return new AppWrapper(_app.toEscapedModel());
+	}
+
+	@Override
+	public App toUnescapedModel() {
+		return new AppWrapper(_app.toUnescapedModel());
+	}
+
 	/**
 	* Returns the required of this app.
 	*
@@ -216,22 +226,12 @@ public class AppWrapper implements App, ModelWrapper<App> {
 	}
 
 	@Override
-	public com.liferay.marketplace.model.App toEscapedModel() {
-		return new AppWrapper(_app.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.marketplace.model.App toUnescapedModel() {
-		return new AppWrapper(_app.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.marketplace.model.App> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<App> toCacheModel() {
 		return _app.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(com.liferay.marketplace.model.App app) {
+	public int compareTo(App app) {
 		return _app.compareTo(app);
 	}
 
@@ -643,7 +643,7 @@ public class AppWrapper implements App, ModelWrapper<App> {
 
 		AppWrapper appWrapper = (AppWrapper)obj;
 
-		if (Validator.equals(_app, appWrapper._app)) {
+		if (Objects.equals(_app, appWrapper._app)) {
 			return true;
 		}
 

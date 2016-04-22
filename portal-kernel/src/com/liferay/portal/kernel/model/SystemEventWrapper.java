@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -170,8 +170,18 @@ public class SystemEventWrapper implements SystemEvent,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.SystemEvent> toCacheModel() {
+	public CacheModel<SystemEvent> toCacheModel() {
 		return _systemEvent.toCacheModel();
+	}
+
+	@Override
+	public SystemEvent toEscapedModel() {
+		return new SystemEventWrapper(_systemEvent.toEscapedModel());
+	}
+
+	@Override
+	public SystemEvent toUnescapedModel() {
+		return new SystemEventWrapper(_systemEvent.toUnescapedModel());
 	}
 
 	@Override
@@ -195,18 +205,7 @@ public class SystemEventWrapper implements SystemEvent,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.SystemEvent toEscapedModel() {
-		return new SystemEventWrapper(_systemEvent.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.SystemEvent toUnescapedModel() {
-		return new SystemEventWrapper(_systemEvent.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.SystemEvent systemEvent) {
+	public int compareTo(SystemEvent systemEvent) {
 		return _systemEvent.compareTo(systemEvent);
 	}
 
@@ -647,7 +646,7 @@ public class SystemEventWrapper implements SystemEvent,
 
 		SystemEventWrapper systemEventWrapper = (SystemEventWrapper)obj;
 
-		if (Validator.equals(_systemEvent, systemEventWrapper._systemEvent)) {
+		if (Objects.equals(_systemEvent, systemEventWrapper._systemEvent)) {
 			return true;
 		}
 

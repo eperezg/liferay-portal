@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -91,8 +91,18 @@ public class ListTypeWrapper implements ListType, ModelWrapper<ListType> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.ListType> toCacheModel() {
+	public CacheModel<ListType> toCacheModel() {
 		return _listType.toCacheModel();
+	}
+
+	@Override
+	public ListType toEscapedModel() {
+		return new ListTypeWrapper(_listType.toEscapedModel());
+	}
+
+	@Override
+	public ListType toUnescapedModel() {
+		return new ListTypeWrapper(_listType.toUnescapedModel());
 	}
 
 	@Override
@@ -116,17 +126,7 @@ public class ListTypeWrapper implements ListType, ModelWrapper<ListType> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.ListType toEscapedModel() {
-		return new ListTypeWrapper(_listType.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.ListType toUnescapedModel() {
-		return new ListTypeWrapper(_listType.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.ListType listType) {
+	public int compareTo(ListType listType) {
 		return _listType.compareTo(listType);
 	}
 
@@ -302,7 +302,7 @@ public class ListTypeWrapper implements ListType, ModelWrapper<ListType> {
 
 		ListTypeWrapper listTypeWrapper = (ListTypeWrapper)obj;
 
-		if (Validator.equals(_listType, listTypeWrapper._listType)) {
+		if (Objects.equals(_listType, listTypeWrapper._listType)) {
 			return true;
 		}
 

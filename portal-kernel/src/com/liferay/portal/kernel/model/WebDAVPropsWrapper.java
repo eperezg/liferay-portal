@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -121,8 +121,18 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.WebDAVProps> toCacheModel() {
+	public CacheModel<WebDAVProps> toCacheModel() {
 		return _webDAVProps.toCacheModel();
+	}
+
+	@Override
+	public WebDAVProps toEscapedModel() {
+		return new WebDAVPropsWrapper(_webDAVProps.toEscapedModel());
+	}
+
+	@Override
+	public WebDAVProps toUnescapedModel() {
+		return new WebDAVPropsWrapper(_webDAVProps.toUnescapedModel());
 	}
 
 	@Override
@@ -146,18 +156,7 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.WebDAVProps toEscapedModel() {
-		return new WebDAVPropsWrapper(_webDAVProps.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.WebDAVProps toUnescapedModel() {
-		return new WebDAVPropsWrapper(_webDAVProps.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.WebDAVProps webDAVProps) {
+	public int compareTo(WebDAVProps webDAVProps) {
 		return _webDAVProps.compareTo(webDAVProps);
 	}
 
@@ -464,7 +463,7 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 
 		WebDAVPropsWrapper webDAVPropsWrapper = (WebDAVPropsWrapper)obj;
 
-		if (Validator.equals(_webDAVProps, webDAVPropsWrapper._webDAVProps)) {
+		if (Objects.equals(_webDAVProps, webDAVPropsWrapper._webDAVProps)) {
 			return true;
 		}
 

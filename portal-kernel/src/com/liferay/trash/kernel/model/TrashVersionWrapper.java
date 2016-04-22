@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -114,6 +114,16 @@ public class TrashVersionWrapper implements TrashVersion,
 	}
 
 	@Override
+	public TrashVersion toEscapedModel() {
+		return new TrashVersionWrapper(_trashVersion.toEscapedModel());
+	}
+
+	@Override
+	public TrashVersion toUnescapedModel() {
+		return new TrashVersionWrapper(_trashVersion.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _trashVersion.isCachedModel();
 	}
@@ -134,7 +144,7 @@ public class TrashVersionWrapper implements TrashVersion,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.trash.kernel.model.TrashVersion> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<TrashVersion> toCacheModel() {
 		return _trashVersion.toCacheModel();
 	}
 
@@ -144,18 +154,7 @@ public class TrashVersionWrapper implements TrashVersion,
 	}
 
 	@Override
-	public com.liferay.trash.kernel.model.TrashVersion toEscapedModel() {
-		return new TrashVersionWrapper(_trashVersion.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.trash.kernel.model.TrashVersion toUnescapedModel() {
-		return new TrashVersionWrapper(_trashVersion.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.trash.kernel.model.TrashVersion trashVersion) {
+	public int compareTo(TrashVersion trashVersion) {
 		return _trashVersion.compareTo(trashVersion);
 	}
 
@@ -424,7 +423,7 @@ public class TrashVersionWrapper implements TrashVersion,
 
 		TrashVersionWrapper trashVersionWrapper = (TrashVersionWrapper)obj;
 
-		if (Validator.equals(_trashVersion, trashVersionWrapper._trashVersion)) {
+		if (Objects.equals(_trashVersion, trashVersionWrapper._trashVersion)) {
 			return true;
 		}
 

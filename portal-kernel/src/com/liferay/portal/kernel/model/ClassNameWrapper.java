@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -84,8 +84,18 @@ public class ClassNameWrapper implements ClassName, ModelWrapper<ClassName> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.ClassName> toCacheModel() {
+	public CacheModel<ClassName> toCacheModel() {
 		return _className.toCacheModel();
+	}
+
+	@Override
+	public ClassName toEscapedModel() {
+		return new ClassNameWrapper(_className.toEscapedModel());
+	}
+
+	@Override
+	public ClassName toUnescapedModel() {
+		return new ClassNameWrapper(_className.toUnescapedModel());
 	}
 
 	@Override
@@ -109,17 +119,7 @@ public class ClassNameWrapper implements ClassName, ModelWrapper<ClassName> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.ClassName toEscapedModel() {
-		return new ClassNameWrapper(_className.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.ClassName toUnescapedModel() {
-		return new ClassNameWrapper(_className.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.ClassName className) {
+	public int compareTo(ClassName className) {
 		return _className.compareTo(className);
 	}
 
@@ -290,7 +290,7 @@ public class ClassNameWrapper implements ClassName, ModelWrapper<ClassName> {
 
 		ClassNameWrapper classNameWrapper = (ClassNameWrapper)obj;
 
-		if (Validator.equals(_className, classNameWrapper._className)) {
+		if (Objects.equals(_className, classNameWrapper._className)) {
 			return true;
 		}
 

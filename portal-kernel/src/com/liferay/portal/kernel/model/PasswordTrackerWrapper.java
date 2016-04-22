@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -107,8 +107,18 @@ public class PasswordTrackerWrapper implements PasswordTracker,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.PasswordTracker> toCacheModel() {
+	public CacheModel<PasswordTracker> toCacheModel() {
 		return _passwordTracker.toCacheModel();
+	}
+
+	@Override
+	public PasswordTracker toEscapedModel() {
+		return new PasswordTrackerWrapper(_passwordTracker.toEscapedModel());
+	}
+
+	@Override
+	public PasswordTracker toUnescapedModel() {
+		return new PasswordTrackerWrapper(_passwordTracker.toUnescapedModel());
 	}
 
 	@Override
@@ -132,18 +142,7 @@ public class PasswordTrackerWrapper implements PasswordTracker,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.PasswordTracker toEscapedModel() {
-		return new PasswordTrackerWrapper(_passwordTracker.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.PasswordTracker toUnescapedModel() {
-		return new PasswordTrackerWrapper(_passwordTracker.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.PasswordTracker passwordTracker) {
+	public int compareTo(PasswordTracker passwordTracker) {
 		return _passwordTracker.compareTo(passwordTracker);
 	}
 
@@ -379,7 +378,7 @@ public class PasswordTrackerWrapper implements PasswordTracker,
 
 		PasswordTrackerWrapper passwordTrackerWrapper = (PasswordTrackerWrapper)obj;
 
-		if (Validator.equals(_passwordTracker,
+		if (Objects.equals(_passwordTracker,
 					passwordTrackerWrapper._passwordTracker)) {
 			return true;
 		}

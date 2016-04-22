@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -214,6 +214,22 @@ public class BookmarksEntryWrapper implements BookmarksEntry,
 		}
 	}
 
+	@Override
+	public BookmarksEntry toEscapedModel() {
+		return new BookmarksEntryWrapper(_bookmarksEntry.toEscapedModel());
+	}
+
+	@Override
+	public BookmarksEntry toUnescapedModel() {
+		return new BookmarksEntryWrapper(_bookmarksEntry.toUnescapedModel());
+	}
+
+	@Override
+	public BookmarksFolder getFolder()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _bookmarksEntry.getFolder();
+	}
+
 	/**
 	* Returns <code>true</code> if this bookmarks entry is approved.
 	*
@@ -340,28 +356,12 @@ public class BookmarksEntryWrapper implements BookmarksEntry,
 	}
 
 	@Override
-	public com.liferay.bookmarks.model.BookmarksEntry toEscapedModel() {
-		return new BookmarksEntryWrapper(_bookmarksEntry.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.bookmarks.model.BookmarksEntry toUnescapedModel() {
-		return new BookmarksEntryWrapper(_bookmarksEntry.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.bookmarks.model.BookmarksFolder getFolder()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _bookmarksEntry.getFolder();
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _bookmarksEntry.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.bookmarks.model.BookmarksEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<BookmarksEntry> toCacheModel() {
 		return _bookmarksEntry.toCacheModel();
 	}
 
@@ -387,8 +387,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.bookmarks.model.BookmarksEntry bookmarksEntry) {
+	public int compareTo(BookmarksEntry bookmarksEntry) {
 		return _bookmarksEntry.compareTo(bookmarksEntry);
 	}
 
@@ -966,7 +965,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry,
 
 		BookmarksEntryWrapper bookmarksEntryWrapper = (BookmarksEntryWrapper)obj;
 
-		if (Validator.equals(_bookmarksEntry,
+		if (Objects.equals(_bookmarksEntry,
 					bookmarksEntryWrapper._bookmarksEntry)) {
 			return true;
 		}

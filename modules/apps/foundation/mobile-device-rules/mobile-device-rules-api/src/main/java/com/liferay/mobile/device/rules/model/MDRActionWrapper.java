@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -179,6 +179,16 @@ public class MDRActionWrapper implements MDRAction, ModelWrapper<MDRAction> {
 	}
 
 	@Override
+	public MDRAction toEscapedModel() {
+		return new MDRActionWrapper(_mdrAction.toEscapedModel());
+	}
+
+	@Override
+	public MDRAction toUnescapedModel() {
+		return new MDRActionWrapper(_mdrAction.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _mdrAction.isCachedModel();
 	}
@@ -199,17 +209,7 @@ public class MDRActionWrapper implements MDRAction, ModelWrapper<MDRAction> {
 	}
 
 	@Override
-	public com.liferay.mobile.device.rules.model.MDRAction toEscapedModel() {
-		return new MDRActionWrapper(_mdrAction.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.mobile.device.rules.model.MDRAction toUnescapedModel() {
-		return new MDRActionWrapper(_mdrAction.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.mobile.device.rules.model.MDRAction> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MDRAction> toCacheModel() {
 		return _mdrAction.toCacheModel();
 	}
 
@@ -219,8 +219,7 @@ public class MDRActionWrapper implements MDRAction, ModelWrapper<MDRAction> {
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.mobile.device.rules.model.MDRAction mdrAction) {
+	public int compareTo(MDRAction mdrAction) {
 		return _mdrAction.compareTo(mdrAction);
 	}
 
@@ -941,7 +940,7 @@ public class MDRActionWrapper implements MDRAction, ModelWrapper<MDRAction> {
 
 		MDRActionWrapper mdrActionWrapper = (MDRActionWrapper)obj;
 
-		if (Validator.equals(_mdrAction, mdrActionWrapper._mdrAction)) {
+		if (Objects.equals(_mdrAction, mdrActionWrapper._mdrAction)) {
 			return true;
 		}
 

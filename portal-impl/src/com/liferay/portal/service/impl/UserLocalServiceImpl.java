@@ -160,6 +160,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -331,6 +332,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			groupIdsSet.toArray(new Long[groupIdsSet.size()]));
 
 		groupLocalService.addUserGroups(userId, groupIds);
+
+		for (long groupId : groupIds) {
+			addDefaultRolesAndTeams(groupId, new long[] {userId});
+		}
 	}
 
 	/**
@@ -3598,7 +3603,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 							ticket.getKey();
 		}
 		else {
-			if (!Validator.equals(
+			if (!Objects.equals(
 					PasswordEncryptorUtil.getDefaultPasswordAlgorithmType(),
 					PasswordEncryptorUtil.TYPE_NONE)) {
 
@@ -4073,8 +4078,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			userId, companyGroup.getGroupId(), user.getCreateDate(),
 			user.getModifiedDate(), User.class.getName(), user.getUserId(),
 			user.getUuid(), 0, assetCategoryIds, assetTagNames, true, false,
-			null, null, null, null, user.getFullName(), null, null, null, null,
-			0, 0, null);
+			null, null, null, null, null, user.getFullName(), null, null, null,
+			null, 0, 0, null);
 	}
 
 	/**

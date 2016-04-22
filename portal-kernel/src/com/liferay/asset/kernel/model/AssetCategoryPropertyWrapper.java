@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -130,6 +130,16 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	}
 
 	@Override
+	public AssetCategoryProperty toEscapedModel() {
+		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toEscapedModel());
+	}
+
+	@Override
+	public AssetCategoryProperty toUnescapedModel() {
+		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _assetCategoryProperty.isCachedModel();
 	}
@@ -145,28 +155,17 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 	}
 
 	@Override
-	public com.liferay.asset.kernel.model.AssetCategoryProperty toEscapedModel() {
-		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.asset.kernel.model.AssetCategoryProperty toUnescapedModel() {
-		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _assetCategoryProperty.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.asset.kernel.model.AssetCategoryProperty> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<AssetCategoryProperty> toCacheModel() {
 		return _assetCategoryProperty.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.asset.kernel.model.AssetCategoryProperty assetCategoryProperty) {
+	public int compareTo(AssetCategoryProperty assetCategoryProperty) {
 		return _assetCategoryProperty.compareTo(assetCategoryProperty);
 	}
 
@@ -463,7 +462,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty,
 
 		AssetCategoryPropertyWrapper assetCategoryPropertyWrapper = (AssetCategoryPropertyWrapper)obj;
 
-		if (Validator.equals(_assetCategoryProperty,
+		if (Objects.equals(_assetCategoryProperty,
 					assetCategoryPropertyWrapper._assetCategoryProperty)) {
 			return true;
 		}

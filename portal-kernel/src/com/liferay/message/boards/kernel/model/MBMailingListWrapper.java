@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -249,6 +249,16 @@ public class MBMailingListWrapper implements MBMailingList,
 		}
 	}
 
+	@Override
+	public MBMailingList toEscapedModel() {
+		return new MBMailingListWrapper(_mbMailingList.toEscapedModel());
+	}
+
+	@Override
+	public MBMailingList toUnescapedModel() {
+		return new MBMailingListWrapper(_mbMailingList.toUnescapedModel());
+	}
+
 	/**
 	* Returns the active of this message boards mailing list.
 	*
@@ -370,23 +380,12 @@ public class MBMailingListWrapper implements MBMailingList,
 	}
 
 	@Override
-	public com.liferay.message.boards.kernel.model.MBMailingList toEscapedModel() {
-		return new MBMailingListWrapper(_mbMailingList.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBMailingList toUnescapedModel() {
-		return new MBMailingListWrapper(_mbMailingList.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.message.boards.kernel.model.MBMailingList> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MBMailingList> toCacheModel() {
 		return _mbMailingList.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.message.boards.kernel.model.MBMailingList mbMailingList) {
+	public int compareTo(MBMailingList mbMailingList) {
 		return _mbMailingList.compareTo(mbMailingList);
 	}
 
@@ -973,7 +972,7 @@ public class MBMailingListWrapper implements MBMailingList,
 
 		MBMailingListWrapper mbMailingListWrapper = (MBMailingListWrapper)obj;
 
-		if (Validator.equals(_mbMailingList, mbMailingListWrapper._mbMailingList)) {
+		if (Objects.equals(_mbMailingList, mbMailingListWrapper._mbMailingList)) {
 			return true;
 		}
 

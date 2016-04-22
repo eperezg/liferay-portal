@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -220,6 +220,22 @@ public class MBThreadWrapper implements MBThread, ModelWrapper<MBThread> {
 		}
 	}
 
+	@Override
+	public MBCategory getCategory()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _mbThread.getCategory();
+	}
+
+	@Override
+	public MBThread toEscapedModel() {
+		return new MBThreadWrapper(_mbThread.toEscapedModel());
+	}
+
+	@Override
+	public MBThread toUnescapedModel() {
+		return new MBThreadWrapper(_mbThread.toUnescapedModel());
+	}
+
 	/**
 	* Returns the question of this message boards thread.
 	*
@@ -381,28 +397,12 @@ public class MBThreadWrapper implements MBThread, ModelWrapper<MBThread> {
 	}
 
 	@Override
-	public com.liferay.message.boards.kernel.model.MBCategory getCategory()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _mbThread.getCategory();
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBThread toEscapedModel() {
-		return new MBThreadWrapper(_mbThread.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBThread toUnescapedModel() {
-		return new MBThreadWrapper(_mbThread.toUnescapedModel());
-	}
-
-	@Override
 	public com.liferay.portal.kernel.lock.Lock getLock() {
 		return _mbThread.getLock();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.message.boards.kernel.model.MBThread> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MBThread> toCacheModel() {
 		return _mbThread.toCacheModel();
 	}
 
@@ -444,8 +444,7 @@ public class MBThreadWrapper implements MBThread, ModelWrapper<MBThread> {
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.message.boards.kernel.model.MBThread mbThread) {
+	public int compareTo(MBThread mbThread) {
 		return _mbThread.compareTo(mbThread);
 	}
 
@@ -1112,7 +1111,7 @@ public class MBThreadWrapper implements MBThread, ModelWrapper<MBThread> {
 
 		MBThreadWrapper mbThreadWrapper = (MBThreadWrapper)obj;
 
-		if (Validator.equals(_mbThread, mbThreadWrapper._mbThread)) {
+		if (Objects.equals(_mbThread, mbThreadWrapper._mbThread)) {
 			return true;
 		}
 

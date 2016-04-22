@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -163,6 +163,22 @@ public class KaleoDefinitionWrapper implements KaleoDefinition,
 		}
 	}
 
+	@Override
+	public KaleoDefinition toEscapedModel() {
+		return new KaleoDefinitionWrapper(_kaleoDefinition.toEscapedModel());
+	}
+
+	@Override
+	public KaleoDefinition toUnescapedModel() {
+		return new KaleoDefinitionWrapper(_kaleoDefinition.toUnescapedModel());
+	}
+
+	@Override
+	public KaleoNode getKaleoStartNode()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _kaleoDefinition.getKaleoStartNode();
+	}
+
 	/**
 	* Returns the active of this kaleo definition.
 	*
@@ -209,29 +225,12 @@ public class KaleoDefinitionWrapper implements KaleoDefinition,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.workflow.kaleo.model.KaleoDefinition> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<KaleoDefinition> toCacheModel() {
 		return _kaleoDefinition.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoDefinition toEscapedModel() {
-		return new KaleoDefinitionWrapper(_kaleoDefinition.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoDefinition toUnescapedModel() {
-		return new KaleoDefinitionWrapper(_kaleoDefinition.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoNode getKaleoStartNode()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _kaleoDefinition.getKaleoStartNode();
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.workflow.kaleo.model.KaleoDefinition kaleoDefinition) {
+	public int compareTo(KaleoDefinition kaleoDefinition) {
 		return _kaleoDefinition.compareTo(kaleoDefinition);
 	}
 
@@ -759,7 +758,7 @@ public class KaleoDefinitionWrapper implements KaleoDefinition,
 
 		KaleoDefinitionWrapper kaleoDefinitionWrapper = (KaleoDefinitionWrapper)obj;
 
-		if (Validator.equals(_kaleoDefinition,
+		if (Objects.equals(_kaleoDefinition,
 					kaleoDefinitionWrapper._kaleoDefinition)) {
 			return true;
 		}

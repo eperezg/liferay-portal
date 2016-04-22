@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -120,8 +120,18 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Image> toCacheModel() {
+	public CacheModel<Image> toCacheModel() {
 		return _image.toCacheModel();
+	}
+
+	@Override
+	public Image toEscapedModel() {
+		return new ImageWrapper(_image.toEscapedModel());
+	}
+
+	@Override
+	public Image toUnescapedModel() {
+		return new ImageWrapper(_image.toUnescapedModel());
 	}
 
 	@Override
@@ -150,17 +160,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Image toEscapedModel() {
-		return new ImageWrapper(_image.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Image toUnescapedModel() {
-		return new ImageWrapper(_image.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.Image image) {
+	public int compareTo(Image image) {
 		return _image.compareTo(image);
 	}
 
@@ -421,7 +421,7 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 
 		ImageWrapper imageWrapper = (ImageWrapper)obj;
 
-		if (Validator.equals(_image, imageWrapper._image)) {
+		if (Objects.equals(_image, imageWrapper._image)) {
 			return true;
 		}
 

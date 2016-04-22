@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -144,6 +144,16 @@ public class AssetTagWrapper implements AssetTag, ModelWrapper<AssetTag> {
 	}
 
 	@Override
+	public AssetTag toEscapedModel() {
+		return new AssetTagWrapper(_assetTag.toEscapedModel());
+	}
+
+	@Override
+	public AssetTag toUnescapedModel() {
+		return new AssetTagWrapper(_assetTag.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _assetTag.isCachedModel();
 	}
@@ -159,27 +169,17 @@ public class AssetTagWrapper implements AssetTag, ModelWrapper<AssetTag> {
 	}
 
 	@Override
-	public com.liferay.asset.kernel.model.AssetTag toEscapedModel() {
-		return new AssetTagWrapper(_assetTag.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.asset.kernel.model.AssetTag toUnescapedModel() {
-		return new AssetTagWrapper(_assetTag.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _assetTag.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.asset.kernel.model.AssetTag> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<AssetTag> toCacheModel() {
 		return _assetTag.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(com.liferay.asset.kernel.model.AssetTag assetTag) {
+	public int compareTo(AssetTag assetTag) {
 		return _assetTag.compareTo(assetTag);
 	}
 
@@ -516,7 +516,7 @@ public class AssetTagWrapper implements AssetTag, ModelWrapper<AssetTag> {
 
 		AssetTagWrapper assetTagWrapper = (AssetTagWrapper)obj;
 
-		if (Validator.equals(_assetTag, assetTagWrapper._assetTag)) {
+		if (Objects.equals(_assetTag, assetTagWrapper._assetTag)) {
 			return true;
 		}
 

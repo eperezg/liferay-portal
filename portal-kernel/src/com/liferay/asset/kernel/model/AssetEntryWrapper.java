@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -253,6 +253,26 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 		}
 	}
 
+	@Override
+	public AssetEntry toEscapedModel() {
+		return new AssetEntryWrapper(_assetEntry.toEscapedModel());
+	}
+
+	@Override
+	public AssetEntry toUnescapedModel() {
+		return new AssetEntryWrapper(_assetEntry.toUnescapedModel());
+	}
+
+	@Override
+	public AssetRenderer<?> getAssetRenderer() {
+		return _assetEntry.getAssetRenderer();
+	}
+
+	@Override
+	public AssetRendererFactory<?> getAssetRendererFactory() {
+		return _assetEntry.getAssetRendererFactory();
+	}
+
 	/**
 	* Returns the listable of this asset entry.
 	*
@@ -309,32 +329,12 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	}
 
 	@Override
-	public com.liferay.asset.kernel.model.AssetEntry toEscapedModel() {
-		return new AssetEntryWrapper(_assetEntry.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.asset.kernel.model.AssetEntry toUnescapedModel() {
-		return new AssetEntryWrapper(_assetEntry.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.asset.kernel.model.AssetRenderer<?> getAssetRenderer() {
-		return _assetEntry.getAssetRenderer();
-	}
-
-	@Override
-	public com.liferay.asset.kernel.model.AssetRendererFactory<?> getAssetRendererFactory() {
-		return _assetEntry.getAssetRendererFactory();
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _assetEntry.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.asset.kernel.model.AssetEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<AssetEntry> toCacheModel() {
 		return _assetEntry.toCacheModel();
 	}
 
@@ -349,7 +349,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	}
 
 	@Override
-	public int compareTo(com.liferay.asset.kernel.model.AssetEntry assetEntry) {
+	public int compareTo(AssetEntry assetEntry) {
 		return _assetEntry.compareTo(assetEntry);
 	}
 
@@ -757,12 +757,12 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 	}
 
 	@Override
-	public java.util.List<com.liferay.asset.kernel.model.AssetCategory> getCategories() {
+	public java.util.List<AssetCategory> getCategories() {
 		return _assetEntry.getCategories();
 	}
 
 	@Override
-	public java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags() {
+	public java.util.List<AssetTag> getTags() {
 		return _assetEntry.getTags();
 	}
 
@@ -1395,7 +1395,7 @@ public class AssetEntryWrapper implements AssetEntry, ModelWrapper<AssetEntry> {
 
 		AssetEntryWrapper assetEntryWrapper = (AssetEntryWrapper)obj;
 
-		if (Validator.equals(_assetEntry, assetEntryWrapper._assetEntry)) {
+		if (Objects.equals(_assetEntry, assetEntryWrapper._assetEntry)) {
 			return true;
 		}
 

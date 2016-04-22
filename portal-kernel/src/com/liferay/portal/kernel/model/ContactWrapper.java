@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -267,8 +267,18 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Contact> toCacheModel() {
+	public CacheModel<Contact> toCacheModel() {
 		return _contact.toCacheModel();
+	}
+
+	@Override
+	public Contact toEscapedModel() {
+		return new ContactWrapper(_contact.toEscapedModel());
+	}
+
+	@Override
+	public Contact toUnescapedModel() {
+		return new ContactWrapper(_contact.toUnescapedModel());
 	}
 
 	/**
@@ -317,17 +327,7 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Contact toEscapedModel() {
-		return new ContactWrapper(_contact.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Contact toUnescapedModel() {
-		return new ContactWrapper(_contact.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.Contact contact) {
+	public int compareTo(Contact contact) {
 		return _contact.compareTo(contact);
 	}
 
@@ -1033,7 +1033,7 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 
 		ContactWrapper contactWrapper = (ContactWrapper)obj;
 
-		if (Validator.equals(_contact, contactWrapper._contact)) {
+		if (Objects.equals(_contact, contactWrapper._contact)) {
 			return true;
 		}
 

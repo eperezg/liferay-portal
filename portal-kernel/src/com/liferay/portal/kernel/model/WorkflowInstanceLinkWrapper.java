@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -144,8 +144,18 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.WorkflowInstanceLink> toCacheModel() {
+	public CacheModel<WorkflowInstanceLink> toCacheModel() {
 		return _workflowInstanceLink.toCacheModel();
+	}
+
+	@Override
+	public WorkflowInstanceLink toEscapedModel() {
+		return new WorkflowInstanceLinkWrapper(_workflowInstanceLink.toEscapedModel());
+	}
+
+	@Override
+	public WorkflowInstanceLink toUnescapedModel() {
+		return new WorkflowInstanceLinkWrapper(_workflowInstanceLink.toUnescapedModel());
 	}
 
 	@Override
@@ -169,18 +179,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.WorkflowInstanceLink toEscapedModel() {
-		return new WorkflowInstanceLinkWrapper(_workflowInstanceLink.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.WorkflowInstanceLink toUnescapedModel() {
-		return new WorkflowInstanceLinkWrapper(_workflowInstanceLink.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.WorkflowInstanceLink workflowInstanceLink) {
+	public int compareTo(WorkflowInstanceLink workflowInstanceLink) {
 		return _workflowInstanceLink.compareTo(workflowInstanceLink);
 	}
 
@@ -531,7 +530,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 
 		WorkflowInstanceLinkWrapper workflowInstanceLinkWrapper = (WorkflowInstanceLinkWrapper)obj;
 
-		if (Validator.equals(_workflowInstanceLink,
+		if (Objects.equals(_workflowInstanceLink,
 					workflowInstanceLinkWrapper._workflowInstanceLink)) {
 			return true;
 		}

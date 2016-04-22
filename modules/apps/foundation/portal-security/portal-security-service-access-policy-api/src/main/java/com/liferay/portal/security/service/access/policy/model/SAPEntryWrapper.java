@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -151,6 +151,16 @@ public class SAPEntryWrapper implements SAPEntry, ModelWrapper<SAPEntry> {
 		}
 	}
 
+	@Override
+	public SAPEntry toEscapedModel() {
+		return new SAPEntryWrapper(_sapEntry.toEscapedModel());
+	}
+
+	@Override
+	public SAPEntry toUnescapedModel() {
+		return new SAPEntryWrapper(_sapEntry.toUnescapedModel());
+	}
+
 	/**
 	* Returns the default s a p entry of this s a p entry.
 	*
@@ -218,23 +228,12 @@ public class SAPEntryWrapper implements SAPEntry, ModelWrapper<SAPEntry> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.security.service.access.policy.model.SAPEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<SAPEntry> toCacheModel() {
 		return _sapEntry.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.security.service.access.policy.model.SAPEntry toEscapedModel() {
-		return new SAPEntryWrapper(_sapEntry.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.security.service.access.policy.model.SAPEntry toUnescapedModel() {
-		return new SAPEntryWrapper(_sapEntry.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.security.service.access.policy.model.SAPEntry sapEntry) {
+	public int compareTo(SAPEntry sapEntry) {
 		return _sapEntry.compareTo(sapEntry);
 	}
 
@@ -718,7 +717,7 @@ public class SAPEntryWrapper implements SAPEntry, ModelWrapper<SAPEntry> {
 
 		SAPEntryWrapper sapEntryWrapper = (SAPEntryWrapper)obj;
 
-		if (Validator.equals(_sapEntry, sapEntryWrapper._sapEntry)) {
+		if (Objects.equals(_sapEntry, sapEntryWrapper._sapEntry)) {
 			return true;
 		}
 

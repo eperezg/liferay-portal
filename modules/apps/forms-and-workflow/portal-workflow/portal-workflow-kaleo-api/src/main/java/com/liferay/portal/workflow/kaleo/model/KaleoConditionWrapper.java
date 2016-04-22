@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -151,6 +151,16 @@ public class KaleoConditionWrapper implements KaleoCondition,
 	}
 
 	@Override
+	public KaleoCondition toEscapedModel() {
+		return new KaleoConditionWrapper(_kaleoCondition.toEscapedModel());
+	}
+
+	@Override
+	public KaleoCondition toUnescapedModel() {
+		return new KaleoConditionWrapper(_kaleoCondition.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _kaleoCondition.isCachedModel();
 	}
@@ -171,23 +181,12 @@ public class KaleoConditionWrapper implements KaleoCondition,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.workflow.kaleo.model.KaleoCondition> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<KaleoCondition> toCacheModel() {
 		return _kaleoCondition.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoCondition toEscapedModel() {
-		return new KaleoConditionWrapper(_kaleoCondition.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoCondition toUnescapedModel() {
-		return new KaleoConditionWrapper(_kaleoCondition.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.workflow.kaleo.model.KaleoCondition kaleoCondition) {
+	public int compareTo(KaleoCondition kaleoCondition) {
 		return _kaleoCondition.compareTo(kaleoCondition);
 	}
 
@@ -545,7 +544,7 @@ public class KaleoConditionWrapper implements KaleoCondition,
 
 		KaleoConditionWrapper kaleoConditionWrapper = (KaleoConditionWrapper)obj;
 
-		if (Validator.equals(_kaleoCondition,
+		if (Objects.equals(_kaleoCondition,
 					kaleoConditionWrapper._kaleoCondition)) {
 			return true;
 		}

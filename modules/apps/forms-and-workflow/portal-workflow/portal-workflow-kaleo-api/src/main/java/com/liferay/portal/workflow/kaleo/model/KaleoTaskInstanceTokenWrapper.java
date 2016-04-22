@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -200,6 +200,28 @@ public class KaleoTaskInstanceTokenWrapper implements KaleoTaskInstanceToken,
 		}
 	}
 
+	@Override
+	public KaleoInstanceToken getKaleoInstanceToken()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _kaleoTaskInstanceToken.getKaleoInstanceToken();
+	}
+
+	@Override
+	public KaleoTask getKaleoTask()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _kaleoTaskInstanceToken.getKaleoTask();
+	}
+
+	@Override
+	public KaleoTaskInstanceToken toEscapedModel() {
+		return new KaleoTaskInstanceTokenWrapper(_kaleoTaskInstanceToken.toEscapedModel());
+	}
+
+	@Override
+	public KaleoTaskInstanceToken toUnescapedModel() {
+		return new KaleoTaskInstanceTokenWrapper(_kaleoTaskInstanceToken.toUnescapedModel());
+	}
+
 	/**
 	* Returns the completed of this kaleo task instance token.
 	*
@@ -241,35 +263,12 @@ public class KaleoTaskInstanceTokenWrapper implements KaleoTaskInstanceToken,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<KaleoTaskInstanceToken> toCacheModel() {
 		return _kaleoTaskInstanceToken.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoInstanceToken getKaleoInstanceToken()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _kaleoTaskInstanceToken.getKaleoInstanceToken();
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoTask getKaleoTask()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _kaleoTaskInstanceToken.getKaleoTask();
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken toEscapedModel() {
-		return new KaleoTaskInstanceTokenWrapper(_kaleoTaskInstanceToken.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken toUnescapedModel() {
-		return new KaleoTaskInstanceTokenWrapper(_kaleoTaskInstanceToken.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken kaleoTaskInstanceToken) {
+	public int compareTo(KaleoTaskInstanceToken kaleoTaskInstanceToken) {
 		return _kaleoTaskInstanceToken.compareTo(kaleoTaskInstanceToken);
 	}
 
@@ -399,7 +398,7 @@ public class KaleoTaskInstanceTokenWrapper implements KaleoTaskInstanceToken,
 	}
 
 	@Override
-	public java.util.List<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances() {
+	public java.util.List<KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances() {
 		return _kaleoTaskInstanceToken.getKaleoTaskAssignmentInstances();
 	}
 
@@ -781,7 +780,7 @@ public class KaleoTaskInstanceTokenWrapper implements KaleoTaskInstanceToken,
 
 		KaleoTaskInstanceTokenWrapper kaleoTaskInstanceTokenWrapper = (KaleoTaskInstanceTokenWrapper)obj;
 
-		if (Validator.equals(_kaleoTaskInstanceToken,
+		if (Objects.equals(_kaleoTaskInstanceToken,
 					kaleoTaskInstanceTokenWrapper._kaleoTaskInstanceToken)) {
 			return true;
 		}

@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -424,6 +424,16 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 		}
 	}
 
+	@Override
+	public ShoppingOrder toEscapedModel() {
+		return new ShoppingOrderWrapper(_shoppingOrder.toEscapedModel());
+	}
+
+	@Override
+	public ShoppingOrder toUnescapedModel() {
+		return new ShoppingOrderWrapper(_shoppingOrder.toUnescapedModel());
+	}
+
 	/**
 	* Returns the insure of this shopping order.
 	*
@@ -545,18 +555,8 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.shopping.model.ShoppingOrder> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ShoppingOrder> toCacheModel() {
 		return _shoppingOrder.toCacheModel();
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingOrder toEscapedModel() {
-		return new ShoppingOrderWrapper(_shoppingOrder.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingOrder toUnescapedModel() {
-		return new ShoppingOrderWrapper(_shoppingOrder.toUnescapedModel());
 	}
 
 	/**
@@ -610,7 +610,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 	}
 
 	@Override
-	public int compareTo(com.liferay.shopping.model.ShoppingOrder shoppingOrder) {
+	public int compareTo(ShoppingOrder shoppingOrder) {
 		return _shoppingOrder.compareTo(shoppingOrder);
 	}
 
@@ -1647,7 +1647,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder,
 
 		ShoppingOrderWrapper shoppingOrderWrapper = (ShoppingOrderWrapper)obj;
 
-		if (Validator.equals(_shoppingOrder, shoppingOrderWrapper._shoppingOrder)) {
+		if (Objects.equals(_shoppingOrder, shoppingOrderWrapper._shoppingOrder)) {
 			return true;
 		}
 

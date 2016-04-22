@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -99,19 +99,28 @@ public class OrgGroupRoleWrapper implements OrgGroupRole,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.OrgGroupRole> toCacheModel() {
+	public CacheModel<OrgGroupRole> toCacheModel() {
 		return _orgGroupRole.toCacheModel();
 	}
 
 	@Override
-	public boolean containsGroup(
-		java.util.List<com.liferay.portal.kernel.model.Group> groups) {
+	public OrgGroupRole toEscapedModel() {
+		return new OrgGroupRoleWrapper(_orgGroupRole.toEscapedModel());
+	}
+
+	@Override
+	public OrgGroupRole toUnescapedModel() {
+		return new OrgGroupRoleWrapper(_orgGroupRole.toUnescapedModel());
+	}
+
+	@Override
+	public boolean containsGroup(java.util.List<Group> groups) {
 		return _orgGroupRole.containsGroup(groups);
 	}
 
 	@Override
 	public boolean containsOrganization(
-		java.util.List<com.liferay.portal.kernel.model.Organization> organizations) {
+		java.util.List<Organization> organizations) {
 		return _orgGroupRole.containsOrganization(organizations);
 	}
 
@@ -135,16 +144,6 @@ public class OrgGroupRoleWrapper implements OrgGroupRole,
 		return _orgGroupRole.getExpandoBridge();
 	}
 
-	@Override
-	public com.liferay.portal.kernel.model.OrgGroupRole toEscapedModel() {
-		return new OrgGroupRoleWrapper(_orgGroupRole.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.OrgGroupRole toUnescapedModel() {
-		return new OrgGroupRoleWrapper(_orgGroupRole.toUnescapedModel());
-	}
-
 	/**
 	* Returns the primary key of this org group role.
 	*
@@ -156,8 +155,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.OrgGroupRole orgGroupRole) {
+	public int compareTo(OrgGroupRole orgGroupRole) {
 		return _orgGroupRole.compareTo(orgGroupRole);
 	}
 
@@ -339,7 +337,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole,
 
 		OrgGroupRoleWrapper orgGroupRoleWrapper = (OrgGroupRoleWrapper)obj;
 
-		if (Validator.equals(_orgGroupRole, orgGroupRoleWrapper._orgGroupRole)) {
+		if (Objects.equals(_orgGroupRole, orgGroupRoleWrapper._orgGroupRole)) {
 			return true;
 		}
 

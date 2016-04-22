@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -116,6 +116,16 @@ public class SocialActivityAchievementWrapper
 		}
 	}
 
+	@Override
+	public SocialActivityAchievement toEscapedModel() {
+		return new SocialActivityAchievementWrapper(_socialActivityAchievement.toEscapedModel());
+	}
+
+	@Override
+	public SocialActivityAchievement toUnescapedModel() {
+		return new SocialActivityAchievementWrapper(_socialActivityAchievement.toUnescapedModel());
+	}
+
 	/**
 	* Returns the first in group of this social activity achievement.
 	*
@@ -157,23 +167,12 @@ public class SocialActivityAchievementWrapper
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.social.kernel.model.SocialActivityAchievement> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<SocialActivityAchievement> toCacheModel() {
 		return _socialActivityAchievement.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.social.kernel.model.SocialActivityAchievement toEscapedModel() {
-		return new SocialActivityAchievementWrapper(_socialActivityAchievement.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.social.kernel.model.SocialActivityAchievement toUnescapedModel() {
-		return new SocialActivityAchievementWrapper(_socialActivityAchievement.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.social.kernel.model.SocialActivityAchievement socialActivityAchievement) {
+	public int compareTo(SocialActivityAchievement socialActivityAchievement) {
 		return _socialActivityAchievement.compareTo(socialActivityAchievement);
 	}
 
@@ -420,7 +419,7 @@ public class SocialActivityAchievementWrapper
 
 		SocialActivityAchievementWrapper socialActivityAchievementWrapper = (SocialActivityAchievementWrapper)obj;
 
-		if (Validator.equals(_socialActivityAchievement,
+		if (Objects.equals(_socialActivityAchievement,
 					socialActivityAchievementWrapper._socialActivityAchievement)) {
 			return true;
 		}

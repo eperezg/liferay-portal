@@ -121,6 +121,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.portlet.PortletRequest;
@@ -1891,7 +1892,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				userId, page.getGroupId(), page.getCreateDate(),
 				page.getModifiedDate(), WikiPage.class.getName(),
 				page.getPrimaryKey(), page.getUuid(), 0, assetCategoryIds,
-				assetTagNames, true, false, null, null, null,
+				assetTagNames, true, false, null, null, null, null,
 				ContentTypes.TEXT_HTML, page.getTitle(), null, null, null, null,
 				0, 0, priority);
 		}
@@ -1900,7 +1901,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				userId, page.getGroupId(), page.getCreateDate(),
 				page.getModifiedDate(), WikiPage.class.getName(),
 				page.getResourcePrimKey(), page.getUuid(), 0, assetCategoryIds,
-				assetTagNames, true, page.isApproved(), null, null, null,
+				assetTagNames, true, page.isApproved(), null, null, null, null,
 				ContentTypes.TEXT_HTML, page.getTitle(), null, null, null, null,
 				0, 0, priority);
 		}
@@ -2044,8 +2045,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 						page.getModifiedDate(), WikiPage.class.getName(),
 						page.getResourcePrimKey(), page.getUuid(), 0,
 						assetCategoryIds, assetTagNames, true, true, null, null,
-						null, ContentTypes.TEXT_HTML, page.getTitle(), null,
-						null, null, null, 0, 0, null);
+						null, null, ContentTypes.TEXT_HTML, page.getTitle(),
+						null, null, null, null, 0, 0, null);
 
 					// Asset Links
 
@@ -2927,7 +2928,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		String pageContent = null;
 
-		if (Validator.equals(page.getFormat(), "creole")) {
+		if (Objects.equals(page.getFormat(), "creole")) {
 			pageContent = wikiEngineRenderer.convert(
 				page, null, null, attachmentURLPrefix);
 		}

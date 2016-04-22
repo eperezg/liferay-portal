@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -179,6 +179,16 @@ public class CalendarNotificationTemplateWrapper
 	}
 
 	@Override
+	public CalendarNotificationTemplate toEscapedModel() {
+		return new CalendarNotificationTemplateWrapper(_calendarNotificationTemplate.toEscapedModel());
+	}
+
+	@Override
+	public CalendarNotificationTemplate toUnescapedModel() {
+		return new CalendarNotificationTemplateWrapper(_calendarNotificationTemplate.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _calendarNotificationTemplate.isCachedModel();
 	}
@@ -194,22 +204,12 @@ public class CalendarNotificationTemplateWrapper
 	}
 
 	@Override
-	public com.liferay.calendar.model.CalendarNotificationTemplate toEscapedModel() {
-		return new CalendarNotificationTemplateWrapper(_calendarNotificationTemplate.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.calendar.model.CalendarNotificationTemplate toUnescapedModel() {
-		return new CalendarNotificationTemplateWrapper(_calendarNotificationTemplate.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _calendarNotificationTemplate.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.calendar.model.CalendarNotificationTemplate> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<CalendarNotificationTemplate> toCacheModel() {
 		return _calendarNotificationTemplate.toCacheModel();
 	}
 
@@ -220,7 +220,7 @@ public class CalendarNotificationTemplateWrapper
 
 	@Override
 	public int compareTo(
-		com.liferay.calendar.model.CalendarNotificationTemplate calendarNotificationTemplate) {
+		CalendarNotificationTemplate calendarNotificationTemplate) {
 		return _calendarNotificationTemplate.compareTo(calendarNotificationTemplate);
 	}
 
@@ -646,7 +646,7 @@ public class CalendarNotificationTemplateWrapper
 
 		CalendarNotificationTemplateWrapper calendarNotificationTemplateWrapper = (CalendarNotificationTemplateWrapper)obj;
 
-		if (Validator.equals(_calendarNotificationTemplate,
+		if (Objects.equals(_calendarNotificationTemplate,
 					calendarNotificationTemplateWrapper._calendarNotificationTemplate)) {
 			return true;
 		}

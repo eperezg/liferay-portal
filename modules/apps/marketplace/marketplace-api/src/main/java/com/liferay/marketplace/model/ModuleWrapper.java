@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -106,6 +106,16 @@ public class ModuleWrapper implements Module, ModelWrapper<Module> {
 	}
 
 	@Override
+	public Module toEscapedModel() {
+		return new ModuleWrapper(_module.toEscapedModel());
+	}
+
+	@Override
+	public Module toUnescapedModel() {
+		return new ModuleWrapper(_module.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isBundle() {
 		return _module.isBundle();
 	}
@@ -131,22 +141,12 @@ public class ModuleWrapper implements Module, ModelWrapper<Module> {
 	}
 
 	@Override
-	public com.liferay.marketplace.model.Module toEscapedModel() {
-		return new ModuleWrapper(_module.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.marketplace.model.Module toUnescapedModel() {
-		return new ModuleWrapper(_module.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.marketplace.model.Module> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<Module> toCacheModel() {
 		return _module.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(com.liferay.marketplace.model.Module module) {
+	public int compareTo(Module module) {
 		return _module.compareTo(module);
 	}
 
@@ -363,7 +363,7 @@ public class ModuleWrapper implements Module, ModelWrapper<Module> {
 
 		ModuleWrapper moduleWrapper = (ModuleWrapper)obj;
 
-		if (Validator.equals(_module, moduleWrapper._module)) {
+		if (Objects.equals(_module, moduleWrapper._module)) {
 			return true;
 		}
 

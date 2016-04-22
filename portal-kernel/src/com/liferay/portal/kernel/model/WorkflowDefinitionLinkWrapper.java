@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -161,8 +161,18 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.WorkflowDefinitionLink> toCacheModel() {
+	public CacheModel<WorkflowDefinitionLink> toCacheModel() {
 		return _workflowDefinitionLink.toCacheModel();
+	}
+
+	@Override
+	public WorkflowDefinitionLink toEscapedModel() {
+		return new WorkflowDefinitionLinkWrapper(_workflowDefinitionLink.toEscapedModel());
+	}
+
+	@Override
+	public WorkflowDefinitionLink toUnescapedModel() {
+		return new WorkflowDefinitionLinkWrapper(_workflowDefinitionLink.toUnescapedModel());
 	}
 
 	@Override
@@ -186,18 +196,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.WorkflowDefinitionLink toEscapedModel() {
-		return new WorkflowDefinitionLinkWrapper(_workflowDefinitionLink.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.WorkflowDefinitionLink toUnescapedModel() {
-		return new WorkflowDefinitionLinkWrapper(_workflowDefinitionLink.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.WorkflowDefinitionLink workflowDefinitionLink) {
+	public int compareTo(WorkflowDefinitionLink workflowDefinitionLink) {
 		return _workflowDefinitionLink.compareTo(workflowDefinitionLink);
 	}
 
@@ -589,7 +588,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink,
 
 		WorkflowDefinitionLinkWrapper workflowDefinitionLinkWrapper = (WorkflowDefinitionLinkWrapper)obj;
 
-		if (Validator.equals(_workflowDefinitionLink,
+		if (Objects.equals(_workflowDefinitionLink,
 					workflowDefinitionLinkWrapper._workflowDefinitionLink)) {
 			return true;
 		}

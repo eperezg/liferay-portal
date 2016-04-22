@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -231,6 +231,16 @@ public class JournalFeedWrapper implements JournalFeed,
 	}
 
 	@Override
+	public JournalFeed toEscapedModel() {
+		return new JournalFeedWrapper(_journalFeed.toEscapedModel());
+	}
+
+	@Override
+	public JournalFeed toUnescapedModel() {
+		return new JournalFeedWrapper(_journalFeed.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _journalFeed.isCachedModel();
 	}
@@ -251,17 +261,7 @@ public class JournalFeedWrapper implements JournalFeed,
 	}
 
 	@Override
-	public com.liferay.journal.model.JournalFeed toEscapedModel() {
-		return new JournalFeedWrapper(_journalFeed.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.journal.model.JournalFeed toUnescapedModel() {
-		return new JournalFeedWrapper(_journalFeed.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.journal.model.JournalFeed> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<JournalFeed> toCacheModel() {
 		return _journalFeed.toCacheModel();
 	}
 
@@ -276,7 +276,7 @@ public class JournalFeedWrapper implements JournalFeed,
 	}
 
 	@Override
-	public int compareTo(com.liferay.journal.model.JournalFeed journalFeed) {
+	public int compareTo(JournalFeed journalFeed) {
 		return _journalFeed.compareTo(journalFeed);
 	}
 
@@ -900,7 +900,7 @@ public class JournalFeedWrapper implements JournalFeed,
 
 		JournalFeedWrapper journalFeedWrapper = (JournalFeedWrapper)obj;
 
-		if (Validator.equals(_journalFeed, journalFeedWrapper._journalFeed)) {
+		if (Objects.equals(_journalFeed, journalFeedWrapper._journalFeed)) {
 			return true;
 		}
 

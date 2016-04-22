@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -109,8 +109,18 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.ResourceBlockPermission> toCacheModel() {
+	public CacheModel<ResourceBlockPermission> toCacheModel() {
 		return _resourceBlockPermission.toCacheModel();
+	}
+
+	@Override
+	public ResourceBlockPermission toEscapedModel() {
+		return new ResourceBlockPermissionWrapper(_resourceBlockPermission.toEscapedModel());
+	}
+
+	@Override
+	public ResourceBlockPermission toUnescapedModel() {
+		return new ResourceBlockPermissionWrapper(_resourceBlockPermission.toUnescapedModel());
 	}
 
 	@Override
@@ -134,18 +144,7 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.ResourceBlockPermission toEscapedModel() {
-		return new ResourceBlockPermissionWrapper(_resourceBlockPermission.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.ResourceBlockPermission toUnescapedModel() {
-		return new ResourceBlockPermissionWrapper(_resourceBlockPermission.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.ResourceBlockPermission resourceBlockPermission) {
+	public int compareTo(ResourceBlockPermission resourceBlockPermission) {
 		return _resourceBlockPermission.compareTo(resourceBlockPermission);
 	}
 
@@ -361,7 +360,7 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission,
 
 		ResourceBlockPermissionWrapper resourceBlockPermissionWrapper = (ResourceBlockPermissionWrapper)obj;
 
-		if (Validator.equals(_resourceBlockPermission,
+		if (Objects.equals(_resourceBlockPermission,
 					resourceBlockPermissionWrapper._resourceBlockPermission)) {
 			return true;
 		}

@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -100,6 +100,22 @@ public class DDMTemplateLinkWrapper implements DDMTemplateLink,
 	}
 
 	@Override
+	public DDMTemplate getTemplate()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _ddmTemplateLink.getTemplate();
+	}
+
+	@Override
+	public DDMTemplateLink toEscapedModel() {
+		return new DDMTemplateLinkWrapper(_ddmTemplateLink.toEscapedModel());
+	}
+
+	@Override
+	public DDMTemplateLink toUnescapedModel() {
+		return new DDMTemplateLinkWrapper(_ddmTemplateLink.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _ddmTemplateLink.isCachedModel();
 	}
@@ -115,34 +131,17 @@ public class DDMTemplateLinkWrapper implements DDMTemplateLink,
 	}
 
 	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMTemplate getTemplate()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _ddmTemplateLink.getTemplate();
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMTemplateLink toEscapedModel() {
-		return new DDMTemplateLinkWrapper(_ddmTemplateLink.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.dynamic.data.mapping.model.DDMTemplateLink toUnescapedModel() {
-		return new DDMTemplateLinkWrapper(_ddmTemplateLink.toUnescapedModel());
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _ddmTemplateLink.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.dynamic.data.mapping.model.DDMTemplateLink> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<DDMTemplateLink> toCacheModel() {
 		return _ddmTemplateLink.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.dynamic.data.mapping.model.DDMTemplateLink ddmTemplateLink) {
+	public int compareTo(DDMTemplateLink ddmTemplateLink) {
 		return _ddmTemplateLink.compareTo(ddmTemplateLink);
 	}
 
@@ -354,7 +353,7 @@ public class DDMTemplateLinkWrapper implements DDMTemplateLink,
 
 		DDMTemplateLinkWrapper ddmTemplateLinkWrapper = (DDMTemplateLinkWrapper)obj;
 
-		if (Validator.equals(_ddmTemplateLink,
+		if (Objects.equals(_ddmTemplateLink,
 					ddmTemplateLinkWrapper._ddmTemplateLink)) {
 			return true;
 		}

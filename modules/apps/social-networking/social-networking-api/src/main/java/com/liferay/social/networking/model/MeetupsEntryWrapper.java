@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -164,6 +164,16 @@ public class MeetupsEntryWrapper implements MeetupsEntry,
 	}
 
 	@Override
+	public MeetupsEntry toEscapedModel() {
+		return new MeetupsEntryWrapper(_meetupsEntry.toEscapedModel());
+	}
+
+	@Override
+	public MeetupsEntry toUnescapedModel() {
+		return new MeetupsEntryWrapper(_meetupsEntry.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _meetupsEntry.isCachedModel();
 	}
@@ -184,18 +194,8 @@ public class MeetupsEntryWrapper implements MeetupsEntry,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.social.networking.model.MeetupsEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MeetupsEntry> toCacheModel() {
 		return _meetupsEntry.toCacheModel();
-	}
-
-	@Override
-	public com.liferay.social.networking.model.MeetupsEntry toEscapedModel() {
-		return new MeetupsEntryWrapper(_meetupsEntry.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.social.networking.model.MeetupsEntry toUnescapedModel() {
-		return new MeetupsEntryWrapper(_meetupsEntry.toUnescapedModel());
 	}
 
 	/**
@@ -209,8 +209,7 @@ public class MeetupsEntryWrapper implements MeetupsEntry,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.social.networking.model.MeetupsEntry meetupsEntry) {
+	public int compareTo(MeetupsEntry meetupsEntry) {
 		return _meetupsEntry.compareTo(meetupsEntry);
 	}
 
@@ -597,7 +596,7 @@ public class MeetupsEntryWrapper implements MeetupsEntry,
 
 		MeetupsEntryWrapper meetupsEntryWrapper = (MeetupsEntryWrapper)obj;
 
-		if (Validator.equals(_meetupsEntry, meetupsEntryWrapper._meetupsEntry)) {
+		if (Objects.equals(_meetupsEntry, meetupsEntryWrapper._meetupsEntry)) {
 			return true;
 		}
 

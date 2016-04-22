@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -101,6 +101,16 @@ public class JournalArticleResourceWrapper implements JournalArticleResource,
 	}
 
 	@Override
+	public JournalArticleResource toEscapedModel() {
+		return new JournalArticleResourceWrapper(_journalArticleResource.toEscapedModel());
+	}
+
+	@Override
+	public JournalArticleResource toUnescapedModel() {
+		return new JournalArticleResourceWrapper(_journalArticleResource.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _journalArticleResource.isCachedModel();
 	}
@@ -121,23 +131,12 @@ public class JournalArticleResourceWrapper implements JournalArticleResource,
 	}
 
 	@Override
-	public com.liferay.journal.model.JournalArticleResource toEscapedModel() {
-		return new JournalArticleResourceWrapper(_journalArticleResource.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.journal.model.JournalArticleResource toUnescapedModel() {
-		return new JournalArticleResourceWrapper(_journalArticleResource.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.journal.model.JournalArticleResource> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<JournalArticleResource> toCacheModel() {
 		return _journalArticleResource.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.journal.model.JournalArticleResource journalArticleResource) {
+	public int compareTo(JournalArticleResource journalArticleResource) {
 		return _journalArticleResource.compareTo(journalArticleResource);
 	}
 
@@ -334,7 +333,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource,
 
 		JournalArticleResourceWrapper journalArticleResourceWrapper = (JournalArticleResourceWrapper)obj;
 
-		if (Validator.equals(_journalArticleResource,
+		if (Objects.equals(_journalArticleResource,
 					journalArticleResourceWrapper._journalArticleResource)) {
 			return true;
 		}

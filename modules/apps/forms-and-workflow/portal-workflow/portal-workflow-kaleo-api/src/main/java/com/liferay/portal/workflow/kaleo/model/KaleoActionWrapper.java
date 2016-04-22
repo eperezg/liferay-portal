@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -193,6 +193,16 @@ public class KaleoActionWrapper implements KaleoAction,
 	}
 
 	@Override
+	public KaleoAction toEscapedModel() {
+		return new KaleoActionWrapper(_kaleoAction.toEscapedModel());
+	}
+
+	@Override
+	public KaleoAction toUnescapedModel() {
+		return new KaleoActionWrapper(_kaleoAction.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _kaleoAction.isCachedModel();
 	}
@@ -213,23 +223,12 @@ public class KaleoActionWrapper implements KaleoAction,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.portal.workflow.kaleo.model.KaleoAction> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<KaleoAction> toCacheModel() {
 		return _kaleoAction.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoAction toEscapedModel() {
-		return new KaleoActionWrapper(_kaleoAction.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.workflow.kaleo.model.KaleoAction toUnescapedModel() {
-		return new KaleoActionWrapper(_kaleoAction.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.workflow.kaleo.model.KaleoAction kaleoAction) {
+	public int compareTo(KaleoAction kaleoAction) {
 		return _kaleoAction.compareTo(kaleoAction);
 	}
 
@@ -707,7 +706,7 @@ public class KaleoActionWrapper implements KaleoAction,
 
 		KaleoActionWrapper kaleoActionWrapper = (KaleoActionWrapper)obj;
 
-		if (Validator.equals(_kaleoAction, kaleoActionWrapper._kaleoAction)) {
+		if (Objects.equals(_kaleoAction, kaleoActionWrapper._kaleoAction)) {
 			return true;
 		}
 

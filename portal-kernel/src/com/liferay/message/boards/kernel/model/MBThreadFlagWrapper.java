@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -138,6 +138,16 @@ public class MBThreadFlagWrapper implements MBThreadFlag,
 	}
 
 	@Override
+	public MBThreadFlag toEscapedModel() {
+		return new MBThreadFlagWrapper(_mbThreadFlag.toEscapedModel());
+	}
+
+	@Override
+	public MBThreadFlag toUnescapedModel() {
+		return new MBThreadFlagWrapper(_mbThreadFlag.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _mbThreadFlag.isCachedModel();
 	}
@@ -158,23 +168,12 @@ public class MBThreadFlagWrapper implements MBThreadFlag,
 	}
 
 	@Override
-	public com.liferay.message.boards.kernel.model.MBThreadFlag toEscapedModel() {
-		return new MBThreadFlagWrapper(_mbThreadFlag.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBThreadFlag toUnescapedModel() {
-		return new MBThreadFlagWrapper(_mbThreadFlag.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.message.boards.kernel.model.MBThreadFlag> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MBThreadFlag> toCacheModel() {
 		return _mbThreadFlag.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.message.boards.kernel.model.MBThreadFlag mbThreadFlag) {
+	public int compareTo(MBThreadFlag mbThreadFlag) {
 		return _mbThreadFlag.compareTo(mbThreadFlag);
 	}
 
@@ -491,7 +490,7 @@ public class MBThreadFlagWrapper implements MBThreadFlag,
 
 		MBThreadFlagWrapper mbThreadFlagWrapper = (MBThreadFlagWrapper)obj;
 
-		if (Validator.equals(_mbThreadFlag, mbThreadFlagWrapper._mbThreadFlag)) {
+		if (Objects.equals(_mbThreadFlag, mbThreadFlagWrapper._mbThreadFlag)) {
 			return true;
 		}
 

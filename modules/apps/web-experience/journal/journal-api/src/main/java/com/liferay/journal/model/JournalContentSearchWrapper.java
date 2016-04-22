@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -114,6 +114,16 @@ public class JournalContentSearchWrapper implements JournalContentSearch,
 		}
 	}
 
+	@Override
+	public JournalContentSearch toEscapedModel() {
+		return new JournalContentSearchWrapper(_journalContentSearch.toEscapedModel());
+	}
+
+	@Override
+	public JournalContentSearch toUnescapedModel() {
+		return new JournalContentSearchWrapper(_journalContentSearch.toUnescapedModel());
+	}
+
 	/**
 	* Returns the private layout of this journal content search.
 	*
@@ -155,23 +165,12 @@ public class JournalContentSearchWrapper implements JournalContentSearch,
 	}
 
 	@Override
-	public com.liferay.journal.model.JournalContentSearch toEscapedModel() {
-		return new JournalContentSearchWrapper(_journalContentSearch.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.journal.model.JournalContentSearch toUnescapedModel() {
-		return new JournalContentSearchWrapper(_journalContentSearch.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.journal.model.JournalContentSearch> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<JournalContentSearch> toCacheModel() {
 		return _journalContentSearch.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.journal.model.JournalContentSearch journalContentSearch) {
+	public int compareTo(JournalContentSearch journalContentSearch) {
 		return _journalContentSearch.compareTo(journalContentSearch);
 	}
 
@@ -398,7 +397,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch,
 
 		JournalContentSearchWrapper journalContentSearchWrapper = (JournalContentSearchWrapper)obj;
 
-		if (Validator.equals(_journalContentSearch,
+		if (Objects.equals(_journalContentSearch,
 					journalContentSearchWrapper._journalContentSearch)) {
 			return true;
 		}

@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -150,8 +150,24 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.UserGroup> toCacheModel() {
+	public CacheModel<UserGroup> toCacheModel() {
 		return _userGroup.toCacheModel();
+	}
+
+	@Override
+	public Group getGroup()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _userGroup.getGroup();
+	}
+
+	@Override
+	public UserGroup toEscapedModel() {
+		return new UserGroupWrapper(_userGroup.toEscapedModel());
+	}
+
+	@Override
+	public UserGroup toUnescapedModel() {
+		return new UserGroupWrapper(_userGroup.toUnescapedModel());
 	}
 
 	/**
@@ -207,23 +223,7 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Group getGroup()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _userGroup.getGroup();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.UserGroup toEscapedModel() {
-		return new UserGroupWrapper(_userGroup.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.UserGroup toUnescapedModel() {
-		return new UserGroupWrapper(_userGroup.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.UserGroup userGroup) {
+	public int compareTo(UserGroup userGroup) {
 		return _userGroup.compareTo(userGroup);
 	}
 
@@ -587,7 +587,7 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 
 		UserGroupWrapper userGroupWrapper = (UserGroupWrapper)obj;
 
-		if (Validator.equals(_userGroup, userGroupWrapper._userGroup)) {
+		if (Objects.equals(_userGroup, userGroupWrapper._userGroup)) {
 			return true;
 		}
 

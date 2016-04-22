@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -120,8 +120,18 @@ public class PortletPreferencesWrapper implements PortletPreferences,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.PortletPreferences> toCacheModel() {
+	public CacheModel<PortletPreferences> toCacheModel() {
 		return _portletPreferences.toCacheModel();
+	}
+
+	@Override
+	public PortletPreferences toEscapedModel() {
+		return new PortletPreferencesWrapper(_portletPreferences.toEscapedModel());
+	}
+
+	@Override
+	public PortletPreferences toUnescapedModel() {
+		return new PortletPreferencesWrapper(_portletPreferences.toUnescapedModel());
 	}
 
 	@Override
@@ -145,18 +155,7 @@ public class PortletPreferencesWrapper implements PortletPreferences,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.PortletPreferences toEscapedModel() {
-		return new PortletPreferencesWrapper(_portletPreferences.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.PortletPreferences toUnescapedModel() {
-		return new PortletPreferencesWrapper(_portletPreferences.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.PortletPreferences portletPreferences) {
+	public int compareTo(PortletPreferences portletPreferences) {
 		return _portletPreferences.compareTo(portletPreferences);
 	}
 
@@ -412,7 +411,7 @@ public class PortletPreferencesWrapper implements PortletPreferences,
 
 		PortletPreferencesWrapper portletPreferencesWrapper = (PortletPreferencesWrapper)obj;
 
-		if (Validator.equals(_portletPreferences,
+		if (Objects.equals(_portletPreferences,
 					portletPreferencesWrapper._portletPreferences)) {
 			return true;
 		}

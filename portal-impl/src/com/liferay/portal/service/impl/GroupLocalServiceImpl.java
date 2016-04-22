@@ -126,6 +126,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -3076,8 +3077,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			userId, companyGroup.getGroupId(), null, null,
 			Group.class.getName(), group.getGroupId(), null, 0,
 			assetCategoryIds, assetTagNames, true, false, null, null, null,
-			null, group.getDescriptiveName(), group.getDescription(), null,
-			null, null, 0, 0, null);
+			null, null, group.getDescriptiveName(), group.getDescription(),
+			null, null, null, 0, 0, null);
 	}
 
 	/**
@@ -3299,7 +3300,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			validateLanguageIds(defaultLanguageId, newLanguageIds);
 
-			if (!Validator.equals(oldLanguageIds, newLanguageIds)) {
+			if (!Objects.equals(oldLanguageIds, newLanguageIds)) {
 				LanguageUtil.resetAvailableGroupLocales(groupId);
 			}
 		}
@@ -3733,7 +3734,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 						if ((resourceTypePermission.getCompanyId() ==
 								companyId) &&
-							Validator.equals(
+							Objects.equals(
 								rolePermissions.getName(),
 								resourceTypePermission.getName()) &&
 							resourceTypePermission.hasAction(resourceAction)) {

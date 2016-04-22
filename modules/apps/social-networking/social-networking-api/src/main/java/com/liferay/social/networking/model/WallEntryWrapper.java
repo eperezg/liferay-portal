@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -121,6 +121,16 @@ public class WallEntryWrapper implements WallEntry, ModelWrapper<WallEntry> {
 	}
 
 	@Override
+	public WallEntry toEscapedModel() {
+		return new WallEntryWrapper(_wallEntry.toEscapedModel());
+	}
+
+	@Override
+	public WallEntry toUnescapedModel() {
+		return new WallEntryWrapper(_wallEntry.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _wallEntry.isCachedModel();
 	}
@@ -141,23 +151,12 @@ public class WallEntryWrapper implements WallEntry, ModelWrapper<WallEntry> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.social.networking.model.WallEntry> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<WallEntry> toCacheModel() {
 		return _wallEntry.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.social.networking.model.WallEntry toEscapedModel() {
-		return new WallEntryWrapper(_wallEntry.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.social.networking.model.WallEntry toUnescapedModel() {
-		return new WallEntryWrapper(_wallEntry.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.social.networking.model.WallEntry wallEntry) {
+	public int compareTo(WallEntry wallEntry) {
 		return _wallEntry.compareTo(wallEntry);
 	}
 
@@ -434,7 +433,7 @@ public class WallEntryWrapper implements WallEntry, ModelWrapper<WallEntry> {
 
 		WallEntryWrapper wallEntryWrapper = (WallEntryWrapper)obj;
 
-		if (Validator.equals(_wallEntry, wallEntryWrapper._wallEntry)) {
+		if (Objects.equals(_wallEntry, wallEntryWrapper._wallEntry)) {
 			return true;
 		}
 

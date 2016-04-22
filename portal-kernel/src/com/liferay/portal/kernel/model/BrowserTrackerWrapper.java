@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -99,7 +99,17 @@ public class BrowserTrackerWrapper implements BrowserTracker,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.BrowserTracker> toCacheModel() {
+	public BrowserTracker toEscapedModel() {
+		return new BrowserTrackerWrapper(_browserTracker.toEscapedModel());
+	}
+
+	@Override
+	public BrowserTracker toUnescapedModel() {
+		return new BrowserTrackerWrapper(_browserTracker.toUnescapedModel());
+	}
+
+	@Override
+	public CacheModel<BrowserTracker> toCacheModel() {
 		return _browserTracker.toCacheModel();
 	}
 
@@ -124,18 +134,7 @@ public class BrowserTrackerWrapper implements BrowserTracker,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.BrowserTracker toEscapedModel() {
-		return new BrowserTrackerWrapper(_browserTracker.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.BrowserTracker toUnescapedModel() {
-		return new BrowserTrackerWrapper(_browserTracker.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.BrowserTracker browserTracker) {
+	public int compareTo(BrowserTracker browserTracker) {
 		return _browserTracker.compareTo(browserTracker);
 	}
 
@@ -351,7 +350,7 @@ public class BrowserTrackerWrapper implements BrowserTracker,
 
 		BrowserTrackerWrapper browserTrackerWrapper = (BrowserTrackerWrapper)obj;
 
-		if (Validator.equals(_browserTracker,
+		if (Objects.equals(_browserTracker,
 					browserTrackerWrapper._browserTracker)) {
 			return true;
 		}

@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -99,8 +99,18 @@ public class PortalPreferencesWrapper implements PortalPreferences,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.PortalPreferences> toCacheModel() {
+	public CacheModel<PortalPreferences> toCacheModel() {
 		return _portalPreferences.toCacheModel();
+	}
+
+	@Override
+	public PortalPreferences toEscapedModel() {
+		return new PortalPreferencesWrapper(_portalPreferences.toEscapedModel());
+	}
+
+	@Override
+	public PortalPreferences toUnescapedModel() {
+		return new PortalPreferencesWrapper(_portalPreferences.toUnescapedModel());
 	}
 
 	@Override
@@ -124,18 +134,7 @@ public class PortalPreferencesWrapper implements PortalPreferences,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.PortalPreferences toEscapedModel() {
-		return new PortalPreferencesWrapper(_portalPreferences.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.PortalPreferences toUnescapedModel() {
-		return new PortalPreferencesWrapper(_portalPreferences.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.PortalPreferences portalPreferences) {
+	public int compareTo(PortalPreferences portalPreferences) {
 		return _portalPreferences.compareTo(portalPreferences);
 	}
 
@@ -331,7 +330,7 @@ public class PortalPreferencesWrapper implements PortalPreferences,
 
 		PortalPreferencesWrapper portalPreferencesWrapper = (PortalPreferencesWrapper)obj;
 
-		if (Validator.equals(_portalPreferences,
+		if (Objects.equals(_portalPreferences,
 					portalPreferencesWrapper._portalPreferences)) {
 			return true;
 		}

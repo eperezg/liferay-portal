@@ -18,12 +18,12 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -117,6 +117,16 @@ public class ExpandoColumnWrapper implements ExpandoColumn,
 	}
 
 	@Override
+	public ExpandoColumn toEscapedModel() {
+		return new ExpandoColumnWrapper(_expandoColumn.toEscapedModel());
+	}
+
+	@Override
+	public ExpandoColumn toUnescapedModel() {
+		return new ExpandoColumnWrapper(_expandoColumn.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _expandoColumn.isCachedModel();
 	}
@@ -132,17 +142,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn,
 	}
 
 	@Override
-	public com.liferay.expando.kernel.model.ExpandoColumn toEscapedModel() {
-		return new ExpandoColumnWrapper(_expandoColumn.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.expando.kernel.model.ExpandoColumn toUnescapedModel() {
-		return new ExpandoColumnWrapper(_expandoColumn.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.expando.kernel.model.ExpandoColumn> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ExpandoColumn> toCacheModel() {
 		return _expandoColumn.toCacheModel();
 	}
 
@@ -152,8 +152,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.expando.kernel.model.ExpandoColumn expandoColumn) {
+	public int compareTo(ExpandoColumn expandoColumn) {
 		return _expandoColumn.compareTo(expandoColumn);
 	}
 
@@ -406,7 +405,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn,
 
 		ExpandoColumnWrapper expandoColumnWrapper = (ExpandoColumnWrapper)obj;
 
-		if (Validator.equals(_expandoColumn, expandoColumnWrapper._expandoColumn)) {
+		if (Objects.equals(_expandoColumn, expandoColumnWrapper._expandoColumn)) {
 			return true;
 		}
 

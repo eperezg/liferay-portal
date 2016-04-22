@@ -19,12 +19,12 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -196,8 +196,24 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.OrgLabor> toCacheModel() {
+	public CacheModel<OrgLabor> toCacheModel() {
 		return _orgLabor.toCacheModel();
+	}
+
+	@Override
+	public ListType getType()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _orgLabor.getType();
+	}
+
+	@Override
+	public OrgLabor toEscapedModel() {
+		return new OrgLaborWrapper(_orgLabor.toEscapedModel());
+	}
+
+	@Override
+	public OrgLabor toUnescapedModel() {
+		return new OrgLaborWrapper(_orgLabor.toUnescapedModel());
 	}
 
 	@Override
@@ -221,23 +237,7 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.ListType getType()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _orgLabor.getType();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.OrgLabor toEscapedModel() {
-		return new OrgLaborWrapper(_orgLabor.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.OrgLabor toUnescapedModel() {
-		return new OrgLaborWrapper(_orgLabor.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(com.liferay.portal.kernel.model.OrgLabor orgLabor) {
+	public int compareTo(OrgLabor orgLabor) {
 		return _orgLabor.compareTo(orgLabor);
 	}
 
@@ -713,7 +713,7 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 
 		OrgLaborWrapper orgLaborWrapper = (OrgLaborWrapper)obj;
 
-		if (Validator.equals(_orgLabor, orgLaborWrapper._orgLabor)) {
+		if (Objects.equals(_orgLabor, orgLaborWrapper._orgLabor)) {
 			return true;
 		}
 

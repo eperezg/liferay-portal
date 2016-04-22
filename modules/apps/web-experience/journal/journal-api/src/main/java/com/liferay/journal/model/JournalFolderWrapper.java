@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -193,6 +193,16 @@ public class JournalFolderWrapper implements JournalFolder,
 		}
 	}
 
+	@Override
+	public JournalFolder toEscapedModel() {
+		return new JournalFolderWrapper(_journalFolder.toEscapedModel());
+	}
+
+	@Override
+	public JournalFolder toUnescapedModel() {
+		return new JournalFolderWrapper(_journalFolder.toUnescapedModel());
+	}
+
 	/**
 	* Returns <code>true</code> if this journal folder is approved.
 	*
@@ -329,23 +339,13 @@ public class JournalFolderWrapper implements JournalFolder,
 	}
 
 	@Override
-	public com.liferay.journal.model.JournalFolder getParentFolder()
+	public JournalFolder getParentFolder()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _journalFolder.getParentFolder();
 	}
 
 	@Override
-	public com.liferay.journal.model.JournalFolder toEscapedModel() {
-		return new JournalFolderWrapper(_journalFolder.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.journal.model.JournalFolder toUnescapedModel() {
-		return new JournalFolderWrapper(_journalFolder.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.journal.model.JournalFolder> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<JournalFolder> toCacheModel() {
 		return _journalFolder.toCacheModel();
 	}
 
@@ -371,7 +371,7 @@ public class JournalFolderWrapper implements JournalFolder,
 	}
 
 	@Override
-	public int compareTo(com.liferay.journal.model.JournalFolder journalFolder) {
+	public int compareTo(JournalFolder journalFolder) {
 		return _journalFolder.compareTo(journalFolder);
 	}
 
@@ -563,7 +563,7 @@ public class JournalFolderWrapper implements JournalFolder,
 	}
 
 	@Override
-	public java.util.List<com.liferay.journal.model.JournalFolder> getAncestors()
+	public java.util.List<JournalFolder> getAncestors()
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _journalFolder.getAncestors();
 	}
@@ -951,7 +951,7 @@ public class JournalFolderWrapper implements JournalFolder,
 
 		JournalFolderWrapper journalFolderWrapper = (JournalFolderWrapper)obj;
 
-		if (Validator.equals(_journalFolder, journalFolderWrapper._journalFolder)) {
+		if (Objects.equals(_journalFolder, journalFolderWrapper._journalFolder)) {
 			return true;
 		}
 

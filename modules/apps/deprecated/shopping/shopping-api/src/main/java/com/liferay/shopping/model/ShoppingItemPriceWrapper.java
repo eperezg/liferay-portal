@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -142,6 +142,16 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice,
 		}
 	}
 
+	@Override
+	public ShoppingItemPrice toEscapedModel() {
+		return new ShoppingItemPriceWrapper(_shoppingItemPrice.toEscapedModel());
+	}
+
+	@Override
+	public ShoppingItemPrice toUnescapedModel() {
+		return new ShoppingItemPriceWrapper(_shoppingItemPrice.toUnescapedModel());
+	}
+
 	/**
 	* Returns the taxable of this shopping item price.
 	*
@@ -203,18 +213,8 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.shopping.model.ShoppingItemPrice> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ShoppingItemPrice> toCacheModel() {
 		return _shoppingItemPrice.toCacheModel();
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingItemPrice toEscapedModel() {
-		return new ShoppingItemPriceWrapper(_shoppingItemPrice.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingItemPrice toUnescapedModel() {
-		return new ShoppingItemPriceWrapper(_shoppingItemPrice.toUnescapedModel());
 	}
 
 	/**
@@ -248,8 +248,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.shopping.model.ShoppingItemPrice shoppingItemPrice) {
+	public int compareTo(ShoppingItemPrice shoppingItemPrice) {
 		return _shoppingItemPrice.compareTo(shoppingItemPrice);
 	}
 
@@ -516,7 +515,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice,
 
 		ShoppingItemPriceWrapper shoppingItemPriceWrapper = (ShoppingItemPriceWrapper)obj;
 
-		if (Validator.equals(_shoppingItemPrice,
+		if (Objects.equals(_shoppingItemPrice,
 					shoppingItemPriceWrapper._shoppingItemPrice)) {
 			return true;
 		}

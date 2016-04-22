@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -128,8 +128,18 @@ public class UserTrackerWrapper implements UserTracker,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.UserTracker> toCacheModel() {
+	public CacheModel<UserTracker> toCacheModel() {
 		return _userTracker.toCacheModel();
+	}
+
+	@Override
+	public UserTracker toEscapedModel() {
+		return new UserTrackerWrapper(_userTracker.toEscapedModel());
+	}
+
+	@Override
+	public UserTracker toUnescapedModel() {
+		return new UserTrackerWrapper(_userTracker.toUnescapedModel());
 	}
 
 	@Override
@@ -153,18 +163,7 @@ public class UserTrackerWrapper implements UserTracker,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.UserTracker toEscapedModel() {
-		return new UserTrackerWrapper(_userTracker.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.UserTracker toUnescapedModel() {
-		return new UserTrackerWrapper(_userTracker.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.UserTracker userTracker) {
+	public int compareTo(UserTracker userTracker) {
 		return _userTracker.compareTo(userTracker);
 	}
 
@@ -269,7 +268,7 @@ public class UserTrackerWrapper implements UserTracker,
 	}
 
 	@Override
-	public java.util.List<com.liferay.portal.kernel.model.UserTrackerPath> getPaths() {
+	public java.util.List<UserTrackerPath> getPaths() {
 		return _userTracker.getPaths();
 	}
 
@@ -324,7 +323,7 @@ public class UserTrackerWrapper implements UserTracker,
 	}
 
 	@Override
-	public void addPath(com.liferay.portal.kernel.model.UserTrackerPath path) {
+	public void addPath(UserTrackerPath path) {
 		_userTracker.addPath(path);
 	}
 
@@ -485,7 +484,7 @@ public class UserTrackerWrapper implements UserTracker,
 
 		UserTrackerWrapper userTrackerWrapper = (UserTrackerWrapper)obj;
 
-		if (Validator.equals(_userTracker, userTrackerWrapper._userTracker)) {
+		if (Objects.equals(_userTracker, userTrackerWrapper._userTracker)) {
 			return true;
 		}
 

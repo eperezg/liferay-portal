@@ -21,13 +21,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -178,8 +178,18 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.Repository> toCacheModel() {
+	public CacheModel<Repository> toCacheModel() {
 		return _repository.toCacheModel();
+	}
+
+	@Override
+	public Repository toEscapedModel() {
+		return new RepositoryWrapper(_repository.toEscapedModel());
+	}
+
+	@Override
+	public Repository toUnescapedModel() {
+		return new RepositoryWrapper(_repository.toUnescapedModel());
 	}
 
 	@Override
@@ -203,22 +213,12 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.Repository toEscapedModel() {
-		return new RepositoryWrapper(_repository.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.Repository toUnescapedModel() {
-		return new RepositoryWrapper(_repository.toUnescapedModel());
-	}
-
-	@Override
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
 		return _repository.getTypeSettingsProperties();
 	}
 
 	@Override
-	public int compareTo(com.liferay.portal.kernel.model.Repository repository) {
+	public int compareTo(Repository repository) {
 		return _repository.compareTo(repository);
 	}
 
@@ -675,7 +675,7 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 
 		RepositoryWrapper repositoryWrapper = (RepositoryWrapper)obj;
 
-		if (Validator.equals(_repository, repositoryWrapper._repository)) {
+		if (Objects.equals(_repository, repositoryWrapper._repository)) {
 			return true;
 		}
 

@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -305,6 +305,28 @@ public class JournalArticleWrapper implements JournalArticle,
 		}
 	}
 
+	@Override
+	public JournalArticle toEscapedModel() {
+		return new JournalArticleWrapper(_journalArticle.toEscapedModel());
+	}
+
+	@Override
+	public JournalArticle toUnescapedModel() {
+		return new JournalArticleWrapper(_journalArticle.toUnescapedModel());
+	}
+
+	@Override
+	public JournalArticleResource getArticleResource()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _journalArticle.getArticleResource();
+	}
+
+	@Override
+	public JournalFolder getFolder()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _journalArticle.getFolder();
+	}
+
 	/**
 	* Returns the indexable of this journal article.
 	*
@@ -507,29 +529,7 @@ public class JournalArticleWrapper implements JournalArticle,
 	}
 
 	@Override
-	public com.liferay.journal.model.JournalArticle toEscapedModel() {
-		return new JournalArticleWrapper(_journalArticle.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.journal.model.JournalArticle toUnescapedModel() {
-		return new JournalArticleWrapper(_journalArticle.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.journal.model.JournalArticleResource getArticleResource()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _journalArticle.getArticleResource();
-	}
-
-	@Override
-	public com.liferay.journal.model.JournalFolder getFolder()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _journalArticle.getFolder();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.journal.model.JournalArticle> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<JournalArticle> toCacheModel() {
 		return _journalArticle.toCacheModel();
 	}
 
@@ -575,8 +575,7 @@ public class JournalArticleWrapper implements JournalArticle,
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.journal.model.JournalArticle journalArticle) {
+	public int compareTo(JournalArticle journalArticle) {
 		return _journalArticle.compareTo(journalArticle);
 	}
 
@@ -1743,7 +1742,7 @@ public class JournalArticleWrapper implements JournalArticle,
 
 		JournalArticleWrapper journalArticleWrapper = (JournalArticleWrapper)obj;
 
-		if (Validator.equals(_journalArticle,
+		if (Objects.equals(_journalArticle,
 					journalArticleWrapper._journalArticle)) {
 			return true;
 		}

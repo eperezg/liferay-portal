@@ -19,13 +19,13 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -142,8 +142,18 @@ public class MembershipRequestWrapper implements MembershipRequest,
 	}
 
 	@Override
-	public CacheModel<com.liferay.portal.kernel.model.MembershipRequest> toCacheModel() {
+	public CacheModel<MembershipRequest> toCacheModel() {
 		return _membershipRequest.toCacheModel();
+	}
+
+	@Override
+	public MembershipRequest toEscapedModel() {
+		return new MembershipRequestWrapper(_membershipRequest.toEscapedModel());
+	}
+
+	@Override
+	public MembershipRequest toUnescapedModel() {
+		return new MembershipRequestWrapper(_membershipRequest.toUnescapedModel());
 	}
 
 	@Override
@@ -167,18 +177,7 @@ public class MembershipRequestWrapper implements MembershipRequest,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.MembershipRequest toEscapedModel() {
-		return new MembershipRequestWrapper(_membershipRequest.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.MembershipRequest toUnescapedModel() {
-		return new MembershipRequestWrapper(_membershipRequest.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.portal.kernel.model.MembershipRequest membershipRequest) {
+	public int compareTo(MembershipRequest membershipRequest) {
 		return _membershipRequest.compareTo(membershipRequest);
 	}
 
@@ -534,7 +533,7 @@ public class MembershipRequestWrapper implements MembershipRequest,
 
 		MembershipRequestWrapper membershipRequestWrapper = (MembershipRequestWrapper)obj;
 
-		if (Validator.equals(_membershipRequest,
+		if (Objects.equals(_membershipRequest,
 					membershipRequestWrapper._membershipRequest)) {
 			return true;
 		}

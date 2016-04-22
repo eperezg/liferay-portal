@@ -20,12 +20,12 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -142,6 +142,16 @@ public class SocialActivitySetWrapper implements SocialActivitySet,
 	}
 
 	@Override
+	public SocialActivitySet toEscapedModel() {
+		return new SocialActivitySetWrapper(_socialActivitySet.toEscapedModel());
+	}
+
+	@Override
+	public SocialActivitySet toUnescapedModel() {
+		return new SocialActivitySetWrapper(_socialActivitySet.toUnescapedModel());
+	}
+
+	@Override
 	public boolean isCachedModel() {
 		return _socialActivitySet.isCachedModel();
 	}
@@ -162,23 +172,12 @@ public class SocialActivitySetWrapper implements SocialActivitySet,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.social.kernel.model.SocialActivitySet> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<SocialActivitySet> toCacheModel() {
 		return _socialActivitySet.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.social.kernel.model.SocialActivitySet toEscapedModel() {
-		return new SocialActivitySetWrapper(_socialActivitySet.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.social.kernel.model.SocialActivitySet toUnescapedModel() {
-		return new SocialActivitySetWrapper(_socialActivitySet.toUnescapedModel());
-	}
-
-	@Override
-	public int compareTo(
-		com.liferay.social.kernel.model.SocialActivitySet socialActivitySet) {
+	public int compareTo(SocialActivitySet socialActivitySet) {
 		return _socialActivitySet.compareTo(socialActivitySet);
 	}
 
@@ -530,7 +529,7 @@ public class SocialActivitySetWrapper implements SocialActivitySet,
 
 		SocialActivitySetWrapper socialActivitySetWrapper = (SocialActivitySetWrapper)obj;
 
-		if (Validator.equals(_socialActivitySet,
+		if (Objects.equals(_socialActivitySet,
 					socialActivitySetWrapper._socialActivitySet)) {
 			return true;
 		}

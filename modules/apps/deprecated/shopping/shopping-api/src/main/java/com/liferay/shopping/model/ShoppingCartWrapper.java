@@ -20,13 +20,13 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -142,6 +142,22 @@ public class ShoppingCartWrapper implements ShoppingCart,
 		}
 	}
 
+	@Override
+	public ShoppingCart toEscapedModel() {
+		return new ShoppingCartWrapper(_shoppingCart.toEscapedModel());
+	}
+
+	@Override
+	public ShoppingCart toUnescapedModel() {
+		return new ShoppingCartWrapper(_shoppingCart.toUnescapedModel());
+	}
+
+	@Override
+	public ShoppingCoupon getCoupon()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _shoppingCart.getCoupon();
+	}
+
 	/**
 	* Returns the insure of this shopping cart.
 	*
@@ -183,28 +199,12 @@ public class ShoppingCartWrapper implements ShoppingCart,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.shopping.model.ShoppingCart> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<ShoppingCart> toCacheModel() {
 		return _shoppingCart.toCacheModel();
 	}
 
 	@Override
-	public com.liferay.shopping.model.ShoppingCart toEscapedModel() {
-		return new ShoppingCartWrapper(_shoppingCart.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingCart toUnescapedModel() {
-		return new ShoppingCartWrapper(_shoppingCart.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.shopping.model.ShoppingCoupon getCoupon()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _shoppingCart.getCoupon();
-	}
-
-	@Override
-	public int compareTo(com.liferay.shopping.model.ShoppingCart shoppingCart) {
+	public int compareTo(ShoppingCart shoppingCart) {
 		return _shoppingCart.compareTo(shoppingCart);
 	}
 
@@ -309,7 +309,7 @@ public class ShoppingCartWrapper implements ShoppingCart,
 	}
 
 	@Override
-	public Map<com.liferay.shopping.model.ShoppingCartItem, java.lang.Integer> getItems() {
+	public Map<ShoppingCartItem, java.lang.Integer> getItems() {
 		return _shoppingCart.getItems();
 	}
 
@@ -546,7 +546,7 @@ public class ShoppingCartWrapper implements ShoppingCart,
 
 		ShoppingCartWrapper shoppingCartWrapper = (ShoppingCartWrapper)obj;
 
-		if (Validator.equals(_shoppingCart, shoppingCartWrapper._shoppingCart)) {
+		if (Objects.equals(_shoppingCart, shoppingCartWrapper._shoppingCart)) {
 			return true;
 		}
 

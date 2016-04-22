@@ -22,13 +22,13 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * <p>
@@ -248,6 +248,28 @@ public class MBMessageWrapper implements MBMessage, ModelWrapper<MBMessage> {
 		}
 	}
 
+	@Override
+	public MBCategory getCategory()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _mbMessage.getCategory();
+	}
+
+	@Override
+	public MBMessage toEscapedModel() {
+		return new MBMessageWrapper(_mbMessage.toEscapedModel());
+	}
+
+	@Override
+	public MBMessage toUnescapedModel() {
+		return new MBMessageWrapper(_mbMessage.toUnescapedModel());
+	}
+
+	@Override
+	public MBThread getThread()
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _mbMessage.getThread();
+	}
+
 	/**
 	* Returns the allow pingbacks of this message-boards message.
 	*
@@ -459,29 +481,7 @@ public class MBMessageWrapper implements MBMessage, ModelWrapper<MBMessage> {
 	}
 
 	@Override
-	public com.liferay.message.boards.kernel.model.MBCategory getCategory()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _mbMessage.getCategory();
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBMessage toEscapedModel() {
-		return new MBMessageWrapper(_mbMessage.toEscapedModel());
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBMessage toUnescapedModel() {
-		return new MBMessageWrapper(_mbMessage.toUnescapedModel());
-	}
-
-	@Override
-	public com.liferay.message.boards.kernel.model.MBThread getThread()
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _mbMessage.getThread();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<com.liferay.message.boards.kernel.model.MBMessage> toCacheModel() {
+	public com.liferay.portal.kernel.model.CacheModel<MBMessage> toCacheModel() {
 		return _mbMessage.toCacheModel();
 	}
 
@@ -523,8 +523,7 @@ public class MBMessageWrapper implements MBMessage, ModelWrapper<MBMessage> {
 	}
 
 	@Override
-	public int compareTo(
-		com.liferay.message.boards.kernel.model.MBMessage mbMessage) {
+	public int compareTo(MBMessage mbMessage) {
 		return _mbMessage.compareTo(mbMessage);
 	}
 
@@ -1236,7 +1235,7 @@ public class MBMessageWrapper implements MBMessage, ModelWrapper<MBMessage> {
 
 		MBMessageWrapper mbMessageWrapper = (MBMessageWrapper)obj;
 
-		if (Validator.equals(_mbMessage, mbMessageWrapper._mbMessage)) {
+		if (Objects.equals(_mbMessage, mbMessageWrapper._mbMessage)) {
 			return true;
 		}
 
