@@ -166,6 +166,19 @@
 		<execute function="Click" locator1="FormFields#TEXT_FIELD_LINE_OPTION" />
 	</command>
 
+	<command name="viewAutoCompleteOptions">
+		<var name="key_autocompleteOption" value="${autocompleteOption}" />
+
+		<execute function="AssertTextEquals" locator1="FormFields#AUTOCOMPLETE_OPTION" value1="${autocompleteOption}" />
+
+		<if>
+			<isset var="autocompleteOptionNotVisible" />
+			<then>
+				<execute function="AssertTextNotPresent" locator1="FormFields#AUTOCOMPLETE_LIST" value1="${autocompleteOptionNotVisible}" />
+			</then>
+		</if>
+	</command>
+
 	<command name="viewCaptchaField">
 		<execute function="AssertElementPresent#assertVisible" locator1="FormFields#CAPTCHA_FIELD" />
 		<execute function="AssertElementPresent#assertVisible" locator1="FormFields#CAPTCHA_FIELD_REFRESH" />
@@ -224,6 +237,12 @@
 		<var name="key_fieldName" value="${fieldName}" />
 
 		<execute function="AssertTextEquals" locator1="FormFields#DATE_FIELD" value1="${fieldValue}" />
+	</command>
+
+	<command name="viewDeletedSelectOptionsRowFieldValue">
+		<var name="key_rowNumber" value="${rowNumber}" />
+
+		<execute function="AssertTextNotPresent" locator1="FormFields#SELECT_OPTIONS_OPTION_VALUE_FIELD_VISIBLE" value1="${fieldValue}" />
 	</command>
 
 	<command name="viewFieldHelpText">
@@ -394,6 +413,12 @@
 		<var name="key_selectOption" value="${selectOption}" />
 
 		<execute function="AssertTextEquals#assertText" locator1="FormFields#SELECT_OPTION" value1="${selectOption}" />
+	</command>
+
+	<command name="viewSelectOptionsRowFieldValue">
+		<var name="key_rowNumber" value="${rowNumber}" />
+
+		<execute function="AssertTextEquals" locator1="FormFields#SELECT_OPTIONS_OPTION_VALUE_FIELD_VISIBLE" value1="${fieldValue}" />
 	</command>
 
 	<command name="viewSelectValue">

@@ -247,6 +247,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_OPTIONS_OPTION_VALUE_FIELD_VISIBLE</td>
+	<td>//div[@class='input-select-wrapper']//option[${key_rowNumber}]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SELECT_LABEL</td>
 	<td>//div[contains(@data-fieldname,'${key_fieldName}')]//label</td>
 	<td></td>
@@ -320,6 +325,11 @@
 	<td></td>
 </tr>
 <!--AUTOCOMPLETE-->
+<tr>
+	<td>AUTOCOMPLETE_LIST</td>
+	<td>//ul[@role='listbox']</td>
+	<td></td>
+</tr>
 <tr>
 	<td>AUTOCOMPLETE_OPTION</td>
 	<td>//li[@data-text='${key_autocompleteOption}']</td>
