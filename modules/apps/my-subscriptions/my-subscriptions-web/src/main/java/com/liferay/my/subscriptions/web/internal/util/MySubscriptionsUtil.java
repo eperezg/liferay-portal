@@ -17,9 +17,11 @@ package com.liferay.my.subscriptions.web.internal.util;
 import com.liferay.asset.kernel.AssetRendererFactoryRegistryUtil;
 import com.liferay.asset.kernel.model.AssetRenderer;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
+import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.bookmarks.model.BookmarksFolder;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
 import com.liferay.document.library.kernel.model.DLFolder;
+import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.message.boards.kernel.model.MBCategory;
@@ -138,7 +140,9 @@ public class MySubscriptionsUtil {
 
 		Group group = GroupLocalServiceUtil.fetchGroup(classPK);
 
-		if (className.equals(_BLOGS_ENTRY_CLASSNAME)) {
+		if (className.equals(BlogsEntry.class.getName()) ||
+			className.equals(_BLOGS_ENTRY_CLASSNAME)) {
+
 			title = "Blog at ";
 		}
 		else if (className.equals(BookmarksFolder.class.getName())) {
@@ -155,6 +159,13 @@ public class MySubscriptionsUtil {
 				DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(classPK);
 
 			return dlFileEntryType.getName(locale);
+		}
+		else if (className.equals(DLFolderConstants.getClassName()) ||
+				 className.equals(Folder.class.getName())) {
+
+			if (group != null) {
+				return LanguageUtil.get(locale, "home");
+			}
 		}
 		else if (className.equals(JournalFolder.class.getName())) {
 			if (group != null) {
@@ -198,11 +209,6 @@ public class MySubscriptionsUtil {
 			WikiNode wikiNode = WikiNodeLocalServiceUtil.getWikiNode(classPK);
 
 			return wikiNode.getName();
-		}
-		else if (className.equals(Folder.class.getName())) {
-			if (group != null) {
-				return LanguageUtil.get(locale, "home");
-			}
 		}
 
 		if (group != null) {

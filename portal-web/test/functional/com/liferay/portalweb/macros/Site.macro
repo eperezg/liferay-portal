@@ -97,7 +97,7 @@
 			</then>
 		</if>
 
-		<execute function="Type#mouseOverFocusType" locator1="TextInput#NAME" value1="${siteName}" />
+		<execute function="Type" locator1="TextInput#NAME" value1="${siteName}" />
 
 		<if>
 			<or>
@@ -427,8 +427,8 @@
 		<if>
 			<condition function="IsNotVisible" locator1="SiteSettingsDisplaySettings#DEFINE_DEFAULT_AND_AVAILABLE_SITE_LANGUAGES_RADIO" />
 			<then>
-				<execute macro="Navigator#gotoTab">
-					<var name="tab" value="Languages" />
+				<execute macro="Navigator#gotoNavTab">
+					<var name="navTab" value="Languages" />
 				</execute>
 			</then>
 		</if>
@@ -532,6 +532,22 @@
 		<execute function="AssertTextNotPresent" value1="${siteName}" />
 	</command>
 
+	<command name="disableRecycleBinCP">
+		<execute function="AssertClick" locator1="SitesEditSite#MENU_ADVANCED_TAB" value1="Advanced" />
+
+		<execute macro="Panel#expandPanel">
+			<var name="panelHeading" value="Recycle Bin" />
+		</execute>
+
+		<execute function="Uncheck#uncheckToggleSwitchNoErrorNoAssert" locator1="Checkbox#ENABLE_RECYCLE_BIN" />
+
+		<execute function="Confirm" value1="Disabling the Recycle Bin prevents the restoring of content that has been moved to the Recycle Bin." />
+
+		<execute function="AssertNotChecked#assertNotCheckedToggleSwitch" locator1="Checkbox#ENABLE_RECYCLE_BIN" />
+
+		<execute macro="PortletEntry#save" />
+	</command>
+
 	<command name="editCP">
 		<execute function="AssertTextEquals" locator1="TextInput#NAME" value1="${siteName}" />
 
@@ -551,7 +567,7 @@
 
 		<execute function="Pause" locator1="5000" />
 
-		<execute function="Type#mouseOverFocusType" locator1="TextInput#FRIENDLY_URL" value1="${siteFriendlyURLEdit}" />
+		<execute function="Type" locator1="TextInput#FRIENDLY_URL" value1="${siteFriendlyURLEdit}" />
 
 		<execute macro="Button#clickSave" />
 
@@ -577,14 +593,6 @@
 		</execute>
 
 		<execute function="Type" locator1="TextInput#GOOGLE_ANALYTICS_ID" value1="${googleAnalyticsID}" />
-
-		<execute macro="PortletEntry#save" />
-	</command>
-
-	<command name="enableRecycleBinCP">
-		<execute function="AssertClick" locator1="NavListItem#RECYCLE_BIN" value1="Recycle Bin" />
-
-		<execute function="Check" locator1="Checkbox#ENABLE_RECYCLE_BIN" />
 
 		<execute macro="PortletEntry#save" />
 	</command>
@@ -1101,8 +1109,8 @@
 		<if>
 			<condition function="IsNotVisible" locator1="SiteSettingsDisplaySettings#DEFINE_DEFAULT_AND_AVAILABLE_SITE_LANGUAGES_RADIO" />
 			<then>
-				<execute macro="Navigator#gotoTab">
-					<var name="tab" value="Languages" />
+				<execute macro="Navigator#gotoNavTab">
+					<var name="navTab" value="Languages" />
 				</execute>
 			</then>
 		</if>
@@ -1239,6 +1247,20 @@
 		</execute>
 	</command>
 
+	<command name="viewNoSiteMembershipsRequest">
+		<execute function="Click" locator1="Button#INFO" />
+
+		<execute function="AssertElementNotPresent" locator1="SiteMemberships#REQUEST_MESSAGE" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="SiteMemberships#MEMBERSHIP_TYPE" value1="Membership Type: Restricted" />
+		<execute function="AssertElementNotPresent" locator1="SiteMemberships#REQUEST_MESSAGE" value1="There are 1 membership requests pending." />
+
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+		<execute function="AssertClick" locator1="MenuItem#VIEW_MEMBERSHIP_REQUESTS" value1="View Membership Requests" />
+
+		<execute function="AssertElementNotPresent" locator1="SiteMembershipsViewMembershipRequests#USER_NAME" />
+		<execute function="AssertTextNotPresent" locator1="SiteMembershipsViewMembershipRequests#USER_COMMENTS" value1="Please allow me to join the Restricted Site." />
+	</command>
+
 	<command name="viewPrivateVirtualHostUrlUserLoginRedirect">
 		<execute function="AssertTextEquals" locator1="TextInput#EMAIL_ADDRESS" value1="${userEmailAddress}" />
 		<execute function="AssertElementPresent" locator1="TextInput#PASSWORD" />
@@ -1303,6 +1325,22 @@
 				</for>
 			</then>
 		</if>
+	</command>
+
+	<command name="viewSiteMembershipsRequest">
+		<execute function="Click" locator1="Button#INFO" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="SiteMemberships#MEMBERSHIP_TYPE" value1="Membership Type: Restricted" />
+		<execute function="AssertElementPresent" locator1="SiteMemberships#REQUEST_MESSAGE" value1="There are 1 membership requests pending." />
+
+		<execute function="Click" locator1="SiteMemberships#REQUEST_MESSAGE" />
+
+		<execute macro="Portlet#changeDisplayStyle">
+			<var name="displayStyle" value="List" />
+		</execute>
+
+		<execute function="AssertTextEquals" locator1="SiteMembershipsViewMembershipRequests#USER_NAME" value1="${userFirstName} ${userLastName}" />
+		<execute function="AssertTextEquals" locator1="SiteMembershipsViewMembershipRequests#USER_COMMENTS" value1="Please allow me to join the Restricted Site." />
 	</command>
 
 	<command name="viewSiteNotClonedFromSiteTemplateCP">
