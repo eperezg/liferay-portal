@@ -27,7 +27,6 @@ import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.model.AssetTagModel;
 import com.liferay.asset.kernel.service.AssetTagLocalService;
-import com.liferay.category.apio.architect.identifier.CategoryIdentifier;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.folder.apio.architect.identifier.FolderIdentifier;
@@ -40,6 +39,10 @@ import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.io.InputStream;
 
 import java.util.List;
 
@@ -65,7 +68,7 @@ public class MediaObjectNestedCollectionResource
 		return builder.addGetter(
 			this::_getPageItems
 		).addCreator(
-			this::_getFileEntry,
+			this::_addFileEntry,
 			_hasPermission.forAddingIn(RootFolderIdentifier.class),
 			MediaObjectCreatorForm::buildForm
 		).build();
@@ -124,6 +127,34 @@ public class MediaObjectNestedCollectionResource
 		).addStringList(
 			"keywords", this::_getMediaObjectAssetTags
 		).build();
+	}
+
+	private FileEntry _addFileEntry(
+			Long folderId, MediaObjectCreatorForm mediaObjectCreatorForm)
+		throws PortalException {
+
+		ServiceContext serviceContext = new ServiceContext();
+		BinaryFile binaryFile = mediaObjectCreatorForm.getBinaryFile();
+
+		long repositoryId = mediaObjectCreatorForm.getRepositoryId();
+
+		String sourceFileName = mediaObjectCreatorForm.getSourceFileName();
+
+		String title = mediaObjectCreatorForm.getTitle();
+
+		String mimeType = binaryFile.getMimeType();
+
+		String description = mediaObjectCreatorForm.getDescription();
+
+		String changelog = mediaObjectCreatorForm.getChangelog();
+
+		InputStream inputStream = binaryFile.getInputStream();
+
+		long size = binaryFile.getSize();
+
+		return _dlAppService.addFileEntry(
+			repositoryId, folderId, sourceFileName, mimeType, title,
+			description, changelog, inputStream, size, serviceContext);
 	}
 
 	private BinaryFile _getBinaryFile(FileEntry fileEntry) {
