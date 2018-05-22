@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.impl;
 
+import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.model.AssetTagDisplay;
 import com.liferay.petra.string.StringPool;
@@ -35,6 +36,7 @@ import com.liferay.portlet.asset.util.comparator.AssetTagNameComparator;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -194,6 +196,28 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	}
 
 	@Override
+	public List<AssetTag> getTags(
+		String className, long classPK, int start, int end) {
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return getTags(classNameId, classPK, start, end);
+	}
+
+	@Override
+	public List<AssetTag> getTags(
+		long classNameId, long classPK, int start, int end) {
+		AssetEntry entry = assetEntryPersistence.fetchByC_C(
+			classNameId, classPK);
+
+		if (entry == null) {
+			return Collections.emptyList();
+		}
+
+		return sanitize(assetEntryPersistence.getAssetTags(
+			entry.getEntryId(), start, end));
+	}
+
+	@Override
 	public int getTagsCount(long groupId, String name) {
 		if (Validator.isNull(name)) {
 			return assetTagPersistence.countByGroupId(groupId);
@@ -202,6 +226,16 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		return assetTagPersistence.countByG_LikeN(groupId, name);
 	}
 
+	public int getTagsCount(String className, long classPK) {
+		long classNameId = classNameLocalService.getClassNameId(className);
+		AssetEntry entry = assetEntryPersistence.fetchByC_C(
+			classNameId, classPK);
+
+		if (entry == null) {
+			return 0;
+		}
+		return assetEntryPersistence.getAssetTagsSize(entry.getEntryId());
+	}
 	@Override
 	public int getVisibleAssetsTagsCount(
 		long groupId, long classNameId, String name) {

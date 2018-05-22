@@ -97,6 +97,11 @@ public class AssetTagServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
+		long classNameId, long classPK, int start, int end) {
+		return getService().getTags(classNameId, classPK, start, end);
+	}
+
+	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
 		long groupId, long classNameId, String name) {
 		return getService().getTags(groupId, classNameId, name);
 	}
@@ -134,8 +139,17 @@ public class AssetTagServiceUtil {
 		return getService().getTags(className, classPK);
 	}
 
+	public static java.util.List<com.liferay.asset.kernel.model.AssetTag> getTags(
+		String className, long classPK, int start, int end) {
+		return getService().getTags(className, classPK, start, end);
+	}
+
 	public static int getTagsCount(long groupId, String name) {
 		return getService().getTagsCount(groupId, name);
+	}
+
+	public static int getTagsCount(String className, long classPK) {
+		return getService().getTagsCount(className, classPK);
 	}
 
 	public static int getVisibleAssetsTagsCount(long groupId, long classNameId,

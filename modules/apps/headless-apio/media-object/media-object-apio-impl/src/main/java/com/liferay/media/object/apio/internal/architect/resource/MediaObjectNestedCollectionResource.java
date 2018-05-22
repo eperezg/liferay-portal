@@ -32,6 +32,7 @@ import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.tag.apio.identifier.TagIdentifier;
 
 import java.util.List;
 
@@ -99,6 +100,8 @@ public class MediaObjectNestedCollectionResource
 			"author", PersonIdentifier.class, FileEntry::getUserId
 		).addNumber(
 			"contentSize", FileEntry::getSize
+		).addRelatedCollection(
+			"tags", TagIdentifier.class
 		).addString(
 			"fileFormat", FileEntry::getMimeType
 		).addString(

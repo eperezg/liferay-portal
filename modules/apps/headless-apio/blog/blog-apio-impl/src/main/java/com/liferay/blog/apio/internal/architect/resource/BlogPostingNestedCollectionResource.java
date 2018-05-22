@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
+import com.liferay.tag.apio.identifier.TagIdentifier;
 
 import java.util.List;
 
@@ -121,6 +122,8 @@ public class BlogPostingNestedCollectionResource
 			BlogsEntry::getCoverImageFileEntryId
 		).addRelatedCollection(
 			"comments", CommentIdentifier.class
+		).addRelatedCollection(
+			"tags", TagIdentifier.class
 		).addString(
 			"alternativeHeadline", BlogsEntry::getSubtitle
 		).addString(
