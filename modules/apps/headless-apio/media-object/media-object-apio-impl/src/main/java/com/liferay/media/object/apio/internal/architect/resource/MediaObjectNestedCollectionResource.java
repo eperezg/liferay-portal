@@ -68,7 +68,7 @@ public class MediaObjectNestedCollectionResource
 		return builder.addGetter(
 			this::_getPageItems
 		).addCreator(
-			this::_addFileEntry,
+			this::_getFileEntry,
 			_hasPermission.forAddingIn(RootFolderIdentifier.class),
 			MediaObjectCreatorForm::buildForm
 		).build();
@@ -127,36 +127,6 @@ public class MediaObjectNestedCollectionResource
 		).addStringList(
 			"keywords", this::_getMediaObjectAssetTags
 		).build();
-	}
-
-	private FileEntry _addFileEntry(
-			Long folderId, MediaObjectCreatorForm mediaObjectCreatorForm)
-		throws PortalException {
-
-		ServiceContext serviceContext = new ServiceContext();
-		BinaryFile binaryFile = mediaObjectCreatorForm.getBinaryFile();
-
-		String sourceFileName = mediaObjectCreatorForm.getName();
-
-		String title = mediaObjectCreatorForm.getTitle();
-
-		String mimeType = binaryFile.getMimeType();
-
-		String description = mediaObjectCreatorForm.getDescription();
-
-		String changelog = mediaObjectCreatorForm.getChangelog();
-
-		InputStream inputStream = binaryFile.getInputStream();
-
-		long size = binaryFile.getSize();
-
-		Folder folder = _dlAppService.getFolder(folderId);
-
-		long repositoryId = folder.getRepositoryId();
-
-		return _dlAppService.addFileEntry(
-			repositoryId, folderId, sourceFileName, mimeType, title,
-			description, changelog, inputStream, size, serviceContext);
 	}
 
 	private BinaryFile _getBinaryFile(FileEntry fileEntry) {
