@@ -14,7 +14,7 @@
 
 package com.liferay.forms.apio.internal.architect.resource;
 
-import static com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil.setServiceContextAttributes;
+import static com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil.calculateServiceContextAttributes;
 import static com.liferay.forms.apio.internal.util.FormValuesUtil.getDDMFormValues;
 import static com.liferay.forms.apio.internal.util.LocalizedValueUtil.getLocalizedString;
 
@@ -156,14 +156,8 @@ public class FormInstanceRecordNestedCollectionResource
 			formInstanceRecordForm.getFieldValues(), ddmStructure.getDDMForm(),
 			acceptLocale.get());
 
-		setServiceContextAttributes(
-			serviceContextWrapper, formInstanceRecordForm.isDraft());
-
 		long groupId = ddmFormInstance.getGroupId();
 		long formInstanceId = ddmFormInstance.getFormInstanceId();
-
-		ServiceContext serviceContext =
-			serviceContextWrapper.getServiceContext();
 
 		DDMForm ddmForm = ddmStructure.getDDMForm();
 
@@ -171,6 +165,9 @@ public class FormInstanceRecordNestedCollectionResource
 
 		_uploadFileHelper.linkFiles(
 			ddmFormFields, ddmFormValues.getDDMFormFieldValues());
+
+		ServiceContext serviceContext = calculateServiceContextAttributes(
+			serviceContextWrapper, formInstanceRecordForm.isDraft());
 
 		return _ddmFormInstanceRecordService.addFormInstanceRecord(
 			groupId, formInstanceId, ddmFormValues, serviceContext);
@@ -224,10 +221,7 @@ public class FormInstanceRecordNestedCollectionResource
 			formInstanceRecordForm.getFieldValues(), ddmStructure.getDDMForm(),
 			acceptLocale.get());
 
-		ServiceContext serviceContext =
-			serviceContextWrapper.getServiceContext();
-
-		setServiceContextAttributes(
+		ServiceContext serviceContext = calculateServiceContextAttributes(
 			serviceContextWrapper, formInstanceRecordForm.isDraft());
 
 		return _ddmFormInstanceRecordService.updateFormInstanceRecord(

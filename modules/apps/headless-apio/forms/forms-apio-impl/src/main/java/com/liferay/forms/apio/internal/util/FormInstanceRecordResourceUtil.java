@@ -38,7 +38,7 @@ public final class FormInstanceRecordResourceUtil {
 		);
 	}
 
-	public static void setServiceContextAttributes(
+	public static ServiceContext calculateServiceContextAttributes(
 		ServiceContextWrapper serviceContextWrapper, boolean draft) {
 
 		ServiceContext serviceContext =
@@ -54,6 +54,7 @@ public final class FormInstanceRecordResourceUtil {
 		else {
 			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 		}
+		return serviceContext;
 	}
 
 }
