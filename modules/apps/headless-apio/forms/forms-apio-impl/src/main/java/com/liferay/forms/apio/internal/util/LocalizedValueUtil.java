@@ -29,8 +29,8 @@ public final class LocalizedValueUtil {
 	public static <T> BiFunction<T, Locale, String> getLocalizedString(
 		Function<T, Value> function) {
 
-		return (t, locale) -> Try.fromFallible(
-			() -> function.apply(t)
+		return (value, locale) -> Try.fromFallible(
+			() -> function.apply(value)
 		).map(
 			localizedValue -> localizedValue.getString(locale)
 		).orElse(
