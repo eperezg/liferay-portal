@@ -16,7 +16,7 @@ package com.liferay.forms.apio.internal.architect.resource;
 
 import com.liferay.apio.architect.customactions.PostRoute;
 import com.liferay.apio.architect.functional.Try;
-import com.liferay.apio.architect.language.Language;
+import com.liferay.apio.architect.language.AcceptLanguage;
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
 import com.liferay.apio.architect.representor.NestedRepresentor;
@@ -194,7 +194,8 @@ public class FormInstanceNestedCollectionResource
 
 	private FormContextWrapper _evaluateContext(
 		Long ddmFormInstanceId, FormContextForm formContextForm,
-		DDMFormRenderingContext ddmFormRenderingContext, Language language) {
+		DDMFormRenderingContext ddmFormRenderingContext,
+		AcceptLanguage language) {
 
 		String fieldValues = formContextForm.getFieldValues();
 		Locale locale = language.getPreferredLocale();

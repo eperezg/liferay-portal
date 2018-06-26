@@ -142,7 +142,8 @@ public class FormInstanceRecordNestedCollectionResource
 
 	private DDMFormInstanceRecord _addFormInstanceRecord(
 			long ddmFormInstanceId,
-			FormInstanceRecordForm formInstanceRecordForm, AcceptLocale acceptLocale,
+			FormInstanceRecordForm formInstanceRecordForm,
+			AcceptLocale acceptLocale,
 			ServiceContextWrapper serviceContextWrapper)
 		throws PortalException {
 
@@ -205,7 +206,8 @@ public class FormInstanceRecordNestedCollectionResource
 
 	private DDMFormInstanceRecord _updateFormInstanceRecord(
 			long formInstanceRecordId,
-			FormInstanceRecordForm formInstanceRecordForm, AcceptLocale acceptLocale,
+			FormInstanceRecordForm formInstanceRecordForm,
+			AcceptLocale acceptLocale,
 			ServiceContextWrapper serviceContextWrapper)
 		throws PortalException {
 
