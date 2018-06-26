@@ -88,8 +88,6 @@ public class WebSiteCollectionResource
 			"author", PersonIdentifier.class, Group::getCreatorUserId
 		).addLinkedModel(
 			"creator", PersonIdentifier.class, Group::getCreatorUserId
-		).addLinkedModel(
-			"folder", RootFolderIdentifier.class, Group::getGroupId
 		).addLocalizedStringByLocale(
 			"description", Group::getDescription
 		).addLocalizedStringByLocale(

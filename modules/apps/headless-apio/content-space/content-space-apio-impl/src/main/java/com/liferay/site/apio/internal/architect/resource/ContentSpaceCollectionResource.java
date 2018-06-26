@@ -77,13 +77,8 @@ public class ContentSpaceCollectionResource
 			"ContentSpace"
 		).identifier(
 			Group::getGroupId
-		).addBidirectionalModel(
-			"interactionService", "contentSpaces", ContentSpaceIdentifier.class,
-			this::_getParentGroupId
 		).addBoolean(
 			"active", Group::isActive
-		).addLinkedModel(
-			"author", PersonIdentifier.class, Group::getCreatorUserId
 		).addLinkedModel(
 			"creator", PersonIdentifier.class, Group::getCreatorUserId
 		).addLinkedModel(
@@ -92,14 +87,8 @@ public class ContentSpaceCollectionResource
 			"description", Group::getDescription
 		).addLocalizedStringByLocale(
 			"name", Group::getName
-		).addRelatedCollection(
-			"members", PersonIdentifier.class
 		).addString(
 			"membershipType", Group::getTypeLabel
-		).addString(
-			"privateUrl", GroupWrapper::getPrivateURL
-		).addString(
-			"publicUrl", GroupWrapper::getPublicURL
 		).build();
 	}
 
