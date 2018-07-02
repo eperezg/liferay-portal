@@ -59,7 +59,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Paulo Cruz
  */
 @Component
-public class StructureItemResource
+public class StructureNestedCollectionResource
 	implements
 		NestedCollectionResource<DDMStructure, Long, StructureIdentifier,
 			Long, WebSiteIdentifier> {
@@ -110,13 +110,13 @@ public class StructureItemResource
 			"name", DDMStructure::getName
 		).addNested(
 			"successPage", StructureRepresentorUtil::getSuccessPage,
-			StructureItemResource::_buildSuccessPageSettings
+			StructureNestedCollectionResource::_buildSuccessPageSettings
 		).addNested(
 			"version", StructureRepresentorUtil::getVersion,
-			StructureItemResource::_buildVersion
+			StructureNestedCollectionResource::_buildVersion
 		).addNestedList(
 			"pages", StructureRepresentorUtil::getPages,
-			StructureItemResource::_buildFormPages
+			StructureNestedCollectionResource::_buildFormPages
 		).build();
 	}
 
@@ -175,13 +175,13 @@ public class StructureItemResource
 			"tip", getLocalizedString(DDMFormField::getTip)
 		).addNested(
 			"grid", ddmFormField -> ddmFormField,
-			StructureItemResource::_buildGridProperties
+			StructureNestedCollectionResource::_buildGridProperties
 		).addNested(
 			"validation", DDMFormField::getDDMFormFieldValidation,
-			StructureItemResource::_buildValidationProperties
+			StructureNestedCollectionResource::_buildValidationProperties
 		).addNestedList(
 			"options", getFieldOptions(DDMFormField::getDDMFormFieldOptions),
-			StructureItemResource::_buildFieldOptions
+			StructureNestedCollectionResource::_buildFieldOptions
 		).addString(
 			"additionalType", DDMFormField::getType
 		).addString(
@@ -211,7 +211,7 @@ public class StructureItemResource
 			"text", FormLayoutPage::getDescription
 		).addNestedList(
 			"fields", FormLayoutPage::getFields,
-			StructureItemResource::_buildFormFields
+			StructureNestedCollectionResource::_buildFormFields
 		).build();
 	}
 
@@ -222,10 +222,10 @@ public class StructureItemResource
 			"FormFieldProperties"
 		).addNestedList(
 			"columns", getFieldOptions("columns"),
-			StructureItemResource::_buildFieldOptions
+			StructureNestedCollectionResource::_buildFieldOptions
 		).addNestedList(
 			"rows", getFieldOptions("rows"),
-			StructureItemResource::_buildFieldOptions
+			StructureNestedCollectionResource::_buildFieldOptions
 		).build();
 	}
 
