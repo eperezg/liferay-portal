@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.forms.apio.internal.architect.resource;
+package com.liferay.structure.apio.internal.architect.resource;
 
-import static com.liferay.forms.apio.internal.util.LocalizedValueUtil.getLocalizedString;
-import static com.liferay.forms.apio.internal.util.StructureRepresentorUtil.getFieldOptions;
-import static com.liferay.forms.apio.internal.util.StructureRepresentorUtil.getFieldProperty;
-import static com.liferay.forms.apio.internal.util.StructureRepresentorUtil.hasFormRules;
+import static com.liferay.structure.apio.internal.util.LocalizedValueUtil.getLocalizedString;
+import static com.liferay.structure.apio.internal.util.StructureRepresentorUtil.getFieldOptions;
+import static com.liferay.structure.apio.internal.util.StructureRepresentorUtil.getFieldProperty;
+import static com.liferay.structure.apio.internal.util.StructureRepresentorUtil.hasFormRules;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -36,9 +36,9 @@ import com.liferay.dynamic.data.mapping.model.DDMStructureVersion;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMStructureService;
-import com.liferay.forms.apio.architect.identifier.StructureIdentifier;
-import com.liferay.forms.apio.internal.model.FormLayoutPage;
-import com.liferay.forms.apio.internal.util.StructureRepresentorUtil;
+import com.liferay.structure.apio.architect.identifier.StructureIdentifier;
+import com.liferay.structure.apio.internal.model.FormLayoutPage;
+import com.liferay.structure.apio.internal.util.StructureRepresentorUtil;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.model.ClassName;
 import com.liferay.portal.kernel.model.Company;

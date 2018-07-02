@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.forms.apio.internal.util;
+package com.liferay.structure.apio.internal.util;
 
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
@@ -27,7 +27,7 @@ import com.liferay.dynamic.data.mapping.model.DDMFormSuccessPageSettings;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMStructureVersion;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
-import com.liferay.forms.apio.internal.model.FormLayoutPage;
+import com.liferay.structure.apio.internal.model.FormLayoutPage;
 
 import java.util.ArrayList;
 import java.util.List;
