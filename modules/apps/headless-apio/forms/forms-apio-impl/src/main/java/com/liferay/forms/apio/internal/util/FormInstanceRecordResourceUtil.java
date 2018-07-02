@@ -26,18 +26,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
  */
 public final class FormInstanceRecordResourceUtil {
 
-	public static DDMFormInstanceRecordVersion getVersion(
-		DDMFormInstanceRecord ddmFormInstanceRecord) {
-
-		return Try.fromFallible(
-			ddmFormInstanceRecord::getVersion
-		).map(
-			ddmFormInstanceRecord::getFormInstanceRecordVersion
-		).orElse(
-			null
-		);
-	}
-
 	public static ServiceContext calculateServiceContextAttributes(
 		ServiceContextWrapper serviceContextWrapper, boolean draft) {
 
@@ -54,7 +42,20 @@ public final class FormInstanceRecordResourceUtil {
 		else {
 			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 		}
+
 		return serviceContext;
+	}
+
+	public static DDMFormInstanceRecordVersion getVersion(
+		DDMFormInstanceRecord ddmFormInstanceRecord) {
+
+		return Try.fromFallible(
+			ddmFormInstanceRecord::getVersion
+		).map(
+			ddmFormInstanceRecord::getFormInstanceRecordVersion
+		).orElse(
+			null
+		);
 	}
 
 }
