@@ -36,14 +36,14 @@ import com.liferay.dynamic.data.mapping.model.DDMStructureVersion;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMStructureService;
-import com.liferay.structure.apio.architect.identifier.StructureIdentifier;
-import com.liferay.structure.apio.internal.model.FormLayoutPage;
-import com.liferay.structure.apio.internal.util.StructureRepresentorUtil;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.model.ClassName;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.service.ClassNameService;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
+import com.liferay.structure.apio.architect.identifier.StructureIdentifier;
+import com.liferay.structure.apio.internal.model.FormLayoutPage;
+import com.liferay.structure.apio.internal.util.StructureRepresentorUtil;
 
 import java.util.List;
 import java.util.Map.Entry;

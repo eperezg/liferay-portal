@@ -39,11 +39,11 @@ import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
+import com.liferay.structure.apio.architect.identifier.StructureIdentifier;
 
 import java.util.List;
 import java.util.Locale;
 
-import com.liferay.structure.apio.architect.identifier.StructureIdentifier;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 

@@ -41,8 +41,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ListUtil;
 
-import java.io.InputStream;
-
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
