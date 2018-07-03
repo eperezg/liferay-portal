@@ -144,7 +144,7 @@ public class WebPageElementNestedCollectionResource
 		).build();
 	}
 
-	private JournalArticle _addJournalArticle(
+	private JournalArticleWrapper _addJournalArticle(
 			long contentSpaceId,
 			WebPageElementCreatorForm webPageElementCreatorForm,
 			ThemeDisplay themeDisplay)
