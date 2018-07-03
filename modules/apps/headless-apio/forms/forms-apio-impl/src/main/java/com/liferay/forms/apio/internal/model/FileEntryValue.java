@@ -12,15 +12,19 @@
  * details.
  */
 
-package com.liferay.forms.apio.architect.identifier;
-
-import com.liferay.apio.architect.identifier.Identifier;
+package com.liferay.forms.apio.internal.model;
 
 /**
- * Holds information about a {@code DDMStructure} identifier.
- *
- * @author Paulo Cruz
- * @review
+ * @author Javier Gamarra
  */
-public interface StructureIdentifier extends Identifier<Long> {
+public class FileEntryValue {
+
+	public FileEntryValue(long groupId, String uuid) {
+		this.groupId = groupId;
+		this.uuid = uuid;
+	}
+
+	public final long groupId;
+	public final String uuid;
+
 }
