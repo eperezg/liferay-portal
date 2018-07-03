@@ -21,37 +21,34 @@ import com.liferay.apio.architect.resource.CollectionResource;
 import com.liferay.apio.architect.routes.CollectionRoutes;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.content.space.apio.architect.identifier.ContentSpaceIdentifier;
-import com.liferay.content.space.apio.internal.model.GroupWrapper;
 import com.liferay.folder.apio.architect.identifier.RootFolderIdentifier;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.service.GroupService;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * Provides the information necessary to expose ContentSpace resources through a web API.
- * The resources are mapped from the internal model {@link Group}.
+ * Provides the information necessary to expose ContentSpace resources through a
+ * web API. The resources are mapped from the internal model {@link Group}.
  *
  * @author Javier Gamarra
  */
 @Component(immediate = true)
 public class ContentSpaceCollectionResource
-	implements CollectionResource<GroupWrapper, Long, ContentSpaceIdentifier> {
+	implements CollectionResource<Group, Long, ContentSpaceIdentifier> {
 
 	@Override
-	public CollectionRoutes<GroupWrapper, Long> collectionRoutes(
-		CollectionRoutes.Builder<GroupWrapper, Long> builder) {
+	public CollectionRoutes<Group, Long> collectionRoutes(
+		CollectionRoutes.Builder<Group, Long> builder) {
 
 		return builder.addGetter(
-			this::_getPageItems, ThemeDisplay.class
+			this::_getPageItems, Company.class
 		).build();
 	}
 
@@ -61,17 +58,17 @@ public class ContentSpaceCollectionResource
 	}
 
 	@Override
-	public ItemRoutes<GroupWrapper, Long> itemRoutes(
-		ItemRoutes.Builder<GroupWrapper, Long> builder) {
+	public ItemRoutes<Group, Long> itemRoutes(
+		ItemRoutes.Builder<Group, Long> builder) {
 
 		return builder.addGetter(
-			this::_getGroupWrapper, ThemeDisplay.class
+			this::_getGroup
 		).build();
 	}
 
 	@Override
-	public Representor<GroupWrapper> representor(
-		Representor.Builder<GroupWrapper, Long> builder) {
+	public Representor<Group> representor(
+		Representor.Builder<Group, Long> builder) {
 
 		return builder.types(
 			"ContentSpace"
@@ -92,40 +89,22 @@ public class ContentSpaceCollectionResource
 		).build();
 	}
 
-	private GroupWrapper _getGroupWrapper(
-			long groupId, ThemeDisplay themeDisplay)
-		throws PortalException {
-
-		return new GroupWrapper(_groupService.getGroup(groupId), themeDisplay);
+	private Group _getGroup(long groupId) throws PortalException {
+		return _groupService.getGroup(groupId);
 	}
 
-	private PageItems<GroupWrapper> _getPageItems(
-			Pagination pagination, ThemeDisplay themeDisplay)
+	private PageItems<Group> _getPageItems(
+			Pagination pagination, Company company)
 		throws PortalException {
 
-		List<GroupWrapper> groupWrappers = Stream.of(
-			_groupService.getGroups(
-				themeDisplay.getCompanyId(), 0, true,
-				pagination.getStartPosition(), pagination.getEndPosition())
-		).flatMap(
-			List::stream
-		).map(
-			group -> new GroupWrapper(group, themeDisplay)
-		).collect(
-			Collectors.toList()
-		);
+		List<Group> groups = _groupService.getGroups(
+			company.getCompanyId(), 0, true, pagination.getStartPosition(),
+			pagination.getEndPosition());
+
 		int count = _groupService.getGroupsCount(
-			themeDisplay.getCompanyId(), 0, true);
+			company.getCompanyId(), 0, true);
 
-		return new PageItems<>(groupWrappers, count);
-	}
-
-	private Long _getParentGroupId(Group group) {
-		if (group.getParentGroupId() != 0L) {
-			return group.getParentGroupId();
-		}
-
-		return null;
+		return new PageItems<>(groups, count);
 	}
 
 	@Reference
