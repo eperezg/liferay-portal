@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ClassName;
 import com.liferay.portal.kernel.service.ClassNameService;
 import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
-import com.liferay.structure.apio.architect.identifier.StructuredContentIdentifier;
+import com.liferay.structure.apio.architect.identifier.ContentStructuresIdentifier;
 
 import java.util.List;
 
@@ -38,17 +38,18 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * Provides the information necessary to expose Structure resources through a
- * web API. The resources are mapped from the internal model {@code
- * DDMStructure}.
+ * Provides the information necessary to expose Structure resources associated
+ * to a JournalArticle through a web API. The resources are mapped from the
+ * internal model {@code DDMStructure}.
  *
  * @author Paulo Cruz
+ * @review
  */
 @Component
-public class StructuredContentNestedCollectionResource
+public class ContentStructuresNestedCollectionResource
 	implements
 		NestedCollectionResource<DDMStructure, Long,
-			StructuredContentIdentifier, Long, WebSiteIdentifier> {
+			ContentStructuresIdentifier, Long, WebSiteIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<DDMStructure, Long, Long> collectionRoutes(
@@ -59,7 +60,7 @@ public class StructuredContentNestedCollectionResource
 
 	@Override
 	public String getName() {
-		return "structured-content";
+		return "content-structures";
 	}
 
 	@Override
@@ -78,7 +79,7 @@ public class StructuredContentNestedCollectionResource
 
 		Representor.FirstStep<DDMStructure> bidirectionalModelStep =
 			builderFirstStep.addBidirectionalModel(
-				"interactionService", "structuredContents",
+				"interactionService", "content-structures",
 				WebSiteIdentifier.class, DDMStructureModel::getGroupId);
 
 		return bidirectionalModelStep.build();

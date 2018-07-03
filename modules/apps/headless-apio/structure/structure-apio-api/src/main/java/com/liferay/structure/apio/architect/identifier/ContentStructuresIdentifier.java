@@ -17,10 +17,11 @@ package com.liferay.structure.apio.architect.identifier;
 import com.liferay.apio.architect.identifier.Identifier;
 
 /**
- * Holds information about a {@code DDMStructure} identifier used for {@code JournalArticle} elements
+ * Holds information about a {@code DDMStructure} identifier used for {@code
+ * JournalArticle} elements
  *
  * @author Javier Gamarra
  * @review
  */
-public interface StructuredContentIdentifier extends Identifier<Long> {
+public interface ContentStructuresIdentifier extends Identifier<Long> {
 }
