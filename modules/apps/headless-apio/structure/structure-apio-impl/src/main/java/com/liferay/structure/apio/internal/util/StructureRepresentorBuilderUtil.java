@@ -12,44 +12,26 @@
  * details.
  */
 
-package com.liferay.structure.apio.internal.architect.resource;
+package com.liferay.structure.apio.internal.util;
 
 import static com.liferay.structure.apio.internal.util.LocalizedValueUtil.getLocalizedString;
 import static com.liferay.structure.apio.internal.util.StructureRepresentorUtil.getFieldOptions;
 import static com.liferay.structure.apio.internal.util.StructureRepresentorUtil.getFieldProperty;
 import static com.liferay.structure.apio.internal.util.StructureRepresentorUtil.hasFormRules;
 
-import com.liferay.apio.architect.pagination.PageItems;
-import com.liferay.apio.architect.pagination.Pagination;
 import com.liferay.apio.architect.representor.NestedRepresentor;
 import com.liferay.apio.architect.representor.NestedRepresentor.Builder;
 import com.liferay.apio.architect.representor.Representor;
-import com.liferay.apio.architect.resource.NestedCollectionResource;
-import com.liferay.apio.architect.routes.ItemRoutes;
-import com.liferay.apio.architect.routes.NestedCollectionRoutes;
-import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMFormFieldValidation;
 import com.liferay.dynamic.data.mapping.model.DDMFormSuccessPageSettings;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMStructureVersion;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
-import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
-import com.liferay.dynamic.data.mapping.service.DDMStructureService;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
-import com.liferay.portal.kernel.model.ClassName;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.service.ClassNameService;
-import com.liferay.site.apio.architect.identifier.WebSiteIdentifier;
-import com.liferay.structure.apio.architect.identifier.StructureIdentifier;
 import com.liferay.structure.apio.internal.model.FormLayoutPage;
-import com.liferay.structure.apio.internal.util.StructureRepresentorUtil;
 
-import java.util.List;
 import java.util.Map.Entry;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * Provides the information necessary to expose Structure resources through a
@@ -58,44 +40,15 @@ import org.osgi.service.component.annotations.Reference;
  *
  * @author Paulo Cruz
  */
-@Component
-public class StructureNestedCollectionResource
-	implements
-		NestedCollectionResource<DDMStructure, Long, StructureIdentifier,
-			Long, WebSiteIdentifier> {
+public class StructureRepresentorBuilderUtil {
 
-	@Override
-	public NestedCollectionRoutes<DDMStructure, Long, Long> collectionRoutes(
-		NestedCollectionRoutes.Builder<DDMStructure, Long, Long> builder) {
-
-		return builder.addGetter(this::_getPageItems, Company.class).build();
-	}
-
-	@Override
-	public String getName() {
-		return "structure";
-	}
-
-	@Override
-	public ItemRoutes<DDMStructure, Long> itemRoutes(
-		ItemRoutes.Builder<DDMStructure, Long> builder) {
-
-		return builder.addGetter(
-			_ddmStructureService::getStructure
-		).build();
-	}
-
-	@Override
-	public Representor<DDMStructure> representor(
+	public static Representor.FirstStep<DDMStructure> getStructureFirstStep(
 		Representor.Builder<DDMStructure, Long> builder) {
 
 		return builder.types(
 			"Structure"
 		).identifier(
 			DDMStructure::getStructureId
-		).addBidirectionalModel(
-			"interactionService", "structures", WebSiteIdentifier.class,
-			DDMStructure::getGroupId
 		).addDate(
 			"dateCreated", DDMStructure::getCreateDate
 		).addDate(
@@ -110,14 +63,14 @@ public class StructureNestedCollectionResource
 			"name", DDMStructure::getName
 		).addNested(
 			"successPage", StructureRepresentorUtil::getSuccessPage,
-			StructureNestedCollectionResource::_buildSuccessPageSettings
+			StructureRepresentorBuilderUtil::_buildSuccessPageSettings
 		).addNested(
 			"version", StructureRepresentorUtil::getVersion,
-			StructureNestedCollectionResource::_buildVersion
+			StructureRepresentorBuilderUtil::_buildVersion
 		).addNestedList(
 			"pages", StructureRepresentorUtil::getPages,
-			StructureNestedCollectionResource::_buildFormPages
-		).build();
+			StructureRepresentorBuilderUtil::_buildFormPages
+		);
 	}
 
 	private static NestedRepresentor<Entry<String, LocalizedValue>>
@@ -175,13 +128,13 @@ public class StructureNestedCollectionResource
 			"tip", getLocalizedString(DDMFormField::getTip)
 		).addNested(
 			"grid", ddmFormField -> ddmFormField,
-			StructureNestedCollectionResource::_buildGridProperties
+			StructureRepresentorBuilderUtil::_buildGridProperties
 		).addNested(
 			"validation", DDMFormField::getDDMFormFieldValidation,
-			StructureNestedCollectionResource::_buildValidationProperties
+			StructureRepresentorBuilderUtil::_buildValidationProperties
 		).addNestedList(
 			"options", getFieldOptions(DDMFormField::getDDMFormFieldOptions),
-			StructureNestedCollectionResource::_buildFieldOptions
+			StructureRepresentorBuilderUtil::_buildFieldOptions
 		).addString(
 			"additionalType", DDMFormField::getType
 		).addString(
@@ -211,7 +164,7 @@ public class StructureNestedCollectionResource
 			"text", FormLayoutPage::getDescription
 		).addNestedList(
 			"fields", FormLayoutPage::getFields,
-			StructureNestedCollectionResource::_buildFormFields
+			StructureRepresentorBuilderUtil::_buildFormFields
 		).build();
 	}
 
@@ -222,10 +175,10 @@ public class StructureNestedCollectionResource
 			"FormFieldProperties"
 		).addNestedList(
 			"columns", getFieldOptions("columns"),
-			StructureNestedCollectionResource::_buildFieldOptions
+			StructureRepresentorBuilderUtil::_buildFieldOptions
 		).addNestedList(
 			"rows", getFieldOptions("rows"),
-			StructureNestedCollectionResource::_buildFieldOptions
+			StructureRepresentorBuilderUtil::_buildFieldOptions
 		).build();
 	}
 
@@ -266,32 +219,5 @@ public class StructureNestedCollectionResource
 			"name", DDMStructureVersion::getVersion
 		).build();
 	}
-
-	private PageItems<DDMStructure> _getPageItems(
-		Pagination pagination, Long aLong, Company o) {
-
-		ClassName className = _classNameService.fetchClassName(
-			DDLRecordSet.class.getName());
-
-		Long classNameId = className.getClassNameId();
-
-		List<DDMStructure> structures = _ddmStructureService.getStructures(
-			o.getCompanyId(), new long[] {aLong}, classNameId, 0,
-			pagination.getStartPosition(), pagination.getEndPosition(), null);
-
-		int structuresCount = _ddmStructureLocalService.getStructuresCount(
-			aLong, classNameId);
-
-		return new PageItems<>(structures, structuresCount);
-	}
-
-	@Reference
-	private ClassNameService _classNameService;
-
-	@Reference
-	private DDMStructureLocalService _ddmStructureLocalService;
-
-	@Reference
-	private DDMStructureService _ddmStructureService;
 
 }
