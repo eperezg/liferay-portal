@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.apio.internal.architect.resource;
+package com.liferay.content.space.apio.internal.architect.resource;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -21,13 +21,13 @@ import com.liferay.apio.architect.resource.CollectionResource;
 import com.liferay.apio.architect.routes.CollectionRoutes;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.content.space.apio.architect.identifier.ContentSpaceIdentifier;
+import com.liferay.content.space.apio.internal.model.GroupWrapper;
 import com.liferay.folder.apio.architect.identifier.RootFolderIdentifier;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.site.apio.internal.model.GroupWrapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

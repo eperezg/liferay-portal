@@ -12,17 +12,17 @@
  * details.
  */
 
-package com.liferay.site.apio.internal.architect.router;
+package com.liferay.content.space.apio.internal.architect.router;
 
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
 import com.liferay.apio.architect.router.NestedCollectionRouter;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
 import com.liferay.content.space.apio.architect.identifier.ContentSpaceIdentifier;
+import com.liferay.content.space.apio.internal.model.GroupWrapper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.GroupService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.site.apio.internal.model.GroupWrapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,7 +42,8 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true)
 public class ContentSpaceNestedCollectionRouter implements
 	NestedCollectionRouter
-		<GroupWrapper, Long, ContentSpaceIdentifier, Long, ContentSpaceIdentifier> {
+		<GroupWrapper, Long, ContentSpaceIdentifier, Long,
+			ContentSpaceIdentifier> {
 
 	@Override
 	public NestedCollectionRoutes<GroupWrapper, Long, Long> collectionRoutes(

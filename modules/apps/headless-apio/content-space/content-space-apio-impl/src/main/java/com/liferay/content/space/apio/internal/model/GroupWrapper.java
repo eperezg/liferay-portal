@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.site.apio.internal.model;
+package com.liferay.content.space.apio.internal.model;
 
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
