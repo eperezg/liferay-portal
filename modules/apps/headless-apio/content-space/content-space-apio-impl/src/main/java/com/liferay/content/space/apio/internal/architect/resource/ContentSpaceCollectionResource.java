@@ -38,6 +38,7 @@ import org.osgi.service.component.annotations.Reference;
  * web API. The resources are mapped from the internal model {@link Group}.
  *
  * @author Javier Gamarra
+ * @review
  */
 @Component(immediate = true)
 public class ContentSpaceCollectionResource

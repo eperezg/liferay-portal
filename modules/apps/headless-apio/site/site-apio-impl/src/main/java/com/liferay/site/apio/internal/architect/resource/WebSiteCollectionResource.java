@@ -85,13 +85,13 @@ public class WebSiteCollectionResource
 		).addBoolean(
 			"active", Group::isActive
 		).addLinkedModel(
+			"contentSpace", ContentSpaceIdentifier.class, Group::getGroupId
+		).addLinkedModel(
 			"creator", PersonIdentifier.class, Group::getCreatorUserId
 		).addLocalizedStringByLocale(
 			"description", Group::getDescription
 		).addLocalizedStringByLocale(
 			"name", Group::getName
-		).addLinkedModel(
-			"contentSpace", ContentSpaceIdentifier.class, Group::getGroupId
 		).addRelatedCollection(
 			"members", PersonIdentifier.class
 		).addString(
