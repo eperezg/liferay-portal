@@ -88,9 +88,6 @@ public class FormInstanceNestedCollectionResource
 
 		return builder.addGetter(
 			_ddmFormInstanceService::getFormInstance
-		).addUpdater(
-			this::_evaluateContext, DDMFormRenderingContext.class,
-			(credentials, aLong) -> true, FormContextForm::buildForm
 		).build();
 	}
 
@@ -167,46 +164,6 @@ public class FormInstanceNestedCollectionResource
 		).build();
 	}
 
-	private DDMFormInstance _evaluateContext(
-			long ddmFormInstanceId, FormContextForm formContextForm,
-			DDMFormRenderingContext ddmFormRenderingContext)
-		throws PortalException {
-
-		Locale locale = LocaleUtil.fromLanguageId(
-			formContextForm.getLanguageId());
-
-		LocaleThreadLocal.setThemeDisplayLocale(locale);
-
-		DDMFormInstance ddmFormInstance =
-			_ddmFormInstanceService.getFormInstance(ddmFormInstanceId);
-
-		if (_log.isDebugEnabled()) {
-			JSONSerializer jsonSerializer = _jsonFactory.createJSONSerializer();
-
-			DDMStructure ddmStructure = ddmFormInstance.getStructure();
-
-			DDMForm ddmForm = ddmStructure.getDDMForm();
-			DDMFormLayout ddmFormLayout = ddmStructure.getDDMFormLayout();
-
-			DDMFormValues ddmFormValues =
-				FormInstanceRecordResourceHelper.getDDMFormValues(
-					formContextForm.getFieldValues(), ddmForm, locale);
-
-			ddmFormRenderingContext.setDDMFormValues(ddmFormValues);
-
-			ddmFormRenderingContext.setLocale(locale);
-
-			Map<String, Object> templateContext =
-				_ddmFormTemplateContextFactory.create(
-					ddmForm, ddmFormLayout, ddmFormRenderingContext);
-
-			String json = jsonSerializer.serializeDeep(templateContext);
-
-			_log.debug(json);
-		}
-
-		return ddmFormInstance;
-	}
 
 	private List<String> _getAvailableLanguages(
 		DDMFormInstance ddmFormInstance) {
@@ -257,11 +214,5 @@ public class FormInstanceNestedCollectionResource
 
 	@Reference
 	private DDMFormInstanceService _ddmFormInstanceService;
-
-	@Reference
-	private DDMFormTemplateContextFactory _ddmFormTemplateContextFactory;
-
-	@Reference
-	private JSONFactory _jsonFactory;
 
 }
