@@ -14,6 +14,7 @@
 
 package com.liferay.forms.apio.internal.architect.resource;
 
+import static com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil.calculateServiceContextAttributes;
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -31,10 +32,11 @@ import com.liferay.dynamic.data.mapping.service.DDMFormInstanceService;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.forms.apio.architect.identifier.FormInstanceIdentifier;
 import com.liferay.forms.apio.architect.identifier.FormInstanceRecordIdentifier;
-import com.liferay.forms.apio.internal.FormInstanceRecordServiceContext;
 import com.liferay.forms.apio.internal.architect.form.FormInstanceRecordForm;
 import com.liferay.forms.apio.internal.architect.locale.AcceptLocale;
 import com.liferay.forms.apio.internal.helper.FormInstanceRecordResourceHelper;
+import com.liferay.forms.apio.internal.model.ServiceContextWrapper;
+import com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -67,8 +69,8 @@ public class FormInstanceRecordNestedCollectionResource
 			this::_getPageItems
 		).addCreator(
 			this::_addFormInstanceRecord, AcceptLocale.class,
-			FormInstanceRecordServiceContext.class,
-			(credentials, aLong) -> true, FormInstanceRecordForm::buildForm
+			ServiceContextWrapper.class, (credentials, aLong) -> true,
+			FormInstanceRecordForm::buildForm
 		).build();
 	}
 
@@ -85,7 +87,7 @@ public class FormInstanceRecordNestedCollectionResource
 			_ddmFormInstanceRecordService::getFormInstanceRecord
 		).addUpdater(
 			this::_updateFormInstanceRecord, AcceptLocale.class,
-			FormInstanceRecordServiceContext.class,
+			ServiceContextWrapper.class,
 			(credentials, aLong) -> true, FormInstanceRecordForm::buildForm
 		).build();
 	}
@@ -128,7 +130,7 @@ public class FormInstanceRecordNestedCollectionResource
 			long ddmFormInstanceId,
 			FormInstanceRecordForm formInstanceRecordForm,
 			AcceptLocale acceptLocale,
-			FormInstanceRecordServiceContext formInstanceRecordServiceContext)
+			ServiceContextWrapper serviceContextWrapper)
 		throws PortalException {
 
 		DDMFormInstance ddmFormInstance =
@@ -141,11 +143,7 @@ public class FormInstanceRecordNestedCollectionResource
 				formInstanceRecordForm.getFieldValues(),
 				ddmStructure.getDDMForm(), acceptLocale.get());
 
-		ServiceContext serviceContext =
-			formInstanceRecordServiceContext.getServiceContext();
 
-		_setServiceContextAttributes(
-			serviceContext, formInstanceRecordForm.isDraft());
 
 		return _ddmFormInstanceRecordService.addFormInstanceRecord(
 			ddmFormInstance.getGroupId(), ddmFormInstance.getFormInstanceId(),
@@ -164,6 +162,8 @@ public class FormInstanceRecordNestedCollectionResource
 				null);
 		int count = _ddmFormInstanceRecordService.getFormInstanceRecordsCount(
 			formInstanceId);
+		ServiceContext serviceContext = calculateServiceContextAttributes(
+			serviceContextWrapper, formInstanceRecordForm.isDraft());
 
 		return new PageItems<>(ddmFormInstances, count);
 	}
@@ -180,26 +180,13 @@ public class FormInstanceRecordNestedCollectionResource
 		);
 	}
 
-	private void _setServiceContextAttributes(
-		ServiceContext serviceContext, boolean draft) {
-
-		if (draft) {
-			serviceContext.setAttribute(
-				"status", WorkflowConstants.STATUS_DRAFT);
-			serviceContext.setAttribute("validateDDMFormValues", Boolean.FALSE);
-			serviceContext.setWorkflowAction(
-				WorkflowConstants.ACTION_SAVE_DRAFT);
-		}
-		else {
-			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-		}
 	}
 
 	private DDMFormInstanceRecord _updateFormInstanceRecord(
 			long formInstanceRecordId,
 			FormInstanceRecordForm formInstanceRecordForm,
 			AcceptLocale acceptLocale,
-			FormInstanceRecordServiceContext formInstanceRecordServiceContext)
+			ServiceContextWrapper serviceContextWrapper)
 		throws PortalException {
 
 		DDMFormInstanceRecord ddmFormInstanceRecord =
@@ -216,11 +203,8 @@ public class FormInstanceRecordNestedCollectionResource
 				formInstanceRecordForm.getFieldValues(),
 				ddmStructure.getDDMForm(), acceptLocale.get());
 
-		ServiceContext serviceContext =
-			formInstanceRecordServiceContext.getServiceContext();
-
-		_setServiceContextAttributes(
-			serviceContext, formInstanceRecordForm.isDraft());
+		ServiceContext serviceContext = calculateServiceContextAttributes(
+			serviceContextWrapper, formInstanceRecordForm.isDraft());
 
 		return _ddmFormInstanceRecordService.updateFormInstanceRecord(
 			formInstanceRecordId, false, ddmFormValues, serviceContext);
