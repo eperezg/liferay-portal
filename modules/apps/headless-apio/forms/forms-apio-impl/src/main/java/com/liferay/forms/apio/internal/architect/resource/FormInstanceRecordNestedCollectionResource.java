@@ -25,6 +25,8 @@ import com.liferay.apio.architect.representor.Representor;
 import com.liferay.apio.architect.resource.NestedCollectionResource;
 import com.liferay.apio.architect.routes.ItemRoutes;
 import com.liferay.apio.architect.routes.NestedCollectionRoutes;
+import com.liferay.dynamic.data.mapping.model.DDMForm;
+import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersion;
@@ -32,11 +34,13 @@ import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersionModel;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceRecordService;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceService;
+import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.forms.apio.architect.identifier.FormInstanceIdentifier;
 import com.liferay.forms.apio.architect.identifier.FormInstanceRecordIdentifier;
 import com.liferay.forms.apio.internal.architect.form.FormInstanceRecordForm;
 import com.liferay.forms.apio.internal.architect.locale.AcceptLocale;
+import com.liferay.forms.apio.internal.helper.UploadFileHelper;
 import com.liferay.forms.apio.internal.model.ServiceContextWrapper;
 import com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
@@ -151,43 +155,49 @@ public class FormInstanceRecordNestedCollectionResource
 			formInstanceRecordForm.getFieldValues(), ddmStructure.getDDMForm(),
 			acceptLocale.get());
 
+		long groupId = ddmFormInstance.getGroupId();
+		long formInstanceId = ddmFormInstance.getFormInstanceId();
 
+		DDMForm ddmForm = ddmStructure.getDDMForm();
 
-		return _ddmFormInstanceRecordService.addFormInstanceRecord(
-			ddmFormInstance.getGroupId(), ddmFormInstance.getFormInstanceId(),
-			ddmFormValues,
-			formInstanceRecordServiceContext.getServiceContext());
-	}
+		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
 
-	private PageItems<DDMFormInstanceRecord> _getPageItems(
-			Pagination pagination, long formInstanceId)
-		throws PortalException {
+		_uploadFileHelper.linkFiles(
+			ddmFormFields, ddmFormValues.getDDMFormFieldValues());
 
-		List<DDMFormInstanceRecord> ddmFormInstances =
-			_ddmFormInstanceRecordService.getFormInstanceRecords(
-				formInstanceId, WorkflowConstants.STATUS_ANY,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
-		int count = _ddmFormInstanceRecordService.getFormInstanceRecordsCount(
-			formInstanceId);
 		ServiceContext serviceContext = calculateServiceContextAttributes(
 			serviceContextWrapper, formInstanceRecordForm.isDraft());
 
-		return new PageItems<>(ddmFormInstances, count);
+		return _ddmFormInstanceRecordService.addFormInstanceRecord(
+			groupId, formInstanceId, ddmFormValues, serviceContext);
 	}
 
-	private DDMFormInstanceRecordVersion _getVersion(
+	private List<DDMFormFieldValue> _getFieldValues(
 		DDMFormInstanceRecord ddmFormInstanceRecord) {
 
 		return Try.fromFallible(
-			ddmFormInstanceRecord::getVersion
+			ddmFormInstanceRecord::getDDMFormValues
 		).map(
-			ddmFormInstanceRecord::getFormInstanceRecordVersion
+			DDMFormValues::getDDMFormFieldValues
 		).orElse(
 			null
 		);
 	}
 
+	private PageItems<DDMFormInstanceRecord> _getPageItems(
+			Pagination pagination, Long formInstanceId)
+		throws PortalException {
+
+		List<DDMFormInstanceRecord> ddmFormInstanceRecords =
+			_ddmFormInstanceRecordService.getFormInstanceRecords(
+				formInstanceId, WorkflowConstants.STATUS_ANY,
+				pagination.getStartPosition(), pagination.getEndPosition(),
+				null);
+
+		int count = _ddmFormInstanceRecordService.getFormInstanceRecordsCount(
+			formInstanceId);
+
+		return new PageItems<>(ddmFormInstanceRecords, count);
 	}
 
 	private DDMFormInstanceRecord _updateFormInstanceRecord(
@@ -206,10 +216,9 @@ public class FormInstanceRecordNestedCollectionResource
 
 		DDMStructure ddmStructure = ddmFormInstance.getStructure();
 
-		DDMFormValues ddmFormValues =
-			FormInstanceRecordResourceHelper.getDDMFormValues(
-				formInstanceRecordForm.getFieldValues(),
-				ddmStructure.getDDMForm(), acceptLocale.get());
+		DDMFormValues ddmFormValues = getDDMFormValues(
+			formInstanceRecordForm.getFieldValues(), ddmStructure.getDDMForm(),
+			acceptLocale.get());
 
 		ServiceContext serviceContext = calculateServiceContextAttributes(
 			serviceContextWrapper, formInstanceRecordForm.isDraft());
@@ -223,5 +232,8 @@ public class FormInstanceRecordNestedCollectionResource
 
 	@Reference
 	private DDMFormInstanceService _ddmFormInstanceService;
+
+	@Reference
+	private UploadFileHelper _uploadFileHelper;
 
 }
