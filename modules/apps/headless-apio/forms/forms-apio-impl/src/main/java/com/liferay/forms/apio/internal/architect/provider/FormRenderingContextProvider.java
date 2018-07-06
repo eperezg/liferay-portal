@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Victor Oliveira
  */
 @Component(immediate = true)
-public class DDMFormRenderingContextProvider
+public class FormRenderingContextProvider
 	implements Provider<DDMFormRenderingContext> {
 
 	@Override
