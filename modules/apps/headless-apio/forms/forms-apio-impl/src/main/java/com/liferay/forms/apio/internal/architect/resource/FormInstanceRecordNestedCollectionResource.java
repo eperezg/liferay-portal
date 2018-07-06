@@ -15,6 +15,9 @@
 package com.liferay.forms.apio.internal.architect.resource;
 
 import static com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil.calculateServiceContextAttributes;
+import static com.liferay.forms.apio.internal.util.FormValuesUtil.getDDMFormValues;
+import static com.liferay.forms.apio.internal.util.LocalizedValueUtil.getLocalizedString;
+
 import com.liferay.apio.architect.functional.Try;
 import com.liferay.apio.architect.pagination.PageItems;
 import com.liferay.apio.architect.pagination.Pagination;
@@ -34,7 +37,6 @@ import com.liferay.forms.apio.architect.identifier.FormInstanceIdentifier;
 import com.liferay.forms.apio.architect.identifier.FormInstanceRecordIdentifier;
 import com.liferay.forms.apio.internal.architect.form.FormInstanceRecordForm;
 import com.liferay.forms.apio.internal.architect.locale.AcceptLocale;
-import com.liferay.forms.apio.internal.helper.FormInstanceRecordResourceHelper;
 import com.liferay.forms.apio.internal.model.ServiceContextWrapper;
 import com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
@@ -111,17 +113,24 @@ public class FormInstanceRecordNestedCollectionResource
 			"datePublished", DDMFormInstanceRecord::getLastPublishDate
 		).addLinkedModel(
 			"author", PersonIdentifier.class, DDMFormInstanceRecord::getUserId
-		).addLocalizedStringByLocale(
-			"fieldValues", FormInstanceRecordResourceHelper::getFieldValuesJSON
 		).addNested(
-			"version", this::_getVersion,
-			nestedBuilder -> nestedBuilder.types(
+			"version", FormInstanceRecordResourceUtil::getVersion,
+			versionBuilder -> versionBuilder.types(
 				"FormInstanceRecordVersion"
 			).addLinkedModel(
 				"author", PersonIdentifier.class,
 				DDMFormInstanceRecordVersion::getUserId
 			).addString(
 				"name", DDMFormInstanceRecordVersionModel::getVersion
+			).build()
+		).addNestedList(
+			"fieldValues", this::_getFieldValues,
+			fieldValuesBuilder -> fieldValuesBuilder.types(
+				"FormFieldValue"
+			).addLocalizedStringByLocale(
+				"value", getLocalizedString(DDMFormFieldValue::getValue)
+			).addString(
+				"name", DDMFormFieldValue::getName
 			).build()
 		).build();
 	}
@@ -138,10 +147,9 @@ public class FormInstanceRecordNestedCollectionResource
 
 		DDMStructure ddmStructure = ddmFormInstance.getStructure();
 
-		DDMFormValues ddmFormValues =
-			FormInstanceRecordResourceHelper.getDDMFormValues(
-				formInstanceRecordForm.getFieldValues(),
-				ddmStructure.getDDMForm(), acceptLocale.get());
+		DDMFormValues ddmFormValues = getDDMFormValues(
+			formInstanceRecordForm.getFieldValues(), ddmStructure.getDDMForm(),
+			acceptLocale.get());
 
 
 
