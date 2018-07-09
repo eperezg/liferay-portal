@@ -44,6 +44,7 @@ import com.liferay.forms.apio.internal.helper.UploadFileHelper;
 import com.liferay.forms.apio.internal.model.ServiceContextWrapper;
 import com.liferay.forms.apio.internal.util.FormInstanceRecordResourceUtil;
 import com.liferay.person.apio.architect.identifier.PersonIdentifier;
+import com.liferay.portal.apio.permission.HasPermission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -75,7 +76,8 @@ public class FormInstanceRecordNestedCollectionResource
 			this::_getPageItems
 		).addCreator(
 			this::_addFormInstanceRecord, AcceptLocale.class,
-			ServiceContextWrapper.class, (credentials, aLong) -> true,
+			ServiceContextWrapper.class,
+			_hasPermission.forAddingIn(FormInstanceIdentifier.class),
 			FormInstanceRecordForm::buildForm
 		).build();
 	}
@@ -93,8 +95,8 @@ public class FormInstanceRecordNestedCollectionResource
 			_ddmFormInstanceRecordService::getFormInstanceRecord
 		).addUpdater(
 			this::_updateFormInstanceRecord, AcceptLocale.class,
-			ServiceContextWrapper.class,
-			(credentials, aLong) -> true, FormInstanceRecordForm::buildForm
+			ServiceContextWrapper.class, _hasPermission::forUpdating,
+			FormInstanceRecordForm::buildForm
 		).build();
 	}
 
@@ -232,6 +234,11 @@ public class FormInstanceRecordNestedCollectionResource
 
 	@Reference
 	private DDMFormInstanceService _ddmFormInstanceService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecord)"
+	)
+	private HasPermission<Long> _hasPermission;
 
 	@Reference
 	private UploadFileHelper _uploadFileHelper;
